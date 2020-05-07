@@ -1,3 +1,9 @@
+# Hoe zit het? V2 repo: Hoe zit het met Gatsby!
+
+### TypeScript
+
+Link [Gatsby + TypeScript setup][1]
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
@@ -97,3 +103,5 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
 
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+[1]: https://github.com/gatsbyjs/gatsby/tree/master/examples/using-typescript

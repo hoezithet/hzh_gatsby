@@ -32,7 +32,11 @@ class Footer extends React.Component<FooterProps, any> {
                     <Grid.Row>
                         <Grid.Column textAlign="center">
                             {this._renderSocials()}
-                            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                            <a
+                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <HzhIcon name="creative commons" />
                             </a>
                         </Grid.Column>
@@ -47,12 +51,12 @@ class Footer extends React.Component<FooterProps, any> {
         return (
             <>
                 {facebookLink ? (
-                    <a href={facebookLink} target="_blank">
+                    <a href={facebookLink} target="_blank" rel="noopener noreferrer">
                         <HzhIcon name="facebook square" />
                     </a>
                 ) : null}
                 {githubLink ? (
-                    <a href={githubLink} target="_blank">
+                    <a href={githubLink} target="_blank" rel="noopener noreferrer">
                         <HzhIcon name="github" />
                     </a>
                 ) : null}

@@ -22,12 +22,14 @@
     "semantic-ui-react": "^0.88.2"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "eslint": "^6.8.0",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.5",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "typescript": "^3.9.3"
   },
   "keywords": [
     "gatsby"
@@ -36,7 +38,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,jsx,.ts,.tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

@@ -11,16 +11,12 @@ interface FooterProps {
     facebookLink?: string;
 }
 
-class Footer extends React.Component<FooterProps, any> {
-    public static defaultProps = {
+class Footer extends React.Component<FooterProps, unknown> {
+    static defaultProps: Partial<FooterProps> = {
         subtitle: "",
         githubLink: undefined,
         facebookLink: undefined,
     };
-
-    constructor(props: FooterProps) {
-        super(props);
-    }
 
     render() {
         const { title, subtitle } = this.props;

@@ -1,9 +1,9 @@
-import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
 
 interface HeaderProps {
-    siteTitle: String;
+    siteTitle: string;
 }
 
 const Header = ({ siteTitle }: HeaderProps) => (

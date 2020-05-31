@@ -28,6 +28,6 @@ const COLORS = {
     MID_GRAY: "rgba(85,85, 85)",
     GRAY: "rgba(211, 211, 211)",
     NEAR_WHITE: "rgba(244, 244, 244)",
-}
+};
 
 export default COLORS;

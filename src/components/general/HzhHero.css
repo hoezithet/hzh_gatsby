@@ -1,0 +1,14 @@
+.hzh-hero-content {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hzh-left-content {
+    width: 50%;
+}
+
+.hzh-right-content {
+    width: 50%;
+    float: right;
+}

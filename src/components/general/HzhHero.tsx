@@ -1,6 +1,9 @@
 import React from "react";
 import { Container, Image } from "semantic-ui-react";
 import HzhHeader from "./HzhHeader";
+import CSS from "csstype";
+import COLORS from "../../colors";
+import "./HzhHero.css";
 
 interface HzhHeroProps {
     image: string;
@@ -17,15 +20,27 @@ class HzhHero extends React.Component<HzhHeroProps, unknown> {
     };
 
     render() {
-        const { title, image, text } = this.props;
+        const { title } = this.props;
         return (
             <Container fluid>
-                <HzhHeader>{title}</HzhHeader>
-                <Image src={image} />
-                <p>{text}</p>
+                <div className="hzh-hero-content">
+                    <HzhHeader>{title}</HzhHeader>
+                    <div className="hzh-left-content">{this._renderLeftContent()}</div>
+                    <div className="hzh-right-content">{this._renderRightContent()}</div>
+                </div>
             </Container>
         );
     }
+
+    _renderLeftContent = () => {
+        const { imagePosition, image, text } = this.props;
+        return imagePosition === "left" ? <Image src={image} /> : <p>{text}</p>;
+    };
+
+    _renderRightContent = () => {
+        const { imagePosition, image, text } = this.props;
+        return imagePosition === "left" ? <p>{text}</p> : <Image src={image} />;
+    };
 }
 
 export default HzhHero;

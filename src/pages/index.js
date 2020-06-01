@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import HzhHero from "../components/general/HzhHero";
 import student from "../images/student.svg";
-import COLORS from '../colors';
+import COLORS from "../colors";
 
 const IndexPage = () => (
     <Layout>

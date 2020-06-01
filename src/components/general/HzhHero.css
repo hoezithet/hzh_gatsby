@@ -1,14 +1,21 @@
 .hzh-hero-content {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+.hzh-hero-text {
+    padding-top: 25%;
+    font-size: 1.2rem;
+    text-align: left;
 }
 
-.hzh-left-content {
-    width: 50%;
+img {
+    width: 20rem;
 }
 
-.hzh-right-content {
-    width: 50%;
+.hzh-hero-right img,
+.hzh-hero-right p {
     float: right;
 }

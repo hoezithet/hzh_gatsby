@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "semantic-ui-react";
-import CSS from "csstype";
+import * as CSS from "csstype";
 import COLORS from "../../colors";
 
 interface HzhHeaderProps {
@@ -11,7 +11,6 @@ interface HzhHeaderProps {
 
 const hzhHeaderStyles: CSS.Properties = {
     color: COLORS.MID_GRAY,
-    fontFamily: "Quicksand",
 };
 
 const HzhHeader = ({ as = "h2", style = hzhHeaderStyles, children }: HzhHeaderProps) => (

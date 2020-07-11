@@ -6,7 +6,7 @@ import COLORS from "../../colors";
 interface HzhHeaderProps {
     as?: string;
     children: React.ReactNode;
-    style?: CSS.properties;
+    style?: CSS.Properties;
 }
 
 const hzhHeaderStyles: CSS.Properties = {

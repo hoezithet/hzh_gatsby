@@ -1,0 +1,300 @@
+{
+    "target_id": null,
+    "root_id": "1093",
+    "doc": {
+        "roots": {
+            "references": [
+                {
+                    "attributes": {
+                        "align": "center",
+                        "plot": null,
+                        "text": "7 x- en y-waarden van f(x)",
+                        "text_font": "Quicksand",
+                        "text_font_size": { "value": "18pt" },
+                        "text_font_style": "normal"
+                    },
+                    "id": "1121",
+                    "type": "Title"
+                },
+                {
+                    "attributes": {
+                        "active_drag": "auto",
+                        "active_inspect": "auto",
+                        "active_multi": null,
+                        "active_scroll": "auto",
+                        "active_tap": "auto",
+                        "logo": null,
+                        "tools": [
+                            { "id": "1112", "type": "HoverTool" },
+                            { "id": "1113", "type": "CrosshairTool" },
+                            { "id": "1114", "type": "SaveTool" }
+                        ]
+                    },
+                    "id": "1115",
+                    "type": "Toolbar"
+                },
+                {
+                    "attributes": {
+                        "callback": null,
+                        "tooltips": "<div style=\"font-family: 'Quicksand'; font-size: 14pt; color:#555555;\">(<span style=\"color:#ff6300;\">@x{0.[0]}</span>, <span style=\"color:#19a974;\">@y{0.[0]}</span>)</div>"
+                    },
+                    "id": "1112",
+                    "type": "HoverTool"
+                },
+                { "attributes": {}, "id": "1147", "type": "BasicTickFormatter" },
+                { "attributes": { "line_alpha": 0.5, "line_width": 2 }, "id": "1113", "type": "CrosshairTool" },
+                { "attributes": {}, "id": "1149", "type": "BasicTickFormatter" },
+                { "attributes": {}, "id": "1114", "type": "SaveTool" },
+                { "attributes": {}, "id": "1150", "type": "Selection" },
+                { "attributes": {}, "id": "1151", "type": "UnionRenderers" },
+                {
+                    "attributes": {
+                        "fill_color": { "value": "#19a974" },
+                        "line_color": { "value": "#19a974" },
+                        "line_join": "round",
+                        "plot": null,
+                        "size": 10
+                    },
+                    "id": "1125",
+                    "type": "NormalHead"
+                },
+                {
+                    "attributes": {
+                        "background_fill_alpha": { "value": 0 },
+                        "below": [{ "id": "1102", "type": "LinearAxis" }],
+                        "border_fill_alpha": { "value": 0 },
+                        "left": [{ "id": "1107", "type": "LinearAxis" }],
+                        "renderers": [
+                            { "id": "1102", "type": "LinearAxis" },
+                            { "id": "1106", "type": "Grid" },
+                            { "id": "1107", "type": "LinearAxis" },
+                            { "id": "1111", "type": "Grid" },
+                            { "id": "1126", "type": "Arrow" },
+                            { "id": "1129", "type": "Arrow" },
+                            { "id": "1131", "type": "Label" },
+                            { "id": "1132", "type": "Label" },
+                            { "id": "1134", "type": "Label" },
+                            { "id": "1142", "type": "GlyphRenderer" }
+                        ],
+                        "sizing_mode": "scale_width",
+                        "title": { "id": "1121", "type": "Title" },
+                        "toolbar": { "id": "1115", "type": "Toolbar" },
+                        "x_range": { "id": "1094", "type": "Range1d" },
+                        "x_scale": { "id": "1098", "type": "LinearScale" },
+                        "y_range": { "id": "1096", "type": "Range1d" },
+                        "y_scale": { "id": "1100", "type": "LinearScale" }
+                    },
+                    "id": "1093",
+                    "subtype": "Figure",
+                    "type": "Plot"
+                },
+                {
+                    "attributes": {
+                        "end": { "id": "1125", "type": "NormalHead" },
+                        "line_color": { "value": "#19a974" },
+                        "line_width": { "value": 2 },
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "source": null,
+                        "start": null,
+                        "x_end": { "value": 0 },
+                        "x_start": { "value": 0 },
+                        "y_end": { "value": 11 },
+                        "y_start": { "value": 10 }
+                    },
+                    "id": "1126",
+                    "type": "Arrow"
+                },
+                { "attributes": { "callback": null, "end": 11, "start": -11 }, "id": "1094", "type": "Range1d" },
+                {
+                    "attributes": {
+                        "fill_color": { "value": "#ff6300" },
+                        "line_color": { "value": "#ff6300" },
+                        "line_join": "round",
+                        "plot": null,
+                        "size": 10
+                    },
+                    "id": "1128",
+                    "type": "NormalHead"
+                },
+                {
+                    "attributes": {
+                        "callback": null,
+                        "data": { "x": [-1, 0, 1, 2, 3, 4, 5], "y": [-10.5, -6.0, -2.5, 0.0, 1.5, 2.0, 1.5] },
+                        "selected": { "id": "1150", "type": "Selection" },
+                        "selection_policy": { "id": "1151", "type": "UnionRenderers" }
+                    },
+                    "id": "1139",
+                    "type": "ColumnDataSource"
+                },
+                {
+                    "attributes": {
+                        "end": { "id": "1128", "type": "NormalHead" },
+                        "line_color": { "value": "#ff6300" },
+                        "line_width": { "value": 2 },
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "source": null,
+                        "start": null,
+                        "x_end": { "value": 11 },
+                        "x_start": { "value": 10 },
+                        "y_end": { "value": 0 },
+                        "y_start": { "value": 0 }
+                    },
+                    "id": "1129",
+                    "type": "Arrow"
+                },
+                { "attributes": { "callback": null, "end": 11, "start": -11 }, "id": "1096", "type": "Range1d" },
+                {
+                    "attributes": {
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "text": "x",
+                        "text_color": { "value": "#ff6300" },
+                        "text_font": "Quicksand",
+                        "text_font_size": { "value": "16pt" },
+                        "x": 10.1,
+                        "y": 0.3
+                    },
+                    "id": "1131",
+                    "type": "Label"
+                },
+                { "attributes": {}, "id": "1098", "type": "LinearScale" },
+                {
+                    "attributes": {
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "text": "y",
+                        "text_color": { "value": "#19a974" },
+                        "text_font": "Quicksand",
+                        "text_font_size": { "value": "16pt" },
+                        "x": 0.3,
+                        "y": 10.1
+                    },
+                    "id": "1132",
+                    "type": "Label"
+                },
+                { "attributes": {}, "id": "1100", "type": "LinearScale" },
+                {
+                    "attributes": {
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "text": "Bron: hoezithet.nu",
+                        "text_color": { "value": "#d3d3d3" },
+                        "text_font": "Quicksand",
+                        "text_font_size": { "value": "12pt" },
+                        "x": -9.9,
+                        "y": -9.9
+                    },
+                    "id": "1134",
+                    "type": "Label"
+                },
+                {
+                    "attributes": {
+                        "axis_label": "x-as",
+                        "axis_label_text_color": { "value": "#ff6300" },
+                        "axis_line_cap": "round",
+                        "axis_line_color": { "value": "#ff6300" },
+                        "axis_line_width": { "value": 2 },
+                        "bounds": [-10.5, 10],
+                        "fixed_location": 0,
+                        "formatter": { "id": "1147", "type": "BasicTickFormatter" },
+                        "major_label_text_color": { "value": "#ff6300" },
+                        "major_label_text_font": "Quicksand",
+                        "major_label_text_font_size": { "value": "14pt" },
+                        "major_tick_line_cap": "round",
+                        "major_tick_line_color": { "value": "#ff6300" },
+                        "major_tick_line_width": { "value": 2 },
+                        "minor_tick_line_color": { "value": "#ff6300" },
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "ticker": { "id": "1103", "type": "BasicTicker" }
+                    },
+                    "id": "1102",
+                    "type": "LinearAxis"
+                },
+                { "attributes": {}, "id": "1103", "type": "BasicTicker" },
+                {
+                    "attributes": {
+                        "fill_color": { "value": "#555555" },
+                        "line_color": { "value": "#555555" },
+                        "radius": { "units": "data", "value": 0.4 },
+                        "x": { "field": "x" },
+                        "y": { "field": "y" }
+                    },
+                    "id": "1140",
+                    "type": "Circle"
+                },
+                {
+                    "attributes": {
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "ticker": { "id": "1103", "type": "BasicTicker" }
+                    },
+                    "id": "1106",
+                    "type": "Grid"
+                },
+                {
+                    "attributes": {
+                        "fill_alpha": { "value": 0.1 },
+                        "fill_color": { "value": "#1f77b4" },
+                        "line_alpha": { "value": 0.1 },
+                        "line_color": { "value": "#1f77b4" },
+                        "radius": { "units": "data", "value": 0.4 },
+                        "x": { "field": "x" },
+                        "y": { "field": "y" }
+                    },
+                    "id": "1141",
+                    "type": "Circle"
+                },
+                {
+                    "attributes": {
+                        "axis_label": "y-as",
+                        "axis_label_text_color": { "value": "#19a974" },
+                        "axis_line_cap": "round",
+                        "axis_line_color": { "value": "#19a974" },
+                        "axis_line_width": { "value": 2 },
+                        "bounds": [-10.5, 10],
+                        "fixed_location": 0,
+                        "formatter": { "id": "1149", "type": "BasicTickFormatter" },
+                        "major_label_text_color": { "value": "#19a974" },
+                        "major_label_text_font": "Quicksand",
+                        "major_label_text_font_size": { "value": "14pt" },
+                        "major_tick_line_cap": "round",
+                        "major_tick_line_color": { "value": "#19a974" },
+                        "major_tick_line_width": { "value": 2 },
+                        "minor_tick_line_color": { "value": "#19a974" },
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "ticker": { "id": "1108", "type": "BasicTicker" }
+                    },
+                    "id": "1107",
+                    "type": "LinearAxis"
+                },
+                {
+                    "attributes": {
+                        "data_source": { "id": "1139", "type": "ColumnDataSource" },
+                        "glyph": { "id": "1140", "type": "Circle" },
+                        "hover_glyph": null,
+                        "muted_glyph": null,
+                        "nonselection_glyph": { "id": "1141", "type": "Circle" },
+                        "selection_glyph": null,
+                        "view": { "id": "1143", "type": "CDSView" }
+                    },
+                    "id": "1142",
+                    "type": "GlyphRenderer"
+                },
+                { "attributes": {}, "id": "1108", "type": "BasicTicker" },
+                {
+                    "attributes": { "source": { "id": "1139", "type": "ColumnDataSource" } },
+                    "id": "1143",
+                    "type": "CDSView"
+                },
+                {
+                    "attributes": {
+                        "dimension": 1,
+                        "plot": { "id": "1093", "subtype": "Figure", "type": "Plot" },
+                        "ticker": { "id": "1108", "type": "BasicTicker" }
+                    },
+                    "id": "1111",
+                    "type": "Grid"
+                }
+            ],
+            "root_ids": ["1093"]
+        },
+        "title": "",
+        "version": "1.0.2"
+    }
+}

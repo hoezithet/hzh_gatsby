@@ -1,0 +1,40 @@
+---
+title: "Wetenschappelijke schrijfwijze"
+date: 2019-01-28T08:07:16+01:00
+weight: 6
+draft: false
+tags: []
+categories: []
+level: ""
+course: ""
+topic: ""
+images: []
+---
+
+_Wetenschappelijke schrijfwijze_ is een manier om getallen te noteren. Het houdt in dat je **de komma verschuift tot die na het eerste [beduidend cijfer](../beduidende_cijfers)** staat. Om het getal gelijk te houden, moet je samen met het verschuiven van de komma ook een [macht van 10](../machten_van_10) toevoegen.
+
+Enkele voorbeelden van getallen in wetenschappelijke schrijfwijze:
+$$-3{,}568\cdot 10^{-11}$$
+$$6{,}4\cdot 10^{3}$$
+$$1{,}0$$
+$$9{,}9074\cdot 10^{-13}$$
+$$3$$
+
+## Omzetten naar wetenschappelijke schrijfwijze
+
+We hebben in de les over machten van 10 gezien hoe we zonder problemen de [komma een bepaald aantal plaatsen kunnen verschuiven](../machten_van_10#getallen-omzetten-naar-een-macht-van-10).
+We passen hier dezelfde techniek toe om de komma te verschuiven tot na het eerste beduidend cijfer, zodat we het getal omzetten naar wetenschappelijke schrijfwijze.
+
+Bijvoorbeeld: zet $-345{,}2$ om naar wetenschappelijke schrijfwijze. Dat wil zeggen: verschuif de komma tot die na het eerste beduidend cijfer staat. Hier betekent dat: **twee plaatsen naar links**. Met [de techniek](../machten_van_10#getallen-omzetten-naar-een-macht-van-10) uit de les over machten van 10, gaat dat als volgt:
+
+\begin{split}
+-345{,}2 &= -345{,}2\cdot \blue{10^{-2}}\cdot \orange{10^{2}}\\\\\
+ &= \blue{-3{,}452} \cdot \orange{10^{2}}
+\end{split}
+
+Een ander voorbeeld, waarbij we nu de komma **vier plaatsen naar rechts** moeten schuiven:
+
+\begin{split}
+0{,}0002495 &= 0{,}0002495\cdot \blue{10^{4}}\cdot \orange{10^{-4}}\\\\\
+ &= \blue{2{,}495} \cdot \orange{10^{-4}}
+\end{split}

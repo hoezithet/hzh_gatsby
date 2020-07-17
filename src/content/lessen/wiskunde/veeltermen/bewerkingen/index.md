@@ -1,0 +1,360 @@
+---
+title: "Bewerkingen met veeltermen"
+date: 2020-06-04T09:29:43+02:00
+weight: 4
+draft: true
+description: "In deze les leggen we uit hoe je kan rekenen met veeltermen. Hoe
+tel je veeltermen bij elkaar op of vermenigvuldig je ze? Hoe deel je een
+veelterm door een eenterm? En hoe vermenigvuldig je een veelterm met een
+eenterm?"
+tags: ["veeltermen", "veelterm", "bewerkingen met veeltermen", "veeltermen
+optellen", "veeltermen aftrekken", "veeltermen vermenigvuldigen", "veelterm
+vermenigvuldigen met een eenterm", "veelterm delen door een eenterm", "som van
+veeltermen", "verschil van veeltermen", "product van veeltermen", "product van
+een veelterm en een eenterm", "quotient van een veelterm en een eenterm"]
+images: []
+---
+
+Net zoals je op getallen bewerkingen kan uitvoeren (optellen, aftrekken,
+vermenigvuldigen,...), kan je dat ook met veeltermen. In principe kan je eender
+welke bewerking die je met getallen kan doen, ook met veeltermen doen wanneer
+de variabelen van de veelterm reële of rationale getallen zijn. We gaan ons
+voorlopig echter tot vier basisbewerkingen beperken:
+
+-   Veeltermen optellen (en aftrekken)
+-   Een veelterm vermenigvuldigen met een eenterm
+-   Een veelterm vermenigvuldigen met een veelterm
+-   Een veelterm delen door een eenterm
+
+We bespreken deze bewerkingen hieronder apart.
+
+{{< expand "Alle variabelen in deze les zijn $\in \mathbb{R}$ (of $\in\mathbb{Q}$)" >}}
+
+We gaan ervan uit dat alle variabelen in deze les een element zijn van de reële
+getallen. Als je nog niet weet wat reële getallen zijn, mag je ook aannemen
+dat de variabelen een element zijn van de rationale, gehele of zelfs natuurlijk
+getallen. Voor al die verzamelingen gelden dezelfde rekenregels wat
+betreft bewerkingen met veeltermen.
+{{< /expand >}}
+
+## Veeltermen optellen en aftrekken
+
+Het **optellen** van twee veeltermen doe je zo:
+
+1. Laat de **haakjes weg**.
+2. Je krijgt nu één lange veelterm. **Vereenvoudig en herleid** die veelterm.
+
+Twee veeltermen die bij elkaar moeten opgeteld worden, dat ziet er bijvoorbeeld
+zo uit:
+
+$$(2a^2b - 4ab^3) + (2ab^3 - 3a^2b)$$
+
+We gaan ervan uit dat de variabelen {{< mute "($a$ en $b$)" >}} reële getallen
+zijn {{< mute "(of rationale getallen, maakt niet uit)" >}}. We mogen dus de
+rekenregels voor reële getallen toepassen. Die zeggen dat de **optelling in
+$\mathbb{R}$ associatief is**. Dat betekent dat het niet uitmaakt of we al dan
+niet haakjes zetten in een optelling en dat het niet uitmaakt waar we dan wel
+die haakjes zouden zetten. We kunnen alle **haakjes dus gewoon weglaten**:
+
+\begin{split}
+\orange{(}2a^2b - 4ab^3\orange{)} + \orange{(}2ab^3 - 3a^2b\orange{)} &=
+2a^2b - 4ab^3 + 2ab^3 - 3a^2b
+\end{split}
+
+Nu krijgen we een veelterm die we eenvoudig kunnen **herleiden** door de
+gelijksoortige eentermen bij elkaar op te tellen:
+
+\begin{split}
+\orange{2a^2b} \green{- 4ab^3} \green{+ 2ab^3} \orange{- 3a^2b} &= \orange{(2 - 3)\cdot a^2b} + \green{(-4 + 2)\cdot ab^3}\\\\\
+ &= \orange{-a^2b} - \green{2\cdot ab^3}\\\\\
+\end{split}
+
+> Als je niet meer goed weet wat het juist betekent om een veelterm te
+> _"herleiden"_, lees dan zeker onze les over het [vereenvoudigen en herleiden
+> van een veelterm](../vereenvoudigen) eens na.
+
+Het **aftrekken** van twee veeltermen gaat zo:
+
+1. Laat de **haakjes weg** en **verander de toestandstekens**
+   {{< mute "($+$ en $-$)" >}} van de termen van de veelterm die **na het
+   minteken** stond.
+2. Je krijgt nu één lange veelterm. **Vereenvoudig en herleid** die veelterm.
+
+Bij het **aftrekken van veeltermen** gaan we ook de haakjes weglaten, maar dan
+moeten we **opletten dat we het minteken correct binnen de haakjes brengen**.
+Stel dat we de volgende berekening voorgeschoteld krijgen:
+
+$(-2x^3 + 3y - 5x^2y + 6) - (2x^2y + 3 - 5y - 6x^3)$
+
+Bij het weglaten van de haakjes, vermenigvuldigen we eigenlijk elke term in de
+tweede veelterm met het minteken. Net zoals $-(-3) = +3$. Dat betekent dat
+**alle tekens van die veelterm moeten veranderen**:
+
+\begin{split}
+(-2x^3 - 5x^2y + 6) - (\orange{2x^2y + 3 - 6x^3}) &=
+-2x^3 - 5x^2y + 6 \orange{- 2x^2y - 3 + 6x^3}
+\end{split}
+
+Vervolgens is het weer een kwestie van de veelterm te **herleiden**, net als
+bij het optellen van veeltermen:
+
+\begin{split}
+\orange{-2x^3} \green{- 5x^2y} \blue{+ 6} \green{- 2x^2y} \blue{- 3} \orange{+ 6x^3}
+&= \orange{(-2 + 6)\cdot x^3} + \green{(- 5 - 2)\cdot x^2y} + \blue{(6 - 3)}\\\\\
+ &= \orange{4\cdot x^3} -\green{7\cdot x^2y} + \blue{3}\\\\\
+\end{split}
+
+## Een veelterm vermenigvuldigen met een eenterm
+
+Het vermenigvuldigen van een eenterm met een veelterm gaat als volgt:
+
+1. **Vermenigvuldig de coëfficiënt** van elke term in de veelterm met de
+   coëfficiënt van de eenterm
+2. **Vermenigvuldig het lettergedeelte** van elke term in de veelterm met elke
+   factor in het lettergedeelte van de eenterm
+
+> Ben je even vergeten wat nu weer de _"coëfficiënt"_ en het _"lettergedeelte"_
+> was van een eenterm? Lees dan zeker onze [les over
+> eentermen](../../eentermen/eenterm) even na.
+
+Stel bijvoorbeeld dat we de volgende berekening moeten maken:
+
+$$-2x y^2\cdot (3x^2 + 4y^3 -6)$$
+
+We zien dat de eenterm $-2xy^2$ wordt vermenigvuldigd met een veelterm. Eerst
+gaan we de $-2$ van de eenterm vermenigvuldigen met alle **coëfficiënten** van
+de veelterm ($3$, $4$ en $-6$). We passen dus eigenlijk gewoon de
+**distributieve eigenschap** toe:
+
+$$\orange{-2}x y^2\cdot (\orange{3}x^2 \orange{+ 4}y^3 \orange{-6}) = x y^2\cdot (\orange{-6}x^2 \orange{- 8}y^3 \orange{+ 12})$$
+
+Nu staan er enkel nog variabelen buiten de haakjes. We zullen eerste de $x$
+naar binnen brengen door weer gebruik te maken van de distributieve eigenschap:
+
+$$\orange{x} y^2\cdot (-6x^2 - 8y^3 + 12) = y^2\cdot (-6\orange{x^3} - 8\orange{x} y^3 + 12 \orange{x})$$
+
+> Merk op dat de $-6x^2$ na de vermenigvuldiging met $x$ veranderd is naar
+> $-6x^\orange{3}$. We passen de rekenregel toe van het **vermenigvuldigen van
+> machten met hetzelfde grondtal**. Zowel $x$ als $x^2$ hebben namelijk een
+> grondtal $x$. Daarom moeten we bij de vermenigvuldigingen de **exponenten bij
+> elkaar optellen**: $x \cdot x^2 = x^{1 + 2} = x^3$.
+
+Goed! Nu staat er nog enkel $y^2$ buiten de haakjes. We kunnen ook hier weer de
+distributieve eigenschap gebruiken om die binnen de haakjes te krijgen:
+
+$$\orange{y^2}\cdot (-6x^3 - 8x y^3 + 12 x) = (-6x^3\orange{y^2} - 8x \orange{y^5} + 12 x\orange{y^2})$$
+
+> Merk weer op dat we de rekenregel van het vermenigvuldigen van machten met
+> hetzelfde grondtal hebben toegepast: $y^2 \cdot y^3 = y^{2 + 3} = y^5$.
+
+De haakjes rond onze uitkomst mogen we natuurlijk gewoon weglaten. We krijgen
+de volgende veelterm:
+
+$$-6x^3y^2 - 8x y^5 + 12 xy^2$$
+
+## Een veelterm delen door een eenterm
+
+Bij het **delen van een veelterm door een eenterm**, gaan we gelijkaardig te
+werk als bij het _vermenigvuldigen_ van een veelterm met een eenterm:
+
+1. **Deel de coëfficiënt** van elke term in de veelterm door de
+   coëfficiënt van de eenterm
+2. **Deel het lettergedeelte** van elke term in de veelterm door elke
+   factor in het lettergedeelte van de eenterm
+
+Stel bijvoorbeeld dat we de volgende deling moeten maken:
+
+$$(21u^2v^3 - 14u^2v^2 + 28uv^3):(-7uv^2)$$
+
+Dan beginnen we eerst met het delen van **alle coëfficiënten** van de veelterm
+door de $-7$:
+
+$$(\orange{21}u^2v^3 \orange{- 14}u^2v^2 \orange{+ 28}uv^3):(\orange{-7}uv^2) = (\orange{-3}u^2v^3 \orange{+ 2}u^2v^2 \orange{- 4}uv^3):(uv^2)$$
+
+Vervolgens gaan we de factoren van de eentermen één per één weghalen. We
+beginnen met de $u$:
+
+$$(-2u^2v^3 + 2u^2v^2 - 4uv^3):(\orange{u}v^2) = (-3\orange{u}v^3 + 2\orange{u}v^2 - 4v^3):v^2$$
+
+> Merk op dat we de rekenregel van het **delen van machten met hetzelfde
+> grondtal** toepassen. Wanneer we delen door $u$ moeten we daarom in elke
+> term van de veelterm $1$ aftrekken van de exponent van $u$. Bij $-2u^2v^3$,
+> bijvoorbeeld, krijgen we na een deling door $u$ $-2\orange{u}v^3$ omdat
+> \begin{split}
+
+    -2\orange{u^2}v^3:\orange{u} &= -2\orange{u^{2 - 1}}v^3\\\\\
+    &= -2\orange{u}v^3
+
+\end{split}
+
+> Bij de deling van $-4uv^3$ door $u$ **valt de $u$ in de term weg** omdat
+> \begin{split}
+
+    -4\orange{u}v^3:\orange{u} &= -4\orange{u^{1-1}}v^3\\\\\
+    &= -4\orange{u^0}v^3\\\\\
+    &= -4\cdot \orange{1} \cdot v^3\\\\\
+    &= -4v^3
+
+\end{split}
+
+Nu we de $u$ uit de deler hebben gehaald, blijven we enkel nog over met een
+deling door $v^2$. We gebruiken dezelfde rekenregels om ook die deling uit te
+voeren:
+
+$$(-3uv^3 + 2uv^2 - 4v^3):\orange{v^2} = (-3u\orange{v} + 2u - 4\orange{v})$$
+
+> Merk op dat ook hier iets wegvalt door de deling: $2uv^2:v^2 = 2u$.
+
+De haakjes rond onze uitkomst kunnen gewoon weggelaten worden. De uitkomst van
+onze deling is dus:
+
+$$-3uv + 2u - 4v$$
+
+## Veeltermen met elkaar vermenigvuldigen
+
+Om twee veeltermen met elkaar te vermenigvuldigen, moeten we eigenlijk meerdere
+keren een [veelterm vermenigvuldigen met een
+eenterm](#een-veelterm-vermenigvuldigen-met-een-eenterm). Het stappenplan gaat
+als volgt:
+
+1. **Vermenigvuldig elke term van de ene veelterm met elke term van de
+   andere veelterm**.
+2. Je krijgt één lange veelterm. **Vereenvoudig en herleid** die veelterm.
+
+Zoals je in de eerste stap ziet, moeten we élke term van de ene met élke term
+van de andere veelterm vermenigvuldigen. Het vermenigvuldigen van veeltermen
+kan daarom al snel een warboel worden. Het is belangrijk dat je er stap per
+stap doorgaat. Stel dat we de volgende vermenigvuldiging moeten oplossen:
+
+$$(-4a^2b + 3 ab^2 + ab) \cdot (a - 2ab)$$
+
+Nu komt het erop aan om op een _gestructureerde manier_ alle termen van de ene
+veelterm met elke term van de andere veelterm te vermenigvuldigen. We beginnen
+met de _eerste term van de eerste veelterm_ te vermenigvuldigen met de tweede
+veelterm. Dit doen we op precies dezelfde manier als hoe we een [eenterm
+vermenigvuldigen met een
+veelterm](##een-veelterm-vermenigvuldigen-met-een-eenterm) Zo kunnen we al het
+eerste stuk van onze uitkomst beginnen schrijven:
+
+$$
+\gray{+ \ldots}$$
+
+Vervolgens vermenigvuldigen we de *tweede term van de eerste veelterm* met de
+tweede veelterm. Zo krijgen we het tweede stuk van de uitkomst:
+$$
+
+8a^3b^2} + 3a^2b^2 - 6a^2b^3 \gray{+ \ldots}\\\\$\$
+
+Tenslotte vermenigvuldigen we de _derde term van de eerste veelterm_ met de
+tweede veelterm.
+
+$$
+8a^3b^2 + 3a^2b^2 - 6a^2b^3} + a^2b - 2a^2b^2$$
+
+De volledige uitkomst van onze vermenigvuldiging is dus:
+$$
+
+Als laatste stap moeten we eens kijken of we deze lange veelterm nog kunnen
+vereenvoudigen of herleiden.
+
+> Als je niet meer goed weet wat het juist betekent om een veelterm te
+> _"herleiden"_, lees dan zeker onze les over het [vereenvoudigen en herleiden
+> van een veelterm](../vereenvoudigen) eens na.
+
+We zoeken naar termen met **hetzelfde lettergedeelten** en tellen de
+coëfficiënten van deze termen bij elkaar op:
+
+\begin{split}
+-4a^3b + 8a^3b^2 \orange{+ 3a^2b^2} - 6a^2b^3 + a^2b \orange{- 2a^2b^2}
+&= -4a^3b + 8a^3b^2 \orange{+ (3 - 2)a^2b^2} - 6a^2b^3 + a^2b\\\\\
+ &= -4a^3b + 8a^3b^2 \orange{+ a^2b^2} - 6a^2b^3 + a^2b\\\\\
+\end{split}
+
+Tenslotte **rangschikken** we de veelterm volgens dalende graad van de
+eentermen:
+
+$$8a^3b^2 - 6a^2b^3 -4a^3b + a^2b^2 + a^2b$$
+
+## Veeltermen en eentermen met letterexponenten vermenigvuldigen
+
+Het kan soms voorkomen dat een eenterm of een veelterm **letterexponenten**
+bevat. Stel bijvoorbeeld dat we de volgende vermenigvuldiging hebben van een
+eenterm en een veelterm:
+
+$$x^{(m + 1)}y^n\cdot (-3x + x^2y^n)$$
+
+Dan moeten we goed de **rekenregel voor het vermenigvuldigen van machten met
+hetzelfde grondtal** in ons achterhoofd houden. Die zegt dat we bij zo een
+vermenigvuldiging de **exponenten moeten optellen**. We zullen eens tonen hoe
+dat gaat wanneer we die $x^{(m + 1)}$ binnen de haakjes brengen:
+
+\begin{split}
+\orange{x^{(m + 1)}}y^n\cdot (-3x + x^2y^n) &= y^n\cdot (-3x\cdot\orange{x^{(m + 1)}} + x^2\cdot\orange{x^{(m + 1)}}y^n)\\\\\
+ &= y^n\cdot (-3x^{1 + \orange{(m + 1)}} + x^{2 + \orange{(m + 1)}}y^n)\\\\\
+ &= y^n\cdot (-3x^{1 + \orange{m + 1}} + x^{2 + \orange{m + 1}}y^n)\\\\\
+ &= y^n\cdot (-3x^{(m + 2)} + x^{(m + 3)}y^n)\\\\\
+\end{split}
+
+Je ziet dat we ook hier weer niets meer doen dan de exponenten bij elkaar op te
+tellen. We brengen nu op dezelfde manier de $y^n$ naar binnen:
+
+\begin{split}
+\orange{y^n}\cdot (-3x^{(m + 2)} + x^{(m + 3)}y^n)
+&= (-3x^{(m + 2)}\cdot\orange{y^n} + x^{(m + 3)}y^n\cdot\orange{y^n})\\\\\
+ &= (-3x^{(m + 2)}y^n + x^{(m + 3)}y^{n + \orange{n}})\\\\\
+ &= (-3x^{(m + 2)}y^n + x^{(m + 3)}y^{2n})\\\\\
+\end{split}
+
+De haakjes rond onze uitkomst kunnen we gerust weglaten. We krijgen dus het
+volgende resultaat:
+
+$$-3x^{(m + 2)}y^n + x^{(m + 3)}y^{2n}$$
+
+Voor het vermenigvuldigen van twee veeltermen die letterexponenten bevatten,
+werken we uiteraard op een gelijkaardige manier. Het verschil is dat je moet
+het in dat geval enkele keren vaker moet doen om elke term van de ene veelterm
+te vermenigvuldigen met elke term van de andere veelterm.
+
+## Samengevat
+
+{{< attention "Het optellen van veeltermen" >}}
+Het **optellen** van twee veeltermen doe je zo:
+
+1. Laat de **haakjes weg**.
+2. Je krijgt nu één lange veelterm. **Vereenvoudig en herleid** die veelterm.
+   {{< /attention >}}
+
+{{< attention "Het aftrekken van veeltermen" >}}
+Het **aftrekken** van twee veeltermen gaat zo:
+
+1. Laat de **haakjes weg** en **verander de toestandstekens**
+   {{< mute "($+$ en $-$)" >}} van de termen van de veelterm die **na het
+   minteken** stond.
+2. Je krijgt nu één lange veelterm. **Vereenvoudig en herleid** die veelterm.
+   {{< /attention >}}
+
+{{< attention "Een veelterm vermenigvuldigen met een eenterm" >}}
+Het **vermenigvuldigen** van een **veelterm met een eenterm** gaat als volgt:
+
+1. **Vermenigvuldig de coëfficiënt** van elke term in de veelterm met de
+   coëfficiënt van de eenterm
+2. **Vermenigvuldig het lettergedeelte** van elke term in de veelterm met elke
+   factor in het lettergedeelte van de eenterm
+   {{< /attention >}}
+
+{{< attention "Een veelterm delen door een eenterm" >}}
+Het **delen van een veelterm door een eenterm** doen we als volgt:
+
+1. **Deel de coëfficiënt** van elke term in de veelterm door de
+   coëfficiënt van de eenterm
+2. **Deel het lettergedeelte** van elke term in de veelterm door elke
+   factor in het lettergedeelte van de eenterm
+   {{< /attention >}}
+
+{{< attention "Een veelterm vermenigvuldigen met een andere veelterm" >}}
+Twee veeltermen met elkaar te vermenigvuldigen, doen we zo:
+
+1. **Vermenigvuldig elke term van de ene veelterm met elke term van de
+   andere veelterm**.
+2. Je krijgt één lange veelterm. **Vereenvoudig en herleid** die veelterm.
+   {{< /attention >}}

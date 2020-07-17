@@ -1,0 +1,134 @@
+---
+title: "Merkwaardige producten"
+date: 2018-12-03T23:21:36+01:00
+wiski: "http://wiski.be/oefenen/merkwaardige-producten/take"
+weight: 5
+draft: false
+images: []
+---
+
+Wat is $99^2$? Of $102^2$? Eens we de formules van **merkwaardige producten**
+onder de knie hebben, wordt het heel eenvoudig om zulke machten uit te rekenen.
+Er zijn **drie** merkwaardige producten:
+
+$$(a \atten{+} b ) \cdot (a \atten{+} b)$$
+$$(a \atten{-} b ) \cdot (a \atten{-} b)$$
+$$(a \atten{+} b ) \cdot (a \atten{-} b)$$
+
+Waarbij $a$ en $b$ getallen voorstellen. We schrijven de merkwaardige
+producten meestal korter als
+
+$$(a \atten{+} b )^2$$
+$$(a \atten{-} b )^2$$
+$$(a \atten{+} b ) \cdot (a \atten{-} b)$$
+
+$99^2$ kunnen we schrijven als een merkwaardig product, want $99$ is $100 - 1$
+en dus $99^2$ is $(100 - 1)^2$. Die laatste heeft
+dezelfde vorm als $(a \atten{-} b)^2$.
+
+Ook $102^2$ kunnen we als merkwaardig product schrijven als $(100 + 2)^2$. Die
+is dus van de vorm $(a \atten{+} b)^2$.
+
+We zullen merkwaardige producten vaak tegenkomen bij onder andere [ontbinden in
+factoren](/lessen/wiskunde/veeltermen/ontbinden) en
+[functies](/lessen/wiskunde/functies) (meer bepaald veeltermfuncties).
+Hieronder bespreken we hoe je een merkwaardig product kan uitrekenen.
+
+## Merkwaardige producten uitrekenen
+
+Eigenlijk is het heel eenvoudig om merkwaardige producten uit te rekenen. Je
+kan gewoon de distributieve eigenschap toepassen. Bijvoorbeeld voor
+$(a + b)^2$:
+
+\begin{split}
+(\blue{a} + \blue{b})\cdot(\orange{a} + \orange{b})
+&= \blue{a}\cdot \orange{a}
+\quad&+ \blue{a} \cdot \orange{b}
+\quad&+ \blue{b} \cdot \orange{a}
+\quad&+ \blue{b} \cdot \orange{b} \\\\\
+ &= a^2
+&+ \blue{a}\orange{b}
+&+ \orange{a}\blue{b}
+&+ b^2 \\\\\
+ &= a^2 &+ 2ab &&+ b^2
+\end{split}
+
+We kunnen hetzelfde voor $(a - b)^2$ doen:
+\begin{split}
+(\blue{a} - \blue{b})\cdot(\orange{a} - \orange{b})
+&= \blue{a}\cdot \orange{a}
+\quad&+ \blue{a} \cdot (-\orange{b})
+\quad&- \blue{b} \cdot \orange{a}
+\quad&- \blue{b} \cdot (-\orange{b}) \\\\\
+ &= a^2
+&- \blue{a}\orange{b}
+&- \orange{a}\blue{b}
+&+ b^2 \\\\\
+ &= a^2 &- 2ab &&+ b^2
+\end{split}
+
+En voor $(a + b)\cdot(a - b)$:
+\begin{split}
+(\blue{a} + \blue{b})\cdot(\orange{a} - \orange{b})
+&= \blue{a}\cdot \orange{a}
+\quad&+ \blue{a} \cdot (-\orange{b})
+\quad&+ \blue{b} \cdot \orange{a}
+\quad&+ \blue{b} \cdot (-\orange{b}) \\\\\
+ &= a^2
+&- \blue{a}\orange{b}
+&+ \orange{a}\blue{b}
+&- b^2 \\\\\
+ &= a^2 &&&- b^2
+\end{split}
+
+In de voorlaatste lijn valt $- \blue{a}\orange{b} + \orange{a}\blue{b}$ weg
+omdat het gelijk is aan $0$.
+
+De uitkomsten zijn samengevat in de onderstaande tabel.
+
+{{< attention "Te onthouden" >}}
+De drie **merkwaardige producten** zijn:
+\begin{equation}
+(a + b )^2 = a^2 + 2ab + b^2
+\end{equation}
+\begin{equation}
+(a - b )^2 = a^2 - 2ab + b^2
+\end{equation}
+\begin{equation}
+(a + b ) \cdot (a - b) = a^2 - b^2
+\end{equation}
+{{< /attention >}}
+
+## **BLACK OUT**
+
+Stel dat je de bovenstaande formules ooit zou vergeten, niet panikeren. Je kan
+snel de formules terug bekomen door de distributieve eigenschap toe te passen
+zoals we hierboven deden. De formules zijn maar een binnenweg om niet telkens
+de hele berekening met de distributieve eigenschap te moeten doen.
+
+## Indruk maken
+
+Terug naar de oorspronkelijke vraag: wat is $99^2$ en $102^2$? Wel we kunnen
+$99^2$ schrijven als $(100 - 1)^2$ en we kunnen dus de formule van $(a - b)^2$
+toepassen: $(a - b)^2 = a^2 -2ab + b^2$ waarbij we $a$ vervangen door $100$ en
+$b$ vervangen door $1$.
+
+\begin{split}
+99^2 &= (100 - 1)^2 \\\\\
+ &= 100^2 -2\cdot 100 \cdot 1 + 1^2 \\\\\
+ &= 10\ 000 -200 + 1 \\\\\
+ &= 9801
+\end{split}
+
+We kunnen ook snel $102^2$ berekenen door het op te splitsen in $100 + 2$:
+
+\begin{split}
+102^2 &= (100 + 2)^2 \\\\\
+ &= 100^2 +2\cdot 100 \cdot 2 + 2^2 \\\\\
+ &= 10\ 000 +400 + 4 \\\\\
+ &= 10\ 404
+\end{split}
+
+Als je dus ooit een moeilijk kwadraat moet berekenen, kan je altijd proberen om
+het getal op te splitsen in een som of verschil van twee getallen waarvan je
+snel de kwadraten kan berekenen. Bijvoorbeeld $19^2$, $108^2$ enzovoort.

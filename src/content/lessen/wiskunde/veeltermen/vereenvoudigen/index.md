@@ -1,0 +1,197 @@
+---
+title: "Veeltermen vereenvoudigen en herleiden"
+date: 2020-06-04T09:26:36+02:00
+weight: 2
+draft: true
+tags: ["veelterm", "veelterm herleiden", "bewerkingen met veeltermen",
+"Veeltermen vereenvoudigen", "gelijksoortige eentermen optellen"]
+description: "Hoe kan je een veelterm vereenvoudigen? Om eenvoudiger veeltermen
+met elkaar te kunnen vergelijken en bewerkingen met veeltermen te kunnen doen,
+is het belangrijk dat we leren om een veelterm te vereenvoudigen. In deze les
+leggen we stap voor stap uit hoe dat moet."
+images: []
+---
+
+Voor we een veelterm beginnen gebruiken, zorgen we er best voor dat we hem zo
+kort mogelijk schrijven. Dat bespaart ons schrijfwerk achteraf en zorgt ervoor
+dat we eenvoudiger gelijkenissen tussen veeltermen kunnen ontdekken. Het
+vereenvoudigen van een veelterm doe je zo:
+
+1. **Werk de haakjes** uit in elke eenterm;
+2. **Vereenvoudig alle eentermen**;
+3. **Herleid** door de gelijksoortige eentermen bij elkaar op te tellen.
+
+In deze les leggen we elk van die stappen wat verder uit.
+
+{{< expand "Alle variabelen in deze les zijn $\in \mathbb{R}$ (of $\in\mathbb{Q}$)" >}}
+
+We gaan ervan uit dat alle variabelen in deze les een element zijn van de reële
+getallen. Als je nog niet weet wat reële getallen zijn, mag je ook aannemen
+dat de variabelen een element zijn van de rationale, gehele of zelfs natuurlijk
+getallen. Voor al die verzamelingen gelden dezelfde rekenregels wat
+betreft het vereenvoudigen van veeltermen.
+{{< /expand >}}
+
+## Haakjes uitwerken
+
+Soms staat een factor van een term in een veelterm tussen haakjes. Voor we een
+veelterm gaan vereenvoudigen, werken we eerst alle haakjes uit.
+
+De uitdrukking die tussen haakjes staat, kan zelf een eenterm of een veelterm
+zijn. Bijvoorbeeld:
+
+-   In de veelterm $$-ab^2 + 3(b^3c^2)$$ staat er een **eenterm tussen haakjes**
+-   In de veelterm $$- 5(x^3 + 2x^2) + 3x^2$$ staat er een **veelterm tussen haakjes**
+
+Wanneer de **uitdrukking tussen haakjes een eenterm** is, mag je de **haakjes
+gewoon weglaten**. Dat mag omdat de vermenigvuldiging in $\mathbb{R}$
+associatief is en we ervan uitgaan dat alle variabelen reële
+{{% mute "($\in \mathbb{R}$)" %}} of rationale
+{{% mute "($\in \mathbb{Q}$)" %}} getallen zijn. Bijvoorbeeld:
+
+-   $$-ab^2 + \sqrt{3}\cdot \orange{(b^3c^2)} = -ab^2 + \sqrt{3}\cdot \orange{b^3c^2}$$
+-   $$6\cdot \orange{(x^3y^3)} + 5y^2 = 6\cdot \orange{x^3y^3} + 5y^2$$
+-   $$-2\cdot \orange{(st^2)} + \blue{(\frac{5}{2}t^3u^2)} - 9 = - 2\cdot \orange{st^2} + \blue{\frac{5}{2}t^3u^2} - 9$$
+
+Let wel op wanneer er een minteken tussen haakjes staat. Dat **minteken breng
+je naar voor in de term** en combineer je vooraan met het toestandsteken dat er
+al stond:
+
+-   $$\orange{-p^3(-5q^2r)} - 5q \blue{+ 3(-p^2r^3)} = \orange{5p^3q^2r} - 5q \blue{- 3p^2r^3}$$
+-   $$-x^2y \orange{+ 3(-xy^2)} = - x^2y \orange{- 3xy^2}$$
+-   $$y^3 + \sqrt{5} y^2 \orange{- (-9y)} = y^3 + \sqrt{5} y^2 \orange{+ 9y}$$
+
+Wanneer de **uitdrukking tussen haakjes een veelterm** is, probeer je eerst die
+veelterm apart te vereenvoudigen. Wanneer die niet vereenvoudigbaar meer is,
+pas je de **distributieve eigenschap** toe.
+
+-   \begin{split}
+    3(p^2 + \orange{(-5p^3)}) - 2p &= 3(p^2 - \orange{5p^3}) - 2p\\\\\
+     &= \orange{3p^2 - 15p^3} - 2p
+    \end{split}
+-   \begin{split}
+    -6x^4 - 2x (\orange{-3(4y^2)} - 2y + 5) &= - 6x^4 - 2x (\orange{-12y^2} - 2y + 5)\\\\\
+     &= - 6x^4 \orange{+ 24xy^2 + 4xy - 10x}
+    \end{split}
+-   $$5q^3r^2 \orange{- (q + 2r)} = 5q^3 r^2 \orange{- q - 2r}$$
+
+## Eentermen vereenvoudigen
+
+Vanaf er geen haakjes meer zijn in de termen van de veelterm, gaan we **alle
+eentermen vereenvoudigen**. Vergeet daarbij niet om de **factoren van de
+eenterm te rangschikken**. De coëfficiënt zetten we voorop en de variabelen
+rangschikken we **alfabetisch**. Door in deze stap de factoren van de eentermen
+al meteen te rangschikken, zullen we in de volgende stap heel eenvoudig de
+gelijksoortige eentermen kunnen vinden.
+
+> Als je niet meer goed weet hoe je een eenterm vereenvoudigt, lees je best
+> onze les over het [vereenvoudigen van eentermen](../vereenvoudig_eenterm)
+> eens na. Enkele voorbeelden:
+
+-   $$\orange{-2yx^2\cdot 3x} + 4y^2 = \orange{- 6x^3 y} + 4y^2$$
+-   $$\orange{2\cdot 5 q^3} \blue{- p \cdot p^2} + 4 = \orange{10 q^3} \blue{- p^3} + 4$$
+-   $$\orange{zyx} \blue{- 2 \frac{xy^3}{3} x} \green{+ 3z^3z} = \orange{xyz} \blue{- \frac{2}{3} x^2y^3} \green{+ 3z^4}$$
+
+## Herleid door de gelijksoortige eentermen op te tellen
+
+Wanneer alle eentermen in een veelterm vereenvoudigd zijn, gaan we alle
+**gelijksoortige eentermen bij elkaar optellen**. Dit noemen we ook wel het
+**herleiden van de veelterm**. Om de gelijksoortige eentermen bij elkaar te
+kunnen optellen, moeten we natuurlijk eerst op zoek naar waar er allemaal
+gelijksoortige eentermen zijn in de veelterm. In de vorige stap
+{{< mute "(eentermen vereenvoudigen)" >}} hebben we de factoren van de
+eentermen al gerangschikt. Daardoor zal het nu eenvoudiger zijn om de
+gelijksoortige eentermen te vinden.
+
+> Als je niet meer goed weet wat we bedoelen met _"gelijksoortige eentermen"_
+> lees dan zeker onze [introductieles over
+> eentermen](../../eentermen/eenterm/#gelijksoortige-eentermen) eens na.
+
+Hieronder hebben we per veelterm de gelijksoortige eentermen aangeduid in
+dezelfde kleur:
+
+-   $$\orange{-3xy^2} + 5x^3 \orange{+ 9 xy^2}$$
+-   $$\orange{-2qr} + p^2qr^3 \green{- 6p} \orange{+ 5qr} \green{+ 3 p}$$
+-   $$\orange{\frac{4}{5}a^2b} \green{- 2b} + \frac{4}{5}a^2 \green{+ \frac{4}{5}b} \orange{- a^2b}$$
+
+> Het is een goeie gewoonte om bij het aanduiden van gelijksoortige eentermen
+> ook altijd het **plus- of minteken mee aan te duiden**. Zo voorkomen we dat
+> we bv. plots een optelling gaan doen waar we eigenlijk een aftrekking hadden
+> moeten doen.
+
+Eens je de gelijksoortige eentermen hebt aangeduid, moet je de **gelijksoortige
+eentermen optellen** bij elkaar. Dat doe je door de **coëfficiënten op te
+tellen** en het **lettergedeelte te laten staan**.
+
+> Als je niet meer goed weet wat we bedoelen met _"coëfficiënten"_ en
+> _"lettergedeelte"_, lees dan zeker onze [introductieles over
+> eentermen](../../eentermen/eenterm/#gelijksoortige-eentermen) eens na.
+
+We werken de voorbeelden van hierboven verder uit:
+
+-   \begin{split}
+    \orange{-3xy^2} + 5x^3 \orange{+ 9 xy^2} &= \orange{(-3 + 9)xy^2} + 5x^3\\\\\
+     &= \orange{6xy^2} + 5x^3
+    \end{split}
+-   \begin{split}
+    \orange{-2qr} + p^2qr^3 \green{- 6p} \orange{+ 5qr} \green{+ 3 p} &= \orange{(-2 + 5)qr} + p^2qr^3 + \green{(-6 + 3)p}\\\\\
+     &= \orange{3qr} + p^2qr^3 \green{-3p}
+    \end{split}
+-   \begin{split}
+    \orange{\frac{4}{5}a^2b} \green{- 2b} + \frac{4}{5}a^2 \green{+ \frac{4}{5}b} \orange{- a^2b} &= \orange{(\frac{4}{5} - 1)a^2b} + \green{(-2+ \frac{4}{5})b} + \frac{4}{5}a^2\\\\\
+     &= \orange{-\frac{1}{5}a^2b} \green{-\frac{6}{5}b} + \frac{4}{5}a^2
+    \end{split}
+
+We maken hier eigenlijk gebruik van de distributieve eigenschap in $\mathbb{R}$
+die zegt dat de vermenigvuldiging distributief is over de optelling in
+$\mathbb{R}$.
+
+| Distributieve eigenschap | Gelijksoortige eentermen optellen  |
+| ------------------------ | ---------------------------------- |
+| $$(2 + 3)a = 2a + 3a$$   | $$2a + 3a = (2 + 3)a \gray{= 5a}$$ |
+
+## Termen rangschikken
+
+Eens je de eentermen hebt vereenvoudigd en de gelijksoortige eentermen hebt
+opgeteld, is de veelterm vereenvoudigd. 🙌 Om de veelterm mooi voor te stellen,
+zullen we echter vaak als laatste stap de **termen in de veelterm
+rangschikken**.
+
+Dat kan je op verschillende manieren doen. De meest gebruikelijke manier is om
+de termen volgens **dalende graad van de eentermen** te rangschikken. Wanneer
+twee eentermen dezelfde graad hebben, rangschik je die termen alfabetisch
+volgens graad zodat bv. de term $x^2y$ vóór $xy^2$ komt te staan en de term
+$x^3$ vóór $y^3$.
+
+> Als je bent vergeten hoe je de graad van een eenterm vindt, lees dan zeker
+> onze [introductieles over eentermen](../../eentermen/eenterm) eens na.
+
+Enkele voorbeelden van het rangschikken volgens dalende graad van de eentermen:
+
+-   $$-3\orange{x} + 2\orange{xy} + \orange{x^2y^3} - 5 \orange{x^2} = \orange{x^2y^3} - 5 \orange{x^2} + 2\orange{xy} - 3\orange{x}$$
+-   $$-\frac{1}{3}\orange{a} + 5\orange{a^2} - 4 = 5\orange{a^2} -\frac{1}{3}\orange{a} - 4$$
+-   $$5\orange{p^2q} + 3 \orange{p^5} - 2\orange{q^2} = 3\orange{p^5} + 5\orange{p^2q} - 2\orange{q^2}$$
+
+We kunnen ook kiezen om enkel naar de graad van een bepaalde variabele te
+kijken. Zo zouden we de termen bijvoorbeeld kunnen rangschikken volgens dalende
+graad in $x$. Bijvoorbeeld:
+
+-   Rangschikken volgens **dalende graad in $x$**:
+    $$\orange{x}y^3 + \orange{x^3}y^4 - \orange{x^2}y = \orange{x^3}y^4 - \orange{x^2} y + \orange{x}y^3$$
+-   Rangschikken volgens **dalende graad in $b$**:
+    $$a\orange{b^2} - 4\orange{b^3} + a^4 = - 4\orange{b^3} + a\orange{b^2} + a^4$$
+-   Rangschikken volgens **dalende graad in $q$**:
+    $$-\orange{q} + \sqrt{3}p^4 - 3\orange{q^3} + p^3\orange{q^2} = -3\orange{q^3} + p^3\orange{q^2} - \orange{q} + \sqrt{3}p^4$$
+
+## Samengevat
+
+{{< attention "Veeltermen vereenvoudigen" >}}
+Een veelterm kan je als volgt vereenvoudigen:
+
+1. Werk alle haakjes uit
+2. Vereenvoudig alle eentermen
+3. Herleid de veelterm (tel de gelijksoortige eentermen op)
+
+Ten slotte zullen we vaak de termen op een bepaalde manier rangschikken,
+bijvoorbeeld volgens dalende graad van de eentermen.
+{{< /attention >}}

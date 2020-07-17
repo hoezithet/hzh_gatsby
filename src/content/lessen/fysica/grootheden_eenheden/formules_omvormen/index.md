@@ -1,0 +1,58 @@
+---
+title: "Formules invullen en omvormen"
+date: 2019-01-28T08:07:58+01:00
+weight: 8
+draft: false
+tags: ["grootheden_eenheden", "formules", "vergelijkingen"]
+categories: ["grootheden_eenheden", "formules"]
+level: "3M"
+course: "Fysica"
+topic: "grootheden_eenheden"
+images: []
+---
+
+Fysica levert een wiskundige beschrijving van bepaalde eigenschappen en onderdelen van de wereld en het heelal rondom ons. Die beschrijvingen schrijven we neer in **formules**. Zulke formules tonen een **wiskundig verband tussen [grootheden](../intro)**. Een eenvoudige formule is bijvoorbeeld hoe we massadichtheid kunnen berekenen:
+$$\rho = \frac{\si{m}}{\si{V}}$$
+
+Dit lees je als:
+$$\text{massadichtheid} = \frac{\text{massa}}{\text{volume}}$$
+
+De massadichtheid van een stof zegt hoeveel $\si{kg}$ een bepaald volume van die stof is. Eén liter water, bijvoorbeeld, heeft een massa van ongeveer $1 \si{ kg}$. Water heeft dus een massadichtheid van $1 \si{ kg/l}$, [wat gelijk is aan](../eenheden_omzetten#volumes-omzetten) $10^3 \si{ kg/m}^3$.
+
+## Grootheden invullen
+
+Als we de massadichtheid willen berekenen wanneer we van een stof de massa $\orange{\si{m}}$ voor een bepaald volume $\orange{\si{V}}$ kennen, kunnen we de formule $\rho = \frac{\orange{\si{m}}}{\orange{\si{V}}}$ rechtstreeks gebruiken.
+
+Bijvoorbeeld: we leggen een kubusvormig blokje kurk met een zijde van $5 \si{ cm}$ op een weegschaal en lezen af dat het blokje een massa heeft van $26 \si{ g}$. Dan is de massadichtheid van kurk:
+\begin{split}
+\rho &= \frac{\si{m}}{\si{V}} \\\\\
+&= \frac{26 \si{ g}}{5 \si{ cm} \cdot 5 \si{ cm} \cdot 5 \si{ cm}}\\\\\
+&= \frac{26 \si{ g}}{125 \si{ cm}^3}\\\\\
+&= 0{,}208 \frac{\si{g}}{\si{cm}^3}\\\\\
+&\approx 0{,}21 \frac{\si{g}}{\si{cm}^3}
+\end{split}
+
+## Omvormen zoals vergelijkingen
+
+De technieken die we gebruiken om [vergelijkingen om te vormen](../../../wiskunde/1g_vgl/omvormen), kunnen we ook gebruiken om formules om te vormen. Zo kunnen we de formule voor massadichtheid omvormen zodat $m$ alleen overblijft aan één kant:
+\begin{split}
+\rho &= \frac{m}{V}\\\\\
+\Leftrightarrow \rho \cdot \orange{V} &= \frac{m}{V} \cdot \orange{V}\\\\\
+\Leftrightarrow \rho \cdot \orange{V} &= m \cdot \frac{\orange{V}}{V} \\\\\
+\Leftrightarrow \rho \cdot \orange{V} &= m \cdot 1 \\\\\
+\Leftrightarrow \rho \cdot \orange{V} &= m \\\\\
+\Leftrightarrow m &= \rho \cdot V \\\\\
+\end{split}
+
+Zo kunnen we $m$ berekenen wanneer we $\rho$ en $V$ kennen. We kunnen deze formule dan weer verder omvormen zodat $V$ alleen overblijft aan één kant:
+
+\begin{split}
+m &= \rho \cdot V \\\\\
+\Leftrightarrow \frac{m}{\orange{\rho}} &= \frac{\rho \cdot V}{\orange{\rho}} \\\\\
+\Leftrightarrow \frac{m}{\orange{\rho}} &= \frac{\rho}{\orange{\rho}} \cdot V \\\\\
+\Leftrightarrow \frac{m}{\orange{\rho}} &= 1 \cdot V \\\\\
+\Leftrightarrow \frac{m}{\orange{\rho}} &= V \\\\\
+\Leftrightarrow V &= \frac{m}{\rho}
+\end{split}
+
+Met die formule kunnen we dan $V$ berekenen wanneer $m$ en $\rho$ gegeven zijn.

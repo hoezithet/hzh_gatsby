@@ -20,11 +20,11 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `gatsby-starter-default`,
-                short_name: `starter`,
+                name: `Hoe Zit Het?`,
+                short_name: `hoezithet`,
                 start_url: `/`,
-                background_color: `#663399`,
-                theme_color: `#663399`,
+                background_color: `#F4F4F4`,
+                theme_color: `#FFB700`,
                 display: `minimal-ui`,
                 icon: `src/images/favicon.png`, // This path is relative to the root of the site.
             },

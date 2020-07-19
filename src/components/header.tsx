@@ -1,6 +1,7 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
+import headerStyle from "./styles/header.module.scss";
 
 interface HeaderProps {
     siteTitle: string;
@@ -32,6 +33,7 @@ const Header = ({ siteTitle }: HeaderProps) => (
                 </Link>
             </h1>
         </div>
+        <div className={headerStyle.example}></div>
     </header>
 );
 

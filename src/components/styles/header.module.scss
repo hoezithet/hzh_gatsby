@@ -1,0 +1,8 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+.example {
+    font: 100% $font-stack;
+    height: 300px;
+    background-color: $primary-color;
+}

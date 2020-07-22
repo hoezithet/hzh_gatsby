@@ -84,7 +84,7 @@ Bij het **aftrekken van veeltermen** gaan we ook de haakjes weglaten, maar dan
 moeten we **opletten dat we het minteken correct binnen de haakjes brengen**.
 Stel dat we de volgende berekening voorgeschoteld krijgen:
 
-$(-2x^3 + 3y - 5x^2y + 6) - (2x^2y + 3 - 5y - 6x^3)$
+$$(-2x^3 + 3y - 5x^2y + 6) - (2x^2y + 3 - 5y - 6x^3)$$
 
 Bij het weglaten van de haakjes, vermenigvuldigen we eigenlijk elke term in de
 tweede veelterm met het minteken. Net zoals $-(-3) = +3$. Dat betekent dat
@@ -236,23 +236,21 @@ vermenigvuldigen met een
 veelterm](##een-veelterm-vermenigvuldigen-met-een-eenterm) Zo kunnen we al het
 eerste stuk van onze uitkomst beginnen schrijven:
 
-$$
-\gray{+ \ldots}$$
+$$(-4a^2b \gray{+ 3 ab^2 + ab}) \cdot (a - 2ab) = -4a^3b + 8a^3b^2 \gray{+ \ldots}$$
 
-Vervolgens vermenigvuldigen we de *tweede term van de eerste veelterm* met de
+Vervolgens vermenigvuldigen we de _tweede term van de eerste veelterm_ met de
 tweede veelterm. Zo krijgen we het tweede stuk van de uitkomst:
-$$
 
-8a^3b^2} + 3a^2b^2 - 6a^2b^3 \gray{+ \ldots}\\\\$\$
+$$(\gray{-4a^2b} + 3 ab^2 \gray{+ ab}) \cdot (a - 2ab) = \gray{-4a^3b + 8a^3b^2} + 3a^2b^2 - 6a^2b^3 \gray{+ \ldots}$$
 
 Tenslotte vermenigvuldigen we de _derde term van de eerste veelterm_ met de
 tweede veelterm.
 
-$$
-8a^3b^2 + 3a^2b^2 - 6a^2b^3} + a^2b - 2a^2b^2$$
+$$(\gray{-4a^2b + 3 ab^2} + ab) \cdot (a - 2ab) = \gray{-4a^3b + 8a^3b^2 + 3a^2b^2 - 6a^2b^3} + a^2b - 2a^2b^2$$
 
 De volledige uitkomst van onze vermenigvuldiging is dus:
-$$
+
+$$-4a^3b + 8a^3b^2 + 3a^2b^2 - 6a^2b^3 + a^2b - 2a^2b^2$$
 
 Als laatste stap moeten we eens kijken of we deze lange veelterm nog kunnen
 vereenvoudigen of herleiden.

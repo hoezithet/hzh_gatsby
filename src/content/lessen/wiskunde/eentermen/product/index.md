@@ -156,7 +156,7 @@ Ten slotte delen we ook de factoren die grondtal $v$ hebben:
  & = -3u\orange{v^{2}}\\\\\
 \end{split}
 
-Klaar! :tada: Het resultaat van onze deling is:
+Klaar! 🎉 Het resultaat van onze deling is:
 
 $$-3uv^{2}$$
 

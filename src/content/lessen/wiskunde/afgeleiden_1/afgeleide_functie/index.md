@@ -22,7 +22,8 @@ berekenen.
 Gelukkig kunnen we ook de **afgeleide van een volledige functie** berekenen.
 Dat betekent dat we in één keer in **alle x-waarden**
 {{< mute "(waarin $f(x)$ afleidbaar is)" >}} de afgeleide berekenen!
-:open_mouth: Dat noemen we de **afgeleide functie** van een functie of kortweg **de afgeleide van een functie**.
+😮 Dat noemen we de **afgeleide functie** van een functie of kortweg **de
+afgeleide van een functie**.
 
 {{< svg "img/zonder_met_afgeleide_fx.svg" "Met de afgeleide functie kunnen we sneller afgeleiden berekenen" >}}
 
@@ -70,7 +71,7 @@ moeten in onze definitie van $f'(a)$ de $a$ dus gewoon vervangen door een $x$:
 $$ f'(\blue{x}) = \lim\_{\Delta x \rightarrow 0} \frac{ f(\blue{x} + \Delta x) - f(\blue{x}) }{\Delta x} $$
 
 En zo hebben we de **definitie van de afgeleide functie van $f(x)$**!
-:raised_hands: Als we naar die definitie kijken, zien we dat er twee keer iets
+🙌 Als we naar die definitie kijken, zien we dat er twee keer iets
 met $f(\ldots)$ staat. De eerste keer staat er $f(x + \Delta x)$ en de tweede
 keer staat er $f(x)$:
 
@@ -95,7 +96,7 @@ apart uitwerken:
 
 {{< svg "img/f_delta_x_uitwerking.svg" "Uitwerking van $f(x + \Delta x)$" >}}
 
-Die $f(x + \Delta x)$ blijft een serieus harige uitdrukking... :rolling_eyes:
+Die $f(x + \Delta x)$ blijft een serieus harige uitdrukking... 🙄
 Als je terug even naar boven gaat, zie je in de definitie van $f'(x)$ in de
 teller van de breuk "$f(x + \Delta x) - f(x)$" staan. We moeten van onze $f(x +
 \Delta x)$ dus nog $f(x)$ aftrekken. Gelukkig vallen er dan een hele hoop
@@ -127,7 +128,7 @@ probleem delen door $\Delta x$.
 
 {{< /expand >}}
 
-Dat ziet er al een heel stuk properder uit! :grinning: Het enige wat ons nu nog
+Dat ziet er al een heel stuk properder uit! 😀 Het enige wat ons nu nog
 rest is de **limiet zelf berekenen**. De limiet zegt enkel iets over $\Delta
 x$, dus elke term zonder $\Delta x$ mogen we buiten de limiet zetten. Dan wordt
 de limiet heel eenvoudig en komt de afgeleide functie van $f(x) = -3x^2 + 4x -
@@ -135,7 +136,7 @@ de limiet heel eenvoudig en komt de afgeleide functie van $f(x) = -3x^2 + 4x -
 
 {{< svg "img/limiet_uitrekenen.svg" "Uitwerking van de limiet om de afgeleide functie te berekenen." >}}
 
-Ziezo! We hebben de afgeleide functie $f'(x)$ gevonden! :muscle:
+Ziezo! We hebben de afgeleide functie $f'(x)$ gevonden! 💪
 
 ## Hoe helpt een afgeleide functie ons nu?
 

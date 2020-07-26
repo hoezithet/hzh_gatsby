@@ -90,8 +90,8 @@ meetkunde om hoeken aan te duiden.
 {{< svg "img/greek_angle.png" >}}
 
 Maar het hoeft natuurlijk niet altijd zo saai te zijn. Niets houdt je tegen om
-**emoji's** te gebruiken als variabele, zoals :dog:, :elephant: of
-:straight_ruler::
+**emoji's** te gebruiken als variabele, zoals 🐶, 🐘 of
+📏:
 
 {{< svg "img/emoji_formula.png" >}}
 

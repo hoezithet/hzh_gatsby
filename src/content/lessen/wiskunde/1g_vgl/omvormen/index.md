@@ -88,7 +88,7 @@ Vervolgens moeten we enkel nog de $3$ weg krijgen. Dat kan als volgt:
  \Leftrightarrow \cancelto{1}{\frac{3}{\orange{3}}}\cdot x &= \frac{14}{\orange{3}}\\\\\
  \Leftrightarrow x &= \frac{14}{3}\\\\\
 \end{split}
-**En we hebben $x$ gevonden!!!** :tada::dancer::muscle:
+**En we hebben $x$ gevonden!!!** 🎉💃💪
 
 {{< expand "Uitbreiding: via een andere weg" >}}
 Als we in de stap met de keuze tussen $\orange{3}$ en $-6$, kiezen om eerst de $\orange{3}$ weg te werken in plaats van de $6$, vinden we natuurlijk hetzelfde:

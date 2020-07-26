@@ -134,7 +134,7 @@ $+\infty$:
 | ---------------------- | --------- | --------- | ---------- | ----------- | ---------- | --------- | --------- |
 | **Uitgang** $y = f(x)$ |           | $\red{-}$ | $\blue{0}$ | $\green{+}$ | $\blue{0}$ | $\red{-}$ |
 
-Et voilà! :muscle: We krijgen hetzelfde tekenschema als daarnet.
+Et voilà! 💪 We krijgen hetzelfde tekenschema als daarnet.
 
 ## Enkel nulpunten en grenzen van domein
 
@@ -147,7 +147,7 @@ nulpunt of na een grens van het domein**.
 Voor echt heel speciale functies kan het teken ook na andere x-waarden
 veranderen, namelijk na een _discontinuïteit_. Zulke functies zullen we niet zo
 vaak tegenkomen, dus is het niet de moeite om er nu verder op in te gaan.
-Zorgen voor later! :wave:
+Zorgen voor later! 👋
 
 ## Samengevat
 

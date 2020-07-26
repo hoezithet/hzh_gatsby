@@ -144,7 +144,7 @@ Als we nu alles terug samen zetten, krijgen we dus:
 
 $$6xy^3 + 5x + 2xy^3 - 8x = \orange{8}xy^3 \blue{-3}x$$
 
-Klaar! :tada:
+Klaar! 🎉
 
 ## Samengevat
 

@@ -205,7 +205,7 @@ $\green{-24}$ over:
 
 $$\lim\_{\Delta x \to 0} (\green{- 24 - 3\Delta x}) = \green{-24}$$
 
-:tada: We krijgen dus dezelfde uitkomst als wanneer we de limiet met onze
+🎉 We krijgen dus dezelfde uitkomst als wanneer we de limiet met onze
 blote handen uitrekenden!
 
 ## Samengevat

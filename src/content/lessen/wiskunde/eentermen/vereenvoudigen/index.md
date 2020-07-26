@@ -48,7 +48,7 @@ Dit invullen in het voorbeeld geeft:
 
 $$-3y\cdot \orange{(2xz)^3}\cdot(-y)^2\cdot (-2) \cdot (-5) = -3y\cdot \orange{2^3x^3z^3}\cdot(-y)^2\cdot (-2) \cdot (-5)$$
 
-Ziezo, die haakjes zijn al weg! :muscle:
+Ziezo, die haakjes zijn al weg! 💪
 
 De andere factor die haakjes met een macht bevat, is $\orange{(-y)^2}$. Het
 minteken binnen de haakjes moet je ook tot de macht verheffen. Dat doe je door
@@ -249,7 +249,7 @@ Tenslotte laten we de maaltekens weg waar het kan:
 
 $$-240 x^3 y^{3}z^3$$
 
-Wat. Een. Prachtige. Eenterm. :relieved:
+Wat. Een. Prachtige. Eenterm. 😌
 
 ## Samengevat
 

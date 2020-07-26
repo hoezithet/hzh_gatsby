@@ -45,7 +45,7 @@ Het gebeurt heel vaak dat _iets_ afhangt van _iets anders_:
 Met een functie kunnen we _het verband_ beschrijven tussen het _ene_
 {{< mute "(hoe lang het duurt voor we ergens geraken)" >}}
 en het _andere_ {{< mute "(hoe snel we bewegen)" >}}. Het beschrijven van dat
-verband tussen de $x$ en de $y$, doen we met een [functievoorschrift](../voorschrift).
+verband tussen de $x$ en de $y$, doen we met een [functievoorschrift](voorschrift).
 
 ## Samengevat
 

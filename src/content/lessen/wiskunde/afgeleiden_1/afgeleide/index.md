@@ -26,7 +26,7 @@ met het differentiequotiënt:
 $$\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
 
 > Als je de formule voor het differentiequotiënt nog wat beangstigend vindt,
-> lees je best de [les over differentiequotiënt](../differentiequotient) nog
+> lees je best de [les over differentiequotiënt](differentiequotient) nog
 > eens na.
 
 Met die formule kunnen we bijvoorbeeld de _gemiddelde snelheid_ van een wagen

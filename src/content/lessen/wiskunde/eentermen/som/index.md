@@ -14,11 +14,11 @@ images: []
 ---
 
 Het optellen en aftrekken van eentermen zullen we later gebruiken bij het
-vereenvoudigen van [veeltermen](../../veeltermen). Het gaat als volgt:
+vereenvoudigen van [veeltermen](../veeltermen). Het gaat als volgt:
 
-1. [Vereenvoudig](../vereenvoudigen) alle eentermen.
-2. Duid de [gelijksoortige](../eenterm#gelijksoortige-eentermen) eentermen aan.
-3. Tel per soort de [coëfficiënten](../eenterm#coëfficiënt-en-lettergedeelte)
+1. [Vereenvoudig](vereenvoudigen) alle eentermen.
+2. Duid de [gelijksoortige](eenterm#gelijksoortige-eentermen) eentermen aan.
+3. Tel per soort de [coëfficiënten](eenterm#coëfficiënt-en-lettergedeelte)
    op, of trek ze van elkaar af.
 
 Als voorbeeld gebruiken we:
@@ -28,7 +28,7 @@ $$-3y\cdot x\cdot(-y)^2\cdot (-2) + 5x + 2y^3x + x\cdot (-2)^3$$
 ## Vereenvoudig alle eentermen
 
 Hoe we eentermen kunnen vereenvoudigen, vind je terug in [een vorige
-les](../vereenvoudigen). De eentermen in ons voorbeeld zijn:
+les](vereenvoudigen). De eentermen in ons voorbeeld zijn:
 
 -   $-3y\cdot x\cdot(-y)^2\cdot (-2)$
 -   $5x$
@@ -49,7 +49,7 @@ $$6xy^3 + 5x + 2xy^3 - 8x$$
 ## Duid de gelijksoortige eentermen aan
 
 Na het vereenvoudigen, duiden we de [gelijksoortige
-eentermen](../eenterm/#gelijksoortige-eentermen) aan. De gelijksoortige
+eentermen](eenterm/#gelijksoortige-eentermen) aan. De gelijksoortige
 eentermen, zijn hier
 
 -   $6xy^3$ en $2xy^3$ hebben allebei het lettergedeelte $xy^3$
@@ -60,7 +60,7 @@ Aangeduid in ons voorbeeld:
 $$\usolidorange{6xy^3} + \udoubleblue{5x} + \usolidorange{2xy^3} \udoubleblue{- 8x}$$
 
 Merk op dat we ook het minteken van $\udoubleblue{- 8x}$ aanduiden, omdat een
-[minteken altijd deel uitmaakt](../eenterm/#coëfficiënt-en-lettergedeelte) van
+[minteken altijd deel uitmaakt](eenterm/#coëfficiënt-en-lettergedeelte) van
 de eenterm waar het bij staat.
 
 ## Tel de coëfficiënt per soort op

@@ -6,7 +6,7 @@ draft: true
 images: []
 ---
 
-Wanneer een veelterm [variabelen](../variabelen) bevat, geeft de veelterm enkel een **beschrijving van een berekening**. De veelterm zegt enkel **hoe** je een uitkomst kan berekenen. Wanneer we echter de **variabelen vervangen** door getallen, kan de veelterm ook gelijk worden aan een getal. Dat getal noemen we een **getalwaarde van de veelterm**. In deze les leren we hoe we zo een getalwaarde kunnen berekenen.
+Wanneer een veelterm [variabelen](variabelen) bevat, geeft de veelterm enkel een **beschrijving van een berekening**. De veelterm zegt enkel **hoe** je een uitkomst kan berekenen. Wanneer we echter de **variabelen vervangen** door getallen, kan de veelterm ook gelijk worden aan een getal. Dat getal noemen we een **getalwaarde van de veelterm**. In deze les leren we hoe we zo een getalwaarde kunnen berekenen.
 
 ## De getalwaarde berekenen
 

@@ -34,15 +34,15 @@ hoort daar dus niet bij.
 De krachten op Maria zijn:
 
 -   de kracht van Dirk op Maria $\red{\vec{F}_{DM}}$,
--   [de zwaartekracht](../zwaartekracht) $\red{\vec{F}_{zM}}$ die de aarde uitoefent
+-   [de zwaartekracht](zwaartekracht) $\red{\vec{F}_{zM}}$ die de aarde uitoefent
     op Maria,
--   [de normaalkracht](../normaalkracht) $\red{\vec{F}_{nM}}$ die de schaatsbaan
+-   [de normaalkracht](normaalkracht) $\red{\vec{F}_{nM}}$ die de schaatsbaan
     uitoefent op Maria.
 
 {{< svg "img/krachten_maria.png" >}}
 
 Merk op hoe we [krachten
-noteren](../krachtvector#kracht-is-een-vectoriële-grootheid).
+noteren](krachtvector#kracht-is-een-vectoriële-grootheid).
 $\vec{F}\_{DM}$ betekent: "de kracht van
 **D**irk op **M**aria", terwijl $\vec{F}\_{MD}$ betekent "de kracht van
 **M**aria op **D**irk".

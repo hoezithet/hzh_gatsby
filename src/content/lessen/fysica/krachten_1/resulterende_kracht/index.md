@@ -11,7 +11,7 @@ images:
     ]
 ---
 
-Er kunnen meerdere [krachten](../intro) tegelijk inwerken op een voorwerp. Om
+Er kunnen meerdere [krachten](intro) tegelijk inwerken op een voorwerp. Om
 te weten wat er met het voorwerp zal gebeuren, moeten we die **krachten
 combineren tot een resulterende kracht**.
 
@@ -30,13 +30,13 @@ tijdens haar _drop_ van de _halfpipe_.
 Als we de wrijving met de wind en de halfpipe verwaarlozen, zijn er drie
 krachten die inwerken op de droppende Maria:
 
-1. [de zwaartekracht](../zwaartekracht) $\red{\vec{F}_{zM}}$ die de aarde uitoefent
+1. [de zwaartekracht](zwaartekracht) $\red{\vec{F}_{zM}}$ die de aarde uitoefent
    op Maria,
-2. [een normaalkracht](../normaalkracht) $\red{\vec{F}\_{nM}}$ op Maria, veroorzaakt door
+2. [een normaalkracht](normaalkracht) $\red{\vec{F}\_{nM}}$ op Maria, veroorzaakt door
    het steunen op het skateboard.
 
 We tekenen de krachten samen in [een
-massapunt](../kracht_op_voorwerp/#leg-alle-krachten-samen-in-een-massapunt).
+massapunt](kracht_op_voorwerp/#leg-alle-krachten-samen-in-een-massapunt).
 
 {{< svg "img/maria_drop_krachten.png" "Krachten tekenen in massapunt" >}}
 
@@ -45,8 +45,8 @@ $\green{\vec{F}_{rM}}$. Dat doen we door de krachtvectoren **vectorieel op te te
 Dat kan op twee manieren:
 
 1. via de
-   [kop-staartmethode](../../../wiskunde/vector_1/grafisch_optellen/#kop-staartmethode),
-2. via de [parallellogram-methode](../../../wiskunde/vector_1/grafisch_optellen/#parallellogram-methode).
+   [kop-staartmethode](../../wiskunde/vector_1/grafisch_optellen/#kop-staartmethode),
+2. via de [parallellogram-methode](../../wiskunde/vector_1/grafisch_optellen/#parallellogram-methode).
 
 {{< svg "img/add_krachten.png" "Resulterende kracht tekenen" >}}
 
@@ -54,7 +54,7 @@ We zien dat de resulterende kracht $\green{\vec{F}_{rM}}$ naar rechtsbeneden wij
 De grootte van de resulterende kracht {{< mute "(in newton)" >}} zullen we in een
 andere les leren berekenen.
 
-In [de volgende les](../snelheidsverandering) leren we dat Maria door deze
+In [de volgende les](snelheidsverandering) leren we dat Maria door deze
 resulterende kracht **een snelheidsverandering zal hebben naar rechtsbeneden**.
 Met andere woorden _versnelt_ Maria naar rechtsbeneden. Dat komt overeen met wat
 we verwachten. 👍

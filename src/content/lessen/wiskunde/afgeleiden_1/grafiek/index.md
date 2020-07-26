@@ -11,7 +11,7 @@ een grafiek. In deze les leren we hoe je het verband kan zien tussen de grafiek
 van de afgeleide van een functie en de grafiek van de functie zelf."
 ---
 
-In de [les over de afgeleide functie](../afgeleide_functie) leerden we hoe we
+In de [les over de afgeleide functie](afgeleide_functie) leerden we hoe we
 de afgeleide van **een volledige functie** in één keer konden berekenen. Die
 _afgeleide van een functie_ is zélf ook een functie. En van een functie kunnen
 we een grafiek tekenen.
@@ -21,7 +21,7 @@ _afgeleide_ van een functie en de grafiek van de functie _zelf_.
 
 ## Een grafiek vol met rico's
 
-In de [les over de afgeleide als rico van een raaklijn](../rico_raaklijn),
+In de [les over de afgeleide als rico van een raaklijn](rico_raaklijn),
 hebben we gezien dat de afgeleide van een functie $f(x)$ in $x = a$ gelijk is
 aan de **richtingscoëfficiënt van de raaklijn** aan de grafiek van $f(x)$.
 Wanneer we dus voor een bepaalde x-waarde $x = a$ op de grafiek van $f'(x)$

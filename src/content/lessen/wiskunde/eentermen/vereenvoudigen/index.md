@@ -8,7 +8,7 @@ images: []
 ---
 
 Een eenterm bestaat in principe enkel uit een [coëfficiënt en een
-lettergedeelte](../eenterm/#coëfficiënt-en-lettergedeelte). Toch kan een
+lettergedeelte](eenterm/#coëfficiënt-en-lettergedeelte). Toch kan een
 eenterm er soms wat ingewikkeld uitzien. Om een eenterm er zo minst
 angstaanjagend mogelijk te laten uitzien, moeten we de eenterm
 **vereenvoudigen**.
@@ -16,8 +16,8 @@ angstaanjagend mogelijk te laten uitzien, moeten we de eenterm
 Het vereenvoudigen van een eenterm gaat als volgt:
 
 1. Werk de haakjes weg;
-2. Reken de [coëfficiënt](../eenterm/#coëfficiënt-en-lettergedeelte) uit;
-3. Reken het [lettergedeelte](../eenterm/#coëfficiënt-en-lettergedeelte) uit;
+2. Reken de [coëfficiënt](eenterm/#coëfficiënt-en-lettergedeelte) uit;
+3. Reken het [lettergedeelte](eenterm/#coëfficiënt-en-lettergedeelte) uit;
 4. Rangschik de factoren.
 
 Als voorbeeld zullen we volgende eenterm vereenvoudigen:
@@ -126,9 +126,9 @@ Onze veelterm bevat nu geen haakjes meer:
 
 $$-3\cdot y\cdot 2^3x^3z^3\cdot y^2\cdot 2 \cdot 5$$
 
-De volgende stap is om de [coëfficiënt](../eenterm/#coëfficiënt-en-lettergedeelte), of het
+De volgende stap is om de [coëfficiënt](eenterm/#coëfficiënt-en-lettergedeelte), of het
 _cijfergedeelte_, van de eenterm uit te rekenen. Daarvoor mag je in gedachte alle
-[variabelen](../variabele) even weglaten. Vervolgens reken je de bewerking die
+[variabelen](variabele) even weglaten. Vervolgens reken je de bewerking die
 er staat gewoon uit:
 
 $$-3\gray{\cdot y}\cdot 2^3\gray{x^3z^3\cdot y^2}\cdot 2 \cdot 5$$
@@ -168,7 +168,7 @@ plaats veranderen.
 \end{split}
 
 We kiezen ervoor om het volledige
-[cijfergedeelte](../eenterm/#coëfficiënt-en-lettergedeelte) vooraan te zetten
+[cijfergedeelte](eenterm/#coëfficiënt-en-lettergedeelte) vooraan te zetten
 en als eerste uit te rekenen.
 
 \begin{split}

@@ -85,7 +85,7 @@ grootte, een richting en een zin hebben.
 
 Positie, verplaatsing, snelheid, kracht
 en versnelling zijn bijvoorbeeld allemaal vectoriële grootheden. In de [volgende
-les](../vectoriele_grootheden) gaan we iets dieper in op vectoriële grootheden.
+les](vectoriele_grootheden) gaan we iets dieper in op vectoriële grootheden.
 
 Er zijn echter **nog vele andere toepassingsgebieden** van vectoren, maar daar
 kunnen we helaas hier niet verder op in gaan. Enkele voorbeelden: special

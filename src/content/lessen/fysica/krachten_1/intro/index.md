@@ -20,7 +20,7 @@ images:
     ]
 ---
 
-Een van de meest fundamentele [grootheden](../../grootheden_eenheden/intro) in de
+Een van de meest fundamentele [grootheden](../grootheden_eenheden/intro) in de
 fysica is **kracht**. Kracht is een maat voor op welke manier er wordt
 **geduwd** tegen of **getrokken** aan een voorwerp. Wanneer een kracht inwerkt
 op een voorwerp, kan de kracht een **verandering van de snelheid** en/of een
@@ -41,7 +41,7 @@ Je komt krachten voortdurend tegen in het dagelijkse leven:
 {{< svg "img/krachten_voorbeelden.png" >}}
 
 Het symbool voor de grootheid kracht is $F$ {{< mute "(van het Engelse <em>force</em>)" >}} en de
-[SI-eenheid](../../grootheden_eenheden/intro##si-eenheden-maken-duidelijke-afspraken)
+[SI-eenheid](../grootheden_eenheden/intro##si-eenheden-maken-duidelijke-afspraken)
 is **de newton** (symbool: $\si{N}$), genoemd naar de bekende natuurkundige
 [Isaac Newton](https://nl.m.wikipedia.org/wiki/Isaac_Newton).
 

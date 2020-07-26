@@ -27,15 +27,15 @@ images:
 ---
 
 Een zonsverduistering is een mooi voorbeeld van de
-[schaduw gecreëerd door een diffuse lichtbron](../schaduwvorming#de-schaduw-tekenen-van-een-diffuse-lichtbron).
+[schaduw gecreëerd door een diffuse lichtbron](schaduwvorming#de-schaduw-tekenen-van-een-diffuse-lichtbron).
 Om in de sfeer van de hemellichamen te blijven, zullen we ook meteen de
 maanfasen en maansverduistering bespreken.
 
 ## Zonsverduistering
 
-De zon is een [diffuse lichtbron](../lichtstralen#puntvormige-en-diffuse-lichtbronnen).
+De zon is een [diffuse lichtbron](lichtstralen#puntvormige-en-diffuse-lichtbronnen).
 Hierdoor zal een belicht voorwerp een
-[bijschaduw en soms een kernschaduw](../schaduwvorming#diffuse-lichtbron-zachte-schaduw)
+[bijschaduw en soms een kernschaduw](schaduwvorming#diffuse-lichtbron-zachte-schaduw)
 hebben. Een voorbeeld hiervan is een **totale zonsverduistering**. Daarbij
 staan de zon, de maan en de aarde ongeveer op één lijn waardoor er een grote
 schaduw van de maan op de aarde valt.

@@ -7,7 +7,7 @@ draft: false
 images: []
 ---
 
-Een eenterm is een **product van getallen en/of [variabelen](../variabelen)**.
+Een eenterm is een **product van getallen en/of [variabelen](variabelen)**.
 Enkele voorbeelden:
 
 -   De eenterm $\orange{4a^2 b^3}$ is een product van $\orange{4}$,

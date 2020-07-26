@@ -18,7 +18,7 @@ Wanneer je springt, duurt het niet lang voor je terug met beide voetjes op de gr
 
 ## De zwaartekrachtsvector $\vec{F}_z$
 
-Zwaartekracht is een kracht en is dus [vectorieel](../krachtvector). De zwaartekracht die inwerkt op een bepaald voorwerp $A$, duiden we aan als $\vec{F}_{zA}$.
+Zwaartekracht is een kracht en is dus [vectorieel](krachtvector). De zwaartekracht die inwerkt op een bepaald voorwerp $A$, duiden we aan als $\vec{F}_{zA}$.
 
 | Schrijf                | Lees                                   |
 | ---------------------- | -------------------------------------- |

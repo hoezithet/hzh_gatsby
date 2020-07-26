@@ -12,7 +12,7 @@ topic: "algebra"
 images: []
 ---
 
-Een [vergelijking](../intro) van de eerste graad in één onbekende $x$ is een vergelijking
+Een [vergelijking](intro) van de eerste graad in één onbekende $x$ is een vergelijking
 waar er maar één onbekende is {{< mute "(genaamd $x$)" >}} en waarbij de
 **hoogste macht van die $x$ gelijk is aan $1$**. Bijvoorbeeld de
 vergelijking
@@ -32,7 +32,7 @@ $$-4z + 2x -9 = 3 + 5y - x$$
 
 In deze les zien we hoe we eerstegraadsvergelijkingen in één onbekende ($x$)
 kunnen oplossen in drie stappen. Tijdens deze stappen zullen we de vergelijking
-[omvormen](../omvormen).
+[omvormen](omvormen).
 De drie stappen zijn:
 
 1. **Schoonmaakwerk**: vereenvoudig het linker- en rechterlid zodat er langs
@@ -75,7 +75,7 @@ Waarbij
 ## Alle $x$-en naar links
 
 De volgende stap is om alle termen met een $x$ als lettergedeelte naar de
-linkerkant te brengen. We [vormen de vergelijking om](../omvormen) door de
+linkerkant te brengen. We [vormen de vergelijking om](omvormen) door de
 $\green{a\_{rechts}x}$
 uit het **rechter**lid van de vergelijking af te trekken. Dan zal de
 $\green{a\_{rechts}x}$ uit het
@@ -140,7 +140,7 @@ linker- en rechterlid te delen door $a$ {{< mute "($= -5$)" >}}.
  \Leftrightarrow x &= -\frac{14}{5}\\\\\
 \end{split}
 
-Et voilà! We hebben $x$ gevonden! De [oplossingsverzameling](../intro#oplossingsverzameling) van de vergelijking
+Et voilà! We hebben $x$ gevonden! De [oplossingsverzameling](intro#oplossingsverzameling) van de vergelijking
 is $V = \\{-\frac{14}{5}\\}$.
 
 ## Samengevat

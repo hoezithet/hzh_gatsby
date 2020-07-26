@@ -88,7 +88,7 @@ komma.
 ## Afronden vóór de komma
 
 Soms moeten we ook vóór de komma afronden. Dat kunnen we met behulp van
-[machten van 10](../machten_van_10). We zullen weer $384{,}9503$ gebruiken als
+[machten van 10](machten_van_10). We zullen weer $384{,}9503$ gebruiken als
 voorbeeld.
 
 | Voor afronding               | Soort afronding     | Na afronding                                          | Uitleg                                                                                                                               |
@@ -132,7 +132,7 @@ $$36{,}\orange{7}\gold{5} \approx 36{,}\orange{8}$$
 ## Vermenigvuldigingen en delingen
 
 Voor vermenigvuldigingen en delingen kijken we naar het [aantal buidende
-cijfers](../beduidende_cijfers/#aantal-beduidende-cijfers). We moeten de
+cijfers](beduidende_cijfers/#aantal-beduidende-cijfers). We moeten de
 uitkomst afronden zodat die hetzelfde aantal beduidende cijfers heeft als het
 getal in de berekening met het **minst aantal beduidende cijfers**.
 

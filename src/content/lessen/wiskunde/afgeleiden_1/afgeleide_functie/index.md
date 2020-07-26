@@ -13,7 +13,7 @@ tweedegraadsfunctie."
 ---
 
 In de vorige les zagen we hoe je de [afgeleide voor een bepaalde
-x-waarde](../in_een_punt) van een functie $f(x)$ kan berekenen. Lees die les
+x-waarde](in_een_punt) van een functie $f(x)$ kan berekenen. Lees die les
 zeker eens na als je nog niet goed begrijpt wat we daar juist mee bedoelen. Je
 kan in die les zien dat het eigenlijk nogal **veel werk** is om zo'n afgeleide
 te berekenen. Zeker als we voor meerdere x-waarden die afgeleide zouden willen
@@ -40,7 +40,7 @@ De afgeleide functie geeft ons een **nieuw functievoorschrift $f'(x)$**. In dat
 voorschrift kunnen we dan weer x-waarden invullen, net zoals we in $f(x)$
 x-waarden kunnen invullen. Als we in $f'(x)$ een x-waarde invullen, berekenen
 we meteen de **afgeleide van $f$ in die x-waarde**. Zo moeten we niet telkens
-al het werk herhalen van de [vorige les](../in_een_punt).
+al het werk herhalen van de [vorige les](in_een_punt).
 
 ## De afgeleide van een tweedegraadsfunctie
 
@@ -54,7 +54,7 @@ de volgende tweedegraadsfunctie:
 $$f(x) = -3x^2 + 4x - 1$$
 
 We leerden in de vorige les hoe je in een [bepaalde x-waarde de
-afgeleide](../in_een_punt) kan berekenen. Daarvoor vulden we de x-waarde in in
+afgeleide](in_een_punt) kan berekenen. Daarvoor vulden we de x-waarde in in
 de definitie van een afgeleide. Nu doen we hetzelfde, maar in plaats van een
 bepaald getal in te vullen, **vullen we nu $x$ in**.
 
@@ -62,7 +62,7 @@ Herinner je de definitie van de afgeleide van $f(x)$ in $a$:
 
 $$ f'(a) = \lim\_{\Delta x \rightarrow 0} \frac{ f(a + \Delta x) - f(a) }{\Delta x} $$
 
-Lees zeker [onze introductie tot afgeleiden](../intro) eens na als je die
+Lees zeker [onze introductie tot afgeleiden](intro) eens na als je die
 formule niet zo goed begrijpt. Wij zijn nu op zoek naar **de afgeleide functie
 van een functie**, en dat is niet $f'(\blue{a})$, maar wel $f'(\blue{x})$. We
 moeten in onze definitie van $f'(a)$ de $a$ dus gewoon vervangen door een $x$:
@@ -141,7 +141,7 @@ Ziezo! We hebben de afgeleide functie $f'(x)$ gevonden! :muscle:
 
 Eens we $f'(x)$ gevonden hebben, kunnen we de afgeleiden van $f(x)$ in eender
 welke x-waarde {{< mute "(waarin $f(x)$ afleidbaar is)" >}} berekenen! In de
-[vorige les](../in_een_punt) hebben we bijvoorbeeld de afgeleide van de functie
+[vorige les](in_een_punt) hebben we bijvoorbeeld de afgeleide van de functie
 $f(x) = -3x^2 + 4x -1$ in $x=2$ berekend. Dat vergde toen heel wat werk om te
 vinden dat $f'(2)=-8$. Nu kunnen we dezelfde afgeleide veel sneller berekenen
 omdat we nu weten dat $f'(x) = -6x + 4$:

@@ -71,7 +71,7 @@ gelijksoortige eentermen bij elkaar op te tellen:
 
 > Als je niet meer goed weet wat het juist betekent om een veelterm te
 > _"herleiden"_, lees dan zeker onze les over het [vereenvoudigen en herleiden
-> van een veelterm](../vereenvoudigen) eens na.
+> van een veelterm](vereenvoudigen) eens na.
 
 Het **aftrekken** van twee veeltermen gaat zo:
 
@@ -115,7 +115,7 @@ Het vermenigvuldigen van een eenterm met een veelterm gaat als volgt:
 
 > Ben je even vergeten wat nu weer de _"coëfficiënt"_ en het _"lettergedeelte"_
 > was van een eenterm? Lees dan zeker onze [les over
-> eentermen](../../eentermen/eenterm) even na.
+> eentermen](../eentermen/eenterm) even na.
 
 Stel bijvoorbeeld dat we de volgende berekening moeten maken:
 
@@ -257,7 +257,7 @@ vereenvoudigen of herleiden.
 
 > Als je niet meer goed weet wat het juist betekent om een veelterm te
 > _"herleiden"_, lees dan zeker onze les over het [vereenvoudigen en herleiden
-> van een veelterm](../vereenvoudigen) eens na.
+> van een veelterm](vereenvoudigen) eens na.
 
 We zoeken naar termen met **hetzelfde lettergedeelten** en tellen de
 coëfficiënten van deze termen bij elkaar op:

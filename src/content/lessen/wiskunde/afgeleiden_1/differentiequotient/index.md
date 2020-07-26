@@ -80,12 +80,12 @@ Maria's **positie een functie is van de tijd**.
 
 > Als je niet meer goed weet vanaf wanneer een verband tussen twee variabelen
 > {{< mute "(zoals positie en tijd)" >}} een functie is, kan je altijd onze
-> [les over functies](../../functies/intro) eens nalezen.
+> [les over functies](../functies/intro) eens nalezen.
 
 We kunnen de **positie** die overeenkomt met tijdstip $\orange{x}$ dus **de
 functiewaarde van $\orange{x}$** noemen en afkorten als $\green{f(x)}$. Wanneer
 we op de luchtfoto's de racewagens met elkaar verbinden, zien we inderdaad dat
-de posities mooi de [grafiek van een functie](../../functies/grafiek) volgen
+de posities mooi de [grafiek van een functie](../functies/grafiek) volgen
 waarbij de **tijd op de x-as** {{< mute "(horizontale as)" >}} staat en de
 **positie op de y-as** {{< mute "(verticale as)" >}}:
 

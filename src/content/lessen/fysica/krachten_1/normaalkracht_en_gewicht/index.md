@@ -88,7 +88,7 @@ aan de zwaartekracht**.
 {{< expand "Verschillende definities voor gewicht" >}}
 Als je verschillende handboeken van fysica naast elkaar legt, zal je zien dat
 "gewicht" niet overal dezelfde definitie heeft. Sommige handboeken definiëren
-gewicht als de [zwaartekracht](../zwaartekracht) die inwerkt op een voorwerp,
+gewicht als de [zwaartekracht](zwaartekracht) die inwerkt op een voorwerp,
 dus $F_g = m \cdot g$. In dat geval is gewicht een kracht die inwerkt op het
 voorwerp zelf, en is er niet per se een ondersteuning nodig.
 

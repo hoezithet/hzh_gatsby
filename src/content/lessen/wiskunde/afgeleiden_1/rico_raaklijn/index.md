@@ -19,8 +19,8 @@ van een functie $f(x)$ in een punt $x = a$ kunnen berekenen:
 $$ f'(a) = \lim\_{\Delta x \to 0} \frac{ \green{f(a + \Delta x)} - \green{f(a)} }{\orange{\Delta x}} $$
 
 > Komt deze formule wat uit de lucht gevallen voor jou? 🤨 Lees dan zeker onze
-> [les over het berekenen van de afgeleide in een punt](../afgeleide) en onze
-> [les over het differentiequotiënt](../differentiequotient) eens na.
+> [les over het berekenen van de afgeleide in een punt](afgeleide) en onze
+> [les over het differentiequotiënt](differentiequotient) eens na.
 
 In deze les gaan we leren dat deze formule eigenlijk ook de formule is voor het
 berekenen van de **richtingscoëfficiënt van de raaklijn** aan de grafiek van de
@@ -84,7 +84,7 @@ $f(x)$!
 
 Wanneer we de formule voor de rico van een eerstegraadsfunctie eens goed
 bekijken, zien we toch wel opvallende gelijkenissen met de formule voor het
-[differentiequotiënt](../differentiequotient):
+[differentiequotiënt](differentiequotient):
 
 | Formule voor de rico van een eerstegraadsfunctie                                     | Formule voor het differentiequotiënt                                                 |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
@@ -100,7 +100,7 @@ $(\orange{x\_1}, \green{f(x\_1)})$ en $(\orange{x\_2}, \green{f(x\_2)})$ gaat!
 
 ## De limiet zorgt voor een raaklijn
 
-In onze les over de [afgeleide in een punt](../afgeleide) zagen we dat we de
+In onze les over de [afgeleide in een punt](afgeleide) zagen we dat we de
 afgeleide van een functie in $x = a$ vinden door het differentiequotiënt
 te berekenen waarbij we $\Delta x$ {{< mute "(of $x_2 - x_1$)" >}} naar $0$
 laten gaan:

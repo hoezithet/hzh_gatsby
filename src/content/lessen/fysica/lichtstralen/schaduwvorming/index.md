@@ -27,7 +27,7 @@ schaduw** en een **diffuse lichtbron zorgt voor een zachte schaduw**.
 
 ## Wat is een schaduw?
 
-Wanneer een [ondoorschijnend](../absorberen_reflecteren_doorlaten#licht-doorlaten)
+Wanneer een [ondoorschijnend](absorberen_reflecteren_doorlaten#licht-doorlaten)
 voorwerp wordt belicht, zijn er altijd plekken achter
 het voorwerp waar **weinig of geen lichtstralen geraken**. Die gebieden lijken
 donkerder en we noemen die gebieden de **schaduw** van het voorwerp.
@@ -37,7 +37,7 @@ donkerder en we noemen die gebieden de **schaduw** van het voorwerp.
 ## Puntlichtbron: harde schaduw
 
 Om te weten hoe de schaduw bij een
-[puntlichtbron](../lichtbronnen#puntvormige-en-diffuse-lichtbronnen) eruit
+[puntlichtbron](lichtbronnen#puntvormige-en-diffuse-lichtbronnen) eruit
 ziet, kijken we op welke plekken wel en geen lichtstralen geraken. Op de
 onderstaande figuur staat er links telkens een puntlichtbron met daarnaast een
 ondoorschijnende zwarte bol en een scherm met drie gebieden: **A**, **B**, en
@@ -75,7 +75,7 @@ lijnen botsen tegen de bol en kunnen het scherm erachter onmogelijk verlichten.
 ## Diffuse lichtbron: zachte schaduw
 
 Om te weten hoe de schaduw er bij een
-[diffuse lichtbron](../lichtbronnen#puntvormige-en-diffuse-lichtbronnen)
+[diffuse lichtbron](lichtbronnen#puntvormige-en-diffuse-lichtbronnen)
 uit ziet, kijken we op welke plekken er wel of geen lichtstralen geraken.
 Omdat een diffuse lichtbron eigenlijk bestaat uit allemaal
 kleine puntlichtbronnen, bekijken we de schaduw van enkele van die

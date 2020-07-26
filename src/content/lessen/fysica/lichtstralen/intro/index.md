@@ -32,7 +32,7 @@ in op de bloem en de bloem weerkaatst die. Sommige weerkaatste
 lichtstralen komen toevallig in ons oog terecht en botsen daar
 op ons netvlies waardoor we de bloem kunnen zien.
 Opvallend genoeg, belandt het beeld van de bloem omgekeerd op ons netvlies.
-Waarom dat juist zo is, zijn zorgen voor [later](../beeldvorming).
+Waarom dat juist zo is, zijn zorgen voor [later](beeldvorming).
 
 ## Licht is een elektromagnetische golf
 

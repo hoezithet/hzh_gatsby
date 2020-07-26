@@ -19,7 +19,7 @@ images:
     ]
 ---
 
-Een [donker lichaam](../lichtbronnen#donkere-lichamen) is een voorwerp dat
+Een [donker lichaam](lichtbronnen#donkere-lichamen) is een voorwerp dat
 van zichzelf geen licht geeft, bijvoorbeeld een bloem. Hoe zo'n donker lichaam
 eruit ziet hangt af van welk licht erop invalt en wat er gebeurt met dat
 invallend licht. In het algemeen kunnen er drie dingen gebeuren:

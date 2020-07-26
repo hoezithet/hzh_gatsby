@@ -15,7 +15,7 @@ images:
     ]
 ---
 
-[Kracht](../intro) is een maat voor hoe er geduwd of getrokken wordt. Een van
+[Kracht](intro) is een maat voor hoe er geduwd of getrokken wordt. Een van
 de speciale eigenschappen van de grootheid _kracht_ is dat ze een **vectoriële
 grootheid** is.
 

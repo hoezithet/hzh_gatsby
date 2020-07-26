@@ -67,7 +67,7 @@ Om de macht van een eenterm te berekenen, doen we het volgende:
 
 > Ben je even vergeten wat nu weer de _"coëfficiënt"_ en het _"lettergedeelte"_
 > was van een eenterm? Lees dan zeker onze [les over
-> eentermen](../../eentermen/eenterm) even na.
+> eentermen](../eentermen/eenterm) even na.
 
 Stel bijvoorbeeld dat we de volgende macht willen berekenen:
 

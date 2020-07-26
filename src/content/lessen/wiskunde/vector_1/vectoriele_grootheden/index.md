@@ -12,7 +12,7 @@ images:
     ]
 ---
 
-In de [vorige les](../intro) leerden we dat vectoren pijlen zijn met een
+In de [vorige les](intro) leerden we dat vectoren pijlen zijn met een
 grootte, een richting en een zin. Na die les ben je misschien nog niet volledig
 overtuigd dat vectoren wel degelijk nuttig zijn. Daarom tonen we in deze les een
 voorbeeld van hoe vectoren kunnen voorkomen in de echte wereld.

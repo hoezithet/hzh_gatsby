@@ -85,7 +85,7 @@ al meteen te rangschikken, zullen we in de volgende stap heel eenvoudig de
 gelijksoortige eentermen kunnen vinden.
 
 > Als je niet meer goed weet hoe je een eenterm vereenvoudigt, lees je best
-> onze les over het [vereenvoudigen van eentermen](../vereenvoudig_eenterm)
+> onze les over het [vereenvoudigen van eentermen](vereenvoudig_eenterm)
 > eens na. Enkele voorbeelden:
 
 -   $$\orange{-2yx^2\cdot 3x} + 4y^2 = \orange{- 6x^3 y} + 4y^2$$
@@ -105,7 +105,7 @@ gelijksoortige eentermen te vinden.
 
 > Als je niet meer goed weet wat we bedoelen met _"gelijksoortige eentermen"_
 > lees dan zeker onze [introductieles over
-> eentermen](../../eentermen/eenterm/#gelijksoortige-eentermen) eens na.
+> eentermen](../eentermen/eenterm/#gelijksoortige-eentermen) eens na.
 
 Hieronder hebben we per veelterm de gelijksoortige eentermen aangeduid in
 dezelfde kleur:
@@ -125,7 +125,7 @@ tellen** en het **lettergedeelte te laten staan**.
 
 > Als je niet meer goed weet wat we bedoelen met _"coëfficiënten"_ en
 > _"lettergedeelte"_, lees dan zeker onze [introductieles over
-> eentermen](../../eentermen/eenterm/#gelijksoortige-eentermen) eens na.
+> eentermen](../eentermen/eenterm/#gelijksoortige-eentermen) eens na.
 
 We werken de voorbeelden van hierboven verder uit:
 
@@ -164,7 +164,7 @@ volgens graad zodat bv. de term $x^2y$ vóór $xy^2$ komt te staan en de term
 $x^3$ vóór $y^3$.
 
 > Als je bent vergeten hoe je de graad van een eenterm vindt, lees dan zeker
-> onze [introductieles over eentermen](../../eentermen/eenterm) eens na.
+> onze [introductieles over eentermen](../eentermen/eenterm) eens na.
 
 Enkele voorbeelden van het rangschikken volgens dalende graad van de eentermen:
 

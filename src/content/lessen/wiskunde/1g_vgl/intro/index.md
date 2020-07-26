@@ -12,15 +12,15 @@ topic: "algebra"
 images: []
 ---
 
-Een van de meest essentiële vaardigheden voor een uit-de-kluiten-gewassen wiskundige is het kunnen oplossen van **vergelijkingen**. Om te begrijpen _waarom_ het oplossen van vergelijkingen zo belangrijk is, heb je best al wat kennis van [functies](../../functies/).
+Een van de meest essentiële vaardigheden voor een uit-de-kluiten-gewassen wiskundige is het kunnen oplossen van **vergelijkingen**. Om te begrijpen _waarom_ het oplossen van vergelijkingen zo belangrijk is, heb je best al wat kennis van [functies](../functies/).
 
 Kort gezegd zijn de belangrijkste toepassingen van vergelijkingen:
 
-1. Het vinden van de [nulpunten](../../functies/nulpunten) van een functie;
-2. Het vinden van de snijpunten van de [grafieken](../../functies/grafiek) van twee functies;
+1. Het vinden van de [nulpunten](../functies/nulpunten) van een functie;
+2. Het vinden van de snijpunten van de [grafieken](../functies/grafiek) van twee functies;
 3. Het oplossen van raadsels 🧐.
 
-We zullen in een [latere les](../functies) het verband tussen functies en vergelijkingen iets uitgebreider bespreken.
+We zullen in een [latere les](functies) het verband tussen functies en vergelijkingen iets uitgebreider bespreken.
 
 ## Hoe een vergelijking eruit ziet
 
@@ -58,7 +58,7 @@ gelijkheid klopt: $\orange{-1}$:
 5 &= 5
 \end{split}
 
-Als je de oplossing(en) in een [verzameling](../../verzamelingen) stopt, noemen we die verzameling de _oplossingsverzameling_ van de vergelijking. We stellen de oplossingsverzameling meestal voor met de letter $V$.
+Als je de oplossing(en) in een [verzameling](../verzamelingen) stopt, noemen we die verzameling de _oplossingsverzameling_ van de vergelijking. We stellen de oplossingsverzameling meestal voor met de letter $V$.
 
 De oplossingsverzameling $V$ voor het voorbeeld is dus:
 $$V = \\{\orange{-1}\\}$$

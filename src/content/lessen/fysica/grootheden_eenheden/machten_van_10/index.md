@@ -29,7 +29,7 @@ $$a^{-b} = \frac{1}{a^{b}} \quad \text{waarbij }a \ne 0$$
 $$a^b \cdot a^c = a^{b+c}$$
 
 Extra uitleg vind je in de les over [rekenen met
-machten](../../../wiskunde/rekenen/machten/#producten-van-machten).
+machten](../../wiskunde/rekenen/machten/#producten-van-machten).
 
 ## Machten van 10 uitrekenen
 
@@ -97,9 +97,9 @@ Daarom moeten we ook terug delen door $10^{-11}$. Dat is echter hetzelfde als
  &= \udotblue{1{,}496} \cdot \orange{10^{11}} \\\\\
 \end{split}
 
-Merk wel op dat nu het aantal [beduidende cijfers](../beduidende_cijfers) is
+Merk wel op dat nu het aantal [beduidende cijfers](beduidende_cijfers) is
 veranderd van 12 naar 4. Je kan het juiste aantal beduidende cijfers
-verkrijgen door de [benaderingsregels](../benaderingsregels) toe te passen.
+verkrijgen door de [benaderingsregels](benaderingsregels) toe te passen.
 
 ## Machten van 10 omzetten
 

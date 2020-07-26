@@ -20,12 +20,12 @@ images:
 ---
 
 Vectoren kun je, net als getallen, bij elkaar optellen. Maar hoe gaat dat in
-zijn werk, zo [pijlen](../intro/#een-vector-is-een-pijl) bij elkaar optellen? In
+zijn werk, zo [pijlen](intro/#een-vector-is-een-pijl) bij elkaar optellen? In
 deze les leren we een manier om **vectoren op te tellen via een tekening**.
 
 ## Verplaatsingen optellen
 
-We zagen in [een vorige les](../vectoriele_grootheden) dat verplaatsing een
+We zagen in [een vorige les](vectoriele_grootheden) dat verplaatsing een
 vectoriële grootheid is. We zullen daarom eerst kijken wat een logische manier
 is om verplaatsingen bij elkaar op te tellen. Die manier zullen we dan
 veralgemenen naar alle vectoren.

@@ -22,7 +22,7 @@ $$0{,}0\orange{2}$$
 
 ## Aantal beduidende cijfers
 
-Bij [benaderingsregels](../benaderingsregels) zullen we soms het aantal beduidende cijfers moeten tellen. Eens we de beduidende cijfers van een getal kunnen aanduiden, tellen we gewoon hoeveel er zijn, en dat geeft ons het **aantal beduidende cijfers**.
+Bij [benaderingsregels](benaderingsregels) zullen we soms het aantal beduidende cijfers moeten tellen. Eens we de beduidende cijfers van een getal kunnen aanduiden, tellen we gewoon hoeveel er zijn, en dat geeft ons het **aantal beduidende cijfers**.
 
 | Getal                 | Beduidende cijfers | Aantal beduidende cijfers |
 | --------------------- | ------------------ | ------------------------- |

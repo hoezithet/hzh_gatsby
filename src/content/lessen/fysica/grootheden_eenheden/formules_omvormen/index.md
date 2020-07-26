@@ -11,13 +11,13 @@ topic: "grootheden_eenheden"
 images: []
 ---
 
-Fysica levert een wiskundige beschrijving van bepaalde eigenschappen en onderdelen van de wereld en het heelal rondom ons. Die beschrijvingen schrijven we neer in **formules**. Zulke formules tonen een **wiskundig verband tussen [grootheden](../intro)**. Een eenvoudige formule is bijvoorbeeld hoe we massadichtheid kunnen berekenen:
+Fysica levert een wiskundige beschrijving van bepaalde eigenschappen en onderdelen van de wereld en het heelal rondom ons. Die beschrijvingen schrijven we neer in **formules**. Zulke formules tonen een **wiskundig verband tussen [grootheden](intro)**. Een eenvoudige formule is bijvoorbeeld hoe we massadichtheid kunnen berekenen:
 $$\rho = \frac{\si{m}}{\si{V}}$$
 
 Dit lees je als:
 $$\text{massadichtheid} = \frac{\text{massa}}{\text{volume}}$$
 
-De massadichtheid van een stof zegt hoeveel $\si{kg}$ een bepaald volume van die stof is. Eén liter water, bijvoorbeeld, heeft een massa van ongeveer $1 \si{ kg}$. Water heeft dus een massadichtheid van $1 \si{ kg/l}$, [wat gelijk is aan](../eenheden_omzetten#volumes-omzetten) $10^3 \si{ kg/m}^3$.
+De massadichtheid van een stof zegt hoeveel $\si{kg}$ een bepaald volume van die stof is. Eén liter water, bijvoorbeeld, heeft een massa van ongeveer $1 \si{ kg}$. Water heeft dus een massadichtheid van $1 \si{ kg/l}$, [wat gelijk is aan](eenheden_omzetten#volumes-omzetten) $10^3 \si{ kg/m}^3$.
 
 ## Grootheden invullen
 
@@ -34,7 +34,7 @@ Bijvoorbeeld: we leggen een kubusvormig blokje kurk met een zijde van $5 \si{ cm
 
 ## Omvormen zoals vergelijkingen
 
-De technieken die we gebruiken om [vergelijkingen om te vormen](../../../wiskunde/1g_vgl/omvormen), kunnen we ook gebruiken om formules om te vormen. Zo kunnen we de formule voor massadichtheid omvormen zodat $m$ alleen overblijft aan één kant:
+De technieken die we gebruiken om [vergelijkingen om te vormen](../../wiskunde/1g_vgl/omvormen), kunnen we ook gebruiken om formules om te vormen. Zo kunnen we de formule voor massadichtheid omvormen zodat $m$ alleen overblijft aan één kant:
 \begin{split}
 \rho &= \frac{m}{V}\\\\\
 \Leftrightarrow \rho \cdot \orange{V} &= \frac{m}{V} \cdot \orange{V}\\\\\

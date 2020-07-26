@@ -17,7 +17,7 @@ images:
 ---
 
 We kunnen niet altijd eender welk getal als $x$ kiezen om in ons
-[functievoorschrift](../voorschrift) te stoppen. Omgekeerd is het mogelijk dat
+[functievoorschrift](voorschrift) te stoppen. Omgekeerd is het mogelijk dat
 niet eender welk getal als $y$ uit de functie komt. Deze twee eigenschappen van
 een functie worden beschreven door het **domein** en het **beeld** van de
 functie.
@@ -33,7 +33,7 @@ van x-waarden waarvoor er een functiewaarde {{<mute "(een y-waarde)" >}} bestaat
     y-waarde**.
 
 Een typisch voorbeeld is het domein van de functie die als
-[functievoorschrift](../voorschrift) heeft
+[functievoorschrift](voorschrift) heeft
 
 $$f(x) = \sqrt{x}$$
 
@@ -56,7 +56,7 @@ Het _beeld_ of het _bereik_ van een functie is de verzameling
 van alle y-waarden die ooit uit de functie kunnen komen.
 
 Een typisch voorbeeld is het beeld van de functie die als
-[functievoorschrift](../voorschrift) heeft
+[functievoorschrift](voorschrift) heeft
 
 $$f(x) = x^2$$
 
@@ -73,7 +73,7 @@ $$bld f = [0; +\infty[%]$$
 ## Domein en beeld op een grafiek
 
 Het domein en beeld van een functie kan je ook aflezen van de [grafiek van die
-functie](../grafiek). Neem bijvoorbeeld de grafiek van de functie
+functie](grafiek). Neem bijvoorbeeld de grafiek van de functie
 $$f(x) = 3\cdot \sqrt{x + 5} - 6$$
 Die grafiek ziet er zo uit:
 

@@ -18,8 +18,8 @@ een punt $x = a$ kunnen berekenen:
 $$ f'(a) = \lim\_{\Delta x \to 0} \frac{ \green{f(a + \Delta x)} - \green{f(a)} }{\orange{\Delta x}} $$
 
 > Komt deze formule wat uit de lucht gevallen voor jou? 🤨 Lees dan zeker onze
-> [les over het berekenen van de afgeleide in een punt](../afgeleide) en onze
-> [les over het differentiequotiënt](../differentiequotient) eens na.
+> [les over het berekenen van de afgeleide in een punt](afgeleide) en onze
+> [les over het differentiequotiënt](differentiequotient) eens na.
 
 We hebben ons echter nooit afgevraagd of die afgeleide wel altijd berekend kan
 worden. In deze les leren we over de **afleidbaarheid** van een functie. We

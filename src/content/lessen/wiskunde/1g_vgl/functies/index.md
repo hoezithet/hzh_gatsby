@@ -18,7 +18,7 @@ images:
     ]
 ---
 
-[Vergelijkingen](../intro) en [functies](../../functies/intro) zijn zeer nauw
+[Vergelijkingen](intro) en [functies](../functies/intro) zijn zeer nauw
 met elkaar verbonden. Twee belangrijke toepassingen van vergelijkingen zijn dan
 ook
 
@@ -26,7 +26,7 @@ ook
 2. De nulpunten zoeken van twee functies.
 
 In deze les bespreken we deze toepassingen in het geval van
-[eerstegraadsvergelijkingen met één onbekende](../oplossen).
+[eerstegraadsvergelijkingen met één onbekende](oplossen).
 
 ## Snijpunten van functies
 
@@ -37,13 +37,13 @@ Stel dat we twee functies $\green{f}$ en $\blue{g}$ hebben waarbij
  \blue{g(x)} &= 2x - 3
 \end{split}
 
-De [grafiek](../../functies/grafiek) van deze functies ziet er als volgt uit:
+De [grafiek](../functies/grafiek) van deze functies ziet er als volgt uit:
 
 {{< bokeh "plt/snijpunt.json" >}}
 
 Het oranje punt duidt het {{< class "snijpunt" "orange" >}} aan van de twee functies. Hoe kunnen we de coördinaten van dit snijpunt vinden?
 
-Een snijpunt is een punt dat zowel op de grafiek van $\green{f}$ als op de grafiek van $\blue{g}$ ligt. Denkend aan onze analogie van [het machientje](../../functies/intro#een-functie-is-een-machientje), is de $x-$waarde van een snijpunt een **ingang die voor zowel $\green{f}$ als $\blue{g}$ dezelfde uitgang geeft**.
+Een snijpunt is een punt dat zowel op de grafiek van $\green{f}$ als op de grafiek van $\blue{g}$ ligt. Denkend aan onze analogie van [het machientje](../functies/intro#een-functie-is-een-machientje), is de $x-$waarde van een snijpunt een **ingang die voor zowel $\green{f}$ als $\blue{g}$ dezelfde uitgang geeft**.
 
 {{< svg "img/conveyor_snijpunt_1.svg" >}}
 
@@ -55,7 +55,7 @@ Als $\orange{x}$ de $x-$coördinaat van een snijpunt is, dan is dus $\green{f(\o
 \end{split}
 
 En **poef** ✨🧙! We krijgen een **vergelijking**. Als we deze [vergelijking
-oplossen](../eerste_graad), vinden we de $x-$coördinaat van het snijpunt van
+oplossen](eerste_graad), vinden we de $x-$coördinaat van het snijpunt van
 $\green{f}$ en $\blue{g}$:
 
 \begin{split}
@@ -108,7 +108,7 @@ Als we een {{< class "nulwaarde" "orange" >}} van een functie in die functie sto
 
 {{< svg "img/conveyor_nulpunt_1.svg" >}}
 
-Stel dat $\orange{x}$ een [nulwaarde](../../functies/nulpunten#nulwaarden-van-een-functie) van functie $f(x) = -x + 4$ is, dan is $f(\orange{x}) = 0$, of na invullen:
+Stel dat $\orange{x}$ een [nulwaarde](../functies/nulpunten#nulwaarden-van-een-functie) van functie $f(x) = -x + 4$ is, dan is $f(\orange{x}) = 0$, of na invullen:
 $$-\orange{x} + 4 = 0$$
 
 En we krijgen een vergelijking! Wanneer we deze oplossen, vinden we de {{< class "nulwaarde" "orange" >}} van de functie.
@@ -129,7 +129,7 @@ Dit kan je ook zien op onderstaande grafiek:
 ## Samengevat
 
 {{< attention "Snijpunten van twee functies" >}}
-De **snijpunten** van twee functies $f(x)$ en $g(x)$ vind je door eerst de twee **[functievoorschriften](../../functies/voorschrift) aan elkaar gelijk te stellen**:
+De **snijpunten** van twee functies $f(x)$ en $g(x)$ vind je door eerst de twee **[functievoorschriften](../functies/voorschrift) aan elkaar gelijk te stellen**:
 
 \begin{split}
 f(x) &= g(x)\\\\\
@@ -140,7 +140,7 @@ De oplossing van deze vergelijking geeft de $x-$coördinaat van elk snijpunt. Al
 {{< /attention >}}
 
 {{< attention "Nulpunten van een functie" >}}
-De **nulpunten** van een functie $f(x)$ vind je door het **[functievoorschrift](../../functies/voorschrift) gelijk aan nul te stellen**:
+De **nulpunten** van een functie $f(x)$ vind je door het **[functievoorschrift](../functies/voorschrift) gelijk aan nul te stellen**:
 
 \begin{split}
 f(x) &= 0\\\\\

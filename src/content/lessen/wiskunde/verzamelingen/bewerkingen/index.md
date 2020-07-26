@@ -11,7 +11,7 @@ topic: ""
 images: []
 ---
 
-Je kan je een [verzameling](../intro)
+Je kan je een [verzameling](intro)
 voorstellen als een grote, denkbeeldige zak waarin bepaalde _elementen_ zitten. In deze les zullen we zien hoe verzamelingen kunnen gecombineerd worden om zo nieuwe verzamelingen te krijgen.
 
 ## Verzamelingen samennemen: de unie

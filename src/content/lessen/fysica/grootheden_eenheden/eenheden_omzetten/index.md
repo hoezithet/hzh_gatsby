@@ -11,7 +11,7 @@ topic: ""
 images: ["/lessen/fysica/grootheden_eenheden/eenheden_omzetten/img/liter_conversion.png"]
 ---
 
-Vaak wordt er gevraagd om een eindresultaat te noteren in [SI-eenheden](../intro#si-eenheden-maken-duidelijke-afspraken), terwijl de opgave niet in SI-eenheden gegeven is. Dan is het belangrijk om die eenheden te kunnen omzetten naar de SI-eenheden.
+Vaak wordt er gevraagd om een eindresultaat te noteren in [SI-eenheden](intro#si-eenheden-maken-duidelijke-afspraken), terwijl de opgave niet in SI-eenheden gegeven is. Dan is het belangrijk om die eenheden te kunnen omzetten naar de SI-eenheden.
 
 Soms zullen we een eenheid ook omzetten om beter te begrijpen wat ze betekent. Zo kunnen we ons beter voorstellen hoe lang 2 uren duren, eerder dan hoe lang 7200 seconden duren, ondanks dat de seconde de SI-eenheid van tijd is.
 
@@ -19,11 +19,11 @@ Er zijn dus verschillende situaties waarbij we eenheden zullen moeten omzetten. 
 
 ## Van en naar prefixen
 
-In de les over [prefixen](../prefixen) zagen we al hoe we eenheden konden omzetten waarvan enkel de prefix verschilde. Hierin zijn drie gevallen te onderscheiden:
+In de les over [prefixen](prefixen) zagen we al hoe we eenheden konden omzetten waarvan enkel de prefix verschilde. Hierin zijn drie gevallen te onderscheiden:
 
-1. Het [wegwerken van een prefix](../prefixen#prefixen-wegwerken), zoals van $\si{km}$ naar $\si{m}$;
-2. Het [toevoegen van een prefix](../prefixen#prefixen-toevoegen), zoals van $\si{g}$ naar $\si{kg}$;
-3. Het [omzetten van een prefix](../prefixen#prefixen-omzetten), zoals van $\si{mg}$ naar $\si{kg}$.
+1. Het [wegwerken van een prefix](prefixen#prefixen-wegwerken), zoals van $\si{km}$ naar $\si{m}$;
+2. Het [toevoegen van een prefix](prefixen#prefixen-toevoegen), zoals van $\si{g}$ naar $\si{kg}$;
+3. Het [omzetten van een prefix](prefixen#prefixen-omzetten), zoals van $\si{mg}$ naar $\si{kg}$.
 
 ## Tijden omzetten
 
@@ -41,7 +41,7 @@ vergeet ze vroeg of laat toch. Probeer in de plaats daarvan telkens de **afleidi
 begrijpen** zodat je deze tijdens een toets snel op een kladblad kan hermaken.
 Het enige wat je van buiten moet kennen zijn de bovenstaande 2 gelijkheden.
 
-Merk op: we maken gebruik van de [benaderingsregels](../benaderingsregels) in de kolom met voorbeelden.
+Merk op: we maken gebruik van de [benaderingsregels](benaderingsregels) in de kolom met voorbeelden.
 
 ### Van uur naar...
 

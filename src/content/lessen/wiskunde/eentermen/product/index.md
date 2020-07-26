@@ -1,0 +1,235 @@
+---
+title: "Vermenigvuldigen en delen van eentermen"
+date: 2020-06-05T07:02:35+01:00
+weight: 5
+draft: true
+description: "In deze les leggen we aan de hand van voorbeelden uit hoe je
+eentermen met elkaar kan vermenigvuldigen of door elkaar kan delen. Omdat het
+belangrijk is dat we hiervoor de rekenregels voor het vermenigvuldigen en delen
+van machten met hetzelfde grondtal goed begrijpen, leggen we die rekenregels
+eerst nog eens uit."
+tags: ["eenterm", "eentermen delen", "eentermen vermenigvuldigen", "product van
+eentermen", "quotient van eentermen", "vermenigvuldigen met zelfde grondtal",
+"delen met zelfde grondtal", "bewerkingen met eentermen"]
+images: []
+---
+
+Om eentermen met elkaar te vermenigvuldigen of te delen door elkaar, is het
+belangrijk dat we de **rekenregels voor het vermenigvuldigen en delen van
+machten met hetzelfde grondtal** in ons achterhoofd houden. Stel bijvoorbeeld
+dat we de volgende vermenigvuldiging hebben
+{{< mute "(waarbij $a \in \mathbb{R}$)" >}}:
+
+$$a^2\cdot a^3$$
+
+We zien dat de twee factoren van de vermenigvuldiging allebei het **grondtal
+$a$** hebben. De rekenregel voor het vermenigvuldigen van machten met hetzelfde
+grondtal zegt dat we in dat geval de **exponenten bij elkaar moeten optellen**:
+
+\begin{split}
+a^2\cdot a^3 &= a^{2 + 3}\\\\\
+ &= a^5
+\end{split}
+
+De rekenregel voor het _delen_ van machten met hetzelfde grondtal is heel
+gelijkaardig. Stel dat we de volgende deling moeten uitrekenen
+{{< mute "(waarbij $x \in \mathbb{R}_0$)" >}}:
+
+$$x^5:x^2$$
+
+We zien dat het deeltal $x^5$ hetzelfde grondtal heeft als de deler $x^2$. De
+rekenregel voor het delen van machten met hetzelfde grondtal zegt dat we in dat
+geval de **exponenten van elkaar moeten aftrekken**:
+
+\begin{split}
+x^5:x^2 &= x^{5 - 2}\\\\\
+ &= x^3
+\end{split}
+
+Als we deze rekenregels goed kunnen toepassen, zal het vermenigvuldigen en
+delen van eentermen veel eenvoudiger worden.
+
+{{< expand "Alle variabelen in deze les zijn $\in \mathbb{R}$ (of $\in\mathbb{Q}$) en voor delingen $\in \mathbb{R}_0$ (of $\in\mathbb{Q}_0$)" >}}
+
+We gaan ervan uit dat alle variabelen in deze les een element zijn van de reële
+getallen. Als je nog niet weet wat reële getallen zijn, mag je ook aannemen
+dat de variabelen een element zijn van de rationale, gehele of zelfs natuurlijk
+getallen. Voor al die verzamelingen gelden dezelfde rekenregels wat
+betreft bewerkingen met eentermen.
+
+Voor delingen leggen we de beperking op dat de variabelen niet $0$ mogen zijn
+om delingen door $0$ te voorkomen.
+{{< /expand >}}
+
+## Eentermen met elkaar vermenigvuldigen
+
+Het vermenigvuldigen van eentermen gaat als volgt:
+
+1. Vermenigvuldig de **coëfficiënt** van de ene eenterm met de coëfficiënt van
+   de andere eenterm.
+2. Vermenigvuldig het **lettergedeelte** van de ene eenterm met het
+   lettergedeelte van de andere eenterm door **exponenten van machten met
+   hetzelfde grondtal bij elkaar op te tellen**.
+
+> Ben je even vergeten wat nu weer de _"coëfficiënt"_ en het _"lettergedeelte"_
+> was van een eenterm? Lees dan zeker onze [les over
+> eentermen](../eentermen/eenterm) even na.
+
+Stel bijvoorbeeld dat we de volgende eentermen met elkaar willen
+vermenigvuldigen:
+
+$$-3x^3y^2 \cdot 4xy^2$$
+
+De eerste stap is om de **coëfficiënten** van de eentermen met elkaar te
+vermenigvuldigen:
+
+\begin{split}
+\orange{-3}x^3y^2 \cdot \orange{4}xy^2
+&= (\orange{-3\cdot 4})\cdot x^3y^2\cdot xy^2\\\\\
+ &= \orange{-12}\cdot x^3y^2\cdot xy^2
+\end{split}
+
+Vervolgens vermenigvuldigen we het lettergedeelte van beide eentermen. We
+zullen beginnen met het vermenigvuldigen van de factoren die $x$ als grondtal
+hebben:
+
+\begin{split}
+-12\cdot \orange{x^3}y^2\cdot \orange{x}y^2
+&= -12\cdot\orange{x^{3 + 1}}\cdot y^2\cdot y^2\\\\\
+ &= -12\orange{x^{4}}\cdot y^2\cdot y^2
+\end{split}
+
+Je ziet dat we hiervoor de rekenregel voor het vermenigvuldigen van machten met
+hetzelfde grondtal hebben toegepast. Ten slotte vermenigvuldigen we de factoren
+die $y$ als grondtal hebben:
+
+\begin{split}
+-12x^{4}\cdot \orange{y^2}\cdot \orange{y^2}
+&= -12x^{4}\cdot \orange{y^{2 + 2}}\\\\\
+ &= -12x^{4}\orange{y^{4}}
+\end{split}
+
+Het resultaat van de vermenigvuldiging is dus:
+
+$$-12x^{4}y^{4}$$
+
+## Een eenterm delen door een eenterm
+
+Het delen van eentermen gaat als volgt:
+
+1. Deel de **coëfficiënt** van de ene eenterm door de coëfficiënt van de andere
+   eenterm.
+2. Deel het **lettergedeelte** van de ene eenterm door het lettergedeelte van
+   de andere eenterm door **exponenten van machten met hetzelfde grondtal van
+   elkaar af te trekken**.
+
+Stel dat we de volgende deling moeten uitvoeren:
+
+$$21u^2v^4:(-7uv^2)$$
+
+Dan gaan we eerst de **coëfficiënt** van de eenterm in het deeltal (de $21$)
+delen door de coëfficiënt van de eenterm in de deler (de $-7$):
+
+\begin{split}
+\orange{21}u^2v^4:(\orange{-7}uv^2)
+&= \big(\orange{21}:(\orange{-7})\big)u^2v^4:(uv^2)\\\\\
+ &= \orange{-3}u^2v^4:(uv^2)\\\\\
+\end{split}
+
+Vervolgens moeten we het **lettergedeelte** van het deeltal (de $u^2v^4$) delen
+door het lettergedeelte van de deler (de $uv^2$). Hiervoor kunnen we de
+rekenregel van het delen van machten met hetzelfde grondtal gebruiken. We
+zullen beginnen met het delen van de machten met grondtal $u$:
+
+\begin{split}
+-3\orange{u^2}v^4:(\orange{u}v^2)
+&= -3\orange{u^{2 - 1}}v^4:v^2\\\\\
+ &= -3\orange{u^{1}}v^4:v^2\\\\\
+ &= -3\orange{u}v^4:v^2\\\\\
+\end{split}
+
+Ten slotte delen we ook de factoren die grondtal $v$ hebben:
+
+\begin{split}
+-3u\orange{v^4}:\orange{v^2}
+& = -3u\orange{v^{4 - 2}}\\\\\
+ & = -3u\orange{v^{2}}\\\\\
+\end{split}
+
+Klaar! 🎉 Het resultaat van onze deling is:
+
+$$-3uv^{2}$$
+
+## Eentermen met letterexponenten vermenigvuldigen of delen
+
+Het kan soms voorkomen dat een eenterm **letterexponenten** bevat. Stel
+bijvoorbeeld dat we de volgende vermenigvuldiging hebben
+{{< mute "($m, n \in \mathbb{Z}$)" >}}:
+
+$$x^{(m + 1)}y^n\cdot x^2y^n$$
+
+Dan moeten we weer goed de **rekenregel voor het vermenigvuldigen van machten
+met hetzelfde grondtal** in ons achterhoofd houden. Die zegt dat we bij zo een
+vermenigvuldiging de **exponenten moeten optellen**. We zullen eens tonen hoe
+dat gaat wanneer we de lettergedeelten met $x$ als grondtal met elkaar gaan
+vermenigvuldigen:
+
+\begin{split}
+\orange{x^{(m + 1)}}y^n\cdot x^2y^n
+&= y^n\cdot \orange{x^{(m + 1)}}x^2\cdot y^n\\\\\
+ &= y^n\cdot x^{\orange{(m + 1)} + 2}y^n\\\\\
+ &= y^n\cdot x^{\orange{m + 1} + 2}y^n\\\\\
+ &= y^n\cdot x^{(m + 3)}y^n\\\\\
+\end{split}
+
+Je ziet dat we ook hier weer niets meer doen dan de exponenten bij elkaar op te
+tellen. We vermenigvuldigen nu op dezelfde manier de lettergedeelten met $y$
+als grondtal:
+
+\begin{split}
+\orange{y^n}\cdot x^{(m + 3)}y^n
+&= x^{(m + 3)}\cdot\orange{y^n}y^n\\\\\
+ &= x^{(m + 3)}y^{\orange{n} + n}\\\\\
+ &= x^{(m + 3)}y^{2n}\\\\\
+\end{split}
+
+We krijgen het volgende resultaat:
+
+$$x^{(m + 3)}y^{2n}$$
+
+Voor het **delen** van eentermen met letterexponenten doen we precies
+hetzelfde, maar dan passen we uiteraard de rekenregels voor het _delen_ van
+machten met hetzelfde grondtal toe. Een eenvoudig voorbeeld:
+
+\begin{split}
+a^{(m+2)}b^m:(a^{(2m - 1)}b^3)
+&= a^{(m+2) - (2m - 1)}b^{m - 3}\\\\\
+ &= a^{m+ 2 - 2m + 1}b^{m - 3}\\\\\
+ &= a^{-m + 3}b^{m - 3}\\\\\
+\end{split}
+
+De uitkomst van deze deling is dus:
+
+$$a^{(-m+ 3)}b^{(m - 3)}$$
+
+## Samengevat
+
+{{< attention "Eentermen vermenigvuldigen" >}}
+Het vermenigvuldigen van eentermen gaat als volgt:
+
+1. Vermenigvuldig de **coëfficiënt** van de ene eenterm met de coëfficiënt van
+   de andere eenterm.
+2. Vermenigvuldig het **lettergedeelte** van de ene eenterm met het
+   lettergedeelte van de andere eenterm door **exponenten van machten met
+   hetzelfde grondtal bij elkaar op te tellen**.
+   {{< /attention >}}
+
+{{< attention "Eentermen delen" >}}
+Het delen van eentermen doe je ze:
+
+1. Deel de **coëfficiënt** van de ene eenterm door de coëfficiënt van de andere
+   eenterm.
+2. Deel het **lettergedeelte** van de ene eenterm door het lettergedeelte van
+   de andere eenterm door **exponenten van machten met hetzelfde grondtal van
+   elkaar af te trekken**.
+   {{< /attention >}}

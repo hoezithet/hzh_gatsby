@@ -23,7 +23,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
         createPage({
-            path: node.fileAbsolutePath.replace(/^.*\/src\/content/, "").replace(/\/index\.md/, ""),
+            path: node.fileAbsolutePath.replace(/^.*\/src\/content/, "").replace(/\/index\.md$/, ""),
             component: lessonTemplate,
             context: {
                 filePath: node.fileAbsolutePath,

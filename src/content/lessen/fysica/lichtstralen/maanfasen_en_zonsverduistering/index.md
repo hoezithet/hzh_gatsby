@@ -40,7 +40,7 @@ hebben. Een voorbeeld hiervan is een **totale zonsverduistering**. Daarbij
 staan de zon, de maan en de aarde ongeveer op één lijn waardoor er een grote
 schaduw van de maan op de aarde valt.
 
-![](img/zonsverduistering.png )
+![](img/zonsverduistering.png)
 
 {{< expand "Uitbreiding: tekening niet op schaal" >}}
 Het is belangrijk te beseffen dat het bovenstaande schema **niet op schaal**
@@ -90,19 +90,19 @@ verschillende vormen aan te nemen: soms een volledige cirkel 🌝, soms
 iets sikkelvormig 🌛. Dit noemen we de **schijngestalten van de maan** of de
 **maanfasen**.
 
-![](img/maanfasen_vanop_aarde.png )
+![](img/maanfasen_vanop_aarde.png)
 
 Vanuit de ruimte wordt het duidelijk waar deze schijngestalten vandaan komen.
 Terwijl de maan rond de aarde draait, kijken we vanop aarde naar een andere
 kant van de schaduw.
 {{< mute "De nummertjes op de illustratie komen overeen met de schijngestalten op de vorige figuur." >}}
 
-![](img/maanfasen_zijaanzicht.png )
+![](img/maanfasen_zijaanzicht.png)
 
 In "bovenaanzicht" ziet de situatie er als volgt uit.
 {{< mute "Ook hier komen de nummers overeen." >}}
 
-![](img/maanfasen_bovenaanzicht.png )
+![](img/maanfasen_bovenaanzicht.png)
 
 ## Maansverduistering
 
@@ -110,12 +110,12 @@ De maan draait rond de aarde in een hellend vlak dat een hoek maakt van
 ongeveer 5° met het vlak waarin de aarde rond de zon draait (het _ecliptisch
 vlak_).
 
-![](img/ecliptisch_vlak.png )
+![](img/ecliptisch_vlak.png)
 
 Enkel wanneer de maan **door het ecliptisch vlak beweegt**, kunnen de zon, de aarde
 en de maan op één lijn komen te staan. Dat gebeurt slechts twee keer per maand, zoals getoond op deze figuur:
 
-![](img/lunar_node_eclipses.png )
+![](img/lunar_node_eclipses.png)
 
 Wanneer de maan door het ecliptisch vlak gaat en de zon toevallig in dezelfde
 lijn als de maan en de aarde staat, kan er een zonsverduistering of een
@@ -124,7 +124,7 @@ zon staat** {{< mute "(tijdens een nieuwe maan dus)" >}}. Een **maansverduisteri
 tussen de maan en de zon staat** {{< mute "(volle maan)" >}} op het moment dat de maan door het ecliptisch
 vlak beweegt.
 
-![](img/maansverduistering.png )
+![](img/maansverduistering.png)
 
 ## De aarde, de zon en de maan op schaal
 
@@ -141,18 +141,18 @@ getekend. In werkelijkheid is **de afstand van de aarde tot de maan ongeveer
 $380{\ }000\si{ km}$**. De aarde heeft een diameter van
 $12{\ }756 \si { km}$ en de maan van $3476\si{ km}$.
 
-![](img/aarde_maan_op_schaal.png )
+![](img/aarde_maan_op_schaal.png)
 
 De **afstand tussen de aarde en de zon is ongeveer $149{\ }600{\ }000 \si{ km}$**
 en is dus nog veel groter dan de afstand tussen
 de aarde en de maan. Ook is het verschil in grootte enorm: de zon heeft een
 diameter van $1{\ }393{\ }000 \si{ km}$.
 
-![](img/op_schaal.png )
+![](img/op_schaal.png)
 
 Om je een duidelijker idee te geven van hoe groot de
 aarde, zon en maan zijn ten opzicht van elkaar nog één laatste figuur. Hierop
 zijn de hemellichamen vlak naast elkaar gezet en zijn enkel de groottes van de
 hemellichamen op schaal getekend.
 
-![](img/op_schaal_enkel_groottes.png )
+![](img/op_schaal_enkel_groottes.png)

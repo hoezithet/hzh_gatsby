@@ -26,7 +26,7 @@ fysica is **kracht**. Kracht is een maat voor op welke manier er wordt
 op een voorwerp, kan de kracht een **verandering van de snelheid** en/of een
 **vervorming** van dat voorwerp tot gevolg hebben. Verandering van snelheid noemen we het **dynamisch effect** van krachten. Vervorming noemen we het **statisch effect** van krachten.
 
-![](img/kracht_effecten.png )
+![](img/kracht_effecten.png)
 
 Je komt krachten voortdurend tegen in het dagelijkse leven:
 
@@ -38,7 +38,7 @@ Je komt krachten voortdurend tegen in het dagelijkse leven:
 -   In de winkel **duw** je de winkelkar vooruit;
 -   ...
 
-![](img/krachten_voorbeelden.png )
+![](img/krachten_voorbeelden.png)
 
 Het symbool voor de grootheid kracht is $F$ {{< mute "(van het Engelse <em>force</em>)" >}} en de
 [SI-eenheid](../grootheden_eenheden/intro##si-eenheden-maken-duidelijke-afspraken)
@@ -53,7 +53,7 @@ Om je een idee te geven van hoe groot een newton juist is: als je een flesje
 water van een halve liter op je hand zet, voel je een kracht van ongeveer
 $5\si{ N}$.
 
-![](img/evian_kracht.png )
+![](img/evian_kracht.png)
 
 ## Veld- en contactkrachten
 
@@ -64,20 +64,20 @@ Wanneer een **kracht op afstand** werkt, spreken we van een **veldkracht**. Een
 voorbeeld hiervan is de zwaartekracht. Die werkt namelijk ook wanneer je niet
 in contact bent met de aarde, bijvoorbeeld als je in een vliegtuig zit.
 
-![](img/veldkrachten.png )
+![](img/veldkrachten.png)
 
 We zeggen dat de aarde een **zwaartekrachtsveld** opwekt. Dat betekent dat
 voorwerpen die in de buurt van de aarde komen, een trekkende kracht zullen voelen
 in de richting van de aarde.
 
-![](img/zwaartekrachtsveld.png )
+![](img/zwaartekrachtsveld.png)
 
 Vaak zal er voor een kracht echter contact nodig zijn tussen twee voorwerpen.
 Wanneer je in de winkel een zware kar vooruit moet duwen, bijvoorbeeld, kan
 dat niet zonder de winkelkar aan te raken. We spreken dan over een
 **contactkracht**.
 
-![](img/contactkrachten.png )
+![](img/contactkrachten.png)
 
 ## Puntmassa
 
@@ -89,7 +89,7 @@ tekenen de puntmassa **in het zwaartepunt van het voorwerp**
 De krachten die inwerken op het voorwerp, tekenen we dan ook in die
 puntmassa.
 
-![](img/puntmassa.png )
+![](img/puntmassa.png)
 
 ## Samengevat
 

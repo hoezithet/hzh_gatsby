@@ -25,7 +25,7 @@ binnendringen en ergens tegen ons netvlies _botsen_, zien we de kleur die die
 lichtstraal had. Omdat er zoveel lichtstralen tegelijk overal op ons netvlies
 botsen, zien we voortdurend een hele mozaïek van kleuren.
 
-![](img/mosaic.png )
+![](img/mosaic.png)
 
 Er vallen lichtstralen {{< mute "(van de zon bijvoorbeeld)" >}}
 in op de bloem en de bloem weerkaatst die. Sommige weerkaatste
@@ -42,7 +42,7 @@ licht) en $700 \si{ nm}$ (rood licht). Dat zijn veel moeilijke woorden bij
 elkaar. Je hoeft ze gelukkig niet allemaal te begrijpen. Dat licht een
 elektromagnetische golf is, zal voor ons voorlopig weinig uitmaken.
 
-![](img/em_stralen.png )
+![](img/em_stralen.png)
 
 Het interessante is vooral dat licht niet de enige soort elektromagnetische
 golf is. In het dagelijkse leven komen elektromagnetische (em) golven heel vaak
@@ -55,7 +55,7 @@ Als we em-golven met de
 golflengte van wifi konden zien, dan zou de wifi-antenne van de router bij jou
 thuis licht lijken te geven.
 
-![](img/light_router.png )
+![](img/light_router.png)
 
 Er bestaan ook em-golven met een **kortere golflengte dan licht**, zoals
 ultraviolet en radioactieve straling. Deze golven zijn typisch **schadelijk**
@@ -64,11 +64,11 @@ Ze kunnen ongewenste chemische reacties op gang brengen, zoals het beschadigen
 van DNA. Als je bijvoorbeeld in de zomer geen zonnecrème smeert, verbrandt je
 huid omdat het is blootgesteld aan te veel ultraviolet.
 
-![](img/sunburn.png )
+![](img/sunburn.png)
 
 ## Lichtstralen tekenen
 
 We zullen vaak de weg tekenen die bepaalde lichtstralen volgen. In zulke
 tekeningen stellen we lichtstralen voor als een rechte lijn met een pijl.
 
-![](img/light_rays.png )
+![](img/light_rays.png)

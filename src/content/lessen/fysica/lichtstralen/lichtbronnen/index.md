@@ -31,7 +31,7 @@ De meeste voorwerpen zijn donkere lichamen, bijvoorbeeld een bloem, een
 LEGO-mannetje of een sinaasappel. Wat zeker géén donkere lichamen zijn: een
 brandende gloeilamp en de zon.
 
-![](img/donkere_lichamen.png )
+![](img/donkere_lichamen.png)
 
 ## Puntvormige en diffuse lichtbronnen
 
@@ -40,13 +40,13 @@ _diffuse_ lichtbron. Een puntvormige lichtbron is een **kleine lichtbron** en
 zendt **lichtstralen uit die elkaar snijden in hetzelfde punt**, namelijk de
 puntvormige lichtbron zelf.
 
-![](img/puntvormig.png )
+![](img/puntvormig.png)
 
 Een **diffuse lichtbron zendt lichtstralen in willekeurige richtingen** uit en
 heeft typisch een vrij **grote vorm**. Het is
 eigenlijk een verzameling van heel veel puntvormige lichtbronnen.
 
-![](img/diffuus.png )
+![](img/diffuus.png)
 
 {{< expand "De flitsende fotograaf" >}}
 

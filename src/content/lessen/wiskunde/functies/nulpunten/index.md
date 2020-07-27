@@ -59,7 +59,7 @@ Hieronder staat de grafiek getekend van de functie $f(x) = -x^2 + 9$ die de
 nul*waarden* $x=-3$ en $x=3$ heeft en dus de nul*punten* $(-3,~0)$ en $(3,~0)$.
 De twee nulpunten zijn aangeduid in het **{{< class "oranje" "orange" >}}**.
 
-{{< bokeh "plt/nulpunten.json" >}}
+![](plt/nulpunten.png)
 
 ## Samengevat
 

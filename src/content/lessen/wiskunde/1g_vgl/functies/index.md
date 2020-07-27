@@ -39,7 +39,7 @@ Stel dat we twee functies $\green{f}$ en $\blue{g}$ hebben waarbij
 
 De [grafiek](../functies/grafiek) van deze functies ziet er als volgt uit:
 
-{{< bokeh "plt/snijpunt.json" >}}
+![](plt/snijpunt.png)
 
 Het oranje punt duidt het {{< class "snijpunt" "orange" >}} aan van de twee functies. Hoe kunnen we de coördinaten van dit snijpunt vinden?
 
@@ -124,7 +124,7 @@ $\orange{4}$ en het nulpunt is $(\orange{4}, 0)$
 {{< mute "(met een x- én y-coördinaat)" >}}.
 Dit kan je ook zien op onderstaande grafiek:
 
-{{< bokeh "plt/nulpunt.json" >}}
+![](plt/nulpunt.png)
 
 ## Samengevat
 

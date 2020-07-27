@@ -25,7 +25,7 @@ Als de [grafiek van een functie](grafiek) is gegeven, kunnen we zien waar de
 functiewaarden {{< mute "(of de y-waarden)" >}} _positief_, _negatief_ of _nul_
 zijn.
 
-{{< bokeh "plt/tekenschema.json" >}}
+![](plt/tekenschema.png)
 
 We zien op de grafiek:
 

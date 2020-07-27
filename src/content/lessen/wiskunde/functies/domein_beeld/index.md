@@ -77,7 +77,7 @@ functie](grafiek). Neem bijvoorbeeld de grafiek van de functie
 $$f(x) = 3\cdot \sqrt{x + 5} - 6$$
 Die grafiek ziet er zo uit:
 
-{{< bokeh "plt/fx.json" >}}
+![](plt/fx.png)
 
 Om op deze grafiek het **domein** af te lezen, moet je de grafiek **projecteren
 op de x-as**. Het resultaat van de projectie
@@ -85,13 +85,13 @@ is aangeduid **{{< class "in het groen op de x-as" "green" >}}**.
 {{< mute "We gaan ervan uit dat de grafiek oneindig blijft verder stijgen aan de rechterkant." >}}
 We zien dan dat $\green{dom f = [-5; +\infty[}$.
 
-{{< bokeh "plt/dom.json" >}}
+![](plt/dom.png)
 
 Het **beeld** {{< mute "(of het bereik)" >}} van diezelfde functie kunnen we
 vinden door de grafiek nu te **projecteren op de y-as**. Op de onderstaande
 grafiek zie je het resultaat van deze projectie
 **{{< class "in het groen op de y-as" "green" >}}**.
-{{< bokeh "plt/bld.json" >}}
+![](plt/bld.png)
 {{< mute "We gaan ervan uit dat de grafiek oneindig blijft verder stijgen aan de rechterkant." >}}
 Je vindt dat $\green{bld f = [-6; +\infty[}$.
 

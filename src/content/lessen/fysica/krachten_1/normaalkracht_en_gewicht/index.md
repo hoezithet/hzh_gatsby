@@ -20,7 +20,7 @@ je een kleedje aan een kleerhanger hangt, zorgt de kapstok ervoor dat het
 kleedje niet op de grond valt. De kracht die zo'n ondersteuning of ophanging
 uitoefent, noemen we een **normaalkracht**.
 
-![Voorbeelden van normaalkrachten](img/staan_kapstok.png )
+![Voorbeelden van normaalkrachten](img/staan_kapstok.png)
 
 ## Een normaalkracht ondersteunt
 
@@ -31,19 +31,19 @@ op de plaats waar de ondersteuning contact maakt met het voorwerp.
 Stel dat Maria en Dirk zich wagen aan een bezoekje aan de lokale speeltuin.
 Maria zet zich op de glijbaan en Dirk gaat aan het klimrek hangen.
 
-![Maria en Dirk in de speeltuin](img/speeltuin.png )
+![Maria en Dirk in de speeltuin](img/speeltuin.png)
 
 Maria wordt ondersteund door de glijbaan. De glijbaan oefent dus een
 normaalkracht $\vec{F}\_{nM}$ uit op Maria. Het aangrijpingspunt van
 $\vec{F}\_{nM}$ tekenen we aan het zitvlak van Maria.
 
-![Normaalkracht uitgeoefend door glijbaan](img/normaalkracht_schuifaf.png )
+![Normaalkracht uitgeoefend door glijbaan](img/normaalkracht_schuifaf.png)
 
 Bij een ophanging, zoals Dirk die aan het klimrek hangt, is er ook een
 normaalkracht. Omdat Dirk met beide handen aan het klimrek hangt, zijn er hier
 zelfs twee normaalkrachten. Voor ieder hand één.
 
-![Normaalkracht uitgeoefend door klimrek](img/normaalkracht_klimrek.png )
+![Normaalkracht uitgeoefend door klimrek](img/normaalkracht_klimrek.png)
 
 ## Normaalkracht altijd loodrecht op steunoppervlak
 
@@ -51,7 +51,7 @@ De normaalkracht is _"normaal"_ omdat ze altijd loodrecht op het steunoppervlak
 staat {{< mute "(normaal is een ander woord voor loodrecht)" >}}. Ook
 wanneer het steunoppervlak schuin staat, staat de normaalkracht er loodrecht op.
 
-![Normaalkacht is altijd loodrecht op het steunoppervlak](img/normaalkracht_loodrecht.png )
+![Normaalkacht is altijd loodrecht op het steunoppervlak](img/normaalkracht_loodrecht.png)
 
 ## Gewicht duwt op ondersteuning
 
@@ -77,7 +77,7 @@ F_g &= F\_{zM}\\\\\
  &\breq 638~\si{N}\\\\\
 \end{split}
 
-![Het gewicht uitgeoefend door Maria op de glijbaan](img/gewicht_maria.png )
+![Het gewicht uitgeoefend door Maria op de glijbaan](img/gewicht_maria.png)
 
 In bovenstaand voorbeeld is het gewicht van Maria gelijk aan de zwaartekracht
 die inwerkt op haar. Dat is vaak zo. Wanneer een voorwerp steunt op een
@@ -108,7 +108,7 @@ krachten die gelijk zijn in grootte, maar tegengesteld in zin, een
 _actie-reactiepaar_ noemen. Maar daar hoef je je nu nog geen zorgen over te
 maken.
 
-![Gewicht en normaalkracht zijn gelijk maar hebben een tegengestelde zin](img/gewicht_vs_normaalkracht.png )
+![Gewicht en normaalkracht zijn gelijk maar hebben een tegengestelde zin](img/gewicht_vs_normaalkracht.png)
 
 ## Samengevat
 

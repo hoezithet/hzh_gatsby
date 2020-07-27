@@ -99,7 +99,7 @@ x-waarden die _iets_ groter zijn dan $2$
 {{< mute "(bv. $2{,}1$; $2{,}01$; $2{,}001$;...)" >}} liggen in die opening en
 hebben dus **geen functiewaarden**.
 
-![Discontinue functie tusse x = 2 en x = 5](img/afleidbaarheid_discontinu.png )
+![Discontinue functie tusse x = 2 en x = 5](img/afleidbaarheid_discontinu.png)
 
 De functie is dus enkel **links afleidbaar** en **niet rechts afleidbaar** in $x
 = 2$. Op dezelfde manier kan je erachter komen dat diezelfde functie enkel
@@ -133,7 +133,7 @@ verschillende richtingscoëfficiënt hebben. De **linker- en rechterafgeleide**
 in het knikpunt zijn dus **niet gelijk aan elkaar** en daarom is de functie in
 dat punt **niet afleidbaar**.
 
-![Een functie met een knik is niet afleidbaar in het knikpunt.](img/afleidbaarheid_knik.png )
+![Een functie met een knik is niet afleidbaar in het knikpunt.](img/afleidbaarheid_knik.png)
 
 ## Functies met verticale raaklijnen zijn niet afleidbaar bij die raaklijn
 
@@ -142,7 +142,7 @@ functie. Dat komt omdat een verticale raaklijn een oneindig grote rico heeft.
 De linker- en rechterafgeleiden zijn dus gelijk aan $+\infty$ of $-\infty$ en
 zijn daarom geen elementen van $\mathbb{R}$.
 
-![Een functie met een verticale raaklijn is niet afleidbaar in de x-waarde waar de verticale raaklijn zich bevindt.](img/afleidbaarheid_VA.png )
+![Een functie met een verticale raaklijn is niet afleidbaar in de x-waarde waar de verticale raaklijn zich bevindt.](img/afleidbaarheid_VA.png)
 
 Merk op dat een **verticale asymptoot** ook zorgt voor een **verticale
 raaklijn** aan de grafiek van de functie. Een functie met een verticale

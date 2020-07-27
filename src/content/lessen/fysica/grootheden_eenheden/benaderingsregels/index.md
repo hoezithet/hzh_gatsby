@@ -24,12 +24,12 @@ houden dat **metingen nooit exact** zijn. Stel dat we bijvoorbeeld een meetlat
 naast een LEGO-blokje leggen, en we meten dat de zijde
 $1{,}6 \si{ cm}$ is.
 
-![](img/lego_meetlat.png )
+![](img/lego_meetlat.png)
 
 Als we 100 zulke blokjes naast elkaar leggen,
 hoe lang zal die rij blokjes dan zijn?
 
-![](img/lego_100_bricks.png )
+![](img/lego_100_bricks.png)
 
 Dat lijkt heel eenvoudig, gewoon $100 \cdot 1{,}6 \si{ cm} = 160 \si{ cm}$. We
 hebben het blokje echter gemeten met een meetlat die maar tot op $0{,}1 \si{
@@ -37,12 +37,12 @@ cm}$ nauwkeurig kan meten. Stel dat we het blokje nu meten met een schuifmaat
 die tot op $0{,}01 \si{ cm}$ nauwkeurig kan meten. Nu vinden we dat het blokje
 $1{,}58 \si{ cm}$ is.
 
-![](img/lego_schuifmaat.png )
+![](img/lego_schuifmaat.png)
 
 Als we 100 blokjes naast elkaar zouden leggen, zullen we dus een rij van $158
 \si{ cm}$ krijgen, niet $160 \si{ cm}$.
 
-![](img/lego_100_measured.png )
+![](img/lego_100_measured.png)
 
 Met **benaderingsregels** kunnen we de onzekerheid van een berekening
 uitdrukken. Als we de benaderingsregels toepassen die we straks zullen leren,
@@ -54,7 +54,7 @@ Met $1{,}6 \si{ m}$ bedoelen we namelijk: "Iets tussen $1{,}55 \si{ m}$ en
 $1{,}65 \si{ m}$," en inderdaad, $1{,}58 \si{ m}$
 **{{< class "ligt binnen die foutenmarge" "green" >}}**.
 
-![](img/lego_100_correct_margin.png )
+![](img/lego_100_correct_margin.png)
 
 Als we bij de eerste berekening $1{,}6\red{0}$ hadden geschreven, zou dat
 betekenen: "Iets tussen $1{,}5\red{95} \si{ m}$ en $1{,}6\red{05} \si{ m}$,"
@@ -63,7 +63,7 @@ maar
 want $1{,}58 \si{ m}$
 **{{< class "ligt buiten die foutenmarge" "red" >}}**.
 
-![](img/lego_100_wrong_margin.png )
+![](img/lego_100_wrong_margin.png)
 
 Door na onze berekeningen benaderingsregels toe te passen, zorgen we dat de
 uitkomst de juiste **foutenmarge** heeft.

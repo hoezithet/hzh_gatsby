@@ -25,7 +25,7 @@ Dat betekent dat we in één keer in **alle x-waarden**
 😮 Dat noemen we de **afgeleide functie** van een functie of kortweg **de
 afgeleide van een functie**.
 
-{{< svg "img/zonder_met_afgeleide_fx.svg" "Met de afgeleide functie kunnen we sneller afgeleiden berekenen" >}}
+![Met de afgeleide functie kunnen we sneller afgeleiden berekenen](img/zonder_met_afgeleide_fx.png )
 
 ## De afgeleide functie $f'(x)$
 
@@ -75,26 +75,26 @@ En zo hebben we de **definitie van de afgeleide functie van $f(x)$**!
 met $f(\ldots)$ staat. De eerste keer staat er $f(x + \Delta x)$ en de tweede
 keer staat er $f(x)$:
 
-{{< svg "img/fx_in_afgeleide.svg"  "Definitie van een afgeleide" >}}
+![Definitie van een afgeleide](img/fx_in_afgeleide.png )
 
 Die $f(x + \Delta x)$ en $f(x)$ moeten we bepalen voor de functie waar we de
 afgeleide van willen vinden. Wij zoeken de afgeleide van $f(x) = -3x^2 + 4x -
 1$, dus die $f(x)$ in de definitie kunnen we al meteen vervangen:
 
-{{< svg "img/fx_ingevuld_in_afgeleide.svg" "Functievoorschrift ingevuld in de definitie van een afgeleide." >}}
+![Functievoorschrift ingevuld in de definitie van een afgeleide.](img/fx_ingevuld_in_afgeleide.png )
 
 Maar hoe vinden we die vreemde $f(x + \Delta x)$? Daarvoor moeten we
 eigenlijk gewoon alle $x-$en in het functievoorschrift $f(x) = -3x^2 + 4x - 1$
 vervangen door $(x + \Delta x)$:
 
-{{< svg "img/f_delta_x_ingevuld.svg" "$(x + \Delta x)$ ingevuld in de definitie van een afgeleide." >}}
+![$(x + \Delta x)$ ingevuld in de definitie van een afgeleide.](img/f_delta_x_ingevuld.png )
 
 We hebben nu $f(x + \Delta x)$ en $f(x)$ gevonden voor de functie die we willen
 afleiden. Nu moeten we alles uitwerken en de limiet uitrekenen. Om alles een
 beetje verteerbaar te houden, gaan we die harige $f(\blue{x + \Delta x})$ eerst
 apart uitwerken:
 
-{{< svg "img/f_delta_x_uitwerking.svg" "Uitwerking van $f(x + \Delta x)$" >}}
+![Uitwerking van $f(x + \Delta x)$](img/f_delta_x_uitwerking.png )
 
 Die $f(x + \Delta x)$ blijft een serieus harige uitdrukking... 🙄
 Als je terug even naar boven gaat, zie je in de definitie van $f'(x)$ in de
@@ -102,18 +102,18 @@ teller van de breuk "$f(x + \Delta x) - f(x)$" staan. We moeten van onze $f(x +
 \Delta x)$ dus nog $f(x)$ aftrekken. Gelukkig vallen er dan een hele hoop
 dingen weg:
 
-{{< svg "img/afgeleide_teller_uitwerking.svg" "Uitwerking van de teller van de definitie van een afgeleide functie voor onze tweedegraadsfunctie." >}}
+![Uitwerking van de teller van de definitie van een afgeleide functie voor onze tweedegraadsfunctie.](img/afgeleide_teller_uitwerking.png )
 
 We hebben nu dus de teller gevonden van onze limiet:
 
-{{< svg "img/teller_afgeleide_invullen.svg" "De teller van de afgeleide ingevuld in de definitie." >}}
+![De teller van de afgeleide ingevuld in de definitie.](img/teller_afgeleide_invullen.png )
 
 Nu zou het je moeten opvallen dat er heel vaak in de breuk een $\Delta x$
 staat. Het is zelfs zo dat **elke term in de breuk** een factor $\Delta x$
 bevat. Dat betekent dat we de **breuk kunnen vereenvoudigen** door teller en
 noemer te delen door $\Delta x$.
 
-{{< svg "img/delta_x_wegdelen.svg" "$\Delta x$ wegdelen uit teller en noemer van de afgeleide." >}}
+![$\Delta x$ wegdelen uit teller en noemer van de afgeleide.](img/delta_x_wegdelen.png )
 
 {{< expand "Mogen we de teller en noemer zomaar delen door $\Delta x$?" >}}
 
@@ -134,7 +134,7 @@ x$, dus elke term zonder $\Delta x$ mogen we buiten de limiet zetten. Dan wordt
 de limiet heel eenvoudig en komt de afgeleide functie van $f(x) = -3x^2 + 4x -
 1$ tevoorschijn!
 
-{{< svg "img/limiet_uitrekenen.svg" "Uitwerking van de limiet om de afgeleide functie te berekenen." >}}
+![Uitwerking van de limiet om de afgeleide functie te berekenen.](img/limiet_uitrekenen.png )
 
 Ziezo! We hebben de afgeleide functie $f'(x)$ gevonden! 💪
 

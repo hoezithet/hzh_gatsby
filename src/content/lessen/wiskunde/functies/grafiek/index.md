@@ -38,12 +38,12 @@ $\green{y = 1{,}5}$. We kunnen dit voorstellen door een puntje met coördinaten
 $(\orange{5};~\green{1{,}5})$.
 {{< mute "(Probeer eens op het puntje te klikken.)" >}}
 
-{{< bokeh "plt/single_x.json" >}}
+![](plt/single_x.png)
 
 Zo kunnen we alle rijen in onze waardentabel voorstellen als puntjes in een
 assenstelsel.
 
-{{< bokeh "plt/multiple_x.json" >}}
+![](plt/multiple_x.png)
 
 ## Veel puntjes vormen een curve
 
@@ -54,7 +54,7 @@ $\orange{-0{,}98}$, $\orange{-0{,}97}$ enzovoort tot $\orange{9}$). Wat gebeurt
 er als we die enorme hoeveelheid puntjes nu op een assenstelsel zetten? We
 krijgen deze mooie figuur:
 
-{{< bokeh "plt/loads_of_x.json" >}}
+![](plt/loads_of_x.png)
 
 We hebben nu zoveel puntjes op ons assenstelsel dat we eigenlijk niet meer zien
 dat het _aparte_ puntjes zijn. Het zijn wel degelijk aparte puntjes
@@ -72,4 +72,4 @@ hieronder is een voorbeeld van een curve waar er voor bepaalde waarden van $x$
 functie van** $x$. Zonder het onderste stukje dat lijkt "terug te keren" is
 $y$ _wel_ een functie van $x$.
 
-{{< bokeh "plt/no_fx.json" >}}
+![](plt/no_fx.png)

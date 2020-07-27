@@ -25,16 +25,16 @@ iemand heeft afgelegd, kan je niet exact weten waar die persoon is geëindigd. J
 moet niet alleen weten hoe ver de persoon is gestapt, je moet ook weten
 **waarheen**.
 
-{{< svg "img/verplaatsingsvector_1.svg" >}}
+![](img/verplaatsingsvector_1.png )
 
 **Hoe ver** de persoon stapte, noemen we de **grootte** van de verplaatsing.
 **Waarheen** de persoon stapte, is de **richting** en de **zin** van de verplaatsing.
 
-{{< svg "img/verplaatsingsvector_2.svg" >}}
+![](img/verplaatsingsvector_2.png )
 
 Andere voorbeelden van vectoriële grootheden zijn o.a. snelheid, versnelling en kracht.
 
-{{< svg "img/vec_examples.png" >}}
+![](img/vec_examples.png )
 
 ## Scalaire grootheden hebben géén richting
 
@@ -42,7 +42,7 @@ Er zijn natuurlijk ook veel grootheden die geen richting hebben. Hoeveel kilogra
 
 We noemen temperatuur en massa daarom **scalaire grootheden**. Ze hebben **enkel een getalwaarde** {{< mute "(scalar = getal)" >}}. We kunnen geen vectoren gebruiken om de grootheden te beschrijven.
 
-{{< svg "img/scal_examples.png" >}}
+![](img/scal_examples.png )
 
 ## Samengevat
 

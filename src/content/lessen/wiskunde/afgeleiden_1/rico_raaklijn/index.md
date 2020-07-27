@@ -41,7 +41,7 @@ functie halen:
    is de rico **negatief**. Als de rechte is **gestegen**, is de rico
    **positief**.
 
-{{< svg "img/rico_op_grafiek.svg" "De richtingscoëfficiënt (rico) aangeduid op een grafiek" >}}
+![De richtingscoëfficiënt (rico) aangeduid op een grafiek](img/rico_op_grafiek.png )
 
 ## Hoe berekenen we die _rico_ weer?
 
@@ -51,7 +51,7 @@ schuiven _twee_ eenheden op naar rechts of zelfs _drie eenheden_ 😎 en kijken
 hoeveel we gestegen of gedaald zijn. Die getallen gaan natuurlijk niet meer
 gelijk zijn aan onze rico. Maar zie je een verband met de rico?
 
-{{< svg "img/rico_evenredig_met_stap.svg" "Als we twee stappen naar rechts zetten, gaan we stijgen met twee keer de richtingscoëfficiënt (rico). Als we drie stappen naar rechts zetten, gaan we stijgen met drie keer de rico." >}}
+![Als we twee stappen naar rechts zetten, gaan we stijgen met twee keer de richtingscoëfficiënt (rico). Als we drie stappen naar rechts zetten, gaan we stijgen met drie keer de rico.](img/rico_evenredig_met_stap.png )
 
 Je ziet dat als we _twee_ eenheden opschuiven, we ook met _twee_ keer de rico
 zullen stijgen of dalen. En als we _drie_ eenheden opschuiven, zullen we ook
@@ -96,7 +96,7 @@ we eigenlijk ook de **rico** van de eerstegraadsfunctie
 {{< mute "(of de rechte)" >}} die door de punten met coördinaten
 $(\orange{x\_1}, \green{f(x\_1)})$ en $(\orange{x\_2}, \green{f(x\_2)})$ gaat!
 
-{{< svg "img/difquot_als_rico.svg" "Het differentiequotiënt tussen twee punten is het zelfde als richtingscoëfficiënt (rico) van de rechte die die twee punten verbindt." >}}
+![Het differentiequotiënt tussen twee punten is het zelfde als richtingscoëfficiënt (rico) van de rechte die die twee punten verbindt.](img/difquot_als_rico.png )
 
 ## De limiet zorgt voor een raaklijn
 
@@ -115,7 +115,7 @@ op een functie die steeds dichter en dichter bij elkaar komen? We zien op de
 grafiek dat die lijn een **raaklijn** aan de grafiek is wanneer de twee punten
 héél dicht bij elkaar zijn.
 
-{{< svg "img/limiet_raaklijn.svg" "De limiet van de afgeleide zorgt ervoor dat de punten waartussen we het differentiequotiënt berekenen op de raaklijn van f(x) in x = a zullen liggen." >}}
+![De limiet van de afgeleide zorgt ervoor dat de punten waartussen we het differentiequotiënt berekenen op de raaklijn van f(x) in x = a zullen liggen.](img/limiet_raaklijn.png )
 
 De **limiet** in de formule van de afgeleide zorgt er dus voor dat we het
 **differentiequotiënt** gaan berekenen tussen twee punten die **op de

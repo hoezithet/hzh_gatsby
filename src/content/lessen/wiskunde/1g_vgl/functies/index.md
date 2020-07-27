@@ -39,13 +39,13 @@ Stel dat we twee functies $\green{f}$ en $\blue{g}$ hebben waarbij
 
 De [grafiek](../functies/grafiek) van deze functies ziet er als volgt uit:
 
-{{< bokeh "plt/snijpunt.json" >}}
+![](plt/snijpunt.png)
 
 Het oranje punt duidt het {{< class "snijpunt" "orange" >}} aan van de twee functies. Hoe kunnen we de coördinaten van dit snijpunt vinden?
 
 Een snijpunt is een punt dat zowel op de grafiek van $\green{f}$ als op de grafiek van $\blue{g}$ ligt. Denkend aan onze analogie van [het machientje](../functies/intro#een-functie-is-een-machientje), is de $x-$waarde van een snijpunt een **ingang die voor zowel $\green{f}$ als $\blue{g}$ dezelfde uitgang geeft**.
 
-{{< svg "img/conveyor_snijpunt_1.svg" >}}
+![](img/conveyor_snijpunt_1.png )
 
 Als $\orange{x}$ de $x-$coördinaat van een snijpunt is, dan is dus $\green{f(\orange{x})} = \blue{g(\orange{x})}$, of wanneer we $\orange{x}$ invullen in het voorschrift van $\green{f}$ en $\blue{g}$:
 
@@ -98,7 +98,7 @@ $\orange{\frac{7}{3}}$. We kunnen dit controleren door $\orange{\frac{7}{3}}$ in
 
 Inderdaad, $\green{f(}\orange{\frac{7}{3}}\green{)} = \bbox[1pt,border: 2px dotted #ff6300]{\frac{5}{3}}$ en $\blue{g(}\orange{\frac{7}{3}}\blue{)} = \bbox[1pt,border: 2px dotted #ff6300]{\frac{5}{3}}$! De coördinaten van het snijpunt zijn dan $(\orange{\frac{7}{3}}, \bbox[1pt,border: 2px dotted #ff6300]{\frac{5}{3}})$.
 
-{{< svg "img/conveyor_functiewaarde.svg" >}}
+![](img/conveyor_functiewaarde.png )
 
 Op de grafiek bovenaan zien we dat dit punt inderdaad overeenkomt met het snijpunt van de twee functies.
 
@@ -106,7 +106,7 @@ Op de grafiek bovenaan zien we dat dit punt inderdaad overeenkomt met het snijpu
 
 Als we een {{< class "nulwaarde" "orange" >}} van een functie in die functie stoppen, komt er $0$ uit de functie.
 
-{{< svg "img/conveyor_nulpunt_1.svg" >}}
+![](img/conveyor_nulpunt_1.png )
 
 Stel dat $\orange{x}$ een [nulwaarde](../functies/nulpunten#nulwaarden-van-een-functie) van functie $f(x) = -x + 4$ is, dan is $f(\orange{x}) = 0$, of na invullen:
 $$-\orange{x} + 4 = 0$$
@@ -124,7 +124,7 @@ $\orange{4}$ en het nulpunt is $(\orange{4}, 0)$
 {{< mute "(met een x- én y-coördinaat)" >}}.
 Dit kan je ook zien op onderstaande grafiek:
 
-{{< bokeh "plt/nulpunt.json" >}}
+![](plt/nulpunt.png)
 
 ## Samengevat
 

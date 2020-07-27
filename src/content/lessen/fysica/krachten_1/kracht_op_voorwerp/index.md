@@ -25,7 +25,7 @@ voorwerp zelf uitoefent** op een ander voorwerp.
 
 Stel dat Maria en Dirk op een schaatsbaan staan en tegen elkaar duwen.
 
-{{< svg "img/schaatsbaan_setup.png" >}}
+![](img/schaatsbaan_setup.png )
 
 Als we willen weten wat er met Maria gaat gebeuren, moeten we alle krachten
 tekenen die **op Maria** ingrijpen. De kracht die Maria zelf op Dirk uitoefent,
@@ -39,7 +39,7 @@ De krachten op Maria zijn:
 -   [de normaalkracht](normaalkracht) $\red{\vec{F}_{nM}}$ die de schaatsbaan
     uitoefent op Maria.
 
-{{< svg "img/krachten_maria.png" >}}
+![](img/krachten_maria.png )
 
 Merk op hoe we [krachten
 noteren](krachtvector#kracht-is-een-vectoriële-grootheid).
@@ -56,7 +56,7 @@ De krachten op Dirk zijn:
 -   de zwaartekracht $\red{\vec{F}_{zD}}$ die de aarde uitoefent op Dirk,
 -   de normaalkracht $\red{\vec{F}_{nD}}$ die de schaatsbaan uitoefent op Dirk.
 
-{{< svg "img/krachten_dirk.png" >}}
+![](img/krachten_dirk.png )
 
 ## Leg alle krachten samen in een massapunt
 
@@ -64,7 +64,7 @@ We gaan voorlopig alle krachten die inwerken op een voorwerp samen in één punt
 
 Voor de krachten die inwerken op Maria, ziet dat er als volgt uit:
 
-{{< svg "img/in_massapunt.png" >}}
+![](img/in_massapunt.png )
 
 ## Samengevat
 
@@ -72,13 +72,13 @@ Voor de krachten die inwerken op Maria, ziet dat er als volgt uit:
 Wanneer we _"de krachten op een voorwerp"_ tekenen, tekenen we alle krachten
 die **door andere voorwerpen** worden uitgeoefend **op dat voorwerp**.
 
-{{< svg "img/samenvatting_krachten_op.png" >}}
+![](img/samenvatting_krachten_op.png )
 
 {{< /attention >}}
 
 {{< attention "Krachten samenleggen in massapunt" >}}
 We leggen de krachten **samen in een massapunt**. Als massapunt kiezen we een punt dat ongeveer **in het midden van het voorwerp** ligt.
 
-{{< svg "img/samenvatting_in_massapunt.png" >}}
+![](img/samenvatting_in_massapunt.png )
 
 {{< /attention >}}

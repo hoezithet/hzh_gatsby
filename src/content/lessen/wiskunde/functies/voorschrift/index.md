@@ -153,7 +153,7 @@ te lezen als **"de functiewaarde van $2$"**.
 
 Een laatste valkuil is het invullen van negatieve x-waarden. Let daarbij op dat je die telkens **tussen haakjes** vervangt. Zo voorkom je vreemde fouten. Stel bv. dat we $\orange{x} = \orange{-3}$ invullen in het voorschrift $\green{y} = 2\cdot \orange{x} - 5$:
 
-{{< svg "img/voorschrift_vb_-3_invullen.svg" "Negatief getal invullen in functievoorschrift" >}}
+![Negatief getal invullen in functievoorschrift](img/voorschrift_vb_-3_invullen.png )
 
 Je ziet dat als je het negatieve getal niet tussen haakjes zet, je vreemde dingen kan krijgen zoals een maalteken dat vlak
 naast een minteken staat... 🤨

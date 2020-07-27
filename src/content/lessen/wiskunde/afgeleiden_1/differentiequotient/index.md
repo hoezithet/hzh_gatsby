@@ -23,17 +23,17 @@ Maria houdt van dragracen. Bij een dragrace vertrekken twee wagens vanuit
 stilstand en racen ze $300~\si{m}$ in een rechte lijn. De eerste aan de finish
 wint.
 
-{{< svg "img/drag_racing.svg" "Maria racet en is bijna aan de finish." >}}
+![Maria racet en is bijna aan de finish.](img/drag_racing.png )
 
 De wagens halen enorme snelheden tot meer dan $500~\si{km/h}$. Hieronder zie je
 enkele luchtfoto's van Maria in haar _Top Fuel dragster_ tijdens het dragracen.
 
-{{< svg "img/maria_race_top.svg" "Luchtfoto's van Maria tijdens haar race." >}}
+![Luchtfoto's van Maria tijdens haar race.](img/maria_race_top.png )
 
 Stel dat we Maria's gemiddelde snelheid willen berekenen
 tussen $\orange{1{,}00~\si{s}}$ en $\orange{3{,}00~\si{s}}$.
 
-{{< svg "img/maria_avg_speed_1s_3s.svg" "Gemiddelde snelheid van Maria tussen 1 s en 3 s berekenen" >}}
+![Gemiddelde snelheid van Maria tussen 1 s en 3 s berekenen](img/maria_avg_speed_1s_3s.png )
 
 Daarvoor moeten we de **afgelegde afstand**
 {{< mute "(hoeveel (kilo)meter?)" >}} delen door de **tijd die nodig was**
@@ -89,7 +89,7 @@ de posities mooi de [grafiek van een functie](../functies/grafiek) volgen
 waarbij de **tijd op de x-as** {{< mute "(horizontale as)" >}} staat en de
 **positie op de y-as** {{< mute "(verticale as)" >}}:
 
-{{< svg "img/maria_race_function.svg" "De positie van Maria als functie van de tijd" >}}
+![De positie van Maria als functie van de tijd](img/maria_race_function.png )
 
 We kunnen nu onze formule voor gemiddelde snelheid korter schrijven waarbij we
 
@@ -121,7 +121,7 @@ Op dezelfde manier krijgen we de **gemiddelde** verandering van de functiewaarde
 
 We zeggen dat deze formule de **gemiddelde verandering van de functiewaarde** berekent per $x-$eenheid tussen $\orange{x\_1}$ en $\orange{x\_2}$.
 
-{{< svg "img/diff_quot_intuitie.svg" >}}
+![](img/diff_quot_intuitie.png )
 
 Het is belangrijk om te weten dat we die formule niet enkel kunnen gebruiken om gemiddelde snelheid te berekenen, maar voor nog veel andere soorten van _gemiddelde verandering_.
 De formule wordt zelfs zo vaak gebruikt, dat ze een eigen naam heeft gekregen: het **differentiequotiënt**.
@@ -159,7 +159,7 @@ $$\frac{\green{f(x\_2)} - \green{f(x\_1)}}{\orange{x\_2} - \orange{x\_1}} = \fra
 
 Op een grafiek kan je $\green{\Delta f(x)}$ en $\orange{\Delta x}$ ook aanduiden:
 
-{{< svg "img/graph_delta_fx_delta_x.svg" "Delta f(x) en Delta x aangeduid op een grafiek." >}}
+![Delta f(x) en Delta x aangeduid op een grafiek.](img/graph_delta_fx_delta_x.png )
 
 Je zult het waarschijnlijk niet graag horen, maar er is nog een derde en laatste manier om het differentiequotiënt te schrijven. Daarbij gaan we drie dingen veranderen aan de oorspronkelijke formule van het differentiequotiënt:
 
@@ -169,7 +169,7 @@ Je zult het waarschijnlijk niet graag horen, maar er is nog een derde en laatste
 
 Dat ziet er grafisch zo uit:
 
-{{< svg "img/graph_delta_fa+delta_x_delta_x.svg" "Delta f(a + Delta x) en Delta x aangeduid op een grafiek." >}}
+![Delta f(a + Delta x) en Delta x aangeduid op een grafiek.](img/graph_delta_fa+delta_x_delta_x.png )
 
 We hebben nu drie verschillende manieren gezien om het differentiequotiënt te schrijven:
 

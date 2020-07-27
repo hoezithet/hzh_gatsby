@@ -25,7 +25,7 @@ Stel dat Maria het schaatsen beu is en ze zich wil wagen aan een potje
 skateboarden. Wij gaan de resulterende kracht zoeken die op Maria inwerkt
 tijdens haar _drop_ van de _halfpipe_.
 
-{{< svg "img/maria_drop.png" >}}
+![](img/maria_drop.png )
 
 Als we de wrijving met de wind en de halfpipe verwaarlozen, zijn er drie
 krachten die inwerken op de droppende Maria:
@@ -38,7 +38,7 @@ krachten die inwerken op de droppende Maria:
 We tekenen de krachten samen in [een
 massapunt](kracht_op_voorwerp/#leg-alle-krachten-samen-in-een-massapunt).
 
-{{< svg "img/maria_drop_krachten.png" "Krachten tekenen in massapunt" >}}
+![Krachten tekenen in massapunt](img/maria_drop_krachten.png )
 
 We willen deze twee krachten nu combineren tot één resulterende kracht
 $\green{\vec{F}_{rM}}$. Dat doen we door de krachtvectoren **vectorieel op te tellen**.
@@ -48,7 +48,7 @@ Dat kan op twee manieren:
    [kop-staartmethode](../../wiskunde/vector_1/grafisch_optellen/#kop-staartmethode),
 2. via de [parallellogram-methode](../../wiskunde/vector_1/grafisch_optellen/#parallellogram-methode).
 
-{{< svg "img/add_krachten.png" "Resulterende kracht tekenen" >}}
+![Resulterende kracht tekenen](img/add_krachten.png )
 
 We zien dat de resulterende kracht $\green{\vec{F}_{rM}}$ naar rechtsbeneden wijst.
 De grootte van de resulterende kracht {{< mute "(in newton)" >}} zullen we in een

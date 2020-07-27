@@ -32,7 +32,7 @@ voorwerp wordt belicht, zijn er altijd plekken achter
 het voorwerp waar **weinig of geen lichtstralen geraken**. Die gebieden lijken
 donkerder en we noemen die gebieden de **schaduw** van het voorwerp.
 
-{{< svg "img/schaduw_intro.svg" >}}
+![](img/schaduw_intro.png )
 
 ## Puntlichtbron: harde schaduw
 
@@ -43,7 +43,7 @@ onderstaande figuur staat er links telkens een puntlichtbron met daarnaast een
 ondoorschijnende zwarte bol en een scherm met drie gebieden: **A**, **B**, en
 **C**.
 
-{{< svg "img/puntbron_straal_schaduwen.svg" >}}
+![](img/puntbron_straal_schaduwen.png )
 
 Je ziet dat er in **{{< class "gebied A" "green" >}}** evenveel lichtstralen
 geraken als in **{{< class "gebied B" "green" >}}**. Gebieden **{{< class "A en B" "green" >}}** zijn dus even fel belicht. In
@@ -55,7 +55,7 @@ daarom **donkerder** zijn dan gebieden
 **{{< class "A en B" "green" >}}**. We zien in
 **{{< class "gebied C" "dark-red" >}}** een **schaduw**:
 
-{{< svg "img/puntbron_straal_schaduwen_resultaat.svg" >}}
+![](img/puntbron_straal_schaduwen_resultaat.png )
 
 Aan de rand van de schaduw is er een **abrupte overgang wel licht naar geen
 licht**. Je ziet met andere woorden een **scherpe rand aan de schaduw**.
@@ -70,7 +70,7 @@ puntbron met de **onderkant van de bol**. Alle lichtstralen tussen die twee
 lijnen botsen tegen de bol en kunnen het scherm erachter onmogelijk verlichten.
 **Het gebied tussen de twee lijnen is dus schaduw**.
 
-{{< svg "img/puntvormige_lichtbron.svg" >}}
+![](img/puntvormige_lichtbron.png )
 
 ## Diffuse lichtbron: zachte schaduw
 
@@ -82,7 +82,7 @@ kleine puntlichtbronnen, bekijken we de schaduw van enkele van die
 puntlichtbronnen apart.
 {{< mute "Om de illustratie eenvoudig te houden, beperken we ons tot een bolvormige diffuse lichtbron." >}}
 
-{{< svg "img/diffuse_bron_straal_schaduwen.svg" >}}
+![](img/diffuse_bron_straal_schaduwen.png )
 
 We zien dat alle puntlichtbronnen in gebieden 1 en 5 geraken. **Gebieden 1 en 5
 worden dus goed belicht**.
@@ -92,7 +92,7 @@ Gebieden 2 en 4 worden dus minder belicht. Er valt daarom in **gebieden 2 en 4
 een bijschaduw**. Er is geen enkele puntbron die tot in gebied 3 geraakt.
 **Gebied 3** blijft dus onbelicht en bevat een donkere schaduw, **de kernschaduw**.
 
-{{< svg "img/diffuse_bron_straal_schaduwen_resultaat.svg" >}}
+![](img/diffuse_bron_straal_schaduwen_resultaat.png )
 
 De bijschaduw zorgt voor een **zachte overgang van licht naar schaduw**.
 Fotografen verkiezen vaak deze **zachte schaduwen** omdat ze bij portretten
@@ -108,7 +108,7 @@ twee vanuit de **onderkant van de lichtbron** {{< mute "(blauw op de figuur)" >}
 Van de twee lijnen gaat er telkens één langs de bovenkant van de
 ondoorschijnende bol en één langs de onderkant.
 
-{{< svg "img/niet_puntvormige_lichtbron.svg" >}}
+![](img/niet_puntvormige_lichtbron.png )
 
 Achter de ondoorschijnende bol krijgen we nu drie schaduwgebieden. Het **middelste
 gebied is de kernschaduw**. De twee gebieden eromheen vormen de **bijschaduw**.

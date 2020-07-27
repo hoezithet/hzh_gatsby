@@ -32,7 +32,7 @@ $f'(x)$ dus ook **positief zijn**. Wanneer $f(x)$ **daalt**, hebben de
 raaklijnen aan $f(x)$ een **negatieve rico** en zal $f'(x)$ dus ook **negatief
 zijn**.
 
-{{< svg "img/grafiek_ricos.svg" "Wanneer f(x) stijgt, is f'(x) positief. Wanneer f(x) daalt, is f'(x) negatief" >}}
+![Wanneer f(x) stijgt, is f'(x) positief. Wanneer f(x) daalt, is f'(x) negatief](img/grafiek_ricos.png )
 
 Je kan de grafiek van $f'(x)$ dus zien als een verzameling van de rico's van
 alle raaklijnen aan de grafiek van $f(x)$ voor elke mogelijke x-waarde.

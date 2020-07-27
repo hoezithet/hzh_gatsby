@@ -20,7 +20,7 @@ machientje komt voor bepaalde keuzes van $x$. De $y-$waarde die uit het
 machientje komt voor een bepaalde $x-$waarde, noemen we ook wel **de
 functiewaarde van $x$** of kortweg $f(x)$.
 
-{{< img "img/conveyor_plain.svg" "" >}}
+![](img/conveyor_plain.png )
 
 Omdat de $y$ die uit het machientje komt afhangt van de $x$ die we erin stopten,
 noemen we $y$ ook wel de **afhankelijke variabele**. De $x$ die we erin stoppen,

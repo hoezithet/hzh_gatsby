@@ -34,7 +34,7 @@ is het niet alleen belangrijk hoe snel je rijdt
 {{< mute "(= richting en zin van de vector)" >}}. We schrijven de
 snelheidsvector als $\vec{v}$.
 
-{{< svg "img/snelheidsvector.png" >}}
+![](img/snelheidsvector.png )
 
 ## Snelheidsverandering
 
@@ -63,11 +63,11 @@ Wanneer de snelheid vergroot of verkleint, verandert de **grootte** van de
 snelheidsvector. Wanneer je bijvoorbeeld sneller begint te trappen op je fiets,
 vergroot de vector $\vec{v}$ {{< mute "(je gaat sneller vooruit)" >}}.
 
-{{< svg "img/snelheid_vergroot.png" "De snelheidsvector vergroot" >}}
+![De snelheidsvector vergroot](img/snelheid_vergroot.png )
 
 Wanneer je remt, verkleint de vector $\vec{v}$ {{< mute "(je gaat trager vooruit)" >}}.
 
-{{< svg "img/snelheid_verkleint.png" "De snelheidsvector verkleint" >}}
+![De snelheidsvector verkleint](img/snelheid_verkleint.png )
 
 ### Richting van de snelheid verandert
 
@@ -76,7 +76,7 @@ ook. **Pas wel op!** Dat betekent **niet** dat je sneller of trager gaat. In
 een bocht verandert de snelheidsvector omdat **de richting** van de vector
 verandert.
 
-{{< svg "img/snelheid_draait.png" >}}
+![](img/snelheid_draait.png )
 
 ## $\vec{F}_r$ bepaalt de snelheidsverandering
 
@@ -104,7 +104,7 @@ kracht](resulterende_kracht#resulterende-kracht-tekenen) tekenen en zien we
 dat $\vec{F}_{rM}$ dezelfde zin heeft als de snelheidsvector. Maria zal dus
 **versnellen**.
 
-{{< svg "img/maria_wind_versnelt.png" "Maria versnelt" >}}
+![Maria versnelt](img/maria_wind_versnelt.png )
 
 Wanneer $\vec{F}\_r$ een **andere zin** heeft dan $\vec{v}$, dan zal het
 voorwerp **vertragen**. Stel bijvoorbeeld dat Maria minder hard begint te
@@ -112,7 +112,7 @@ trappen en nu nog slechts met een kracht trapt van $30~\si{N}$. Dan zien we dat
 $\vec{F}\_{rM}$ nu een andere zin heeft dan $\vec{v}$. Maria zal dus
 **vertragen**.
 
-{{< svg "img/maria_wind_vertraagt.png" "Maria vertraagt" >}}
+![Maria vertraagt](img/maria_wind_vertraagt.png )
 
 ### $\vec{F}_r$ loodrecht op $\vec{v}$
 
@@ -120,13 +120,13 @@ Het kan ook dat $\vec{F}_r$ loodrecht staat op $\vec{v}$. In dat geval zal **de
 richting van $\vec{v}$ veranderen**. Het voorwerp zal dus **een bocht nemen**.
 Daarbij wijst **$\vec{F}_r$ naar de binnenkant** van de bocht.
 
-{{< svg "img/Fr_loodrecht_op_v.png" "Maria neemt een bocht" >}}
+![Maria neemt een bocht](img/Fr_loodrecht_op_v.png )
 
 Als $\vec{F}_r$ voortdurend loodrecht blijft staan op $\vec{v} $, zonder dat
 $\vec{F}_r$ zelf van grootte verandert, dan zal het voorwerp een cirkelvormige
 baan volgen.
 
-{{< svg "img/Fr_blijft_loodrecht_op_v.png" "Maria volgt een cirkelvormige beweging" >}}
+![Maria volgt een cirkelvormige beweging](img/Fr_blijft_loodrecht_op_v.png )
 
 ### Andere gevallen
 
@@ -142,7 +142,7 @@ heeft van $0~\si{N}$, dus $\norm{\vec{F}_r} = 0~\si{N}$, dan is er **geen
 snelheidsverandering**. Dus geen verandering van grootte en geen verandering
 van richting. De snelheidsvector blijft zoals die was.
 
-{{< svg "img/maria_wind_constante_v.png" "Maria versnelt" >}}
+![Maria versnelt](img/maria_wind_constante_v.png )
 
 ## Samengevat
 

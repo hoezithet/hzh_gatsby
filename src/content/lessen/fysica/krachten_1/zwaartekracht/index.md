@@ -31,7 +31,7 @@ bowlingbal naar beneden trekt, duiden we dan aan als $\vec{F}_{zb}$. De
 **zwaartekracht wijst altijd recht naar beneden**, meer bepaald naar het
 centrum van de aarde.
 
-{{< svg "img/zwaartekracht_bowlingbal.png" >}}
+![](img/zwaartekracht_bowlingbal.png )
 
 ## Hoe groter de massa, hoe groter de zwaartekracht
 
@@ -40,7 +40,7 @@ van dat voorwerp. Als je een bowlingbal vasthoudt, voel je dat die harder naar
 beneden getrokken wordt dan wanneer je een voetbal vasthoudt. Dat komt omdat de
 massa van een bowlingbal groter is dan de massa van een voetbal.
 
-{{< svg "img/zwaartekracht_bowlingbal_vs_voetbal.png" "De aarde trekt minder hard aan de bowlingbal dan aan de voetbal" >}}
+![De aarde trekt minder hard aan de bowlingbal dan aan de voetbal](img/zwaartekracht_bowlingbal_vs_voetbal.png )
 
 ## Zwaarteveldsterkte
 
@@ -48,7 +48,7 @@ De massa van het voorwerp is niet het enige wat de zwaartekracht bepaalt. Het
 hangt er ook van af op welk hemellichaam je staat. Op aarde worden voorwerpen
 feller aangetrokken dan op de maan, bijvoorbeeld.
 
-{{< svg "img/zwaartekracht_maan_aarde.png" "De maan trekt minder hard aan de bowlingbal dan de aarde" >}}
+![De maan trekt minder hard aan de bowlingbal dan de aarde](img/zwaartekracht_maan_aarde.png )
 
 We zeggen dat het zwaarteveld van de aarde sterker is dan het zwaarteveld van
 de maan. De **zwaarteveldsterkte** zegt hoe hard er aan
@@ -85,7 +85,7 @@ F\_{zb} &= m_b \cdot g\_{aarde}\\\\\
  &= 49{,}1~\si{N}
 \end{split}
 
-{{< svg "img/zwaartekracht_bowlingbal_aarde_oefening.png" >}}
+![](img/zwaartekracht_bowlingbal_aarde_oefening.png )
 
 Dirk gaat nu naar de maan en houdt daar dezelfde bowlingbal vast. Welke kracht
 voelt Dirk nu? Neem $g_{maan}=1{,}62~\si{N/kg}$.
@@ -96,7 +96,7 @@ F\_{zb} &= m_b \cdot g\_{maan}\\\\\
  &= 8{,}10~\si{N}
 \end{split}
 
-{{< svg "img/zwaartekracht_bowlingbal_maan_oefening.png" >}}
+![](img/zwaartekracht_bowlingbal_maan_oefening.png )
 
 De voetbal heeft een massa van $410~\si{g}$. Welke kracht voelt Dirk als hij de
 bal vasthoudt op aarde?
@@ -107,7 +107,7 @@ F\_{zv} &= m_v \cdot g\_{aarde}\\\\\
  &= 4{,}02~\si{N}
 \end{split}
 
-{{< svg "img/zwaartekracht_voetbal_aarde_oefening.png" >}}
+![](img/zwaartekracht_voetbal_aarde_oefening.png )
 
 Vergelijk nu eens de zwaartekracht van de voetbal op aarde met de zwaartekracht
 van de bowlingbal op de maan. Je ziet dat een bowlingbal op de maan ongeveer

@@ -24,7 +24,7 @@ grootheid** is.
 Als je wilt weten wat er met een slee gebeurt als iemand eraan trekt, moet je
 niet alleen weten **hoe hard** {{< mute "(= grootte)" >}}, maar ook **waarheen** {{< mute "(= richting en zin)" >}} er aan de slee getrokken wordt.
 
-{{< svg "img/krachtvector.svg" >}}
+![](img/krachtvector.png )
 
 Bij een kracht hoort dus zowel een **grootte**
 {{< mute "(hoe hard je trekt of duwt)" >}} als een **richting** en **zin**
@@ -41,7 +41,7 @@ Voor de duidelijkheid gaan we bij krachten soms in de _index_ {{< mute "(rechts 
 
 Wanneer Dirk tegen Maria duwt, bijvoorbeeld, zouden we de **kracht van Dirk op Maria** noteren als $\vec{F}_{DM}$.
 
-{{< svg "img/dirk_duwt_maria.png" >}}
+![](img/dirk_duwt_maria.png )
 
 ## Grootte van een kracht
 
@@ -59,7 +59,7 @@ Bij het tekenen van een
 vector gebruiken we de **lengte van de vector** om de grootte van de kracht aan
 te geven.
 
-{{< svg "img/grootte.svg" >}}
+![](img/grootte.png )
 
 ## Richting en zin van een kracht
 
@@ -67,12 +67,12 @@ De **richting** van $\vec{F}$ zegt **aan welke rechte $\vec{F}$
 evenwijdig is**. Bijvoorbeeld: _"verticaal"_, of
 _"horizontaal"_, of _"onder een hoek van $15\deg$"_.
 
-{{< svg "img/richting.svg" >}}
+![](img/richting.png )
 
 De **zin** van $\vec{F}$ zegt **naar welke kant $\vec{F}$ wijst**.
 Dat kan bijvoorbeeld _"naar links"_, _"naar rechts"_, of _"naar beneden"_ zijn.
 
-{{< svg "img/zin.svg" >}}
+![](img/zin.png )
 
 ## Aangrijpingspunt van een kracht
 
@@ -83,7 +83,7 @@ voorwerp**. Wanneer je tegen de bovenkant duwt van een flesje water dat op
 tafel staat, zal het flesje sneller kantelen dan wanneer je tegen de onderkant
 van het flesje duwt.
 
-{{< svg "img/aangrijpingspunt.svg" >}}
+![](img/aangrijpingspunt.png )
 
 ## Samengevat
 
@@ -101,7 +101,7 @@ Een **krachtvector** $\vec{F}$ heeft **vier eigenschappen**:
 3. De **zin**: naar welke kant gaat de kracht?
 4. Het **aangrijpingspunt**: waar wordt de kracht uitgeoefend op het voorwerp?
 
-{{< svg "img/grootte_richting_zin.png" >}}
+![](img/grootte_richting_zin.png )
 {{< /attention >}}
 
 {{< attention "Schrijfwijze voor krachten" >}}

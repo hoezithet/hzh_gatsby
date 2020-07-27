@@ -28,13 +28,13 @@ altijd in een **rechte lijn**. Met een _homogene middenstof_ bedoelen we een
 stof die overal dezelfde samenstelling, dezelfde dichtheid en dezelfde
 temperatuur heeft.
 
-{{< svg "img/rechtlijnige_voortplanting.svg" >}}
+![](img/rechtlijnige_voortplanting.png )
 
 Lichtstralen die door de lucht vliegen van een bloem naar jouw ogen, zullen dat
 in een rechte lijn doen. De middenstof is homogeen en de lichtstralen zullen
 zich dus rechtlijnig voortplanten.
 
-{{< svg "img/zonder_bril.svg" >}}
+![](img/zonder_bril.png )
 
 ## Wat bij een niet-homogene middenstof?
 
@@ -43,7 +43,7 @@ volledig in een rechte lijn gaan omdat het licht niet enkel door lucht gaat
 maar ook door het glas van de bril. De middenstof is dan niet homogeen en de
 lichtstralen zullen zich dus niet rechtlijnig voortplanten.
 
-{{< svg "img/met_bril.svg" >}}
+![](img/met_bril.png )
 
 Lichtstralen lijken te **breken bij de overgangen** van lucht naar glas en van
 glas naar lucht. Dit fenomeen noemen we **lichtbreking** en zullen we later nog
@@ -51,4 +51,4 @@ uitvoerig bespreken. De lenzen in ogen, brilglazen, camera's, telescopen en
 projectors maken handig gebruik van lichtbreking om een beeld scherp te
 stellen.
 
-{{< svg "img/niet_homogeen.svg" >}}
+![](img/niet_homogeen.png )

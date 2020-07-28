@@ -33,14 +33,14 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `markdown-pages`,
+                name: `pages`,
                 path: `${__dirname}/src/content`,
             },
         },
         {
-            resolve: `gatsby-transformer-remark`,
+            resolve: `gatsby-plugin-mdx`,
             options: {
-                plugins: [
+                gatsbyRemarkPlugins: [
                     `gatsby-remark-autolink-headers`,
                     {
                         resolve: `gatsby-remark-images`,

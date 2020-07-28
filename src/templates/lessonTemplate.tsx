@@ -1,6 +1,10 @@
 import React from "react";
 import { graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import Mute from "../components/shortcodes/mute";
+
+const shortcodes = { Mute }
 
 export interface LessonData {
     data: {
@@ -22,7 +26,9 @@ export default function Template({
         <div className="blog-post-container">
             <ul>{ tocItems }</ul>
             <h1>{frontmatter.title}</h1>
-            <MDXRenderer>{body}</MDXRenderer>
+            <MDXProvider components={shortcodes}>
+                <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider>
         </div>
     );
 }

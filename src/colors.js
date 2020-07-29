@@ -25,8 +25,9 @@ const COLORS = {
     WASHED_YELLOW: "rgba(255, 252, 235)",
     WASHED_RED: "rgba(255, 223, 223)",
     BLACK: "rgba(0, 0, 0)",
-    MID_GRAY: "rgba(85,85, 85)",
-    GRAY: "rgba(211, 211, 211)",
+    LIGHT_GRAY: "rgba(211, 211, 211)",
+    GRAY: "rgba(154, 154, 154)",
+    DARK_GRAY: "rgba(85,85, 85)",
     NEAR_WHITE: "rgba(244, 244, 244)",
 };
 

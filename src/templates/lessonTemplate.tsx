@@ -2,10 +2,11 @@ import React from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import Mute from "../components/shortcodes/mute";
+import { Mute } from "../components/shortcodes/mute";
+import { Attention } from "../components/shortcodes/attention";
 import Layout from "../general/layout";
 
-const shortcodes = { Mute }
+const shortcodes = { Mute, Attention }
 
 export interface LessonData {
     data: {

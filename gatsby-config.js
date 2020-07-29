@@ -62,5 +62,14 @@ module.exports = {
                 pathToConfigModule: `src/utils/typography`,
             },
         },
+        {
+            resolve: `gatsby-plugin-material-ui`,
+            options: {
+                stylesProvider: {
+                    injectFirst: true,
+                },
+            },
+        },
+        `gatsby-plugin-styled-components`,
     ],
 };

@@ -50,7 +50,7 @@ module.exports = {
                             // base for generating different widths of each image.
                             maxWidth: 590,
                             showCaptions: ["title"],
-                            markdownCaptions: true,
+                            markdownCaptions: false,
                         },
                     },
                 ],

@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Mute from "../components/shortcodes/mute";
+import Layout from "../general/layout";
 
 const shortcodes = { Mute }
 
@@ -23,13 +24,13 @@ export default function Template({
     const { frontmatter, body, tableOfContents } = mdx;
     const tocItems = tableOfContents.items.map((item) => <li><a href={item.url}>{item.title}</a></li>);
     return (
-        <div className="blog-post-container">
+        <Layout>
             <ul>{ tocItems }</ul>
             <h1>{frontmatter.title}</h1>
             <MDXProvider components={shortcodes}>
                 <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
-        </div>
+        </Layout>
     );
 }
 

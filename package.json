@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Floris De Feyter",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "@mdx-js/mdx": "^1.6.14",
     "@mdx-js/react": "^1.6.14",
     "@types/typography": "^0.16.3",
@@ -12,6 +13,7 @@
     "gatsby": "^2.21.13",
     "gatsby-image": "^2.4.1",
     "gatsby-plugin-manifest": "^2.4.2",
+    "gatsby-plugin-material-ui": "^2.1.10",
     "gatsby-plugin-mdx": "^1.2.29",
     "gatsby-plugin-offline": "^3.2.1",
     "gatsby-plugin-react-helmet": "^3.3.1",

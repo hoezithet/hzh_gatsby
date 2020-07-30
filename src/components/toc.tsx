@@ -8,10 +8,13 @@ const TocTitle = styled.p`
 `
 
 const TocFrame = styled(Box)`
-    border-radius: 10px;
-    border-style: solid;
-    border-color: ${COLORS.GRAY};
     margin: 20px 0px;
+    color: ${COLORS.GRAY};
+`
+
+const TocLink = styled.a`
+    text-decoration: none;
+    color: ${COLORS.GRAY};
 `
 
 interface TocItems {
@@ -23,7 +26,7 @@ const Toc = ({ children }: TocItems) => (
         <TocTitle>
             Inhoud
         </TocTitle>
-        <ul>{ children.items.map((item) => <li><a href={item.url}>{item.title}</a></li>) }</ul>
+        <ul>{ children.items.map((item) => <li><TocLink href={item.url}>{item.title}</TocLink></li>) }</ul>
     </TocFrame>
 );
 

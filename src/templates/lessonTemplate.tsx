@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
+require(`katex/dist/katex.min.css`);
 
 export interface LessonData {
   data: {

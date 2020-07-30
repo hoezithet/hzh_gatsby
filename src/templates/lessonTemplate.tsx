@@ -7,8 +7,13 @@ import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
+import { Link } from '@material-ui/core';
 
 const shortcodes = { Mute, Attention, Expand }
+
+const components = {
+  a: Link,
+}
 
 export interface LessonData {
     data: {
@@ -31,7 +36,7 @@ export default function Template({
             <Toc>
                 { tableOfContents }
             </Toc>
-            <MDXProvider components={shortcodes}>
+            <MDXProvider components={ shortcodes, components }>
                 <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
         </Layout>

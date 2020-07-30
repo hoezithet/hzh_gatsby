@@ -179,7 +179,7 @@ module.exports = {
                                 "\\usolidorange": "\\bbox[1pt,border-bottom: 2px solid #ff6300]",
                                 "\\usolidgold": "\\bbox[1pt,border-bottom: 2px solid #ffb700]",
                                 "\\usolidyellow": "\\bbox[1pt,border-bottom: 2px solid #ffde37]",
-                                vusolidlightyellow: "\\bbox[1pt,border-bottom: 2px solid #fbf1a9]",
+                                "\\vusolidlightyellow": "\\bbox[1pt,border-bottom: 2px solid #fbf1a9]",
                                 "\\usolidpurple": "\\bbox[1pt,border-bottom: 2px solid #5e2ca5]",
                                 "\\usolidlightpurple": "\\bbox[1pt,border-bottom: 2px solid #a463f2]",
                                 "\\usoliddarkpink": "\\bbox[1pt,border-bottom: 2px solid #d5008f]",

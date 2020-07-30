@@ -27,10 +27,10 @@ export default function Template({
     const { frontmatter, body, tableOfContents } = mdx;
     return (
         <Layout>
+            <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }
             </Toc>
-            <h1>{frontmatter.title}</h1>
             <MDXProvider components={shortcodes}>
                 <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>

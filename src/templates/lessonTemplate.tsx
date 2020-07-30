@@ -5,7 +5,8 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Mute } from "../components/shortcodes/mute";
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
-import Layout from "../general/layout";
+import Toc from "../components/toc";
+import Layout from "../components/layout";
 
 const shortcodes = { Mute, Attention, Expand }
 
@@ -24,10 +25,11 @@ export default function Template({
 }: LessonData) {
     const { mdx } = data; // data.mdx holds your post data
     const { frontmatter, body, tableOfContents } = mdx;
-    const tocItems = tableOfContents.items.map((item) => <li><a href={item.url}>{item.title}</a></li>);
     return (
         <Layout>
-            <ul>{ tocItems }</ul>
+            <Toc>
+                { tableOfContents }
+            </Toc>
             <h1>{frontmatter.title}</h1>
             <MDXProvider components={shortcodes}>
                 <MDXRenderer>{body}</MDXRenderer>

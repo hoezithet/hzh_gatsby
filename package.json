@@ -6,6 +6,7 @@
   "author": "Floris De Feyter",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@mdx-js/mdx": "^1.6.14",
     "@mdx-js/react": "^1.6.14",
     "@types/mdx-js__react": "^1.5.2",

@@ -4,9 +4,10 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Mute } from "../components/shortcodes/mute";
 import { Attention } from "../components/shortcodes/attention";
+import { Expand } from "../components/shortcodes/expand";
 import Layout from "../general/layout";
 
-const shortcodes = { Mute, Attention }
+const shortcodes = { Mute, Attention, Expand }
 
 export interface LessonData {
     data: {

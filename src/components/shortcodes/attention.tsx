@@ -1,10 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
-import PropTypes from "prop-types";
 import COLORS from "../../colors";
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import { MDXProvider } from "@mdx-js/react"
 
 const Frame = styled(Box)`
     border-radius: 10px;

@@ -2,26 +2,35 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import Container from '@material-ui/core/Container';
-import styled from 'styled-components';
+import { styled, createGlobalStyle } from 'styled-components';
 import COLORS from '../colors';
 
 export interface LayoutProps {
     children: React.ReactNode;
 }
 
-const Main = styled.main`
-    background-color: ${COLORS.NEAR_WHITE};
+
+const GlobalStyle = createGlobalStyle`
+    body {
+        background-color: ${COLORS.NEAR_WHITE};
+    }
+    a {
+        color: 'red';
+    }
 `
 
 const Layout = ({ children }: LayoutProps) => {
     return (
-        <Main>
+        <>
+        <GlobalStyle/>
+        <main>
             <Container maxWidth="md">
                 <>
                 { children }
                 </>
             </Container>
-        </Main>
+        </main>
+        </>
     );
 };
 

@@ -1,0 +1,219 @@
+---
+title: "Machten en wortels van eentermen"
+date: 2020-01-09T07:02:45+01:00
+weight: 6
+draft: true
+description: "In deze les leggen we uit hoe je de macht en de wortel van
+eentermen kan berekenen. Omdat het belangrijk is dat we hiervoor de rekenregels
+voor het berekenen van de macht van een macht goed begrijpen, herhalen we die
+rekenregels eerst nog eens."
+tags: ["eenterm", "macht van eenterm", "wortel van eenterm", "vierkantswortel
+van eenterm", "bewerkingen met eentermen"]
+images: []
+---
+
+Om de machten en wortels van eentermen te kunnen berekenen, is het belangrijk
+dat we de **rekenregels voor de macht van een macht en de wortel van een
+macht** steeds goed in ons achterhoofd houden. We zullen ze hier kort even
+herhalen. Stel dat we de volgende macht moeten uitrekenen <Mute text="(waarbij
+$a \in \mathbb{R}$)" />:
+
+$$(a^2)^3$$
+
+De rekenregel voor het berekenen van de macht van een macht zegt dat we de
+**exponenten met elkaar moeten vermenigvuldigen**:
+
+\begin{split}
+(a^2)^3 &= a^{2\cdot 3}\\\\\
+ &= a^6
+\end{split}
+
+De rekenregel voor het berekenen van de wortel van een macht zegt dat we de
+**exponent moeten delen door de graad van de wortel**. Als we bijvoorbeeld de
+vierkantswortel van een eenterm berekenen, moeten we de exponent van de
+eenterm delen door $2$. Voor een derdemachtswortel, moeten we de exponent delen
+door $3$, voor een vierdemachtswortel door $4$ enzovoort. Stel dat we de
+volgende wortel moeten berekenen:
+
+$$\sqrt[3]{a^{12}}$$
+
+Dan werken we dat als volgt uit:
+
+\begin{split}
+\sqrt[3]{a^{12}} &= a^{12/3}\\\\\
+ &= a^4
+\end{split}
+
+<Expand title="Alle variabelen in deze les zijn $\in \mathbb{R}$ (of $\in \mathbb{Q}$)">
+
+We gaan ervan uit dat alle variabelen in deze les een element zijn van de reële
+getallen. Als je nog niet weet wat reële getallen zijn, mag je ook aannemen
+dat de variabelen een element zijn van de rationale, gehele of zelfs natuurlijk
+getallen. Voor al die verzamelingen gelden dezelfde rekenregels wat
+betreft het berekenen van de macht en wortel van een eenterm.
+
+Bij het berekenen van even wortels, gaan we ervan uit dat de variabelen niet
+negatief zijn.
+
+</Expand>
+
+## Een macht van een eenterm berekenen
+
+Om de macht van een eenterm te berekenen, doen we het volgende:
+
+1. Bereken de macht van de **coëfficiënt** van de eenterm.
+2. Bereken de macht van het **lettergedeelte** van de eenterm door de
+   exponenten van de variabelen te **vermenigvuldigen** met de exponent van de
+   macht.
+
+> Ben je even vergeten wat nu weer de _"coëfficiënt"_ en het _"lettergedeelte"_
+> was van een eenterm? Lees dan zeker onze [les over
+> eentermen](../eentermen/eenterm) even na.
+
+Stel bijvoorbeeld dat we de volgende macht willen berekenen:
+
+$$(-5x^3y^2)^2$$
+
+De eerste stap is om de macht van de **coëfficiënt** te berekenen (de $-5$):
+
+\begin{split}
+(\orange{-5}x^3y^2)^2 &= (\orange{-5})^2\cdot(x^3y^2)^2\\\\\
+ &=\orange{25}\cdot(x^3y^2)^2\\\\\
+\end{split}
+
+Vervolgens berekenen we de macht van het **lettergedeelte**. Hiervoor gebruiken
+we de rekenregels om de macht van een macht te berekenen. We zullen eerst de
+macht van de $x$ berekenen:
+
+\begin{split}
+25\cdot(\orange{x^3}y^2)^2
+&= 25(\orange{x^3})^2\cdot(y^2)^2\\\\\
+ &= 25\orange{x^{3\cdot 2}}\cdot(y^2)^2\\\\\
+ &= 25\orange{x^{6}}\cdot(y^2)^2\\\\\
+\end{split}
+
+Het berekenen van de macht van de $y$ doen we op dezelfde manier:
+
+\begin{split}
+25x^{6}\cdot(\orange{y^2})^2
+&= 25x^{6}\orange{y^{2\cdot 2}} \\\\\
+ &= 25x^{6}\orange{y^{4}} \\\\\
+\end{split}
+
+De uitkomst van de macht van de veelterm is dus:
+
+$$25x^6y^4$$
+
+## Een wortel van een eenterm berekenen
+
+Om de wortel van een eenterm te berekenen, doen we het volgende:
+
+1. Bereken de wortel van de **coëfficiënt** van de eenterm.
+2. Bereken de wortel van het **lettergedeelte** van de eenterm door de
+   exponenten van de variabelen te **delen** door de graad van de
+   wortel.
+
+Stel dat we de volgende wortel moeten uitrekenen:
+
+$$\sqrt{49a^6b^4}$$
+
+Dan moeten we eerst de wortel berekenen van de **coëfficiënt** (hier $49$):
+
+\begin{split}
+\sqrt{\orange{49}a^6b^4}
+&= \sqrt{\orange{49}}\cdot \sqrt{a^6b^4}\\\\\
+ &= \orange{7}\cdot \sqrt{a^6b^4}\\\\\
+\end{split}
+
+Vervolgens moeten we de wortel van elke factor in het **lettergedeelte**
+berekenen door de exponent van elke factor te **delen door de graad van de
+wortel**. We berekenen de vierkantswortel, dus de graad van de wortel is in dit
+geval $2$. We moeten met andere woorden alle exponenten van de factoren in het
+lettergedeelte ($a^6$ en $b^4$ in dit geval) gaan delen door $2$. We beginnen
+met het berekenen van de exponent van $a$:
+
+\begin{split}
+7\cdot \sqrt{\orange{a^6}b^4}
+&=7\cdot \sqrt{\orange{a^6}}\cdot \sqrt{b^4} \\\\\
+ &=7\orange{a^{6/2}}\cdot \sqrt{b^4} \\\\\
+ &=7\orange{a^3}\cdot \sqrt{b^4} \\\\\
+\end{split}
+
+Ten slotte doen we hetzelfde voor $b$:
+
+\begin{split}
+7a^3\cdot \sqrt{\orange{b^4}}
+&= 7a^3\orange{b^{4/2}} \\\\\
+ &= 7a^3\orange{b^2} \\\\\
+\end{split}
+
+De uitkomst van de wortel van de eenterm is dus:
+
+$$7a^3b^2$$
+
+## Machten en wortels van lettervormen berekenen
+
+Het kan soms voorkomen dat een eenterm **letterexponenten** bevat. Stel
+bijvoorbeeld dat we de volgende macht van een eenterm willen berekenen <Mute
+text="($m, n \in \mathbb{Z}$)" />:
+
+$$(a^{(m - 1)}b^{(n + 2)})^3$$
+
+Dan moeten we weer goed de **rekenregel voor het berekenen van een macht van
+een macht** in ons achterhoofd houden. Die zegt dat we de **exponenten moeten
+vermenigvuldigen**. We zullen dit al eens doen voor de $a$ in de opgave:
+
+\begin{split}
+(\orange{a^{(m - 1)}}b^{(n + 2)})^3
+&= (\orange{a^{(m - 1)}})^3\cdot (b^{(n + 2)})^3\\\\\
+ &= \orange{a^{(m - 1)\cdot 3}}\cdot (b^{(n + 2)})^3\\\\\
+ &= \orange{a^{3m - 3}}\cdot (b^{(n + 2)})^3\\\\\
+\end{split}
+
+We kunnen nu hetzelfde doen voor de $b$:
+
+\begin{split}
+a^{3m - 3}\cdot (\orange{b^{(n + 2)}})^3
+&= a^{3m - 3}\orange{b^{(n + 2)\cdot 3}}\\\\\
+ &= a^{3m - 3}\orange{b^{3n + 6}}\\\\\
+\end{split}
+
+De uitkomst van onze macht is dus:
+
+$$a^{(3m - 3)}b^{(3n + 6)}$$
+
+Het berekenen van de **wortel van een eenterm met letterexponenten**, kunnen we
+op een gelijkaardige manier doen. We geven voor de volledigheid hier ook nog
+een kort voorbeeld van:
+
+\begin{split}
+\sqrt[5]{x^{(20m + 10)}y^{5n}}
+&= x^{(20m + 10)/5}y^{5n/5}\\\\\
+ &= x^{4m + 2}y^{n}\\\\\
+\end{split}
+
+Je ziet dat het weer voornamelijk een kwestie is van het correct toepassen van
+de rekenregels, in dit geval de rekenregel voor het berekenen van de wortel van
+een macht.
+
+## Samengevat
+
+<Attention title="De macht van een eenterm berekenen">
+
+Om de macht van een eenterm te berekenen, doen we het volgende:
+
+1. Bereken de macht van de **coëfficiënt** van de eenterm.
+2. Bereken de macht van het **lettergedeelte** van de eenterm door de
+   exponenten van de variabelen te **vermenigvuldigen** met de exponent van de
+   macht.
+   </Attention>
+
+<Attention title="De wortel van een eenterm berekenen">
+
+De wortel van een eenterm berekenen we als volgt:
+
+1. Bereken de wortel van de **coëfficiënt** van de eenterm.
+2. Bereken de wortel van het **lettergedeelte** van de eenterm door de
+   exponenten van de variabelen te **delen** door de graad van de
+   wortel.
+   </Attention>

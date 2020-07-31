@@ -33,14 +33,14 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `markdown-pages`,
+                name: `pages`,
                 path: `${__dirname}/src/content`,
             },
         },
         {
-            resolve: `gatsby-transformer-remark`,
+            resolve: `gatsby-plugin-mdx`,
             options: {
-                plugins: [
+                gatsbyRemarkPlugins: [
                     `gatsby-remark-autolink-headers`,
                     {
                         resolve: `gatsby-remark-images`,
@@ -50,16 +50,9 @@ module.exports = {
                             // base for generating different widths of each image.
                             maxWidth: 590,
                             showCaptions: ["title"],
-                            markdownCaptions: true,
+                            markdownCaptions: false,
                         },
                     },
-                ],
-            },
-        },
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [
                     {
                         resolve: `gatsby-remark-katex`,
                         options: {
@@ -237,5 +230,20 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: `gatsby-plugin-typography`,
+            options: {
+                pathToConfigModule: `src/utils/typography`,
+            },
+        },
+        {
+            resolve: `gatsby-plugin-material-ui`,
+            options: {
+                stylesProvider: {
+                    injectFirst: true,
+                },
+            },
+        },
+        `gatsby-plugin-styled-components`,
     ],
 };

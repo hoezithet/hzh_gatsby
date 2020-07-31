@@ -1,0 +1,160 @@
+---
+title: "Optellen en aftrekken van eentermen"
+date: 2020-01-09T07:02:25+01:00
+weight: 4
+wiski: "http://wiski.be/oefenen/rekenen-met-lettervormen/take"
+draft: false
+description: "In deze les leggen we aan de hand van voldoende voorbeelden uit
+hoe je eentermen bij elkaar kan optellen of van elkaar kan aftrekken. Omdat het
+optellen en aftrekken van eentermen gebaseerd is op de distributieve
+eigenschap, leggen we die ook nog eens extra uit in deze les."
+tags: ["eenterm", "eentermen optellen", "eentermen aftrekken", "verschil van
+eentermen", "som van eentermen", "bewerkingen met eentermen", "distributiviteit"]
+images: []
+---
+
+Het optellen en aftrekken van eentermen zullen we later gebruiken bij het
+vereenvoudigen van [veeltermen](../veeltermen). Het gaat als volgt:
+
+1. [Vereenvoudig](vereenvoudigen) alle eentermen.
+2. Duid de [gelijksoortige](eenterm#gelijksoortige-eentermen) eentermen aan.
+3. Tel per soort de [coëfficiënten](eenterm#coëfficiënt-en-lettergedeelte)
+   op, of trek ze van elkaar af.
+
+Als voorbeeld gebruiken we:
+
+$$-3y\cdot x\cdot(-y)^2\cdot (-2) + 5x + 2y^3x + x\cdot (-2)^3$$
+
+## Vereenvoudig alle eentermen
+
+Hoe we eentermen kunnen vereenvoudigen, vind je terug in [een vorige
+les](vereenvoudigen). De eentermen in ons voorbeeld zijn:
+
+-   $-3y\cdot x\cdot(-y)^2\cdot (-2)$
+-   $5x$
+-   $2y^3x$
+-   $x\cdot (-2)^3$
+
+Elk van deze vereenvoudigen geeft:
+
+-   $6xy^3$
+-   $5x$
+-   $2xy^3$
+-   $-8x$
+
+Ons voorbeeld wordt dus:
+
+$$6xy^3 + 5x + 2xy^3 - 8x$$
+
+## Duid de gelijksoortige eentermen aan
+
+Na het vereenvoudigen, duiden we de [gelijksoortige
+eentermen](eenterm/#gelijksoortige-eentermen) aan. De gelijksoortige
+eentermen, zijn hier
+
+-   $6xy^3$ en $2xy^3$ hebben allebei het lettergedeelte $xy^3$
+-   $5x$ en $-8x$ hebben allebei het lettergedeelte $x$
+
+Aangeduid in ons voorbeeld:
+
+$$\usolidorange{6xy^3} + \udoubleblue{5x} + \usolidorange{2xy^3} \udoubleblue{- 8x}$$
+
+Merk op dat we ook het minteken van $\udoubleblue{- 8x}$ aanduiden, omdat een
+[minteken altijd deel uitmaakt](eenterm/#coëfficiënt-en-lettergedeelte) van
+de eenterm waar het bij staat.
+
+## Tel de coëfficiënt per soort op
+
+We vonden hierboven al dat er twee soorten eentermen in ons voorbeeld zaten:
+eentermen met $xy^3$ als lettergedeelte en eentermen met $x$ als
+lettergedeelte.
+
+Nu moeten we enkel **per soort de coëfficiënten bij elkaar optellen**. Voor de
+eentermen met $xy^3$ als lettergedeelte geeft dit:
+
+\begin{split}
+\orange{6}xy^3 + \orange{2}xy^3 &= (\orange{6} + \orange{2})xy^3\\\\\
+&= \orange{8}xy^3
+\end{split}
+
+Voor de eentermen met $x$ als lettergedeelte krijgen we:
+
+\begin{split}
+\blue{5}x \blue{-8}x &= (\blue{5} \blue{-8})x \\\\\
+&= \blue{-3}x
+\end{split}
+
+<Expand title="Waarom moeten we per soort optellen?">
+
+Waarom mogen we enkel de coëfficiënten van **gelijksoortige** eentermen bij
+elkaar zetten? Waarom mogen we in ons voorbeeld
+
+$$6xy^3 + 5x + 2xy^3 - 8x$$
+
+de $6$ en de $2$ bij elkaar optellen, maar niet de $6$ en de $5$?
+
+Wanneer we de coëfficiënten van gelijksoortige eentermen bij elkaar optellen,
+maken we eigenlijk gebruik van de **distributiviteit** van de vermenigvuldiging
+over de optelling in $\mathbb{Q}$ <Mute text="(geldt ook voor $\mathbb{R}$)" />:
+
+$$
+\newcommand{\gewoon}{
+\begin{split}
+    (6 + 3)\cdot 2 &= (9) \cdot 2\\\\\
+                   &= 18
+\end{split}
+}
+\newcommand{\distributief}{
+\begin{split}
+    (6 + 3)\cdot \orange{2} &= 6\cdot\orange{2} + 3\cdot\orange{2}\\\\\
+                            &=12 + 6\\\\\
+                            &= 18
+\end{split}
+}
+$$
+
+| Gewoon uitrekenen | Distributiviteit toepassen |
+| ----------------- | -------------------------- |
+| $\gewoon$         | $\distributief$            |
+
+We pasten de distributiviteit toe in deze lijn:
+
+$$(6 + 3)\cdot \orange{2} = 6\cdot\orange{2} + 3\cdot\orange{2}$$
+
+Als we die lijn omdraaien, krijgen we een soort **omgekeerde
+distributiviteit** <Mute text='(dit noemen we ook wel "afzonderen")' />:
+
+$$6\cdot\orange{2} + 3\cdot\orange{2} = (6 + 3)\cdot \orange{2}$$
+
+We mogen de $6$ en de $3$ aan de rechterkant bij elkaar optellen omdat we ze
+aan de linkerkant allebei met $\orange{2}$ vermenigvuldigden. Dat is precies
+wat we bij het optellen van gelijksoortige eentermen ook doen:
+
+$$6\orange{ab^3} + 3\orange{ab^3} = (6 + 3)\orange{ab^3}$$
+
+Wanneer twee eentermen **hetzelfde lettergedeelte** hebben, kunnen we dus een
+soort **omgekeerde distributiviteit** toepassen. Dat betekent dat we **de
+coëfficiënten** bij elkaar mogen optellen.
+
+Wanneer twee eentermen **niet hetzelfde lettergedeelte** hebben, kunnen we die
+omgekeerde distributiviteit niet toepassen en mogen we de coëfficiënten dus
+**niet bij elkaar optellen**.
+
+</Expand>
+
+Als we nu alles terug samen zetten, krijgen we dus:
+
+$$6xy^3 + 5x + 2xy^3 - 8x = \orange{8}xy^3 \blue{-3}x$$
+
+Klaar! 🎉
+
+## Samengevat
+
+<Attention title="Eentermen optellen en aftrekken">
+
+Eentermen bij elkaar optellen doe je zo:
+
+1. Vereenvoudig alle eentermen;
+2. Duid de gelijksoortige eentermen aan;
+3. Tel per soort de coëfficiënten op, of trek ze van elkaar af.
+   </Attention>

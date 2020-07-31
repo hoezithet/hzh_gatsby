@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import Container from '@material-ui/core/Container';
-import { styled, createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import COLORS from '../colors';
+import Footer from './footer';
 
 export interface LayoutProps {
     children: React.ReactNode;
@@ -23,13 +24,19 @@ const Layout = ({ children }: LayoutProps) => {
     return (
         <>
         <GlobalStyle/>
-        <main>
-            <Container maxWidth="md">
-                <>
+        <Container maxWidth="md">
+            <>
+            <main>
                 { children }
-                </>
-            </Container>
-        </main>
+            </main>
+            <Footer
+                title="Hoe Zit Het? vzw"
+                subtitle="ON 0736.486.356 RPR Brussel"
+                facebookLink="https://www.facebook.com/hoezithet"
+                githubLink="https://github.com/hoezithet/hoezithet"
+            />
+            </>
+        </Container>
         </>
     );
 };

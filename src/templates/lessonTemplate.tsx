@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
+require(`katex/dist/katex.min.css`);
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Mute } from "../components/shortcodes/mute";

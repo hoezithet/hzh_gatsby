@@ -34,44 +34,55 @@ const FooterGrid = styled(Grid)`
 
 FooterGrid.defaultProps = {
     container: true,
-    spacing: 2,
-    justify: "center",
+    spacing: 0,
+    justify: "space-between",
+    direction: "column",
+    alignItems: "center",
 };
 
-const FooterGridItem = styled(Grid)`
-    textAlign: center;
+const FooterItem = styled(Grid)`
+    text-align: center;
     color: ${COLORS.GRAY};
 `
 
-FooterGridItem.defaultProps = {
+FooterItem.defaultProps = {
     item: true,
 };
+
+const FooterTitle = styled(FooterItem)`
+    font-weight: bold;
+`;
+
+const FooterIcon = styled(FooterItem)``;
+FooterIcon.defaultProps = {
+    xs: 1,
+}
 
 const Footer = ({ title, subtitle, ccLink, githubLink, facebookLink }: FooterProps) => {
     return (
         <FooterGrid>
-            <FooterGridItem xs={12}>
+            <FooterTitle>
                 {title}
-            </FooterGridItem>
-            <FooterGridItem xs={12}>
+            </FooterTitle>
+            <FooterItem>
                 {subtitle}
-            </FooterGridItem>
+            </FooterItem>
         <Grid container justify="center" >
-            <FooterGridItem xs={1}>
+            <FooterIcon>
                 <IconLink href={ccLink}>
                     <CCIcon/>
                 </IconLink>
-            </FooterGridItem>
-            <FooterGridItem xs={1}>
+            </FooterIcon>
+            <FooterIcon>
                 <IconLink href={facebookLink}>
                     <Facebook/>
                 </IconLink>
-            </FooterGridItem>
-            <FooterGridItem xs={1}>
+            </FooterIcon>
+            <FooterIcon>
                 <IconLink href={githubLink}>
                     <GitHub/>
                 </IconLink>
-            </FooterGridItem>
+            </FooterIcon>
         </Grid>
         </FooterGrid>
     );

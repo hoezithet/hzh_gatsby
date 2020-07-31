@@ -34,6 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
                 subtitle="ON 0736.486.356 RPR Brussel"
                 facebookLink="https://www.facebook.com/hoezithet"
                 githubLink="https://github.com/hoezithet/hoezithet"
+                ccLink="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             />
             </>
         </Container>

@@ -22,6 +22,7 @@ export interface LessonData {
             frontmatter: { title: string };
             body: string;
             tableOfContents: { items: [{url: string, title: string}] };
+            fields: { slug: string };
         };
     }
 }
@@ -30,9 +31,11 @@ export default function Template({
     data, // this prop will be injected by the GraphQL query below.
 }: LessonData) {
     const { mdx } = data; // data.mdx holds your post data
-    const { frontmatter, body, tableOfContents } = mdx;
+    const { frontmatter, body, tableOfContents, fields } = mdx;
+    const { slug } = fields;
+
     return (
-        <Layout>
+        <Layout slug={ slug }>
             <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }
@@ -53,6 +56,9 @@ export const pageQuery = graphql`
         title
       }
       tableOfContents(maxDepth: 2)
+      fields {
+        slug
+      }
     }
   }
 `;

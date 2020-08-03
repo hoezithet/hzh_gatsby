@@ -21,10 +21,10 @@ export interface LessonData {
         mdx: {
             frontmatter: { title: string };
             body: string;
-            tableOfContents: { items: [{url: string, title: string}] };
+            tableOfContents: { items: [{url: string; title: string}] };
             fields: { slug: string };
         };
-    }
+    };
 }
 
 export default function Template({
@@ -40,8 +40,10 @@ export default function Template({
             <Toc>
                 { tableOfContents }
             </Toc>
-            <MDXProvider components={ shortcodes, components }>
-                <MDXRenderer>{body}</MDXRenderer>
+            <MDXProvider components={ shortcodes }>
+              <MDXProvider components={ components }>
+                  <MDXRenderer>{body}</MDXRenderer>
+              </MDXProvider>
             </MDXProvider>
         </Layout>
     );

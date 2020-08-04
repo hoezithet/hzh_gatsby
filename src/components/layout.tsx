@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import Container from '@material-ui/core/Container';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider, styled } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import COLORS from '../colors';
 import Footer from './footer';
@@ -29,20 +29,21 @@ const muiTheme = createMuiTheme({
                     backgroundColor: COLORS.NEAR_WHITE,
                     fontSize: "1rem",
                     lineHeight: 1.5,
-                },
-                a: {
-                    color: 'red',
                 }
             }
         }
     },
 });
 
+const HzhContainer = styled(Container)({
+    padding: `${muiTheme.spacing(2)}px 0`,
+});
+
 const Layout = ({ children, slug }: LayoutProps) => {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
-            <Container maxWidth="md">
+            <HzhContainer maxWidth="md">
                 <>
                 <Header slug={ slug }/>
                 <main>{ children }</main>
@@ -53,7 +54,7 @@ const Layout = ({ children, slug }: LayoutProps) => {
                 ccLink="https://creativecommons.org/licenses/by-nc-sa/4.0/"
                 />
                 </>
-            </Container>
+            </HzhContainer>
         </ThemeProvider>);
     };
     

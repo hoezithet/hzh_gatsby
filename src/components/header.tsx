@@ -3,7 +3,7 @@ import { Breadcrumbs, Link } from '@material-ui/core';
 
 
 interface HeaderProps {
-    slug: string
+    slug: string;
 }
 
 const Header = ({ slug }: HeaderProps) => {

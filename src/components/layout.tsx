@@ -29,7 +29,10 @@ const muiTheme = createMuiTheme({
                     backgroundColor: COLORS.NEAR_WHITE,
                     fontSize: "1rem",
                     lineHeight: 1.5,
-                }
+                },
+                "h2 a.anchor": {
+                    margin: "0 8px 0 0",
+                },
             }
         }
     },

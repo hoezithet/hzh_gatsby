@@ -72,7 +72,7 @@ const muiTheme = createMuiTheme({
 });
 
 const HzhContainer = styled(Container)`
-    padding: ${muiTheme.spacing(2)}px 0;
+    padding: ${muiTheme.spacing(2)}px;
 `;
 
 const LogoImg = styled.img`

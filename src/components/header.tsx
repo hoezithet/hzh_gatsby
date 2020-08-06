@@ -1,25 +1,32 @@
 import React from "react";
 import { Breadcrumbs, Link } from '@material-ui/core';
+import styled from 'styled-components';
 
 
 interface HeaderProps {
     slug: string;
 }
 
+const BreadcrumbLink = styled(Link)`
+    color: inherit;
+`;
+
 const Header = ({ slug }: HeaderProps) => {
+
     const slugItems = slug.split('/').slice(1);
     const breadCrumbLinks = slugItems.map((item, index) => {
         const href = slugItems.slice(0, index + 1).join('/');
         if (index < slugItems.length - 1) {
-            return (<Link href={ href } color="inherit">
+            return (<BreadcrumbLink href={ href }>
                         { item }
-                    </Link>);
+                    </BreadcrumbLink>);
         } else {
-            return (<Link href={ href } color="textPrimary" aria-current="page">
+            return (<BreadcrumbLink href={ href } aria-current="page">
                         { item }
-                    </Link>);
+                    </BreadcrumbLink>);
         }
     });
+
     return (
         <header>
             <Breadcrumbs aria-label="breadcrumb" maxItems={2}>

@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import Container from '@material-ui/core/Container';
-import { createMuiTheme, ThemeProvider, styled } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import styled from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Link from '@material-ui/core/Link';
+import logo from "../images/logo_header.png";
 import COLORS from '../colors';
 import Footer from './footer';
 import Header from './header';
@@ -22,6 +27,26 @@ const muiTheme = createMuiTheme({
             'sans-serif',
         ].join(','),
     },
+    palette: {
+        primary: {
+            main: COLORS.GOLD,
+        },
+        secondary: {
+            main: COLORS.DARK_BLUE,
+        },
+        error: {
+            main: COLORS.DARK_RED,
+        },
+        warning: {
+            main: COLORS.ORANGE,
+        },
+        info: {
+            main: COLORS.LIGHT_BLUE,
+        },
+        success: {
+            main: COLORS.GREEN,
+        },
+    },
     overrides: {
         MuiCssBaseline: {
             '@global': {
@@ -30,22 +55,54 @@ const muiTheme = createMuiTheme({
                     fontSize: "1rem",
                     lineHeight: 1.5,
                 },
-                "h2 a.anchor": {
+                "a.anchor": {
                     margin: "0 8px 0 0",
                 },
             }
+        },
+        MuiLink: {
+            root: {
+                color: COLORS.BLUE,
+                "&:hover": {
+                    opacity: "60%",
+                },
+            }
         }
-    },
+    }
 });
 
-const HzhContainer = styled(Container)({
-    padding: `${muiTheme.spacing(2)}px 0`,
-});
+const HzhContainer = styled(Container)`
+    padding: ${muiTheme.spacing(2)}px 0;
+`;
+
+const LogoImg = styled.img`
+    height: ${muiTheme.typography.h4.fontSize};
+    margin-right: ${muiTheme.spacing(1)}px;
+`;
+
+const LogoLink = styled(Link)`
+    margin: ${muiTheme.spacing(2)}px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: inherit;
+    &:hover {
+        text-decoration: none;
+    }
+`;
 
 const Layout = ({ children, slug }: LayoutProps) => {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
+            <AppBar position="static">
+                <Toolbar>
+                <LogoLink href="/" color="inherit" variant="h5">
+                <LogoImg src={logo} alt="Hoe Zit Het? logo"/>
+                Hoe Zit Het?
+                </LogoLink>
+                </Toolbar>
+            </AppBar>
             <HzhContainer maxWidth="md">
                 <>
                 <Header slug={ slug }/>

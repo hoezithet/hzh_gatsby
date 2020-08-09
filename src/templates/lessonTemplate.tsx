@@ -16,20 +16,28 @@ const components = {
   a: Link,
 }
 
+export interface MdxNode {
+    frontmatter: { title: string };
+    body: string;
+    tableOfContents: { items: [{url: string; title: string}] };
+    fields: { slug: string };
+}
+
 export interface LessonData {
     data: {
-        mdx: {
-            frontmatter: { title: string };
-            body: string;
-            tableOfContents: { items: [{url: string; title: string}] };
-            fields: { slug: string };
-        };
+        mdx: MdxNode;
+    };
+    pageContext: {
+      chapterTitle: string;
+      chapterSlug: string;
+      courseTitle: string;
+      courseSlug: string;
     };
 }
 
-export default function Template({
-    data, // this prop will be injected by the GraphQL query below.
-}: LessonData) {
+export default function Template(
+    { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
+) {
     const { mdx } = data; // data.mdx holds your post data
     const { frontmatter, body, tableOfContents, fields } = mdx;
     const { slug } = fields;

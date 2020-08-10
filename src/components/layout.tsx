@@ -18,7 +18,7 @@ import 'fontsource-quicksand';
 
 export interface LayoutProps {
     children: React.ReactNode;
-    crumbs: HeaderProps.crumbs;
+    crumbs: HeaderProps["crumbs"];
 }
 
 const muiTheme = createMuiTheme({

@@ -28,10 +28,7 @@ export interface LessonData {
         mdx: MdxNode;
     };
     pageContext: {
-      chapterTitle: string;
-      chapterSlug: string;
-      courseTitle: string;
-      courseSlug: string;
+      parents: [MdxNode];
     };
 }
 
@@ -41,9 +38,20 @@ export default function Template(
     const { mdx } = data; // data.mdx holds your post data
     const { frontmatter, body, tableOfContents, fields } = mdx;
     const { slug } = fields;
+    const { parents } = pageContext;
+    
+    const crumbs = parents.reverse().map(item => {
+        return { title: item.frontmatter.title,
+                 slug: item.fields.slug }
+    });
+    
+    crumbs.push({
+        title: frontmatter.title,
+        slug: slug
+    });
 
     return (
-        <Layout slug={ slug }>
+        <Layout crumbs={ crumbs }>
             <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }

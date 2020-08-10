@@ -12,12 +12,13 @@ import logo from "../images/logo_header.png";
 import COLORS from '../colors';
 import Footer from './footer';
 import Header from './header';
+import { HeaderProps } from './header';
 
 import 'fontsource-quicksand';
 
 export interface LayoutProps {
     children: React.ReactNode;
-    slug: string;
+    crumbs: HeaderProps.crumbs;
 }
 
 const muiTheme = createMuiTheme({
@@ -91,7 +92,7 @@ const LogoLink = styled(Link)`
     }
 `;
 
-const Layout = ({ children, slug }: LayoutProps) => {
+const Layout = ({ children, crumbs }: LayoutProps) => {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
@@ -105,7 +106,7 @@ const Layout = ({ children, slug }: LayoutProps) => {
             </AppBar>
             <HzhContainer maxWidth="md">
                 <>
-                <Header slug={ slug }/>
+                <Header crumbs={ crumbs }/>
                 <main>{ children }</main>
                 <Footer title="Hoe Zit Het? vzw"
                 subtitle="ON 0736.486.356 RPR Brussel"

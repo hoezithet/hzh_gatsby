@@ -3,26 +3,27 @@ import { Breadcrumbs, Link } from '@material-ui/core';
 import styled from 'styled-components';
 
 
-interface HeaderProps {
-    slug: string;
+export interface HeaderProps {
+    crumbs: [{
+        slug: string;
+        title: string;
+    }];
 }
 
 const BreadcrumbLink = styled(Link)`
     color: inherit;
 `;
 
-const Header = ({ slug }: HeaderProps) => {
+const Header = ({ crumbs }: HeaderProps) => {
 
-    const slugItems = slug.split('/').slice(1);
-    const breadCrumbLinks = slugItems.map((item, index) => {
-        const href = slugItems.slice(0, index + 1).join('/');
-        if (index < slugItems.length - 1) {
-            return (<BreadcrumbLink href={ href }>
-                        { item }
+    const breadCrumbLinks = crumbs.map(({ slug, title }, index) => {
+        if (index < crumbs.length - 1) {
+            return (<BreadcrumbLink href={ slug }>
+                        { title }
                     </BreadcrumbLink>);
         } else {
-            return (<BreadcrumbLink href={ href } aria-current="page">
-                        { item }
+            return (<BreadcrumbLink href={ slug } aria-current="page">
+                        { title }
                     </BreadcrumbLink>);
         }
     });

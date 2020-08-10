@@ -38,6 +38,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
     `);
 
+    // Handle errors
+    if (result.errors) {
+        reporter.panicOnBuild(`Error while running GraphQL query.`);
+        return;
+    }
+
     function isSection(node) {
         return /.*\/_index.mdx$/.test(node.fileAbsolutePath);
     }
@@ -61,51 +67,38 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         return pathItems;
     }
 
-    function insertContent(node, tree) {
+    function nodeToParentPaths(node) {
+        const nodePath = nodeToPath(node);
+        const parentPaths = [];
+        for (let i = 2; i < nodePath.length; i += 2) {
+            const parentPath = nodePath.slice(0, -i);
+            parentPath.push("section");
+            parentPaths.push(parentPath);
+        }
+
+        return parentPaths;
+    }
+
+    function addNodeToTree(node, tree) {
         const nodePath = nodeToPath(node);
         _.set(tree, nodePath, node);
     }
 
     const contentTree = {};
-    result.data.allMdx.edges.forEach(({ node }) => insertContent(node, contentTree));
-
-    // Handle errors
-    if (result.errors) {
-        reporter.panicOnBuild(`Error while running GraphQL query.`);
-        return;
-    }
-
-    function getSectionFromLesson(lessonNode, contentTree, sectionIdx) {
-        const sectionPath = nodeToPath(lessonNode).slice(0, sectionIdx);
-        sectionPath.push("section");
-        const sectionNode = _.get(contentTree, sectionPath);
-        return sectionNode;
-    }
-
-    function getLessonChapter(lessonNode, contentTree) {
-        return getSectionFromLesson(lessonNode, contentTree, -2);
-    }
-
-    function getLessonCourse(lessonNode, contentTree) {
-        return getSectionFromLesson(lessonNode, contentTree, -4);
-    }
+    result.data.allMdx.edges.forEach(({ node }) => addNodeToTree(node, contentTree));
 
     result.data.allMdx.edges.forEach(({ node }) => {
         if (isSection(node)) {
             return;
         }
 
-        const chapterNode = getLessonChapter(node, contentTree);
-        const courseNode = getLessonCourse(node, contentTree);
+        const parentNodes = nodeToParentPaths(node).map(path => _.get(contentTree, path));
         createPage({
             path: node.fields.slug,
             component: lessonTemplate,
             context: {
                 filePath: node.fileAbsolutePath,
-                chapterTitle: chapterNode.frontmatter.title,
-                chapterSlug: chapterNode.fields.slug,
-                courseTitle: courseNode.frontmatter.title,
-                courseSlug: courseNode.fields.slug,
+                parents: parentNodes,
             },
         });
     });

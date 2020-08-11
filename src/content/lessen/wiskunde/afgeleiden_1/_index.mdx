@@ -1,0 +1,11 @@
+---
+title: "Afgeleiden"
+date: 2020-03-10T16:19:25+01:00
+weight: 8
+draft: false
+section_color: "#19a974"
+level: "5e middelbaar"
+course: "wiskunde"
+topic: "analyse"
+images: []
+---

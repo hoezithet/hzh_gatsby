@@ -6,32 +6,60 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Mute } from "../components/shortcodes/mute";
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
-import Layout from "../general/layout";
+import Toc from "../components/toc";
+import Layout from "../components/layout";
+import { Link } from '@material-ui/core';
 
 const shortcodes = { Mute, Attention, Expand }
 
-export interface LessonData {
-    data: {
-        mdx: {
-            frontmatter: { title: string };
-            body: string;
-            tableOfContents: { items: [{url: string, title: string}] };
-        };
-    }
+const components = {
+  a: Link,
 }
 
-export default function Template({
-    data, // this prop will be injected by the GraphQL query below.
-}: LessonData) {
+export interface MdxNode {
+    frontmatter: { title: string };
+    body: string;
+    tableOfContents: { items: [{url: string; title: string}] };
+    fields: { slug: string };
+}
+
+export interface LessonData {
+    data: {
+        mdx: MdxNode;
+    };
+    pageContext: {
+      parents: [MdxNode];
+    };
+}
+
+export default function Template(
+    { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
+) {
     const { mdx } = data; // data.mdx holds your post data
-    const { frontmatter, body, tableOfContents } = mdx;
-    const tocItems = tableOfContents.items.map((item) => <li><a href={item.url}>{item.title}</a></li>);
+    const { frontmatter, body, tableOfContents, fields } = mdx;
+    const { slug } = fields;
+    const { parents } = pageContext;
+    
+    const crumbs = parents.reverse().map(item => {
+        return { title: item.frontmatter.title,
+                 slug: item.fields.slug }
+    });
+    
+    crumbs.push({
+        title: frontmatter.title,
+        slug: slug
+    });
+
     return (
-        <Layout>
-            <ul>{ tocItems }</ul>
+        <Layout crumbs={ crumbs }>
             <h1>{frontmatter.title}</h1>
-            <MDXProvider components={shortcodes}>
-                <MDXRenderer>{body}</MDXRenderer>
+            <Toc>
+                { tableOfContents }
+            </Toc>
+            <MDXProvider components={ shortcodes }>
+              <MDXProvider components={ components }>
+                  <MDXRenderer>{body}</MDXRenderer>
+              </MDXProvider>
             </MDXProvider>
         </Layout>
     );
@@ -46,6 +74,9 @@ export const pageQuery = graphql`
         title
       }
       tableOfContents(maxDepth: 2)
+      fields {
+        slug
+      }
     }
   }
 `;

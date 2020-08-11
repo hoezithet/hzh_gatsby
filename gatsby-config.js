@@ -51,6 +51,7 @@ module.exports = {
                             maxWidth: 590,
                             showCaptions: ["title"],
                             markdownCaptions: false,
+                            disableBgImageOnAlpha: true,
                         },
                     },
                     {

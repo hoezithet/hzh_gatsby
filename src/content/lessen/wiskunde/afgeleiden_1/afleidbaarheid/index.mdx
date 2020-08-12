@@ -15,7 +15,11 @@ functie afleidbaar zou zijn in een bepaald punt x = a."
 We hebben al geleerd hoe we de ogenblikkelijke verandering, of de afgeleide, in
 een punt $x = a$ kunnen berekenen:
 
-$$ f'(a) = \lim\_{\Delta x \to 0} \frac{ \green{f(a + \Delta x)} - \green{f(a)} }{\orange{\Delta x}} $$
+
+$$
+ f'(a) = \lim\_{\Delta x \to 0} \frac{ \green{f(a + \Delta x)} - \green{f(a)} }{\orange{\Delta x}} 
+$$
+
 
 > Komt deze formule wat uit de lucht gevallen voor jou? 🤨 Lees dan zeker onze
 > [les over het berekenen van de afgeleide in een punt](afgeleide) en onze
@@ -32,7 +36,11 @@ Voor we over afleidbaarheid van een functie beginnen, moeten we eerst weten wat
 een linker- en rechterlimiet weer zijn. De limiet in onze formule voor het
 berekenen van de afgeleide van $f(x)$ in $x = a$ laat $\Delta x$ naar $0$ gaan:
 
-$$ \gray{f'(a) = \orange{\lim\_{\Delta x \to 0}} \frac{ f(a + \Delta x) - f(a) }{\Delta x}} $$
+
+$$
+ \gray{f'(a) = \orange{\lim\_{\Delta x \to 0}} \frac{ f(a + \Delta x) - f(a) }{\Delta x}} 
+$$
+
 
 Er zijn echter twee manieren om $\Delta x$ naar $0$ te laten gaan:
 
@@ -55,11 +63,19 @@ dichter bij $0$ komen.
 
 -   Wanneer we $\Delta x$ **kleiner** houden dan $0$, zeggen we dat we de
     **linkerlimiet** berekenen <Mute text="(omdat we van links naar $0$ gaan)" />. Dit
-    schrijven we als $$\lim\_{\Delta x \lt{\to} 0}$$ Let op het
+    schrijven we als 
+$$
+\lim\_{\Delta x \lt{\to} 0}
+$$
+ Let op het
     _kleiner dan_-teken ($\lt$) onder de pijl van de limiet.
 -   Wanneer we $\Delta x$ **groter** houden dan $0$, zeggen we dat we de
     **rechterlimiet** berekenen <Mute text="(omdat we van rechts naar $0$ gaan)" />. Dit
-    schrijven we als $$\lim\_{\Delta x \gt{\to} 0}$$ Let op het
+    schrijven we als 
+$$
+\lim\_{\Delta x \gt{\to} 0}
+$$
+ Let op het
     _groter dan_-teken ($\gt$) onder de pijl van de limiet.
 
 In veel gevallen zal je voor de linker- en rechterlimiet hetzelfde vinden.
@@ -72,9 +88,17 @@ Net als de linker- en rechterlimiet, is er ook een **linker- en
 rechterafgeleide**:
 
 -   De **linkerafgeleide** in $x = a$ is de afgeleide die je krijgt door de **linkerlimiet**
-    te berekenen: $$ \gray{\orange{\lim\_{\Delta x \lt{\to} 0}} \frac{ f(a + \Delta x) - f(a) }{\Delta x}} $$
+    te berekenen: 
+$$
+ \gray{\orange{\lim\_{\Delta x \lt{\to} 0}} \frac{ f(a + \Delta x) - f(a) }{\Delta x}} 
+$$
+
 -   De **rechterafgeleide** in $x = a$ is de afgeleide die je krijgt door de **rechterlimiet**
-    te berekenen: $$ \gray{\orange{\lim\_{\Delta x \gt{\to} 0}} \frac{ f(a + \Delta x) - f(a) }{\Delta x}} $$
+    te berekenen: 
+$$
+ \gray{\orange{\lim\_{\Delta x \gt{\to} 0}} \frac{ f(a + \Delta x) - f(a) }{\Delta x}} 
+$$
+
 
 Of de linker- en/of rechterafgeleide bestaat en of ze gelijk zijn aan elkaar,
 bepaalt de **afleidbaarheid** van de functie in $x = a$. Er zijn drie gevallen:
@@ -156,10 +180,16 @@ asymptoot is dus niet afleidbaar op de x-waarde waar de asymptoot zich bevindt.
 Een functie is afleidbaar in $x = a$ als en slechts als de linker- en
 rechterafgeleide in $x = a$ **bestaan én gelijk** zijn.
 
--   De linkerafgeleide is gedefinieerd als: $$\lim\_{\Delta x
-  \lt{\to} 0} \frac{ f(a + \Delta x) - f(a) }{\Delta x} $$
--   De rechterafgeleide is gedefinieerd als: $$ \lim\_{\Delta x
-  \gt{\to} 0} \frac{ f(a + \Delta x) - f(a) }{\Delta x}$$
+-   De linkerafgeleide is gedefinieerd als: 
+$$
+\lim\_{\Delta x
+  \lt{\to} 0} \frac{ f(a + \Delta x) - f(a) }{\Delta x} 
+$$
+-   De rechterafgeleide is gedefinieerd als: 
+$$
+ \lim\_{\Delta x
+  \gt{\to} 0} \frac{ f(a + \Delta x) - f(a) }{\Delta x}
+$$
 
 </Attention>
 

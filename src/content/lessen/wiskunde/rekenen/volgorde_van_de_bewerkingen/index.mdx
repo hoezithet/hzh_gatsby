@@ -21,7 +21,7 @@ $4 - 5 \cdot 8 ^ 2$
 uitrekenen?
 
 Zo?
-\begin{equation}
+
 $$
 \begin{aligned}
 \neg{4 - 5} \cdot 8 ^ 2
@@ -30,11 +30,9 @@ $$
  &= \neg{-64}
 \end{aligned}
 $$
-\label{eq:sumfirst}
-\end{equation}
 
 Of zo?
-\begin{equation}
+
 $$
 \begin{aligned}
 4 - \neg{5 \cdot 8} ^ 2
@@ -43,11 +41,9 @@ $$
  &= \neg{- 1596}
 \end{aligned}
 $$
-\label{eq:multfirst}
-\end{equation}
 
 Of misschien zo?
-\begin{equation}
+
 $$
 \begin{aligned}
 4 - 5 \cdot \pos{8 ^ 2}
@@ -56,14 +52,11 @@ $$
  &= \pos{- 316}
 \end{aligned}
 $$
-\label{eq:expfirst}
-\end{equation}
 
-Welke van die manieren is juist: methode \ref{eq:sumfirst}, \ref{eq:multfirst} of
-\ref{eq:expfirst}? De **volgorde van de bewerkingen** geeft ons enkele
-voorrangsregels voor berekeningen zoals $\vba$.
+Welke van die manieren is juist? De **volgorde van de bewerkingen** geeft ons enkele
+voorrangsregels voor berekeningen zoals $4 - 5 \cdot 8 ^ 2$.
 
-<Attention title="Afspraak">
+<Attention title="De volgorde van de bewerkingen">
 
 Bij bewerkingen spreken we de volgende **voorrangsregels** af (A.K.A. _de
 volgorde van de bewerkingen_):
@@ -92,7 +85,7 @@ $$
 $$
 omdat we de deling eerst tegenkomen wanneer we van links naar rechts lezen.
 
-We zullen die volgorde van de bewerkingen eens toepassen op $\vba$.
+We zullen die volgorde van de bewerkingen eens toepassen op $4 - 5 \cdot 8 ^ 2$.
 
 Er staan $3$ verschillende bewerkingen: min, maal en een macht. Moeten we eerst
 $\clra{4 - 5}$ doen of eerst $\clra{5 \cdot 8}$ of eerst $\clra{8 ^ 2}$? De
@@ -124,8 +117,16 @@ $$
 $$
 
 
-De juiste manier om $\vba$ uit te rekenen, is dus zoals in methode
-$\ref{eq:expfirst}$.
+De juiste manier om $4 - 5 \cdot 8 ^ 2$ uit te rekenen, gaat dus als volgt:
+
+$$
+\begin{aligned}
+4 - 5 \cdot \pos{8 ^ 2}
+&= 4 - 5 \cdot \pos{64} \\
+ &= 4 - \pos{320} \\
+ &= \pos{- 316}
+\end{aligned}
+$$ 
 
 ## Een ingewikkelder voorbeeld
 
@@ -224,7 +225,7 @@ $$
 
 Hier passen we apart de volgorde van de bewerkingen op toe. Het resultaat
 stoppen we dan in de oorspronkelijke uitdrukking.
-\begin{equation}
+
 $$
 \begin{aligned}
 \sqrt{-6 + \clra{5^2} \cdot 2}
@@ -237,7 +238,6 @@ $$
  &\approx \clra{6{,}63\ldots}
 \end{aligned}
 $$
-\end{equation}
 
 De oorspronkelijke uitdrukking wordt dus:
 

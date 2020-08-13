@@ -17,7 +17,11 @@ De tijd die het licht nodig
 heeft om $1 \si{ m}$ ver te reizen, bijvoorbeeld, bedraagt $0{,}00000000334 
 \si{ s}$. We kunnen dit getal veel korter schrijven door de komma na de eerste
 3 te zetten en nadien terug te vermenigvuldigen met $\orange{10^{-9}}$:
-$$0{,}00000000334 = 3{,}34\cdot \orange{10^{-9}}$$
+
+$$
+0{,}00000000334 = 3{,}34\cdot \orange{10^{-9}}
+$$
+
 
 Machten van 10 zullen ons toelaten om heel kleine getallen en heel grote
 getallen op een korte, leesbare manier te noteren.
@@ -25,8 +29,16 @@ getallen op een korte, leesbare manier te noteren.
 Het is voor deze les belangrijk dat je de volgende rekenregels kent en begrijpt
 ($a, b, c \in \mathbb{R}$):
 
-$$a^{-b} = \frac{1}{a^{b}} \quad \text{waarbij }a \ne 0$$
-$$a^b \cdot a^c = a^{b+c}$$
+
+$$
+a^{-b} = \frac{1}{a^{b}} \quad \text{waarbij }a \ne 0
+$$
+
+
+$$
+a^b \cdot a^c = a^{b+c}
+$$
+
 
 Extra uitleg vind je in de les over [rekenen met
 machten](../../wiskunde/rekenen/machten/#producten-van-machten).
@@ -37,13 +49,15 @@ Hoe komen we aan die $\orange{10^{-9}}$ bij het voorbeeld van $0{,}00000000334
 = 3{,}34\cdot \orange{10^{-9}}$? Voor we tonen waar die vandaan komt, bespreken
 we eerst hoe we een macht van 10 ook al weer uitrekenen. Enkele voorbeelden:
 
-\begin{split}
-2{,}6211\cdot \orange{10^2} = 2{,}6211 \cdot \orange{100} = 262{,}11\\\\\
- -0{,}0075\cdot \orange{10^3} = -0{,}0075\cdot \orange{1000} = -7{,}5\\\\\
- 6{,}3\cdot \orange{10^{-3}} = 6{,}3 \cdot \orange{0{,}001} = 0{,}0063\\\\\
- 405{,}9\cdot \orange{10^{-2}} = 405{,}9 \cdot \orange{0{,}01} = 4{,}059\\\\\
- 51\cdot \orange{10^{3}} = 51 \cdot \orange{1000} = 51\ 000\\\\\
-\end{split}
+$$
+\begin{aligned}
+2{,}6211\cdot \orange{10^2} = 2{,}6211 \cdot \orange{100} = 262{,}11\\
+ -0{,}0075\cdot \orange{10^3} = -0{,}0075\cdot \orange{1000} = -7{,}5\\
+ 6{,}3\cdot \orange{10^{-3}} = 6{,}3 \cdot \orange{0{,}001} = 0{,}0063\\
+ 405{,}9\cdot \orange{10^{-2}} = 405{,}9 \cdot \orange{0{,}01} = 4{,}059\\
+ 51\cdot \orange{10^{3}} = 51 \cdot \orange{1000} = 51\ 000\\
+\end{aligned}
+$$
 
 Je ziet dat vermenigvuldigen met een macht van 10
 ervoor zorgt dat de **komma verschuift**.
@@ -66,12 +80,14 @@ We willen de komma van $0{,}00000000334$ met
    moeten we ook terug
    **<span class="orange">delen door $10^9$</span>**.
 
-\begin{split}
-0{,}00000000334 &= 0{,}00000000334 \cdot \frac{\blue{10^9}}{\orange{10^9}} \\\\\
- &= 0{,}00000000334 \cdot \blue{10^9} \cdot \frac{1}{\orange{10^9}} \\\\\
- &= \udotblue{0{,}00000000334 \cdot \blue{10^{9}}} \cdot \orange{10^{-9}} \\\\\
- &= \udotblue{3{,}34} \cdot \orange{10^{-9}}
-\end{split}
+$$
+\begin{aligned}
+0{,}00000000334 &= 0{,}00000000334 \cdot \frac{\blue{10^9}}{\orange{10^9}} \\
+ &= 0{,}00000000334 \cdot \blue{10^9} \cdot \frac{1}{\orange{10^9}} \\
+ &= 0{,00000000334 \cdot \blue{10^{9}}} \cdot \orange{10^{-9}} \\
+ &= 3{,34} \cdot \orange{10^{-9}}
+\end{aligned}
+$$
 
 Het **<span class="orange">delen door $10^9$</span>** komt neer op
 een **<span class="orange">vermenigvuldigen met $10^{-9}$</span>**. We kunnen dus ook
@@ -92,10 +108,12 @@ natuurlijk dat onze uitkomst
 Daarom moeten we ook terug delen door $10^{-11}$. Dat is echter hetzelfde als
 **<span class="orange">vermenigvuldigen met $10^{11}$</span>**.
 
-\begin{split}
-149\ 600\ 000\ 000 &= \udotblue{149\ 600\ 000\ 000 \cdot \blue{10^{-11}}} \cdot \orange{10^{11}} \\\\\
- &= \udotblue{1{,}496} \cdot \orange{10^{11}} \\\\\
-\end{split}
+$$
+\begin{aligned}
+149\ 600\ 000\ 000 &= 149\ 600\ 000\ 000 \cdot \blue{10^{-11}} \cdot \orange{10^{11}} \\
+ &= 1{,496} \cdot \orange{10^{11}} \\
+\end{aligned}
+$$
 
 Merk wel op dat nu het aantal [beduidende cijfers](beduidende_cijfers) is
 veranderd van 12 naar 4. Je kan het juiste aantal beduidende cijfers
@@ -111,12 +129,14 @@ zullen we de $3{,}34 \cdot 10^{-9}$
 en vervolgens
 **<span class="orange">vermenigvuldigen met $10^{11}$ om het getal gelijk te houden</span>**.
 
-\begin{split}
-3{,}34 \cdot 10^{-9} &= 3{,}34 \cdot \udotorange{10^{-9} \cdot \orange{10^{11}}} \cdot \blue{10^{-11}} \\\\\
- &= 3{,}34 \cdot \udotorange{10^{2}} \cdot \blue{10^{-11}} \\\\\
- &= \udoubleorange{3{,}34 \cdot 10^{2}} \cdot \blue{10^{-11}} \\\\\
- &= \udoubleorange{334} \cdot \blue{10^{-11}} \\\\\
-\end{split}
+$$
+\begin{aligned}
+3{,}34 \cdot 10^{-9} &= 3{,}34 \cdot 10^{-9} \cdot \orange{10^{11}} \cdot \blue{10^{-11}} \\
+ &= 3{,}34 \cdot 10^{2} \cdot \blue{10^{-11}} \\
+ &= 3{,34 \cdot 10^{2}} \cdot \blue{10^{-11}} \\
+ &= 334 \cdot \blue{10^{-11}} \\
+\end{aligned}
+$$
 
 ## Samengevat
 
@@ -133,12 +153,12 @@ en vervolgens
 <Attention title="Omzetten van een macht van 10">
 
 Als je $a \cdot 10^b$ wilt omzetten naar $\ldots\text{iets}\ldots \cdot
-\blue{10^c}$ <Mute text="(met $a, b, c \in \mathbb{R}$)" />:
+\blue{10^c}$ <Mute>(met $a, b, c \in \mathbb{R}$)</Mute>:
 
-Vermenigvuldig $a \cdot 10^b$ met
-<span class="blue">$10^{c}$ om de juiste macht van 10 te hebben</span> en met
-<span class="orange">$10^{-c}$ om alles gelijk te houden</span> aan $a \cdot 10^b$.
-Combineer vervolgens de $a \cdot 10^{b} \cdot \orange{10^{-c}}$ tot één getal en
-laat de $\cdot \blue{10^{c}}$ erachter staan.
+* Vermenigvuldig $a \cdot 10^b$ met <span class="blue">$10^{c}$ om de juiste
+  macht van 10 te hebben</span> en met <span class="orange">$10^{-c}$ om alles
+  gelijk te houden</span> aan $a \cdot 10^b$.
+* Combineer vervolgens de $a \cdot 10^{b} \cdot \orange{10^{-c}}$ tot één getal
+  en laat de $\cdot \blue{10^{c}}$ erachter staan.
 
 </Attention>

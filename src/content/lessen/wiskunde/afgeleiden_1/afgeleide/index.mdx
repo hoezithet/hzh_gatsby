@@ -23,7 +23,11 @@ kan berekenen.
 We weten al dat we de _gemiddelde verandering_ van een functie kunnen berekenen
 met het differentiequotiënt:
 
-$$\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+
+$$
+\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 
 > Als je de formule voor het differentiequotiënt nog wat beangstigend vindt,
 > lees je best de [les over differentiequotiënt](differentiequotient) nog
@@ -38,12 +42,20 @@ bijvoorbeeld ook berekenen hoe snel een wagen _op een bepaald tijdstip reed_.
 Het trucje is om in de formule van het differentiequotiënt **de limiet te
 berekenen voor $\Delta x$ naar $0$**:
 
-$$\lim\_{\Delta x \to 0} \frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+
+$$
+\lim_{\Delta x \to 0} \frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 
 Zo krijgen we meteen de **formule om een afgeleide te berekenen in $x = a$**, afgekort
-schrijven we "$f'(a)$" <Mute text="(let op het accentje na de $f$)" />:
+schrijven we "$f'(a)$" <Mute>(let op het accentje na de $f$)</Mute>:
 
-$$f'(a) = \lim\_{\Delta x \to 0} \frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+
+$$
+f'(a) = \lim_{\Delta x \to 0} \frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 
 Door die limiet te berekenen, weten we waar de gemiddelde verandering aan
 gelijk is wanneer $a + \Delta x$ **heel dicht bij** $a$ zou liggen. Maar
@@ -55,13 +67,21 @@ berekenen dus de **ogenblikkelijke verandering in $a$**.
 
 Stel dat we de volgende functie hebben:
 
-$$f(x) = - 3\cdot x^2 + 5$$
+
+$$
+f(x) = - 3\cdot x^2 + 5
+$$
+
 
 En we willen de **afgeleide berekenen in $x = 4$**, of in symbolen $f'(4)$. Dan
 moeten we in onze definitie van de afgeleide in $x = a$ de $a$ vervangen door
 $4$. We moeten dus de uitkomst van de volgende limiet vinden:
 
-$$f'(4) = \lim\_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}$$
+
+$$
+f'(4) = \lim_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}
+$$
+
 
 Geen paniek als je nog niet veel ervaring hebt met limieten. Je kan die limiet
 namelijk ook met je _blote handen_ berekenen. Dat doe je door het
@@ -70,35 +90,43 @@ telkens dichter bij $0$ kiest**.
 
 We beginnen bijvoorbeeld met $\Delta x = 0{,}1$:
 
-\begin{split}
+$$
+\begin{aligned}
 \frac{\green{f(4 + 0{,}1)} - \green{f(4)}}{\orange{0{,}1}} &= \frac{\green{f(4{,}1)} - \green{f(4)}}{\orange{0{,}1}}
-\end{split}
+\end{aligned}
+$$
 
 Je ziet dat we eerst nog $\green{f(4{,}1)}$ en $\green{f(4)}$ moeten berekenen.
 Dat is snel gefikst:
 
-\begin{split}
-\green{f(4{,}1)} &= -3 \cdot \green{4{,}1}^2 + 5\\\\\
- &= -3 \cdot 16{,}81 + 5\\\\\
- &= -50{,}43 + 5\\\\\
+$$
+\begin{aligned}
+\green{f(4{,}1)} &= -3 \cdot \green{4{,}1}^2 + 5\\
+ &= -3 \cdot 16{,}81 + 5\\
+ &= -50{,}43 + 5\\
  &= \green{-45{,}43}
-\end{split}
+\end{aligned}
+$$
 
-\begin{split}
-\green{f(4)} &= -3 \cdot \green{4}^2 + 5\\\\\
- &= -3 \cdot 16 + 5\\\\\
- &= -48 + 5\\\\\
+$$
+\begin{aligned}
+\green{f(4)} &= -3 \cdot \green{4}^2 + 5\\
+ &= -3 \cdot 16 + 5\\
+ &= -48 + 5\\
  &= \green{-43}
-\end{split}
+\end{aligned}
+$$
 
 Nu we $\green{f(4{,}1)}$ en $\green{f(4)}$ kennen, kunnen we verder met het
 berekenen van ons differentiequotiënt:
 
-\begin{split}
-\frac{\green{f(4{,}1)} - \green{f(4)}}{\orange{0{,}1}} &= \frac{\green{-45{,}43} - (\green{-43})}{\orange{0{,}1}}\\\\\
- &= \frac{\green{-2{,}43}}{\orange{0{,}1}}\\\\\
+$$
+\begin{aligned}
+\frac{\green{f(4{,}1)} - \green{f(4)}}{\orange{0{,}1}} &= \frac{\green{-45{,}43} - (\green{-43})}{\orange{0{,}1}}\\
+ &= \frac{\green{-2{,}43}}{\orange{0{,}1}}\\
  &= -24{,}3
-\end{split}
+\end{aligned}
+$$
 
 Wanneer we $\Delta x = 0{,}1$ kiezen, is ons differentiequotiënt voor de
 functie $f(x) = - 3\cdot x^2 + 5$ in $x = 4$ dus gelijk aan $-24{,}3$. We gaan
@@ -106,24 +134,26 @@ nu op dezelfde manier het differentiequotiënt berekenen en $\Delta x$ telkens
 dichter en dichter bij $0$ kiezen. Hieronder zie je een tabel met de uitkomsten.
 Reken zelf ook even na of je dezelfde uitkomsten vindt:
 
-| $\Delta x$   | $$\frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}$$                                                                             |
+| $\Delta x$   | $$ \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}} $$ |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| $0{,}1$      | $$\frac{\green{f(4 + 0{,}1)} - \green{f(4)}}{\orange{0{,}1}}  = \frac{\green{-2{,}43}}{\orange{0{,}1}} = -24{,}3$$                               |
-| $0{,}01$     | $$\frac{\green{f(4 + 0{,}01)} - \green{f(4)}}{\orange{0{,}01}}  = \frac{\green{-0{,}2403}}{\orange{0{,}01}} = -24{,}03$$                         |
-| $0{,}001$    | $$\frac{\green{f(4 + 0{,}001)} - \green{f(4)}}{\orange{0{,}001}}  = \frac{\green{-0{,}024003}}{\orange{0{,}001}} = -24{,}003$$                   |
-| $0{,}0001$   | $$\frac{\green{f(4 + 0{,}0001)} - \green{f(4)}}{\orange{0{,}0001}}  = \frac{\green{-0{,}00240003}}{\orange{0{,}0001}} = -24{,}0003$$             |
-| $0{,}00001$  | $$\frac{\green{f(4 + 0{,}00001)} - \green{f(4)}}{\orange{0{,}00001}}  = \frac{\green{-0{,}0002400003}}{\orange{0{,}00001}} = -24{,}00003$$       |
-| $0{,}000001$ | $$\frac{\green{f(4 + 0{,}000001)} - \green{f(4)}}{\orange{0{,}000001}}  = \frac{\green{-0{,}000024000003}}{\orange{0{,}000001}} = -24{,}000003$$ |
+| $0{,}1$      | $$ \frac{\green{f(4 + 0{,}1)} - \green{f(4)}}{\orange{0{,}1}}  = \frac{\green{-2{,}43}}{\orange{0{,}1}} = -24{,}3 $$ |
+| $0{,}01$     | $$ \frac{\green{f(4 + 0{,}01)} - \green{f(4)}}{\orange{0{,}01}}  = \frac{\green{-0{,}2403}}{\orange{0{,}01}} = -24{,}03 $$ |
+| $0{,}001$    | $$ \frac{\green{f(4 + 0{,}001)} - \green{f(4)}}{\orange{0{,}001}}  = \frac{\green{-0{,}024003}}{\orange{0{,}001}} = -24{,}003 $$ |
+| $0{,}0001$   | $$ \frac{\green{f(4 + 0{,}0001)} - \green{f(4)}}{\orange{0{,}0001}}  = \frac{\green{-0{,}00240003}}{\orange{0{,}0001}} = -24{,}0003 $$ |
+| $0{,}00001$  | $$ \frac{\green{f(4 + 0{,}00001)} - \green{f(4)}}{\orange{0{,}00001}}  = \frac{\green{-0{,}0002400003}}{\orange{0{,}00001}} = -24{,}00003 $$ |
+| $0{,}000001$ | $$ \frac{\green{f(4 + 0{,}000001)} - \green{f(4)}}{\orange{0{,}000001}}  = \frac{\green{-0{,}000024000003}}{\orange{0{,}000001}} = -24{,}000003 $$ |
 
 We zouden nog een tijdje kunnen doorgaan, maar het zou je moeten opvallen dat
 die $3$ stilaan wegdrijft naar een plek waar ze zo klein is dat ze eigenlijk
 verwaarloosbaar is. Hoe dichter we $\Delta x$ naar $0$ brengen, hoe dichter de
 uitkomst van het differentiequotiënt gaat naar $-24$. We kunnen dus zeggen dat:
 
-\begin{split}
-f'(4) &= \lim\_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}\\\\\
+$$
+\begin{aligned}
+f'(4) &= \lim_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}\\
  &= -24
-\end{split}
+\end{aligned}
+$$
 
 Dat is eigenlijk wat we bedoelen met die limiet: **naar welk getal gaat de
 uitkomst van het differentiequotiënt wanneer we $\Delta x$ steeds dichter en
@@ -136,11 +166,19 @@ maken. Gelukkig kunnen we iets doordachter te werk gaan. We gaan
 terug naar ons voorbeeld waarbij we de afgeleide in $x = 4$ wilden berekenen
 van de volgende functie:
 
-$$f(x) = - 3\cdot x^2 + 5$$
+
+$$
+f(x) = - 3\cdot x^2 + 5
+$$
+
 
 Om de afgeleide in $x = 4$ te vinden, moeten we de volgende limiet uitrekenen:
 
-$$f'(4) = \lim\_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}$$
+
+$$
+f'(4) = \lim_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}
+$$
+
 
 Vorige keer berekenden we deze limiet door _met onze blote handen_
 verschillende waarden voor $\Delta x$ te kiezen die steeds dichter en dichter
@@ -148,61 +186,77 @@ bij $0$ kwamen. Nu gaan we het iets doordachter aanpakken. We gaan de $\Delta
 x$ even laten voor wat het is en $\green{f(4 + \Delta x)}$ uitrekenen door
 letterlijk $\green{4 + \Delta x}$ in te vullen in ons functievoorschrift:
 
-\begin{split}
-\green{f(4 + \Delta x)} &= -3 \cdot (\green{4 + \Delta x})^2 + 5\\\\\
- &= -3 \cdot (16 + 2\cdot 4 \cdot \Delta x + (\Delta x)^2) + 5\\\\\
- &= -3 \cdot (16 + 8\Delta x + (\Delta x)^2) + 5\\\\\
- &= -48 - 24\Delta x -3(\Delta x)^2 + 5\\\\\
+$$
+\begin{aligned}
+\green{f(4 + \Delta x)} &= -3 \cdot (\green{4 + \Delta x})^2 + 5\\
+ &= -3 \cdot (16 + 2\cdot 4 \cdot \Delta x + (\Delta x)^2) + 5\\
+ &= -3 \cdot (16 + 8\Delta x + (\Delta x)^2) + 5\\
+ &= -48 - 24\Delta x -3(\Delta x)^2 + 5\\
  &= \green{-43 -24\Delta x -3(\Delta x)^2}
-\end{split}
+\end{aligned}
+$$
 
 > ⚠️ Let op! $(\green{4 + \Delta x})^2$ is een **merkwaardig product**! Het is
 > van de vorm $(a + b)^2 = a^2 + 2ab + b^2$.
 
 Als we nu ook nog $\green{f(4)}$ uitrekenen, kennen we de twee termen in de
-teller <Mute text="(bovenaan)" /> van de breuk:
+teller <Mute>(bovenaan)</Mute> van de breuk:
 
-\begin{split}
-\green{f(4)} &= -3 \cdot \green{4}^2 + 5\\\\\
- &= -3 \cdot 16 + 5\\\\\
- &= -48 + 5\\\\\
+$$
+\begin{aligned}
+\green{f(4)} &= -3 \cdot \green{4}^2 + 5\\
+ &= -3 \cdot 16 + 5\\
+ &= -48 + 5\\
  &= \green{-43}
-\end{split}
+\end{aligned}
+$$
 
 Nu we $\green{f(4 + \Delta x)}$ en $\green{f(4)}$ kennen, kunnen we de teller
 van ons differentiequotiënt al voor een stuk uitrekenen. Van de limiet trekken
 we ons voorlopig niets aan, die schrijven we gewoon over.
 
-\begin{split}
-f'(4) &= \lim\_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}\\\\\
- &= \lim\_{\Delta x \to 0} \frac{\green{-43 - 24\Delta x - 3(\Delta x)^2} - (\green{-43})}{\orange{\Delta x}}\\\\\
- &= \lim\_{\Delta x \to 0} \frac{\green{-43 - 24\Delta x - 3(\Delta x)^2} + 43}{\orange{\Delta x}}\\\\\
- &= \lim\_{\Delta x \to 0} \frac{\green{- 24\Delta x - 3(\Delta x)^2}}{\orange{\Delta x}}\\\\\
-\end{split}
+$$
+\begin{aligned}
+f'(4) &= \lim_{\Delta x \to 0} \frac{\green{f(4 + \Delta x)} - \green{f(4)}}{\orange{\Delta x}}\\
+ &= \lim_{\Delta x \to 0} \frac{\green{-43 - 24\Delta x - 3(\Delta x)^2} - (\green{-43})}{\orange{\Delta x}}\\
+ &= \lim_{\Delta x \to 0} \frac{\green{-43 - 24\Delta x - 3(\Delta x)^2} + 43}{\orange{\Delta x}}\\
+ &= \lim_{\Delta x \to 0} \frac{\green{- 24\Delta x - 3(\Delta x)^2}}{\orange{\Delta x}}\\
+\end{aligned}
+$$
 
 Nu krijgen we een breuk die we kunnen **vereenvoudigen**, want zowel teller als
 noemer zijn **deelbaar door $\Delta x$**:
 
-\begin{split}
-\lim\_{\Delta x \to 0} \frac{\green{- 24\Delta x - 3(\Delta x)^2}}{\orange{\Delta x}}
-&= \lim\_{\Delta x \to 0} \frac{\green{- 24 - 3\Delta x}}{\orange{1}} \\\\\
-\end{split}
+$$
+\begin{aligned}
+\lim_{\Delta x \to 0} \frac{\green{- 24\Delta x - 3(\Delta x)^2}}{\orange{\Delta x}}
+&= \lim_{\Delta x \to 0} \frac{\green{- 24 - 3\Delta x}}{\orange{1}} \\
+\end{aligned}
+$$
 
 Zo krijgen we een heel eenvoudige limiet:
 
-$$\lim\_{\Delta x \to 0} (\green{- 24 - 3\Delta x})$$
+
+$$
+\lim_{\Delta x \to 0} (\green{- 24 - 3\Delta x})
+$$
+
 
 Hier zie je duidelijk waar die _wegdrijvende_ $3$ vandaan komt. Wanneer we
-$\Delta x$ kleiner en kleiner kiezen <Mute text="(bv. $0{,}1$; $0{,}01$;
-$0{,}001$;...)" /> gaan we de $\green{-3}$ steeds vermenigvuldigen met kleiner
+$\Delta x$ kleiner en kleiner kiezen <Mute>(bv. $0{,}1$; $0{,}01$;
+$0{,}001$;...)</Mute> gaan we de $\green{-3}$ steeds vermenigvuldigen met kleiner
 en kleiner getal en gaan we van de $\green{-24}$ steeds een kleiner en kleiner
-getal aftrekken <Mute text="($0{,}3$; $0{,}03$; $0{,}003$;...)" />.
+getal aftrekken <Mute>($0{,}3$; $0{,}03$; $0{,}003$;...)</Mute>.
 
 De limiet uitrekenen is heel eenvoudig, want als $\Delta x$ heel dicht naar $0$
 gaat, dan zal $\green{-3 \Delta x}$ ook naar $0$ gaan en blijft dus enkel
 $\green{-24}$ over:
 
-$$\lim\_{\Delta x \to 0} (\green{- 24 - 3\Delta x}) = \green{-24}$$
+
+$$
+\lim_{\Delta x \to 0} (\green{- 24 - 3\Delta x}) = \green{-24}
+$$
+
 
 🎉 We krijgen dus dezelfde uitkomst als wanneer we de limiet met onze
 blote handen uitrekenden!
@@ -214,7 +268,11 @@ blote handen uitrekenden!
 
 De afgeleide in $x = a$ van een functie $f(x)$ is gedefinieerd als:
 
-$$f'(a) = \lim\_{\Delta x \to 0} \frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+
+$$
+f'(a) = \lim_{\Delta x \to 0} \frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 
 Voor een bepaalde $a$ kan je deze limiet kan je als volgt uitrekenen:
 

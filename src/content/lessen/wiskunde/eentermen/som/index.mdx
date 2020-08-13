@@ -23,7 +23,11 @@ vereenvoudigen van [veeltermen](../veeltermen). Het gaat als volgt:
 
 Als voorbeeld gebruiken we:
 
-$$-3y\cdot x\cdot(-y)^2\cdot (-2) + 5x + 2y^3x + x\cdot (-2)^3$$
+
+$$
+-3y\cdot x\cdot(-y)^2\cdot (-2) + 5x + 2y^3x + x\cdot (-2)^3
+$$
+
 
 ## Vereenvoudig alle eentermen
 
@@ -44,7 +48,11 @@ Elk van deze vereenvoudigen geeft:
 
 Ons voorbeeld wordt dus:
 
-$$6xy^3 + 5x + 2xy^3 - 8x$$
+
+$$
+6xy^3 + 5x + 2xy^3 - 8x
+$$
+
 
 ## Duid de gelijksoortige eentermen aan
 
@@ -57,9 +65,13 @@ eentermen, zijn hier
 
 Aangeduid in ons voorbeeld:
 
-$$\usolidorange{6xy^3} + \udoubleblue{5x} + \usolidorange{2xy^3} \udoubleblue{- 8x}$$
 
-Merk op dat we ook het minteken van $\udoubleblue{- 8x}$ aanduiden, omdat een
+$$
+6xy^3 + \blue{5x} + \orange{2xy^3} \blue{- 8x}
+$$
+
+
+Merk op dat we ook het minteken van $- 8x$ aanduiden, omdat een
 [minteken altijd deel uitmaakt](eenterm/#coëfficiënt-en-lettergedeelte) van
 de eenterm waar het bij staat.
 
@@ -72,65 +84,72 @@ lettergedeelte.
 Nu moeten we enkel **per soort de coëfficiënten bij elkaar optellen**. Voor de
 eentermen met $xy^3$ als lettergedeelte geeft dit:
 
-\begin{split}
-\orange{6}xy^3 + \orange{2}xy^3 &= (\orange{6} + \orange{2})xy^3\\\\\
+$$
+\begin{aligned}
+\orange{6}xy^3 + \orange{2}xy^3 &= (\orange{6} + \orange{2})xy^3\\
 &= \orange{8}xy^3
-\end{split}
+\end{aligned}
+$$
 
 Voor de eentermen met $x$ als lettergedeelte krijgen we:
 
-\begin{split}
-\blue{5}x \blue{-8}x &= (\blue{5} \blue{-8})x \\\\\
+$$
+\begin{aligned}
+\blue{5}x \blue{-8}x &= (\blue{5} \blue{-8})x \\
 &= \blue{-3}x
-\end{split}
+\end{aligned}
+$$
 
 <Expand title="Waarom moeten we per soort optellen?">
 
 Waarom mogen we enkel de coëfficiënten van **gelijksoortige** eentermen bij
 elkaar zetten? Waarom mogen we in ons voorbeeld
 
-$$6xy^3 + 5x + 2xy^3 - 8x$$
+
+$$
+6xy^3 + 5x + 2xy^3 - 8x
+$$
+
 
 de $6$ en de $2$ bij elkaar optellen, maar niet de $6$ en de $5$?
 
 Wanneer we de coëfficiënten van gelijksoortige eentermen bij elkaar optellen,
 maken we eigenlijk gebruik van de **distributiviteit** van de vermenigvuldiging
-over de optelling in $\mathbb{Q}$ <Mute text="(geldt ook voor $\mathbb{R}$)" />:
+over de optelling in $\mathbb{Q}$ <Mute>(geldt ook voor $\mathbb{R}$)</Mute>:
 
-$$
-\newcommand{\gewoon}{
-\begin{split}
-    (6 + 3)\cdot 2 &= (9) \cdot 2\\\\\
-                   &= 18
-\end{split}
-}
-\newcommand{\distributief}{
-\begin{split}
-    (6 + 3)\cdot \orange{2} &= 6\cdot\orange{2} + 3\cdot\orange{2}\\\\\
-                            &=12 + 6\\\\\
-                            &= 18
-\end{split}
-}
-$$
+| Gewoon uitrekenen                                                  | Distributiviteit toepassen                                                                                    |
+| -----------------                                                  | --------------------------                                                                                    |
+| $\begin{aligned}(6 + 3)\cdot 2 &= (9) \cdot 2\\&= 18\end{aligned}
+$$ | $\begin{aligned}(6 + 3)\cdot \orange{2} &= 6\cdot\orange{2} + 3\cdot\orange{2}\\&=12 + 6\\&= 18\end{aligned}
+$$ |
 
-| Gewoon uitrekenen | Distributiviteit toepassen |
-| ----------------- | -------------------------- |
-| $\gewoon$         | $\distributief$            |
 
 We pasten de distributiviteit toe in deze lijn:
 
-$$(6 + 3)\cdot \orange{2} = 6\cdot\orange{2} + 3\cdot\orange{2}$$
+
+$$
+(6 + 3)\cdot \orange{2} = 6\cdot\orange{2} + 3\cdot\orange{2}
+$$
+
 
 Als we die lijn omdraaien, krijgen we een soort **omgekeerde
 distributiviteit** <Mute text='(dit noemen we ook wel "afzonderen")' />:
 
-$$6\cdot\orange{2} + 3\cdot\orange{2} = (6 + 3)\cdot \orange{2}$$
+
+$$
+6\cdot\orange{2} + 3\cdot\orange{2} = (6 + 3)\cdot \orange{2}
+$$
+
 
 We mogen de $6$ en de $3$ aan de rechterkant bij elkaar optellen omdat we ze
 aan de linkerkant allebei met $\orange{2}$ vermenigvuldigden. Dat is precies
 wat we bij het optellen van gelijksoortige eentermen ook doen:
 
-$$6\orange{ab^3} + 3\orange{ab^3} = (6 + 3)\orange{ab^3}$$
+
+$$
+6\orange{ab^3} + 3\orange{ab^3} = (6 + 3)\orange{ab^3}
+$$
+
 
 Wanneer twee eentermen **hetzelfde lettergedeelte** hebben, kunnen we dus een
 soort **omgekeerde distributiviteit** toepassen. Dat betekent dat we **de
@@ -144,7 +163,11 @@ omgekeerde distributiviteit niet toepassen en mogen we de coëfficiënten dus
 
 Als we nu alles terug samen zetten, krijgen we dus:
 
-$$6xy^3 + 5x + 2xy^3 - 8x = \orange{8}xy^3 \blue{-3}x$$
+
+$$
+6xy^3 + 5x + 2xy^3 - 8x = \orange{8}xy^3 \blue{-3}x
+$$
+
 
 Klaar! 🎉
 

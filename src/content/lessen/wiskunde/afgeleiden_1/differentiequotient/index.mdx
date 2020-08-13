@@ -39,22 +39,26 @@ Daarvoor moeten we de **afgelegde afstand** <Mute text="(hoeveel (kilo)meter?)"
 /> delen door de **tijd die nodig was** <Mute text="(hoeveel uur of seconden?)"
 /> om die afstand af te leggen:
 
-\begin{split}
-\text{gem. snelheid} &= \frac{\green{\text{afgelegde afstand} }}{\orange{\text{tijd die nodig was}}}\\\\\
-\end{split}
+$$
+\begin{aligned}
+\text{gem. snelheid} &= \frac{\green{\text{afgelegde afstand} }}{\orange{\text{tijd die nodig was}}}\\
+\end{aligned}
+$$
 
 Wanneer de chronometer op $\orange{1{,}00~\si{s}}$ stond, was Maria
 $\green{20~\si{m}}$ ver. Bij $\orange{3{,}00~\si{s}}$, was ze
 $\green{180~\si{m}}$ ver. De gemiddelde snelheid tussen
 $\orange{1{,}00~\si{s}}$ en $\orange{3{,}00~\si{s}}$ is dus:
 
-\begin{split}
-\text{gem. snelheid} &= \frac{\green{\text{afgelegde afstand} }}{\orange{\text{tijd die nodig was}}}\\\\\
- &= \frac{\green{180~\si{m}} - \green{20~\si{m}}}{\orange{3{,}00~\si{s}} - \orange{1{,}00~\si{s}}}\\\\\
- &= \frac{\green{160~\si{m}}}{\orange{2{,}00~\si{s}}}\\\\\
- &= 80{,}0~\si{m/s}\\\\\
+$$
+\begin{aligned}
+\text{gem. snelheid} &= \frac{\green{\text{afgelegde afstand} }}{\orange{\text{tijd die nodig was}}}\\
+ &= \frac{\green{180~\si{m}} - \green{20~\si{m}}}{\orange{3{,}00~\si{s}} - \orange{1{,}00~\si{s}}}\\
+ &= \frac{\green{160~\si{m}}}{\orange{2{,}00~\si{s}}}\\
+ &= 80{,}0~\si{m/s}\\
  &= 288~\si{km/h}
-\end{split}
+\end{aligned}
+$$
 
 Lekker snel! 🚀
 
@@ -64,12 +68,16 @@ positie** ($\green{180~\si{m}}$) **en de eerste positie**
 ($\green{20~\si{m}}$). Voor de tijd is dat het **verschil tussen de tweede
 tijd** ($\orange{3{,}00~\si{s}}$) **en de eerste tijd**
 ($\orange{1{,}00~\si{s}}$). Die twee verschillen zetten we vervolgens in een
-**breuk** met in de teller <Mute text="(boven)" /> het verschil van posities en 
-in de noemer <Mute text="(onder)" /> het
+**breuk** met in de teller <Mute>(boven)</Mute> het verschil van posities en 
+in de noemer <Mute>(onder)</Mute> het
 verschil van tijden. We kunnen de formule voor gemiddelde snelheid dus ook als
 volgt schrijven:
 
-$$\text{gem. snelheid} = \frac{\green{\text{positie}\_2} - \green{\text{positie}\_1}}{\orange{\text{tijd}\_2} - \orange{\text{tijd}\_1}}$$
+
+$$
+\text{gem. snelheid} = \frac{\green{\text{positie}_2} - \green{\text{positie}_1}}{\orange{\text{tijd}_2} - \orange{\text{tijd}_1}}
+$$
+
 
 ## Gemiddelde snelheid veralgemenen naar het differentiequotiënt
 
@@ -80,39 +88,43 @@ _hooguit één_ $\green{\text{positie}}$ overeen. Daarom mogen we zeggen dat
 Maria's **positie een functie is van de tijd**.
 
 > Als je niet meer goed weet vanaf wanneer een verband tussen twee variabelen
-> <Mute text="(zoals positie en tijd)" /> een functie is, kan je altijd onze
+> <Mute>(zoals positie en tijd)</Mute> een functie is, kan je altijd onze
 > [les over functies](../functies/intro) eens nalezen.
 
 We kunnen de **positie** die overeenkomt met tijdstip $\orange{x}$ dus **de
 functiewaarde van $\orange{x}$** noemen en afkorten als $\green{f(x)}$. Wanneer
 we op de luchtfoto's de racewagens met elkaar verbinden, zien we inderdaad dat
 de posities mooi de [grafiek van een functie](../functies/grafiek) volgen
-waarbij de **tijd op de x-as** <Mute text="(horizontale as)" /> staat en de
-**positie op de y-as** <Mute text="(verticale as)" />:
+waarbij de **tijd op de x-as** <Mute>(horizontale as)</Mute> staat en de
+**positie op de y-as** <Mute>(verticale as)</Mute>:
 
 ![De positie van Maria als functie van de tijd](img/maria_race_function.png)
 
 We kunnen nu onze formule voor gemiddelde snelheid korter schrijven waarbij we
 
--   $\green{\text{positie}\_2}$ en $\green{\text{positie}\_1}$ vervangen door
-    $\green{f(x\_2)}$ en $\green{f(x\_1)}$
--   $\orange{\text{tijd}\_2}$ en $\orange{\text{tijd}\_1}$ vervangen door
-    $\orange{x\_2}$ en $\orange{x\_1}$
+-   $\green{\text{positie}_2}$ en $\green{\text{positie}_1}$ vervangen door
+    $\green{f(x_2)}$ en $\green{f(x_1)}$
+-   $\orange{\text{tijd}_2}$ en $\orange{\text{tijd}_1}$ vervangen door
+    $\orange{x_2}$ en $\orange{x_1}$
 
 Zo krijgen we:
 
-$$\frac{\green{f(x\_2)} - \green{f(x\_1)}}{\orange{x\_2} - \orange{x\_1}}$$
 
--   In de teller <Mute text="(boven)" /> staat $\green{f(x\_2)} -
-  \green{f(x\_1)}$. Daarmee berekenen we het verschil van de functiewaarden van
-    $x\_2$ en $x\_1$. **De teller zegt zo hoeveel de functiewaarde is veranderd**
-    tussen $x\_1$ en $x\_2$.
--   In de noemer <Mute text="(onder)" /> staat dan weer het verschil van die
-    $x\_2$ en $x\_1$ zélf. Door te delen door $\orange{x\_2} - \orange{x\_1}$
+$$
+\frac{\green{f(x_2)} - \green{f(x_1)}}{\orange{x_2} - \orange{x_1}}
+$$
+
+
+-   In de teller <Mute>(boven)</Mute> staat $\green{f(x_2)} -
+  \green{f(x_1)}$. Daarmee berekenen we het verschil van de functiewaarden van
+    $x_2$ en $x_1$. **De teller zegt zo hoeveel de functiewaarde is veranderd**
+    tussen $x_1$ en $x_2$.
+-   In de noemer <Mute>(onder)</Mute> staat dan weer het verschil van die
+    $x_2$ en $x_1$ zélf. Door te delen door $\orange{x_2} - \orange{x_1}$
     berekenen we de "**gemiddelde** verandering van de functiewaarde **per
-    $x-$eenheid** <Mute text="(bv. per seconde)" /> tussen $x\_1$ en $x\_2$" in
-    plaats van gewoon de "verandering van de functiewaarde tussen $x\_1$ en
-    $x\_2$".
+    $x-$eenheid** <Mute>(bv. per seconde)</Mute> tussen $x_1$ en $x_2$" in
+    plaats van gewoon de "verandering van de functiewaarde tussen $x_1$ en
+    $x_2$".
 
 <Expand title="Waarom zorgt die deling door $\orange{x_2} - \orange{x_1}$ voor een gemiddelde?">
 
@@ -122,7 +134,7 @@ Op dezelfde manier krijgen we de **gemiddelde** verandering van de functiewaarde
 
 </Expand>
 
-We zeggen dat deze formule de **gemiddelde verandering van de functiewaarde** berekent per $x-$eenheid tussen $\orange{x\_1}$ en $\orange{x\_2}$.
+We zeggen dat deze formule de **gemiddelde verandering van de functiewaarde** berekent per $x-$eenheid tussen $\orange{x_1}$ en $\orange{x_2}$.
 
 ![](img/diff_quot_intuitie.png)
 
@@ -142,24 +154,30 @@ naam vandaan? Het woord bestaat uit twee stukken:
 
 </Expand>
 
-## Het verschil afkorten met $\Delta$
+## Het verschil korter schrijven
 
 Tot slot gaan we het differentiequotiënt nog een tikkeltje korter leren
-schrijven. Verschillen als "$\green{f(x\_2)} - \green{f(x\_1)}$" en
-"$\orange{x\_2} - \orange{x\_1}$" komen namelijk vaak voor en het is lastig om
+schrijven. Verschillen als "$\green{f(x_2)} - \green{f(x_1)}$" en
+"$\orange{x_2} - \orange{x_1}$" komen namelijk vaak voor en het is lastig om
 die telkens voluit te moeten schrijven. Daarom gaan we zulke verschillen
 afkorten. Hiervoor gebruiken we de Griekse hoofdletter $\Delta$ (de delta):
 
-\begin{split}
-\green{f(x_2)} - \green{f(x_1)} &= \green{\Delta f(x)}\\\\\
+$$
+\begin{aligned}
+\green{f(x_2)} - \green{f(x_1)} &= \green{\Delta f(x)}\\
  \orange{x_2} - \orange{x_1} &= \orange{\Delta x}
-\end{split}
+\end{aligned}
+$$
 
 Die "$\Delta$" lijkt wat overweldigend, maar is eigenlijk niets meer dan een
 verkorte schrijfwijze. Met behulp van deze $\Delta$, kunnen we het
 differentiequotiënt als volgt afkorten:
 
-$$\frac{\green{f(x\_2)} - \green{f(x\_1)}}{\orange{x\_2} - \orange{x\_1}} = \frac{\green{\Delta f(x)}}{\orange{\Delta x}}$$
+
+$$
+\frac{\green{f(x_2)} - \green{f(x_1)}}{\orange{x_2} - \orange{x_1}} = \frac{\green{\Delta f(x)}}{\orange{\Delta x}}
+$$
+
 
 Op een grafiek kan je $\green{\Delta f(x)}$ en $\orange{\Delta x}$ ook aanduiden:
 
@@ -167,9 +185,21 @@ Op een grafiek kan je $\green{\Delta f(x)}$ en $\orange{\Delta x}$ ook aanduiden
 
 Je zult het waarschijnlijk niet graag horen, maar er is nog een derde en laatste manier om het differentiequotiënt te schrijven. Daarbij gaan we drie dingen veranderen aan de oorspronkelijke formule van het differentiequotiënt:
 
-1. Vervang $\orange{x\_2} - \orange{x\_1}$ door $\orange{\Delta x}$: $$\frac{\green{f(x\_2)} - \green{f(x\_1)}}{\orange{\Delta x}}$$
-2. Vervang $x\_2$ door $x\_1 + \Delta x$: $$\frac{\green{f(x\_1 + \Delta x)} - \green{f(x\_1)}}{\orange{\Delta x}}$$
-3. Vervang $x\_1$ overal door $a$: $$\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+1. Vervang $\orange{x_2} - \orange{x_1}$ door $\orange{\Delta x}$: 
+$$
+\frac{\green{f(x_2)} - \green{f(x_1)}}{\orange{\Delta x}}
+$$
+
+2. Vervang $x_2$ door $x_1 + \Delta x$: 
+$$
+\frac{\green{f(x_1 + \Delta x)} - \green{f(x_1)}}{\orange{\Delta x}}
+$$
+
+3. Vervang $x_1$ overal door $a$: 
+$$
+\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 
 Dat ziet er grafisch zo uit:
 
@@ -177,9 +207,21 @@ Dat ziet er grafisch zo uit:
 
 We hebben nu drie verschillende manieren gezien om het differentiequotiënt te schrijven:
 
-1. $$\frac{\green{f(x\_2)} - \green{f(x\_1)}}{\orange{x\_2} - \orange{x\_1}}$$
-2. $$\frac{\green{\Delta f(x)}}{\orange{\Delta x}}$$
-3. $$\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+1. 
+$$
+\frac{\green{f(x_2)} - \green{f(x_1)}}{\orange{x_2} - \orange{x_1}}
+$$
+
+2. 
+$$
+\frac{\green{\Delta f(x)}}{\orange{\Delta x}}
+$$
+
+3. 
+$$
+\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 
 Het is belangrijk om in te zien dat deze alle drie **identiek dezelfde berekening** maken. De berekening wordt enkel anders _verwoord_. Kijk dus nog eens extra naar de drie formules voor het differentiequotiënt, bekijk de bijhorende grafieken nogmaals en zorg dat je de gelijkenis begrijpt.
 
@@ -189,17 +231,29 @@ Het is belangrijk om in te zien dat deze alle drie **identiek dezelfde berekenin
 
 Een differentiequotiënt zegt hoeveel de $\green{\text{functiewaarde}}$
 gemiddeld $\orange{\text{per x-eenheid}}$ verandert tussen een gekozen
-$\orange{x\_1}$ en $\orange{x\_2}$.
+$\orange{x_1}$ en $\orange{x_2}$.
 
 Het differentiequotiënt is gedefinieerd als:
 
-$$\frac{\green{f(x\_2)} - \green{f(x\_1)}}{\orange{x\_2} - \orange{x\_1}}$$
 
-Door $\green{f(x\_2) - f(x\_1)}$ te vervangen door $\green{\Delta f(x)}$ en $\orange{x\_2 - x\_1}$ door $\orange{\Delta x}$, kunnen we het differentiequotiënt ook schrijven als:
+$$
+\frac{\green{f(x_2)} - \green{f(x_1)}}{\orange{x_2} - \orange{x_1}}
+$$
 
-$$\frac{\green{\Delta f(x)}}{\orange{\Delta x}}$$
 
-Een andere schrijfwijze vervangt $\orange{x\_2} - \orange{x\_1}$ door $\orange{\Delta x}$, $\green{f(x\_2)}$ door $\green{f(x\_1 + \Delta x)}$ en vervangt ten slotte $\green{x\_1}$ overal door $\green{a}$:
+Door $\green{f(x_2) - f(x_1)}$ te vervangen door $\green{\Delta f(x)}$ en $\orange{x_2 - x_1}$ door $\orange{\Delta x}$, kunnen we het differentiequotiënt ook schrijven als:
 
-$$\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}$$
+
+$$
+\frac{\green{\Delta f(x)}}{\orange{\Delta x}}
+$$
+
+
+Een andere schrijfwijze vervangt $\orange{x_2} - \orange{x_1}$ door $\orange{\Delta x}$, $\green{f(x_2)}$ door $\green{f(x_1 + \Delta x)}$ en vervangt ten slotte $\green{x_1}$ overal door $\green{a}$:
+
+
+$$
+\frac{\green{f(a + \Delta x)} - \green{f(a)}}{\orange{\Delta x}}
+$$
+
 </Attention>

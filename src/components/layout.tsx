@@ -21,7 +21,7 @@ export interface LayoutProps {
     crumbs: HeaderProps["crumbs"];
 }
 
-const muiTheme = createMuiTheme({
+export const muiTheme = createMuiTheme({
     typography: {
         fontFamily: [
             'Quicksand',

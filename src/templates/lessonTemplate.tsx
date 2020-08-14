@@ -9,11 +9,15 @@ import { Expand } from "../components/shortcodes/expand";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
+import BlockquoteBox from "../components/blockquote";
+import Table from '../components/table';
 
 const shortcodes = { Mute, Attention, Expand }
 
 const components = {
-  a: Link,
+    a: Link,
+    blockquote: BlockquoteBox,
+    table: Table,
 }
 
 export interface MdxNode {

@@ -11,6 +11,7 @@ import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
+import LayoutProps from "../components/layout";
 
 const shortcodes = { Mute, Attention, Expand }
 
@@ -23,7 +24,7 @@ const components = {
 export interface MdxNode {
     frontmatter: { title: string };
     body: string;
-    tableOfContents: { items: [{url: string; title: string}] };
+    tableOfContents: { items: {url: string; title: string}[] };
     fields: { slug: string };
 }
 
@@ -32,7 +33,7 @@ export interface LessonData {
         mdx: MdxNode;
     };
     pageContext: {
-      parents: [MdxNode];
+      crumbs: LayoutProps["crumbs"];
     };
 }
 
@@ -42,18 +43,8 @@ export default function Template(
     const { mdx } = data; // data.mdx holds your post data
     const { frontmatter, body, tableOfContents, fields } = mdx;
     const { slug } = fields;
-    const { parents } = pageContext;
+    const { crumbs } = pageContext;
     
-    const crumbs = parents.reverse().map(item => {
-        return { title: item.frontmatter.title,
-                 slug: item.fields.slug }
-    });
-    
-    crumbs.push({
-        title: frontmatter.title,
-        slug: slug
-    });
-
     return (
         <Layout crumbs={ crumbs }>
             <h1>{frontmatter.title}</h1>

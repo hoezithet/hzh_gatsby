@@ -10,7 +10,6 @@ import COLORS from "../../colors";
 
 interface ExpandProps {
     children: React.ReactNode;
-    title: string;
 }
 
 const ExpandFrame = styled(Accordion)`

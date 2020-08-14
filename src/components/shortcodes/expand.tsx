@@ -37,10 +37,13 @@ const ExpandBody = styled(AccordionDetails)`
 const Expand = ({ children, title }: ExpandProps) => (
 	<ExpandFrame>
 		<ExpandTitle expandIcon={<ExpandIcon/>}>
-			{ title }
+            { /* Get title from first child
+               * We can't use a seperate property (e.g. "title") for the title,
+               * because then its markdown syntax will not be rendered */}
+            <div>{ children[0].props.children }</div>
 		</ExpandTitle>
 		<ExpandBody>
-			{ children }
+			{ children.slice(1) }
 		</ExpandBody>
 	</ExpandFrame>
 );

@@ -24,14 +24,18 @@ const ContentBox = styled(Box)`
 
 interface AttentionProps {
     children: React.ReactNode;
-    title: string;
 }
 
-const Attention = ({ children, title }: AttentionProps) => (
+const Attention = ({ children }: AttentionProps) => (
     <Frame>
-        <TitleBox>{ title.toUpperCase() }</TitleBox>
+        <TitleBox>
+            { /* Get title from first child
+               * We can't use a seperate property (e.g. "title") for the title,
+               * because then its markdown syntax will not be rendered */}
+            <div>{ children[0].props.children }</div>
+        </TitleBox>
         <ContentBox>
-            { children }
+            { children.slice(1) }
         </ContentBox>
     </Frame>
 );

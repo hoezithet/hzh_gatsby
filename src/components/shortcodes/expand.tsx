@@ -33,7 +33,7 @@ const ExpandBody = styled(AccordionDetails)`
     display: block;
 `
 
-const Expand = ({ children, title }: ExpandProps) => (
+const Expand = ({ children }: ExpandProps) => (
 	<ExpandFrame>
 		<ExpandTitle expandIcon={<ExpandIcon/>}>
             { /* Get title from first child

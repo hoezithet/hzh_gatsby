@@ -16,19 +16,19 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 };
 
 function isLesson(node) {
-    return /([^/]+\/){4}\/index\.mdx$/.test(node.slug);
+    return /\/content(\/[^/]+){4}\/index\.mdx$/.test(node.fileAbsolutePath);
 }
 
 function isChapter(node) {
-    return /([^/]+\/){3}\/_index\.mdx$/.test(node.slug);
+    return /\/content(\/[^/]+){3}\/_index\.mdx$/.test(node.fileAbsolutePath);
 }
 
 function isCourse(node) {
-    return /([^/]+\/){2}_index\.mdx$/.test(node.slug);
+    return /\/content(\/[^/]+){2}\/_index\.mdx$/.test(node.fileAbsolutePath);
 }
 
 function isAllCourses(node) {
-    return /([^/]+\/){1}_index\.mdx$/.test(node.slug);
+    return /\/content(\/[^/]+){1}\/_index\.mdx$/.test(node.fileAbsolutePath);
 }
 
 /**
@@ -100,13 +100,10 @@ function nodeToCrumbs(node, contentTree) {
  */
 function chapterLessons(chapterNode, contentTree) {
     const lessonPaths = nodeToPath(chapterNode);
+    lessonPaths.pop(); // Remove "section"
     lessonPaths.push("contents");
-    console.log(chapterNode);
-    console.log(lessonPaths);
-    console.log("The tree:");
-    console.log(JSON.stringify(contentTree, null, 2));
-    lessonNodes = lessonPaths.map(p => _.get(contentTree, p));
-    return lessonNodes.map(node => {
+    lessonNodes = _.get(contentTree, lessonPaths);
+    return Object.entries(lessonNodes).map(([key, node]) => {
         return {
             title: node.frontmatter.title,
             slug: node.fields.slug,

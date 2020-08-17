@@ -64,9 +64,14 @@ function nodeToPath(node) {
  */
 function nodeToParentPaths(node) {
     const nodePath = nodeToPath(node);
+    const lastElement = nodePath.slice(-1)[0];
+    if (lastElement === "section" || lastElement === "contents") {
+        nodePath.pop();
+    }
     const parentPaths = [];
-    for (let i = 2; i < nodePath.length; i += 2) {
+    for (let i = 1; i < nodePath.length; i += 2) {
         const parentPath = nodePath.slice(0, -i);
+        parentPath.pop(); // Pop "contents"
         parentPath.push("section");
         parentPaths.push(parentPath);
     }

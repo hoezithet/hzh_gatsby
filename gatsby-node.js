@@ -12,6 +12,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             name: `slug`,
             value: slug,
         });
+        createNodeField({
+            node,
+            name: `parent_slug`,
+            value: slug.split("/").slice(0, -1).join("/"),
+        });
     }
 };
 
@@ -89,13 +94,9 @@ function nodeToParentPaths(node) {
  */
 function nodeToCrumbs(node, contentTree) {
     let nodes = nodeToParentPaths(node);
-    console.log("parent paths");
-    console.log(JSON.stringify(nodes, null, 2));
     nodes = nodes.map(path => _.get(contentTree, path));
-    // console.log(JSON.stringify(nodes, null, 2));
     nodes.push(node);
     nodes = nodes.reverse();
-    console.log(JSON.stringify(nodes, null, 2));
     return nodes.map(item => {
         return { title: item.frontmatter.title, slug: item.fields.slug };
     });
@@ -164,7 +165,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 component: require.resolve("./src/templates/lesson.tsx"),
                 context: {
                     filePath: node.fileAbsolutePath,
-                    crumbs: nodeToCrumbs(node),
+                    crumbs: nodeToCrumbs(node, contentTree),
                 },
             });
         } else if (isChapter(node)) {
@@ -172,9 +173,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 path: node.fields.slug,
                 component: require.resolve("./src/templates/chapter.tsx"),
                 context: {
-                    title: node.frontmatter.title,
-                    lessons: chapterLessons(node, contentTree),
+                    slug: node.fields.slug,
                     crumbs: nodeToCrumbs(node, contentTree),
+                    title: node.frontmatter.title,
                 },
             });
         }

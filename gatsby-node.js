@@ -88,9 +88,15 @@ function nodeToParentPaths(node) {
  * property `title` and `slug`.
  */
 function nodeToCrumbs(node, contentTree) {
-    const nodes = nodeToParentPaths(node).map(path => _.get(contentTree, path));
+    let nodes = nodeToParentPaths(node);
+    console.log("parent paths");
+    console.log(JSON.stringify(nodes, null, 2));
+    nodes = nodes.map(path => _.get(contentTree, path));
+    // console.log(JSON.stringify(nodes, null, 2));
     nodes.push(node);
-    return nodes.reverse().map(item => {
+    nodes = nodes.reverse();
+    console.log(JSON.stringify(nodes, null, 2));
+    return nodes.map(item => {
         return { title: item.frontmatter.title, slug: item.fields.slug };
     });
 }
@@ -168,7 +174,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 context: {
                     title: node.frontmatter.title,
                     lessons: chapterLessons(node, contentTree),
-                    crumbs: nodeToCrumbs(node),
+                    crumbs: nodeToCrumbs(node, contentTree),
                 },
             });
         }

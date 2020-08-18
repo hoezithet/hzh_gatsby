@@ -168,7 +168,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     crumbs: nodeToCrumbs(node, contentTree),
                 },
             });
-        } else if (isChapter(node)) {
+        } else if (isChapter(node) || isCourse(node) || isAllCourses(node)) {
             createPage({
                 path: node.fields.slug,
                 component: require.resolve("./src/templates/chapter.tsx"),

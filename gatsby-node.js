@@ -95,8 +95,8 @@ function nodeToParentPaths(node) {
 function nodeToCrumbs(node, contentTree) {
     let nodes = nodeToParentPaths(node);
     nodes = nodes.map(path => _.get(contentTree, path));
-    nodes.push(node);
     nodes = nodes.reverse();
+    nodes.push(node);
     return nodes.map(item => {
         return { title: item.frontmatter.title, slug: item.fields.slug };
     });

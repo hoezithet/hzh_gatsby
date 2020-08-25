@@ -18,7 +18,7 @@ interface ChapterData {
                 frontmatter: {
                     title: string;
                     description: string;
-                    images: string[];
+                    title_img: string;
                 };
                 fileAbsolutePath: string;
                 excerpt: string;
@@ -53,7 +53,7 @@ export const chapterQuery = graphql`
         frontmatter {
           title
           description
-          images
+          title_img
         }
         fileAbsolutePath
         excerpt(pruneLength: 200, truncate: true)

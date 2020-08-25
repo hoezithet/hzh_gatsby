@@ -9,7 +9,7 @@ interface ListItemProps {
   frontmatter: {
       title: string;
       description: string;
-      images: string[];
+      title_img: string;
   };
   fileAbsolutePath: string;
   excerpt: string;
@@ -41,7 +41,7 @@ export default function ListItem(node: ListItemProps) {
     }
     `);
     console.log(JSON.stringify(node, null, 2));
-    const imgSlug = node.node.frontmatter.images ? node.node.frontmatter.images[0] : "";
+    const imgSlug = node.node.frontmatter.title_img;
     const imgFile = imgData.allFile.edges.find(file =>
         file.node.absolutePath.includes(imgSlug)
     );

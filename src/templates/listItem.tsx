@@ -2,6 +2,14 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { Link } from '@material-ui/core';
 import styled from "styled-components";
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 
 interface ListItemProps {
@@ -15,16 +23,11 @@ interface ListItemProps {
   excerpt: string;
 }
 
-const ListImg = styled.img`
-    max-width: 100%;
+const CardImg = styled(CardMedia)`
 `;
 
-const ListLink = styled(Link)`
-    color: inherit;
-    text-decoration: none;
-    &:hover {
-      text-decoration: none;
-    }
+const StyledCard = styled(Card)`
+    max-width: 345;
 `;
 
 export default function ListItem(node: ListItemProps) {
@@ -40,19 +43,36 @@ export default function ListItem(node: ListItemProps) {
       }
     }
     `);
-    console.log(JSON.stringify(node, null, 2));
+
     const imgSlug = node.node.frontmatter.title_img;
     const imgFile = imgData.allFile.edges.find(file =>
         file.node.absolutePath.includes(imgSlug)
     );
     return (
-            <ListLink href={ node.node.fields.slug }>
-            <>
-                <h2>{ node.node.frontmatter.title }</h2>
-                <ListImg src={ imgFile ? imgFile.node.publicURL : "" } />
-                <p>{ node.node.excerpt }</p>
-                <Link href={ node.node.fields.slug }>Lees meer</Link>
-            </>
-            </ListLink>
+    <Box my={2}>
+            <StyledCard>
+      <CardActionArea>
+        <CardImg
+          component="img"
+          height="100%"
+          image={ imgFile ? imgFile.node.publicURL : "" } 
+          title={ node.node.frontmatter.title }
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            { node.node.frontmatter.title }
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            { node.node.frontmatter.description ? node.node.frontmatter.description : node.node.excerpt }
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button href={ node.node.fields.slug } size="small" color="primary">
+          Lees Meer
+        </Button>
+      </CardActions>
+    </StyledCard>
+    </Box>
         );
 }

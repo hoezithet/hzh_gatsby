@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
+import ListItem from "./listItem";
 
 interface ChapterData {
     pageContext: {
@@ -17,8 +18,10 @@ interface ChapterData {
                 frontmatter: {
                     title: string;
                     description: string;
+                    images: string[];
                 };
                 fileAbsolutePath: string;
+                excerpt: string;
             }[];
         }
     }
@@ -26,16 +29,15 @@ interface ChapterData {
 
 export default function ChapterTemplate({ pageContext, data }: ChapterData) {
     const { crumbs, title } = pageContext;
-    const lessonLinks = data.allMdx.nodes.map(node => {
-        return <li><Link href= { node.fields.slug }>{ node.frontmatter.title }</Link></li>;
-    });
+    
+    const lessonLinks = data.allMdx.nodes.map(node => 
+        <ListItem node={ node } />
+    );
 
     return (
         <Layout crumbs={ crumbs }>
             <h1>{ title }</h1>
-            <ul>
-                { lessonLinks }
-            </ul>
+            { lessonLinks }
         </Layout>
     );
 }
@@ -51,8 +53,10 @@ export const chapterQuery = graphql`
         frontmatter {
           title
           description
+          images
         }
         fileAbsolutePath
+        excerpt(pruneLength: 200, truncate: true)
       }
     }
   }

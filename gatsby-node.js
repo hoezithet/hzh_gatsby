@@ -39,7 +39,7 @@ function isAllCourses(node) {
 /**
  * Converts the node to the lodash path it would have in the content tree.
  * @param { MdxNode } node The MDX node.
- * @return { String[] } The lodash path of the node, based on its slug.
+ * @return { String[] } The lodash path of the node, based on its slug
  */
 function nodeToPath(node) {
     const slug = node.fields.slug;
@@ -133,7 +133,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     const result = await graphql(`
         {
-            allMdx(sort: { order: DESC, fields: [frontmatter___weight] }) {
+            allMdx(sort: { order: ASC, fields: [frontmatter___weight] }) {
                 edges {
                     node {
                         fileAbsolutePath
@@ -142,6 +142,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                         }
                         frontmatter {
                             title
+                            weight
                         }
                     }
                 }
@@ -168,7 +169,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     crumbs: nodeToCrumbs(node, contentTree),
                 },
             });
-        } else if (isChapter(node) || isCourse(node) || isAllCourses(node)) {
+        } else if (isChapter(node)) {
             createPage({
                 path: node.fields.slug,
                 component: require.resolve("./src/templates/chapter.tsx"),
@@ -176,6 +177,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     slug: node.fields.slug,
                     crumbs: nodeToCrumbs(node, contentTree),
                     title: node.frontmatter.title,
+                },
+            });
+        } else if (isAllCourses(node) || isCourse(node)) {
+            const nodePath = nodeToPath(node, contentTree);
+            nodePath.pop(); // Pop "section"
+            createPage({
+                path: node.fields.slug,
+                component: require.resolve("./src/templates/allCourses.tsx"),
+                context: {
+                    slug: node.fields.slug,
+                    crumbs: nodeToCrumbs(node, contentTree),
+                    title: node.frontmatter.title,
+                    tree: _.get(contentTree, nodePath),
                 },
             });
         }

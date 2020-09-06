@@ -10,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 
 
 interface SectionItemProps {
@@ -50,7 +51,7 @@ export default function SectionItem({title, titleImg, buttonLink, buttonText, ch
         file.node.absolutePath.includes(imgSlug)
     );
     return (
-    <Box my={2}>
+    <Grid item xs={12} sm={4}>
             <StyledCard>
       <CardActionArea>
         <CardImg
@@ -72,6 +73,6 @@ export default function SectionItem({title, titleImg, buttonLink, buttonText, ch
         </Button>
       </CardActions>
     </StyledCard>
-    </Box>
+    </Grid>
         );
 }

@@ -37,11 +37,9 @@ export default function ChapterTemplate({ pageContext, data }: ChapterData) {
         const titleImg = node.frontmatter.title_img;
         const buttonLink = node.fields.slug;
         const buttonText = "Lees meer";
-        return (<Grid item xs={4}>
-                    <SectionItem title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
-                        { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
-                    </SectionItem>
-                </Grid>
+        return (<SectionItem title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
+                    { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
+                </SectionItem>
             );
     }
     );

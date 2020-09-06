@@ -44,7 +44,7 @@ export default function SectionItem({title, titleImg, buttonLink, buttonText, ch
     `);
 
     let imgSlug = titleImg;
-    if (imgSlug === "") {
+    if (imgSlug == null || imgSlug === "") {
         imgSlug = "images/default_title_img.png";
     }
     const imgFile = imgData.allFile.edges.find(file =>

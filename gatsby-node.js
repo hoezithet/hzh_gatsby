@@ -179,7 +179,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     title: node.frontmatter.title,
                 },
             });
-        } else if (isAllCourses(node) || isCourse(node)) {
+        } else if (isCourse(node)) {
+            const nodePath = nodeToPath(node, contentTree);
+            nodePath.pop(); // Pop "section"
+            createPage({
+                path: node.fields.slug,
+                component: require.resolve("./src/templates/course.tsx"),
+                context: {
+                    slug: node.fields.slug,
+                    crumbs: nodeToCrumbs(node, contentTree),
+                    title: node.frontmatter.title,
+                    tree: _.get(contentTree, nodePath),
+                },
+            });
+        } else if (isAllCourses(node)) {
             const nodePath = nodeToPath(node, contentTree);
             nodePath.pop(); // Pop "section"
             createPage({

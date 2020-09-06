@@ -13,24 +13,22 @@ import Box from '@material-ui/core/Box';
 
 
 interface ListItemProps {
-  fields: { slug: string; };
-  frontmatter: {
-      title: string;
-      description: string;
-      title_img: string;
-  };
-  fileAbsolutePath: string;
-  excerpt: string;
+    title: string;
+    titleImg: string;
+    buttonLink: string;
+    buttonText: string;
+    children: React.ReactElement;
 }
 
 const CardImg = styled(CardMedia)`
+    height: 140px;
 `;
 
 const StyledCard = styled(Card)`
-    max-width: 345;
+    
 `;
 
-export default function ListItem(node: ListItemProps) {
+export default function ListItem({title, titleImg, buttonLink, buttonText, children}: ListItemProps) {
     const imgData = useStaticQuery(graphql`
     {
       allFile(filter: { extension: { eq: "png" } }) {
@@ -44,7 +42,10 @@ export default function ListItem(node: ListItemProps) {
     }
     `);
 
-    const imgSlug = node.node.frontmatter.title_img;
+    let imgSlug = titleImg;
+    if (imgSlug === "") {
+        imgSlug = "images/default_title_img.png";
+    }
     const imgFile = imgData.allFile.edges.find(file =>
         file.node.absolutePath.includes(imgSlug)
     );
@@ -53,23 +54,21 @@ export default function ListItem(node: ListItemProps) {
             <StyledCard>
       <CardActionArea>
         <CardImg
-          component="img"
-          height="100%"
           image={ imgFile ? imgFile.node.publicURL : "" } 
-          title={ node.node.frontmatter.title }
+          title={ title }
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            { node.node.frontmatter.title }
+            { title }
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            { node.node.frontmatter.description ? node.node.frontmatter.description : node.node.excerpt }
+            { children }
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button href={ node.node.fields.slug } size="small" color="primary">
-          Lees Meer
+        <Button href={ buttonLink } size="small" color="primary">
+            { buttonText }
         </Button>
       </CardActions>
     </StyledCard>

@@ -4,6 +4,8 @@ import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
 import ListItem from "./listItem";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 interface ChapterData {
     pageContext: {
@@ -30,14 +32,26 @@ interface ChapterData {
 export default function ChapterTemplate({ pageContext, data }: ChapterData) {
     const { crumbs, title } = pageContext;
     
-    const lessonLinks = data.allMdx.nodes.map(node => 
-        <ListItem node={ node } />
+    const lessonLinks = data.allMdx.nodes.map(node => {
+        const title = node.frontmatter.title;
+        const titleImg = node.frontmatter.title_img;
+        const buttonLink = node.fields.slug;
+        const buttonText = "Lees meer";
+        return (<Grid item xs={4}>
+                    <ListItem title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
+                        { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
+                    </ListItem>
+                </Grid>
+            );
+    }
     );
 
     return (
         <Layout crumbs={ crumbs }>
             <h1>{ title }</h1>
-            { lessonLinks }
+            <Grid container spacing={2}>
+                { lessonLinks }
+            </Grid>
         </Layout>
     );
 }

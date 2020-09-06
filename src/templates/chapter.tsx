@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
-import ListItem from "./listItem";
+import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
@@ -38,9 +38,9 @@ export default function ChapterTemplate({ pageContext, data }: ChapterData) {
         const buttonLink = node.fields.slug;
         const buttonText = "Lees meer";
         return (<Grid item xs={4}>
-                    <ListItem title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
+                    <SectionItem title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
                         { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
-                    </ListItem>
+                    </SectionItem>
                 </Grid>
             );
     }

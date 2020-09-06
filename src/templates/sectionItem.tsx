@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 
-interface ListItemProps {
+interface SectionItemProps {
     title: string;
     titleImg: string;
     buttonLink: string;
@@ -28,7 +28,7 @@ const StyledCard = styled(Card)`
     
 `;
 
-export default function ListItem({title, titleImg, buttonLink, buttonText, children}: ListItemProps) {
+export default function SectionItem({title, titleImg, buttonLink, buttonText, children}: SectionItemProps) {
     const imgData = useStaticQuery(graphql`
     {
       allFile(filter: { extension: { eq: "png" } }) {

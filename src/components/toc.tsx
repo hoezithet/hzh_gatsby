@@ -18,7 +18,7 @@ const TocLink = styled.a`
 `
 
 interface TocItems {
-    children: { items: [{url: string, title: string}] };
+    children: { items: {url: string, title: string}[] };
 }
 
 const Toc = ({ children }: TocItems) => (

@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 
 export interface HeaderProps {
-    crumbs: [{
+    crumbs: {
         slug: string;
         title: string;
-    }];
+    }[];
 }
 
 const BreadcrumbLink = styled(Link)`

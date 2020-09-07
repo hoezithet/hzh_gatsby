@@ -37,14 +37,18 @@ function renderContents(tree, contentsPath) {
         </SectionItem>
         );
     } else {
-        return <li><a href={ contentsNode.fields.slug }>{ contentsNode.frontmatter.title }</a></li>;
+        return <li><Link href={ contentsNode.fields.slug }>{ contentsNode.frontmatter.title }</Link></li>;
     }
+}
+
+export function compareContentKeys(k1, k2, tree) {
+    return _.get(tree, [k1, 'section']).frontmatter.weight - _.get(tree, [k2, 'section']).frontmatter.weight;
 }
 
 export function CourseChapters({treeContents}) {
     return (
     <Grid container spacing={2}>
-        { Object.keys(treeContents).map(p => renderContents(treeContents, [p])) }
+        { Object.keys(treeContents).sort((k1, k2) => compareContentKeys(k1, k2, treeContents)).map(p => renderContents(treeContents, [p])) }
     </Grid>
     );
 }

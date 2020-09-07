@@ -6,7 +6,7 @@ import { Link } from '@material-ui/core';
 import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
 import _ from "lodash";
-import { CourseChapters } from "./course";
+import { CourseChapters, compareContentKeys } from "./course";
 
 interface AllCoursesData {
     pageContext: {
@@ -24,7 +24,7 @@ export default function AllCoursesTemplate({ pageContext }: AllCoursesData) {
     return (
         <Layout crumbs={ crumbs }>
             <h1>{ title }</h1>
-            { Object.keys(courseTrees).map(p => <><h2>{_.get(tree, ['contents', p, 'section']).frontmatter.title }</h2> <CourseChapters treeContents={_.get(tree, ['contents', p, 'contents'])}/></> ) }
+            { Object.keys(courseTrees).sort((k1, k2) => compareContentKeys(k1, k2, courseTrees)).map(p => <><h2>{_.get(tree, ['contents', p, 'section']).frontmatter.title }</h2> <CourseChapters treeContents={_.get(tree, ['contents', p, 'contents'])}/></> ) }
         </Layout>
     );
 }

@@ -3,7 +3,7 @@ import { Breadcrumbs, Link } from '@material-ui/core';
 import styled from 'styled-components';
 
 
-export interface HeaderProps {
+export interface CrumbProps {
     crumbs: {
         slug: string;
         title: string;
@@ -14,7 +14,7 @@ const BreadcrumbLink = styled(Link)`
     color: inherit;
 `;
 
-const Header = ({ crumbs }: HeaderProps) => {
+const Crumbs = ({ crumbs }: CrumbProps) => {
 
     const breadCrumbLinks = crumbs.map(({ slug, title }, index) => {
         if (index < crumbs.length - 1) {
@@ -37,4 +37,4 @@ const Header = ({ crumbs }: HeaderProps) => {
     );
 }
 
-export default Header;
+export default Crumbs;

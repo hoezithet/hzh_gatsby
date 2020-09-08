@@ -77,6 +77,10 @@ const HzhContainer = styled(Container)`
     padding: ${muiTheme.spacing(2)}px;
 `;
 
+const HzhMain = styled.main`
+    margin-bottom: ${muiTheme.spacing(4)}px;
+`;
+
 const LogoImg = styled.img`
     height: ${muiTheme.typography.h4.fontSize};
     margin-right: ${muiTheme.spacing(1)}px;
@@ -114,7 +118,7 @@ const Layout = ({ children, crumbs }: LayoutProps) => {
             <HzhContainer maxWidth="md">
                 <>
                 <Header crumbs={ crumbs }/>
-                <main>{ children }</main>
+                <HzhMain>{ children }</HzhMain>
                 <Footer title="Hoe Zit Het? vzw"
                 subtitle="ON 0736.486.356 RPR Brussel"
                 facebookLink="https://www.facebook.com/hoezithet"

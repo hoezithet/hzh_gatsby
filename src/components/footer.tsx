@@ -21,13 +21,6 @@ IconLink.defaultProps = {
     rel: "noopener noreferrer",
 }
 
-interface FooterProps {
-    title: string;
-    subtitle: string;
-    githubLink: string;
-    facebookLink: string;
-    ccLink: string;
-}
 
 const FooterGrid = styled(Grid)`
 `;
@@ -58,28 +51,28 @@ FooterIcon.defaultProps = {
     xs: 1,
 }
 
-const Footer = ({ title, subtitle, ccLink, githubLink, facebookLink }: FooterProps) => {
+const Footer = () => {
     return (
         <FooterGrid>
             <FooterTitle>
-                {title}
+                Hoe Zit Het? vzw
             </FooterTitle>
             <FooterItem>
-                {subtitle}
+                ON 0736.486.356 RPR Brussel
             </FooterItem>
         <Grid container justify="center" >
             <FooterIcon>
-                <IconLink href={ccLink}>
+                <IconLink href="https://creativecommons.org/licenses/by-nc-sa/4.0/" >
                     <CCIcon/>
                 </IconLink>
             </FooterIcon>
             <FooterIcon>
-                <IconLink href={facebookLink}>
+                <IconLink href="https://www.facebook.com/hoezithet">
                     <Facebook/>
                 </IconLink>
             </FooterIcon>
             <FooterIcon>
-                <IconLink href={githubLink}>
+                <IconLink href="https://github.com/hoezithet/hoezithet">
                     <GitHub/>
                 </IconLink>
             </FooterIcon>

@@ -2,10 +2,17 @@ import React from "react";
 import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
+import { theme }  from "../components/theme";
 import { Link } from '@material-ui/core';
 import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
+import styled from "styled-components";
 import _ from "lodash";
+
+
+const LessonListItem = styled.li`
+    font-size: 12pt;
+`
 
 interface CourseData {
     pageContext: {
@@ -37,7 +44,13 @@ function renderContents(tree, contentsPath) {
         </SectionItem>
         );
     } else {
-        return <li><Link href={ contentsNode.fields.slug }>{ contentsNode.frontmatter.title }</Link></li>;
+        return (
+            <LessonListItem>
+                <Link href={ contentsNode.fields.slug }>
+                    { contentsNode.frontmatter.title }
+                </Link>
+            </LessonListItem>
+        );
     }
 }
 

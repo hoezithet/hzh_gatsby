@@ -26,7 +26,7 @@ const CardImg = styled(CardMedia)`
 `;
 
 const StyledCard = styled(Card)`
-    
+
 `;
 
 export default function SectionItem({title, titleImg, buttonLink, buttonText, children}: SectionItemProps) {
@@ -51,28 +51,22 @@ export default function SectionItem({title, titleImg, buttonLink, buttonText, ch
         file.node.absolutePath.includes(imgSlug)
     );
     return (
-    <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={4}>
             <StyledCard>
-      <CardActionArea>
-        <CardImg
-          image={ imgFile ? imgFile.node.publicURL : "" } 
-          title={ title }
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            { title }
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            { children }
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button href={ buttonLink } size="small" color="primary">
-            { buttonText }
-        </Button>
-      </CardActions>
-    </StyledCard>
-    </Grid>
-        );
+                <CardActionArea href={ buttonLink }>
+                    <CardImg
+                        image={ imgFile ? imgFile.node.publicURL : "" } 
+                        title={ title } />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                        { title }
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            { children }
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </StyledCard>
+        </Grid>
+    );
 }

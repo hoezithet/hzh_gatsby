@@ -35,7 +35,7 @@ export default function HzhAppBar({ children }) {
         <AppBar position="static">
             <Toolbar>
                 <Grid container justify="space-between" alignItems="center">
-                    <Grid item xs={ 6 } md={ 6 }>
+                    <Grid item xs={ 12 } md={ 6 }>
                         <Box justifyContent="center">
                             <LogoLink href="/" color="inherit" variant="h5">
                                 <LogoImg src={logo} alt="Hoe Zit Het? logo"/>

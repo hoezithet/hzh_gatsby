@@ -12,7 +12,7 @@ import { theme } from './theme';
 
 export interface LayoutProps {
     children: React.ReactNode;
-    crumbs: CrumbProps["crumbs"];
+    crumbs?: CrumbProps["crumbs"];
 }
 
 const HzhContainer = styled(Container)`
@@ -25,12 +25,13 @@ const HzhMain = styled.main`
 
 
 const Layout = ({ children, crumbs }: LayoutProps) => {
+    const breadCrumbs = crumbs ? <Crumbs crumbs={ crumbs }/> : <></>;
     return (
         <HzhTheme>
             <HzhAppBar />
             <HzhContainer maxWidth="md">
                 <>
-                <Crumbs crumbs={ crumbs }/>
+                { breadCrumbs }
                 <HzhMain>{ children }</HzhMain>
                 <Footer />
                 </>

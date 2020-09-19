@@ -70,3 +70,6 @@ yarn-error.log
 
 #VSCode workspace
 .vscode
+
+# Vim swap files
+*.swp

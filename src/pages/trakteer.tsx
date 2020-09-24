@@ -34,16 +34,12 @@ const TrakteerImg = styled.img`
 export default function Trakteer() {
     return (
         <Layout>
-            <h1>🥤 Trakteer ons!</h1>
+            <h1>🥤 Trakteer op een drankje!</h1>
             <Box width={ { xs: 3/4, md: 1/2 } } clone>
                 <TrakteerImg src={ donate } />
             </Box>
             <p>
-                Onze passie voor wetenschappen en wiskunde zorgt ervoor dat we met heel veel plezier hard werken aan <b>Hoe Zit Het?</b>.
-Om die passie te kunnen overbrengen naar zij die het het meeste nodig hebben, bieden we de lessen <b>voor iedereen gratis</b> aan. 🙌
-            </p>
-            <p>
-                Wil je ons graag steunen in ons doel? Dat kan! Via onderstaande knoppen kan je ons trakteren op een symbolisch drankje! 🥤 Jouw traktatie zal integraal worden gebruikt om onze website verder uit te breiden met meer lessen, meer illustraties en meer verlichte uitleg! 💡
+                Wil je Hoe Zit Het? graag steunen? Dat kan! Via onderstaande knoppen kan je Hoe Zit Het? trakteren op een symbolisch drankje! 🥤 Jouw traktatie zal integraal worden gebruikt om de website verder uit te breiden met meer lessen, meer illustraties en meer verlichte uitleg! 💡 Zo zorg jij er mee voor dat Hoe Zit Het? voor iedereen helemaal gratis kan blijven! 🙌
             </p>
 
             <Box my={ 4 }>
@@ -58,7 +54,7 @@ Om die passie te kunnen overbrengen naar zij die het het meeste nodig hebben, bi
                         🍻 Tournée Générale!
                     </TrakteerButton>
                     <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X8BH56ZVUG2BQ&source=url" amount="Eigen bedrag">
-                        Zelf iets kiezen
+                        🎁 Zelf iets kiezen
                     </TrakteerButton>
                 </Grid>
             </Box>

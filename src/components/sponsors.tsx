@@ -10,12 +10,12 @@ const SponsorImg = styled.img`
 export default function Sponsors() {
     return (
         <>
-        <h2>Wij worden met trots gesteund door</h2>
+        <h2>Hoe Zit Het? wordt met trots gesteund door</h2>
         <a href="https://www.kuleuven.be/kuleuven">
             <SponsorImg src={ kuLeuvenLogo } alt="KU Leuven sponsor" />
         </a>
         <p>
-            Wil jij ons ook steunen? Trakteer ons op een drankje! Ga daarvoor naar <a href="/trakteer">onze trakteer-pagina</a>.
+            Wil jij ook steunen? Trakteer Hoe Zit Het? op een drankje! 🥤 Ga daarvoor naar <a href="/trakteer">de trakteer-pagina</a>.
         </p>
         </>
     );

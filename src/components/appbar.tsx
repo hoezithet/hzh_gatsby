@@ -44,11 +44,11 @@ export default function HzhAppBar({ children }) {
                         </Box>
                     </Grid>
                     <PageButtonsGrid item >
-                        <Button href="/lessen">Onze lessen</Button>
+                        <Button href="/lessen">Lessen</Button>
                         <span>|</span>
-                        <Button href="/about">Wie zijn we?</Button>
+                        <Button href="/trakteer">Drankje trakteren</Button>
                         <span>|</span>
-                        <Button href="/trakteer">Trakteer ons!</Button>
+                        <Button href="/about">Over HZH</Button> 
                     </PageButtonsGrid>
                 </Grid>
             </Toolbar>

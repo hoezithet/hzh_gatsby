@@ -30,7 +30,7 @@ const PageButtonsGrid = styled(Grid)`
 `;
 
 
-export default function HzhAppBar({ children }) {
+export default function HzhAppBar() {
     return (
         <AppBar position="static">
             <Toolbar>

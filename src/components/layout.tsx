@@ -28,6 +28,7 @@ const Layout = ({ children, crumbs }: LayoutProps) => {
     const breadCrumbs = crumbs ? <Crumbs crumbs={ crumbs }/> : <></>;
     return (
         <HzhTheme>
+            <>
             <HzhAppBar />
             <HzhContainer maxWidth="md">
                 <>
@@ -36,12 +37,13 @@ const Layout = ({ children, crumbs }: LayoutProps) => {
                 <Footer />
                 </>
             </HzhContainer>
-        </HzhTheme>);
-    };
+            </>
+        </HzhTheme>
+    );
+};
     
-    Layout.propTypes = {
-        children: PropTypes.node.isRequired,
-    };
+Layout.propTypes = {
+    children: PropTypes.node.isRequired,
+};
     
-    export default Layout;
-    
+export default Layout;

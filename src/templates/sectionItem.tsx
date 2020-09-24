@@ -1,15 +1,11 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import { Link } from '@material-ui/core';
 import styled from "styled-components";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -18,7 +14,7 @@ interface SectionItemProps {
     titleImg: string;
     buttonLink: string;
     buttonText: string;
-    children: React.ReactElement;
+    children: React.ReactElement|string;
 }
 
 const CardImg = styled(CardMedia)`
@@ -29,7 +25,7 @@ const StyledCard = styled(Card)`
 
 `;
 
-export default function SectionItem({title, titleImg, buttonLink, buttonText, children}: SectionItemProps) {
+export default function SectionItem({title, titleImg, buttonLink, children}: SectionItemProps) {
     const imgData = useStaticQuery(graphql`
     {
       allFile(filter: { extension: { eq: "png" } }) {

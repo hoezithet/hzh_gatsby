@@ -1,8 +1,6 @@
 import React from "react";
-import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
-import { theme }  from "../components/theme";
 import { Link } from '@material-ui/core';
 import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
@@ -23,9 +21,13 @@ interface CourseData {
     }
 }
 
-function renderContents(tree, contentsPath) {
+interface CourseChapterProps {
+    treeContents: object;
+}
+
+function renderContents(tree: object, contentsPath: string[]) {
     const contentsNode = _.get(tree, contentsPath);
-    
+
     if ('section' in contentsNode) {
         const contSectionNode = _.get(tree, contentsPath.concat(['section']));
         const contContentsPath = contentsPath.concat(['contents']);
@@ -54,11 +56,11 @@ function renderContents(tree, contentsPath) {
     }
 }
 
-export function compareContentKeys(k1, k2, tree) {
+export function compareContentKeys(k1: string, k2: string, tree: object) {
     return _.get(tree, [k1, 'section']).frontmatter.weight - _.get(tree, [k2, 'section']).frontmatter.weight;
 }
 
-export function CourseChapters({treeContents}) {
+export function CourseChapters({treeContents}: CourseChapterProps) {
     return (
     <Grid container spacing={2}>
         { Object.keys(treeContents).sort((k1, k2) => compareContentKeys(k1, k2, treeContents)).map(p => renderContents(treeContents, [p])) }

@@ -7,7 +7,13 @@ import COLORS from "../colors";
 import donate from "../images/trakteer/donate.png";
 import styled from "styled-components";
 
-function TrakteerButton(props) {
+interface TrakteerProps {
+    children: React.ReactNode;
+    amount: string;
+    href: string;
+}
+
+function TrakteerButton(props: TrakteerProps) {
     return (
         <Grid item >
             <Grid container direction="column" justify="center" alignItems="center" spacing={ 1 }>

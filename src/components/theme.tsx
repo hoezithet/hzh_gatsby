@@ -56,8 +56,12 @@ export const theme = createMuiTheme({
     }
 });
 
+interface HzhThemeProps {
+    children: React.ReactElement;
+}
 
-export default function HzhTheme({ children }) {
+
+export default function HzhTheme({ children }: HzhThemeProps) {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />

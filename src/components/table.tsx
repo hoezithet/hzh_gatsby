@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { muiTheme } from '../components/layout';
 import COLORS from '../colors';
 
 const Table = styled.table`

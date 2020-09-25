@@ -1,4 +1,4 @@
-import { Link, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import { theme } from '../components/theme';
 import COLORS from '../colors';

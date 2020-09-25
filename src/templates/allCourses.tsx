@@ -1,10 +1,6 @@
 import React from "react";
-import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
-import { Link } from '@material-ui/core';
-import SectionItem from "./sectionItem";
-import Grid from '@material-ui/core/Grid';
 import _ from "lodash";
 import { CourseChapters, compareContentKeys } from "./course";
 
@@ -14,7 +10,7 @@ interface AllCoursesData {
         slug: string;
         title: string;
         tree: object;
-    }
+    };
 }
 
 

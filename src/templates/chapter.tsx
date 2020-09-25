@@ -2,21 +2,19 @@ import React from "react";
 import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
-import { Link } from '@material-ui/core';
 import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 interface ChapterData {
     pageContext: {
         crumbs: LayoutProps["crumbs"];
         slug: string;
         title: string;
-    }
+    };
     data: {
         allMdx: {
             nodes: {
-                fields: { slug: string; };
+                fields: { slug: string };
                 frontmatter: {
                     title: string;
                     description: string;
@@ -25,8 +23,8 @@ interface ChapterData {
                 fileAbsolutePath: string;
                 excerpt: string;
             }[];
-        }
-    }
+        };
+    };
 }
 
 export default function ChapterTemplate({ pageContext, data }: ChapterData) {
@@ -37,7 +35,7 @@ export default function ChapterTemplate({ pageContext, data }: ChapterData) {
         const titleImg = node.frontmatter.title_img;
         const buttonLink = node.fields.slug;
         const buttonText = "Lees meer";
-        return (<SectionItem title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
+        return (<SectionItem key={ title } title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
                     { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
                 </SectionItem>
             );

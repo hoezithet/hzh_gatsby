@@ -73,7 +73,13 @@ const ShowLessonButton = styled(Button)`
     font-size: 18pt;
 `;
 
-function WhyHzhItem(props) {
+interface WhyHzhItemProps {
+    children: React.ReactElement|string;
+    title: string;
+    img: string;
+}
+
+function WhyHzhItem(props: WhyHzhItemProps) {
     return (
         <Grid item xs={ 8 } sm={ 4 } md={ 3 }>
             <WhyHzhItemImgBox>
@@ -92,6 +98,7 @@ function WhyHzhItem(props) {
 export default function Landing() {
     return (
         <HzhTheme>
+            <>
             <HzhAppBar />
             <Box px={2} py={4} display="flex" justifyContent="center" >
                 <a href="/lessen/fysica/krachten_1/intro/">
@@ -122,6 +129,7 @@ export default function Landing() {
                 <Sponsors />
             </Box>
             <Footer />
+            </>
         </HzhTheme>
     );
 };

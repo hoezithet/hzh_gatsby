@@ -18,7 +18,7 @@ const TocLink = styled.a`
 `
 
 interface TocItems {
-    children: { items: {url: string, title: string}[] };
+    children: { items: {url: string; title: string}[] };
 }
 
 const Toc = ({ children }: TocItems) => (
@@ -26,7 +26,7 @@ const Toc = ({ children }: TocItems) => (
         <TocTitle>
             Inhoud
         </TocTitle>
-        <ul>{ children.items.map((item) => <li><TocLink href={item.url}>{item.title}</TocLink></li>) }</ul>
+        <ul>{ children.items.map((item) => <li key={ item.title }><TocLink href={item.url}>{item.title}</TocLink></li>) }</ul>
     </TocFrame>
 );
 

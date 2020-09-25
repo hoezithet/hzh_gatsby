@@ -1,9 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
-import theme from "../components/theme.";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import COLORS from "../colors";
 import styled from "styled-components";
 import demotivated from "../images/about/leerling_gedemotiveerd.png";
@@ -61,12 +58,12 @@ export default function About() {
         <AboutImg src={ bfg_lift } />
         <h1>Over de auteur</h1>
         <Grid container spacing={ 2 } justify="center">
-            <Grid item sx={ 12 } md={ 2 }>
+            <Grid item xs={ 12 } md={ 2 }>
                 <p>
                 <ProfileImg src={ floris } alt="Floris De Feyter, auteur van Hoe Zit Het?" />
                 </p>
             </Grid>
-            <Grid item sx={ 12 } md={ 10 }>
+            <Grid item xs={ 12 } md={ 10 }>
                 <>
                 <p>
                 Van opleiding ben ik industrieel ingenieur elektronica-ICT en momenteel ben ik bezig aan een doctoraat over computervisie. Afgelopen jaren heb ik in mijn vrije tijd heel wat bijlessen wiskunde en fysica gegeven. Het leukste daaraan was om de blik van de leerlingen te zien opklaren eens <q>het lichtje ging branden</q>. Dat wil ik met Hoe Zit Het? ook graag bereiken door mijn uiterste best te doen om de leerstof helder uit te leggen aan de hand van sprekende illustraties.

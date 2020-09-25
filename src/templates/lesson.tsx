@@ -11,7 +11,7 @@ import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
-import LayoutProps from "../components/layout";
+import { LayoutProps } from "../components/layout";
 
 const shortcodes = { Mute, Attention, Expand }
 
@@ -41,8 +41,7 @@ export default function Template(
     { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
 ) {
     const { mdx } = data; // data.mdx holds your post data
-    const { frontmatter, body, tableOfContents, fields } = mdx;
-    const { slug } = fields;
+    const { frontmatter, body, tableOfContents } = mdx;
     const { crumbs } = pageContext;
     
     return (

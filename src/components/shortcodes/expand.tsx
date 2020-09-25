@@ -4,8 +4,6 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography';
-import PropTypes from "prop-types";
 import COLORS from "../../colors";
 
 interface ExpandProps {
@@ -37,7 +35,7 @@ const Expand = ({ children }: ExpandProps) => (
 	<ExpandFrame>
 		<ExpandTitle expandIcon={<ExpandIcon/>}>
             { /* Get title from first child
-               * We can't use a seperate property (e.g. "title") for the title,
+               * We can't use a separate property (e.g. "title") for the title,
                * because then its markdown syntax will not be rendered */}
             <div>{ children[0].props.children }</div>
 		</ExpandTitle>

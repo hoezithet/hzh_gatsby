@@ -30,7 +30,7 @@ const Attention = ({ children }: AttentionProps) => (
     <Frame>
         <TitleBox>
             { /* Get title from first child
-               * We can't use a seperate property (e.g. "title") for the title,
+               * We can't use a separate property (e.g. "title") for the title,
                * because then its markdown syntax will not be rendered */}
             <div>{ children[0].props.children }</div>
         </TitleBox>

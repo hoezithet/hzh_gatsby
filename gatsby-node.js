@@ -61,6 +61,18 @@ function nodeToPath(node) {
 }
 
 /**
+ * Removes "section" or "contents" from the path of a node to get the common ancestor node path.
+ * @param { string[] } nodePath The node path.
+ */
+function popSectionOrContents(nodePath) {
+    const lastElement = nodePath.slice(-1)[0];
+    if (lastElement === "section" || lastElement === "contents") {
+        nodePath.pop();
+    }
+    return nodePath;
+}
+
+/**
  * Returns an array of lodash paths of the ancestors of the given node. The
  * first element is the path of closest ancestor to the node. The last
  * element is the path of the root ancestor node.
@@ -68,11 +80,8 @@ function nodeToPath(node) {
  * @return { String[][] } The lodash paths of the node's ancestors.
  */
 function nodeToParentPaths(node) {
-    const nodePath = nodeToPath(node);
-    const lastElement = nodePath.slice(-1)[0];
-    if (lastElement === "section" || lastElement === "contents") {
-        nodePath.pop();
-    }
+    const nodePath = popSectionOrContents(nodeToPath(node));
+
     const parentPaths = [];
     for (let i = 1; i < nodePath.length; i += 2) {
         const parentPath = nodePath.slice(0, -i);
@@ -82,6 +91,35 @@ function nodeToParentPaths(node) {
     }
 
     return parentPaths;
+}
+
+/**
+ * Returns an array of lodash paths of the children of the given node.
+ * @param { MdxNode } node The MDX node.
+ * @param { object } contentTree The content tree that contains the node and all
+ * @return { String[][] } The lodash paths of the node's children.
+ */
+function nodeToChildPaths(node, contentTree) {
+    const nodePath = popSectionOrContents(nodeToPath(node));
+    nodePath.push("contents");
+    const contentsNode = _.get(contentTree, nodePath);
+    const childPaths = Object.keys(contentsNode).map(k => [...nodePath, k]);
+    childPaths.sort((p1, p2) => _.get(contentTree, p1).frontmatter.weight - _.get(contentTree, p2).frontmatter.weight);
+    return childPaths;
+}
+
+/**
+ * Returns an array of lodash paths of the siblings of the given node. The
+ * siblings are ordered according to their weight and include the node itself.
+ * @param { MdxNode } node The MDX node.
+ * @param { object } contentTree The content tree that contains the node and all
+ * other content and section nodes.
+ * @return { String[][] } The lodash paths of the node's siblings.
+ */
+function nodeToSiblingPaths(node, contentTree) {
+    const parentPath = nodeToParentPaths(node)[0];
+    const parentNode = _.get(contentTree, parentPath);
+    return nodeToChildPaths(parentNode, contentTree);
 }
 
 /**
@@ -143,6 +181,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                         frontmatter {
                             title
                             weight
+                            title_img
                         }
                     }
                 }
@@ -167,6 +206,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 context: {
                     filePath: node.fileAbsolutePath,
                     crumbs: nodeToCrumbs(node, contentTree),
+                    siblings: nodeToSiblingPaths(node, contentTree).map(p => _.get(contentTree, p)),
                 },
             });
         } else if (isChapter(node)) {

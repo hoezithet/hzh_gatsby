@@ -9,9 +9,11 @@ import { Expand } from "../components/shortcodes/expand";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import { Link } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
+import SectionItem from "./sectionItem";
 
 const shortcodes = { Mute, Attention, Expand }
 
@@ -34,6 +36,7 @@ export interface LessonData {
     };
     pageContext: {
       crumbs: LayoutProps["crumbs"];
+      siblings: object[];
     };
 }
 
@@ -41,8 +44,25 @@ export default function Template(
     { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
 ) {
     const { mdx } = data; // data.mdx holds your post data
-    const { frontmatter, body, tableOfContents } = mdx;
-    const { crumbs } = pageContext;
+    const { frontmatter, body, tableOfContents, fields } = mdx;
+    const { crumbs, siblings } = pageContext;
+    const siblingSlugs = siblings.map(s => s.fields.slug);
+    const pageIdx = siblingSlugs.findIndex(s => s === fields.slug);
+    const prevSibling = pageIdx - 1 >= 0 ? siblings[pageIdx - 1] : null;
+    const nextSibling = pageIdx + 1 < siblings.length ? siblings[pageIdx + 1] : null;
+    const prevSiblingCard = (
+      prevSibling ? 
+      <SectionItem title={ `👈 Vorige les: ${prevSibling.frontmatter.title}` } titleImg={prevSibling.frontmatter.title_img } buttonLink={prevSibling.fields.slug} />
+      :
+      <></>
+    );
+    
+    const nextSiblingCard = (
+      nextSibling ? 
+      <SectionItem title={ `Volgende les: ${nextSibling.frontmatter.title} 👉` } titleImg={nextSibling.frontmatter.title_img } buttonLink={nextSibling.fields.slug} />
+      :
+      <></>
+    );
     
     return (
         <Layout crumbs={ crumbs }>
@@ -55,6 +75,10 @@ export default function Template(
                   <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
             </MDXProvider>
+            <Grid container spacing={ 2 } justify="space-between">
+                { prevSiblingCard }
+                { nextSiblingCard }
+            </Grid>
         </Layout>
     );
 }

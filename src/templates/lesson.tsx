@@ -8,8 +8,10 @@ import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
+import Sponsors from '../components/sponsors';
 import { Link } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
@@ -79,6 +81,9 @@ export default function Template(
                 { prevSiblingCard }
                 { nextSiblingCard }
             </Grid>
+            <Box my={ 4 } textAlign="center" justifyContent="center">
+                <Sponsors />
+            </Box>
         </Layout>
     );
 }

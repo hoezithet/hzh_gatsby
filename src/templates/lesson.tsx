@@ -15,6 +15,7 @@ import Box from '@material-ui/core/Box';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
+import Comments from "../components/comments";
 import SectionItem from "./sectionItem";
 
 const shortcodes = { Mute, Attention, Expand }
@@ -84,6 +85,7 @@ export default function Template(
             <Box my={ 4 } textAlign="center" justifyContent="center">
                 <Sponsors />
             </Box>
+            <Comments />
         </Layout>
     );
 }

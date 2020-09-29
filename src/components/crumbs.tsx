@@ -18,11 +18,11 @@ const Crumbs = ({ crumbs }: CrumbProps) => {
 
     const breadCrumbLinks = crumbs.map(({ slug, title }, index) => {
         if (index < crumbs.length - 1) {
-            return (<BreadcrumbLink href={ slug }>
+            return (<BreadcrumbLink href={ slug } key={ slug }>
                         { title }
                     </BreadcrumbLink>);
         } else {
-            return (<BreadcrumbLink href={ slug } aria-current="page">
+            return (<BreadcrumbLink href={ slug } aria-current="page" key={ slug }>
                         { title }
                     </BreadcrumbLink>);
         }

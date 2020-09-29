@@ -5,7 +5,7 @@ interface BokehProps {
     plot: string
 }
 
-export default function Bokeh(props: BokehProps) {
+export function Bokeh(props: BokehProps) {
     const { plot } = props;
     const id = `${plot.replace(".json", "")}_${Math.random().toString(36).substring(2)}`;
     return (

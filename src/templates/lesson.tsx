@@ -6,6 +6,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Mute } from "../components/shortcodes/mute";
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
+import { Bokeh } from "../components/shortcodes/bokeh";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
@@ -18,7 +19,7 @@ import { LayoutProps } from "../components/layout";
 import Comments from "../components/comments";
 import SectionItem from "./sectionItem";
 
-const shortcodes = { Mute, Attention, Expand }
+const shortcodes = { Mute, Attention, Expand, Bokeh }
 
 const components = {
     a: Link,

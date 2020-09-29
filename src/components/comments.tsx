@@ -9,7 +9,8 @@ export default function Comments() {
         <Helmet>
             <script defer
                 src="https://commento.hoezithet.nu/js/commento.js"
-                data-no-fonts="true">
+                data-no-fonts="true"
+                data-css-override="/css/commento.css">
             </script>
             <script>
                 {`

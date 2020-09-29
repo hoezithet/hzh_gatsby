@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby"
 
 interface BokehProps {
     plot: string
@@ -8,6 +9,29 @@ interface BokehProps {
 export function Bokeh(props: BokehProps) {
     const { plot } = props;
     const id = `${plot.replace(".json", "")}_${Math.random().toString(36).substring(2)}`;
+
+    const data = useStaticQuery(graphql`
+    {
+      allFile(filter: {absolutePath: {glob: "**/${ plot.replace(".json", "") }.*"}}) {
+          edges {
+              node {
+                  publicURL
+              }
+          }
+      }
+    }`);
+
+    if (data.allFile.edges.length === 0) {
+        return <></>;
+    }
+
+    const plotURL = data.allFile.edges.find( ({ node }) => 
+        node.publicURL.split(".").pop() === "json"
+    );
+    const plotImgURL = data.allFile.edges.find( ({ node }) => 
+        node.publicURL.split(".").pop() === "png"
+    );
+
     return (
         <>
         <Helmet>
@@ -29,13 +53,13 @@ export function Bokeh(props: BokehProps) {
                         }
                     }
                 };
-                xmlhttp.open("GET", "${ plot }", true);
+                xmlhttp.open("GET", "${ plotURL }", true);
                 xmlhttp.send(); 
             `}
             </script>
         </Helmet>
         <div id={ id }>
-            <img src={ plot.replace(".json", ".png") } />
+            <img src={ plotImgURL } />
         </div>
         </>
     );

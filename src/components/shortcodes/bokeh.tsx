@@ -6,16 +6,28 @@ interface BokehProps {
     plot: string
 }
 
+interface PlotData {
+    allFile: {
+        edges: {
+            node: {
+                publicURL: string;
+                absolutePath: string;
+            }
+        }[]
+    }
+}
+
 export function Bokeh(props: BokehProps) {
     const { plot } = props;
-    const id = `${plot.replace(".json", "")}_${Math.random().toString(36).substring(2)}`;
+    const id = `_${plot.replace("/", "")}_${Math.random().toString(36).substring(2)}`;
 
-    const data = useStaticQuery(graphql`
+    const data: PlotData = useStaticQuery(graphql`
     {
-      allFile(filter: {absolutePath: {glob: "**/${ plot.replace(".json", "") }.*"}}) {
+      allFile(filter: {absolutePath: {glob: "**/plt/*.(json|png)"}}) {
           edges {
               node {
                   publicURL
+                  absolutePath
               }
           }
       }
@@ -25,36 +37,37 @@ export function Bokeh(props: BokehProps) {
         return <></>;
     }
 
-    const plotURL = data.allFile.edges.find( ({ node }) => 
-        node.publicURL.split(".").pop() === "json"
+    const plotJsonEdge = data.allFile.edges.find( ({ node }) =>
+        node.absolutePath.endsWith(`${plot}.json`)
     );
-    const plotImgURL = data.allFile.edges.find( ({ node }) => 
-        node.publicURL.split(".").pop() === "png"
+    const plotImgEdge = data.allFile.edges.find( ({ node }) => 
+        node.absolutePath.endsWith(`${plot}.png`)
     );
+
+    if (!plotJsonEdge || !plotImgEdge) {
+        return <></>;
+    }
+
+    const plotJsonURL = plotJsonEdge.node.publicURL;
+    const plotImgURL = plotImgEdge.node.publicURL;
 
     return (
         <>
         <Helmet>
-            <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.2.min.css" type="text/css" />
-            <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.2.min.js">
-            </script>
-            <script type="text/javascript" async
-                src="https://cdn.pydata.org/bokeh/release/bokeh-api-1.0.2.min.js">
-            </script>
             <script type="text/javascript">
             {`
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var item = JSON.parse(this.responseText);
-                        if(typeof Bokeh !== 'undefined') {
-                            document.getElementById("${id}").innerHTML = '';
-                            Bokeh.embed.embed_item(item, "${ id }");
-                        }
-                    }
-                };
-                xmlhttp.open("GET", "${ plotURL }", true);
-                xmlhttp.send(); 
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var item = JSON.parse(this.responseText);
+						if(typeof Bokeh !== 'undefined') {
+							document.getElementById("${id}").innerHTML = '';
+							Bokeh.embed.embed_item(item, "${id}");
+						}
+					}
+				};
+				xmlhttp.open("GET", "${plotJsonURL}", true);
+				xmlhttp.send(); 
             `}
             </script>
         </Helmet>

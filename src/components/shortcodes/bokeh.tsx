@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby"
+import Grid from "@material-ui/core/Grid";
 
 interface BokehProps {
     plot: string
@@ -71,9 +72,13 @@ export function Bokeh(props: BokehProps) {
             `}
             </script>
         </Helmet>
-        <div id={ id }>
-            <img src={ plotImgURL } />
-        </div>
+        <Grid container justify="center" >
+        <Grid item xs={ 10 } md={ 6 }>
+            <div id={ id }> 
+                <img src={ plotImgURL } />
+            </div>
+        </Grid>
+        </Grid>
         </>
     );
 }

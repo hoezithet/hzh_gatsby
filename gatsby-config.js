@@ -115,12 +115,7 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-material-ui`,
-            options: {
-                stylesProvider: {
-                    injectFirst: true,
-                },
-            },
+            resolve: `gatsby-theme-material-ui`,
         },
         `gatsby-plugin-styled-components`,
     ],

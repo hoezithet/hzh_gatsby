@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
-import { Link } from '@material-ui/core';
+import { Link } from "gatsby-theme-material-ui";
 import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
 import styled from "styled-components";
@@ -48,7 +48,7 @@ function renderContents(tree: object, contentsPath: string[]) {
     } else {
         return (
             <LessonListItem>
-                <Link href={ contentsNode.fields.slug }>
+                <Link to={ contentsNode.fields.slug }>
                     { contentsNode.frontmatter.title }
                 </Link>
             </LessonListItem>

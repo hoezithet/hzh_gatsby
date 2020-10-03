@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from '../components/layout';
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+import { Button } from "gatsby-theme-material-ui";
 import Box from "@material-ui/core/Box";
 import COLORS from "../colors";
 import donate from "../images/trakteer/donate.png";

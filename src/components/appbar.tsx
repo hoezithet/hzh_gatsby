@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { theme } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
+import { Button, Link } from "gatsby-theme-material-ui";
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import logo from "../images/logo_header.png";
@@ -37,18 +36,18 @@ export default function HzhAppBar() {
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item xs={ 12 } md={ 6 }>
                         <Box justifyContent="center">
-                            <LogoLink href="/" color="inherit" variant="h5">
+                            <LogoLink to="/" color="inherit" variant="h5">
                                 <LogoImg src={logo} alt="Hoe Zit Het? logo"/>
                                 Hoe Zit Het?
                             </LogoLink>
                         </Box>
                     </Grid>
                     <PageButtonsGrid item >
-                        <Button href="/lessen">Lessen</Button>
+                        <Button to="/lessen">Lessen</Button>
                         <span>|</span>
-                        <Button href="/trakteer">Drankje trakteren</Button>
+                        <Button to="/trakteer">Drankje trakteren</Button>
                         <span>|</span>
-                        <Button href="/about">Over HZH</Button> 
+                        <Button to="/about">Over HZH</Button> 
                     </PageButtonsGrid>
                 </Grid>
             </Toolbar>

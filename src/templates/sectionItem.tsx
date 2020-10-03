@@ -2,11 +2,11 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { CardActionArea } from "gatsby-theme-material-ui";
 
 
 interface SectionItemProps {
@@ -49,7 +49,7 @@ export default function SectionItem({title, titleImg, buttonLink, children}: Sec
     return (
         <Grid item xs={12} sm={4}>
             <StyledCard>
-                <CardActionArea href={ buttonLink }>
+                <CardActionArea to={ buttonLink }>
                     <CardImg
                         image={ imgFile ? imgFile.node.publicURL : "" } 
                         title={ title } />

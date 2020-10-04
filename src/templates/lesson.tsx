@@ -15,6 +15,7 @@ import Sponsors from '../components/sponsors';
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
@@ -82,10 +83,12 @@ export default function Template(
                   <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
             </MDXProvider>
-            <Grid container spacing={ 2 } justify="space-between">
-                { prevSiblingCard }
-                { nextSiblingCard }
-            </Grid>
+            <Box my={ 4 }>
+                <Grid container spacing={ 2 } justify="space-between">
+                    { prevSiblingCard }
+                    { nextSiblingCard }
+                </Grid>
+            </Box>
             <Box my={ 4 } textAlign="center" justifyContent="center">
                 <Sponsors />
             </Box>

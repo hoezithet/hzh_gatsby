@@ -12,7 +12,6 @@ import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
 
 
-import MarkdownLink from '../components/mdlink';
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -26,7 +25,7 @@ const shortcodes = { Mute, Attention, Expand, Bokeh }
 
 
 const components = {
-    a: MarkdownLink,
+    a: Link,
     blockquote: BlockquoteBox,
     table: Table,
 }

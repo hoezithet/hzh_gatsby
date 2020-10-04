@@ -118,5 +118,6 @@ module.exports = {
             resolve: `gatsby-theme-material-ui`,
         },
         `gatsby-plugin-styled-components`,
+        `gatsby-plugin-catch-links`,
     ],
 };

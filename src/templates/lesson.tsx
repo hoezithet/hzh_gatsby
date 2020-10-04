@@ -10,7 +10,9 @@ import { Bokeh } from "../components/shortcodes/bokeh";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
-import { Link } from '@material-ui/core';
+
+
+import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import BlockquoteBox from "../components/blockquote";
@@ -20,6 +22,7 @@ import Comments from "../components/comments";
 import SectionItem from "./sectionItem";
 
 const shortcodes = { Mute, Attention, Expand, Bokeh }
+
 
 const components = {
     a: Link,

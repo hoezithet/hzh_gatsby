@@ -10,8 +10,9 @@ import free from "../images/landing/free.png";
 import guts from "../images/landing/guts.png";
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import styled from "styled-components";
+import { Button, Link } from "gatsby-theme-material-ui";
+
 
 const LandingImg = styled.img`
     margin: auto;
@@ -101,9 +102,9 @@ export default function Landing() {
             <>
             <HzhAppBar />
             <Box px={2} py={4} display="flex" justifyContent="center" >
-                <a href="/lessen/fysica/krachten_1/intro/">
+                <Link to="/lessen/fysica/krachten_1/intro/">
                     <LandingImg src={landingImg} />
-                </a>
+                </Link>
             </Box>
             <Box id="why" textAlign="center" justifyContent="center">
                 <WhyHzhTitle>Waarom <WhyHzhTitleSpan>Hoe Zit Het?</WhyHzhTitleSpan></WhyHzhTitle>
@@ -122,7 +123,7 @@ export default function Landing() {
                             Omdat iedereen recht heeft op kennis, zijn alle lessen gratis. Voor vandaag. Voor morgen. Voor altijd.
                         </WhyHzhItem>
                     </WhyHzhGrid>
-                    <ShowLessonButton variant="contained" color="primary" size="large" href="/lessen/fysica/krachten_1/intro/">
+                    <ShowLessonButton variant="contained" color="primary" size="large" to="/lessen/fysica/krachten_1/intro/">
                         Toon mij een voorbeeld!
                     </ShowLessonButton>
                 </WhyHzhBox>

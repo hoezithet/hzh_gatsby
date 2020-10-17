@@ -1,63 +1,100 @@
 import React from 'react';
-import { useStaticQuery, graphql } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 import Img from "gatsby-image";
 
-
-function Image(props) {
-    const imgData = useStaticQuery(graphql`
+const allImgsQuery = graphql`
     {
-      allFile(filter: { extension: { eq: "png" } }) {
-        edges {
-          node {
-            childImageSharp {
-              fluid(maxWidth: 500) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-              }
+        allFile(filter: { extension: { eq: "png" } }) {
+            edges {
+            node {
+                childImageSharp {
+                fluid(maxWidth: 500) {
+                    ...GatsbyImageSharpFluid_tracedSVG
+                }
+                }
+                publicURL
+                absolutePath
             }
-            publicURL
-            absolutePath
-          }
+            }
         }
-      }
     }
-    `);
-    
+`;
+
+function getImageComponent(fluid, publicURL: string, alt: string) {
+    return (
+        <a href={publicURL}>
+            <Img loading="eager" fluid={fluid} alt={alt} />
+        </a>
+    );
+}
+
+function renderStrippedImage(imgData, props) {
     const imgEdge = imgData.allFile.edges.find(({ node }) =>
         node.absolutePath.endsWith(props.src)
     );
-
     const absPath = imgEdge.node.absolutePath;
     const strippedAbsPath = absPath.replace(/\.[^.]+$/, '_stripped.png');
     const strippedImgEdge = imgData.allFile.edges.find(({ node }) =>
         node.absolutePath === strippedAbsPath
     );
+    if (strippedImgEdge !== undefined) {
+        const node = strippedImgEdge.node;
+        return getImageComponent(node.childImageSharp.fluid, node.publicURL, props.alt);
+    } else {
+        return null;
+    }
+}
 
-    const useStripped = strippedImgEdge !== undefined;
-
-    const node = useStripped ? strippedImgEdge.node : imgEdge.node;
-
-    const explanationSwitch = (
-            <Grid xs={ 12 } item>
-                <Switch />
-                <span>Toon uitleg</span>
-            </Grid>
+function renderRegularImage(imgData, props) {
+    const imgEdge = imgData.allFile.edges.find(({ node }) =>
+        node.absolutePath.endsWith(props.src)
     );
+    const node = imgEdge.node;
+    return getImageComponent(node.childImageSharp.fluid, node.publicURL, props.alt);
+}
 
-    return (
-        <Grid container>
-            <Grid xs={ 12 } item>
-                <Box maxWidth={ 500 } margin={ "auto" }>
-                    <a href={node.publicURL}>
-                        <Img fluid={node.childImageSharp.fluid} alt={props.alt} />
-                    </a>
-                </Box>
-            </Grid>
-            { useStripped ? explanationSwitch : null }
-        </Grid>
-    );
+class Image extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {showStripped: true};
+    }
+
+    switchPressed(event) {
+        this.setState({showStripped: !event.target.checked})
+    }
+
+    render() {
+        return <StaticQuery
+                query={ allImgsQuery }
+        render={imgData => {
+            const image = renderRegularImage(imgData, this.props);
+            const strippedImg = renderStrippedImage(imgData, this.props);
+
+            const useStripped = strippedImg !== null;
+
+            const explanationSwitch = (
+                    <Grid xs={ 12 } item>
+                        <Switch onChange={e => this.switchPressed(e)} />
+                        <span>Toon uitleg</span>
+                    </Grid>
+            );
+
+            return (
+                <Grid container>
+                    <Grid xs={ 12 } item>
+                        <Box maxWidth={ 500 } margin={ "auto" }>
+                            { useStripped && this.state.showStripped ? strippedImg : image }
+                        </Box>
+                    </Grid>
+                    { useStripped ? explanationSwitch : null }
+                </Grid>
+            );
+        }
+        } />;
+    }
 }
 
 export default Image;

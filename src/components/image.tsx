@@ -77,8 +77,14 @@ class Image extends React.Component {
 
             const explanationSwitch = (
                     <Grid xs={ 12 } item>
-                        <Switch onChange={e => this.switchPressed(e)} />
-                        <span>Toon uitleg</span>
+                        <Grid container justify="flex-end" alignItems="center">
+                            <Grid item>
+                                <Switch color="primary" onChange={e => this.switchPressed(e)} />
+                            </Grid>
+                            <Grid item>
+                                <span>Toon uitleg</span>
+                            </Grid>
+                        </Grid>
                     </Grid>
             );
 

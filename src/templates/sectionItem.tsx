@@ -7,6 +7,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { CardActionArea } from "gatsby-theme-material-ui";
+import Img from "gatsby-image/withIEPolyfill";
+import COLORS from "../colors.js";
 
 
 interface SectionItemProps {
@@ -17,7 +19,8 @@ interface SectionItemProps {
     children: React.ReactElement|string;
 }
 
-const CardImg = styled(CardMedia)`
+const StyledGrid = styled(Grid)`
+    background-color: ${COLORS.NEAR_WHITE};
     height: 140px;
 `;
 
@@ -31,6 +34,11 @@ export default function SectionItem({title, titleImg, buttonLink, children}: Sec
       allFile(filter: { extension: { eq: "png" } }) {
         edges {
           node {
+            childImageSharp {
+                fixed(height: 140) {
+                    ...GatsbyImageSharpFixed_tracedSVG
+                }
+            }
             publicURL
             absolutePath
           }
@@ -50,9 +58,12 @@ export default function SectionItem({title, titleImg, buttonLink, children}: Sec
         <Grid item xs={12} sm={4}>
             <StyledCard>
                 <CardActionArea to={ buttonLink }>
-                    <CardImg
-                        image={ imgFile ? imgFile.node.publicURL : "" } 
-                        title={ title } />
+                    <StyledGrid container justify="center">
+                        <Grid item>
+                            <Img fixed={ imgFile ? imgFile.node.childImageSharp.fixed: "" }
+                            objectFit="cover" objectPosition="50% 50%" />
+                        </Grid>
+                    </StyledGrid>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                         { title }

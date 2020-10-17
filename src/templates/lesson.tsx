@@ -10,6 +10,7 @@ import { Bokeh } from "../components/shortcodes/bokeh";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
+import Image from "../components/image";
 
 
 import { Link } from 'gatsby-theme-material-ui';
@@ -29,6 +30,7 @@ const components = {
     a: Link,
     blockquote: BlockquoteBox,
     table: Table,
+    img: Image,
 }
 
 export interface MdxNode {

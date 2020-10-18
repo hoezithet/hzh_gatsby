@@ -31,6 +31,7 @@ const components = {
 export interface MdxNode {
     frontmatter: { title: string };
     body: string;
+    fields: { slug: string };
 }
 
 export interface LessonData {
@@ -43,11 +44,16 @@ export default function Template(
     { data }: LessonData
 ) {
     const { mdx } = data;
-    const { frontmatter, body } = mdx;
+    const { frontmatter, body, fields } = mdx;
+    const absURL = `https://hoezithet.nu${fields.slug}`;
 
     return (
         <HzhTheme>
             <h1>{frontmatter.title}</h1>
+            <p>
+                <span>Bron: </span>
+                <Link to={ absURL }>{ absURL }</Link>
+            </p>
             <MDXProvider components={ shortcodes }>
               <MDXProvider components={ components }>
                   <MDXRenderer>{body}</MDXRenderer>
@@ -67,6 +73,9 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+      }
+      fields {
+        slug
       }
     }
   }

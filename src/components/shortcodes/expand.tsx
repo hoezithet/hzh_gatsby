@@ -18,7 +18,7 @@ const ExpandFrame = styled(Accordion)`
     margin: 10px 0px;
 `
 
-const ExpandTitle = styled(AccordionSummary)`
+const StyledAccSummary = styled(AccordionSummary)`
     font-weight: bold;
     color: ${COLORS.DARK_GRAY};
 `
@@ -27,22 +27,49 @@ const ExpandIcon = styled(ExpandMoreIcon)`
     color: ${COLORS.DARK_GRAY};
 `
 
-const ExpandBody = styled(AccordionDetails)`
+const StyledAccDetails = styled(AccordionDetails)`
     display: block;
 `
 
-const Expand = ({ children }: ExpandProps) => (
-	<ExpandFrame>
-		<ExpandTitle expandIcon={<ExpandIcon/>}>
+function ExpandTitle({ children }: ExpandProps) {
+    return (
+        <StyledAccSummary expandIcon={<ExpandIcon/>}>
             { /* Get title from first child
                * We can't use a separate property (e.g. "title") for the title,
                * because then its markdown syntax will not be rendered */}
             <div>{ children[0].props.children }</div>
-		</ExpandTitle>
-		<ExpandBody>
+		</StyledAccSummary>
+    );
+}
+
+function ExpandBody({ children }: ExpandProps) {
+    return (
+        <StyledAccDetails>
 			{ children.slice(1) }
-		</ExpandBody>
+		</StyledAccDetails>
+    );
+}
+
+const Expand = ({ children }: ExpandProps) => (
+	<ExpandFrame>
+	    <ExpandTitle>
+	        { children }
+	    </ExpandTitle>
+	    <ExpandBody>
+	        { children }
+	    </ExpandBody> 
 	</ExpandFrame>
 );
 
-export { Expand };
+const ExpandBare = ({ children }: ExpandProps) => (
+    <ExpandFrame expanded={ true } >
+	    <ExpandTitle>
+	        { children }
+	    </ExpandTitle>
+	    <ExpandBody>
+	        { children }
+	    </ExpandBody> 
+	</ExpandFrame>
+);
+
+export { Expand, ExpandBare };

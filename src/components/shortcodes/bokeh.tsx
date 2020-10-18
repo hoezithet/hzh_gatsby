@@ -18,9 +18,8 @@ interface PlotData {
     }
 }
 
-export function Bokeh(props: BokehProps) {
+function getPlotUrl(props: BokehProps) {
     const { plot } = props;
-    const id = `_${plot.replace("/", "")}_${Math.random().toString(36).substring(2)}`;
 
     const data: PlotData = useStaticQuery(graphql`
     {
@@ -35,7 +34,7 @@ export function Bokeh(props: BokehProps) {
     }`);
 
     if (data.allFile.edges.length === 0) {
-        return <></>;
+        return null;
     }
 
     const plotJsonEdge = data.allFile.edges.find( ({ node }) =>
@@ -51,7 +50,23 @@ export function Bokeh(props: BokehProps) {
 
     const plotJsonURL = plotJsonEdge.node.publicURL;
     const plotImgURL = plotImgEdge.node.publicURL;
+    return {jsonURL: plotJsonURL, imgURL: plotImgURL};
+}
 
+export function BokehBare(props: BokehProps) {
+    const { imgURL } = getPlotUrl(props);
+    return (
+        <Grid container justify="center" >
+            <Grid item >
+                <img src={ imgURL } />
+            </Grid>
+        </Grid>
+    );
+}
+
+export function Bokeh(props: BokehProps) {
+    const id = `_${props.plot.replace("/", "")}_${Math.random().toString(36).substring(2)}`;
+    const {jsonURL, imgURL} = getPlotUrl(props);
     return (
         <>
         <Helmet>
@@ -67,7 +82,7 @@ export function Bokeh(props: BokehProps) {
 						}
 					}
 				};
-				xmlhttp.open("GET", "${plotJsonURL}", true);
+				xmlhttp.open("GET", "${jsonURL}", true);
 				xmlhttp.send(); 
             `}
             </script>
@@ -75,7 +90,7 @@ export function Bokeh(props: BokehProps) {
         <Grid container justify="center" >
         <Grid item xs={ 10 } md={ 6 }>
             <div id={ id }> 
-                <img src={ plotImgURL } />
+                <img src={ imgURL } />
             </div>
         </Grid>
         </Grid>

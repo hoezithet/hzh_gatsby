@@ -209,6 +209,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     siblings: nodeToSiblingPaths(node, contentTree).map(p => _.get(contentTree, p)),
                 },
             });
+            createPage({
+                path: `/bare${node.fields.slug}`,
+                component: require.resolve("./src/templates/lesson_bare.tsx"),
+                context: {
+                    filePath: node.fileAbsolutePath,
+                },
+            });
         } else if (isChapter(node)) {
             createPage({
                 path: node.fields.slug,

@@ -25,31 +25,34 @@ class FeedbackItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            button: <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick.bind(this) }>{ this.props.children }</Button>
+            disabled: false
         }
         this.disable = this.disable.bind(this);
     }
-
+    
     disable() {
-        this.state.button.disabled = true;
+        this.setState({ disabled: true});
     }
 
     render() {
         return (
-            <Grid container spacing={ 2 } alignItems="center" direction="column">
-                <Grid item >
-                    <Img fixed={ this.props.node.childImageSharp.fixed } />
-                </Grid>
-                <Grid item >
-                    { this.state.button }
-                </Grid>
-            </Grid>
+            <StaticQuery query={ feedbackBtnsQuery }
+            render={ imgData => {
+                const node = imgData.allFile.edges.find(({ node }) => node.name === this.props.imgName).node;
+                return (
+                    <Grid container spacing={ 2 } alignItems="center" direction="column">
+                        <Grid item >
+                            <Img fixed={ node.childImageSharp.fixed } />
+                        </Grid>
+                        <Grid item >
+                            <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick.bind(this) } disabled={ this.state.disabled }>{ this.props.children }</Button>
+                        </Grid>
+                    </Grid>
+                );
+            }
+            } />
         );
     }
-}
-
-function getLampImgNode(imgData, img_name: string) {
-    return imgData.allFile.edges.find(({ node }) => node.name === img_name).node;
 }
 
 export default class Feedback extends React.Component {
@@ -73,28 +76,26 @@ export default class Feedback extends React.Component {
                 text: "Heel duidelijk",
             },
         ];
-        const buttons = btnProps.map(({imgName, id, text}) =>
-            <StaticQuery query={ feedbackBtnsQuery }
-            render={ imgData =>
-                <FeedbackItem node={ getLampImgNode(imgData, imgName) } id={ id } onClick={ this.handleClick }>{ text }</FeedbackItem> 
-            } />
+
+        const fbItems = btnProps.map(({imgName, id, text}) =>
+            <FeedbackItem imgName={ imgName } id={ id } onClick={ this.handleClick }>{ text }</FeedbackItem>
         );
         
         this.state = {
-            buttons: buttons
+            feedbackItems: fbItems,
         };
     }
     
     handleClick() {
-        this.state.buttons.forEach(b => b.disable())
+        this.state.feedbackItems.forEach(i => i.disable())
     }
-    
+
     render() {
         return (
             <>
                 <h2>Hoe duidelijke vond je deze les?</h2>
                 <Grid container spacing={ 2 }>
-                    { this.state.buttons.map(b =>
+                    { this.state.feedbackItems.map(b =>
                     <Grid item xs={ 4 }>
                         { b }
                     </Grid>) }

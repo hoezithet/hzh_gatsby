@@ -22,18 +22,6 @@ const feedbackBtnsQuery = graphql`
 `;
 
 class FeedbackItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            disabled: false
-        }
-        this.disable = this.disable.bind(this);
-    }
-    
-    disable() {
-        this.setState({ disabled: true});
-    }
-
     render() {
         return (
             <StaticQuery query={ feedbackBtnsQuery }
@@ -45,7 +33,7 @@ class FeedbackItem extends React.Component {
                             <Img fixed={ node.childImageSharp.fixed } />
                         </Grid>
                         <Grid item >
-                            <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick.bind(this) } disabled={ this.state.disabled }>{ this.props.children }</Button>
+                            <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick } disabled={ this.props.disabled }>{ this.props.children }</Button>
                         </Grid>
                     </Grid>
                 );
@@ -58,8 +46,13 @@ class FeedbackItem extends React.Component {
 export default class Feedback extends React.Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
-        const btnProps = [
+        this.state = {
+            disabled: false
+        };
+    }
+
+    render() {
+        const fbItemProps = [
             {
                 imgName: "lamp_broken", 
                 id: "feedback_neg",
@@ -76,29 +69,18 @@ export default class Feedback extends React.Component {
                 text: "Heel duidelijk",
             },
         ];
-
-        const fbItems = btnProps.map(({imgName, id, text}) =>
-            <FeedbackItem imgName={ imgName } id={ id } onClick={ this.handleClick }>{ text }</FeedbackItem>
-        );
-        
-        this.state = {
-            feedbackItems: fbItems,
-        };
-    }
-    
-    handleClick() {
-        this.state.feedbackItems.forEach(i => i.disable())
-    }
-
-    render() {
         return (
             <>
                 <h2>Hoe duidelijke vond je deze les?</h2>
                 <Grid container spacing={ 2 }>
-                    { this.state.feedbackItems.map(b =>
-                    <Grid item xs={ 4 }>
-                        { b }
-                    </Grid>) }
+                    { fbItemProps.map(({imgName, id, text}) =>
+                        <Grid item xs={ 4 }>
+                            <FeedbackItem imgName={ imgName } id={ id } onClick={ () => this.setState({disabled: true}) } disabled={ this.state.disabled }>
+                               { text }
+                            </FeedbackItem>
+                        </Grid>
+                       )
+                    }
                 </Grid>
             </>
         );

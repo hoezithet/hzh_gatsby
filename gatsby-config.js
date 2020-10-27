@@ -31,6 +31,13 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-plugin-gtag`,
+            options: {
+                trackingId: `UA-133189848-1`,
+                anonymize: true,
+            },
+        },
+        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `content`,

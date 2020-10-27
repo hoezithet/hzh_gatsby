@@ -11,6 +11,7 @@ import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
 import Image from "../components/image";
+import Feedback from "../components/feedback";
 
 
 import { Link } from 'gatsby-theme-material-ui';
@@ -85,6 +86,7 @@ export default function Template(
                   <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
             </MDXProvider>
+            <Feedback />
             <Box my={ 4 }>
                 <Grid container spacing={ 2 } justify="space-between">
                     { prevSiblingCard }

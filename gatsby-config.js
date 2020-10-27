@@ -38,6 +38,12 @@ module.exports = {
             },
         },
         {
+            resolve: "gatsby-plugin-google-tagmanager",
+            options: {
+                id: "GTM-KDR7S6V",
+            },
+        },
+        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `content`,

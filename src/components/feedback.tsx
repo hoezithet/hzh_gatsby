@@ -3,6 +3,7 @@ import { graphql, StaticQuery } from "gatsby";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Img from "gatsby-image";
+import styled from "styled-components";
 
 const feedbackBtnsQuery = graphql`
 {
@@ -23,6 +24,10 @@ const feedbackBtnsQuery = graphql`
 
 class FeedbackItem extends React.Component {
     render() {
+        const UnselectedImg = styled(Img)`
+            opacity: 0.3
+        `;
+        const ImgComp = (this.props.selected || !this.props.disabled) ? Img : UnselectedImg;
         return (
             <StaticQuery query={ feedbackBtnsQuery }
             render={ imgData => {
@@ -30,10 +35,10 @@ class FeedbackItem extends React.Component {
                 return (
                     <Grid container spacing={ 2 } alignItems="center" direction="column">
                         <Grid item >
-                            <Img fixed={ node.childImageSharp.fixed } />
+                            <ImgComp fixed={ node.childImageSharp.fixed } />
                         </Grid>
                         <Grid item >
-                            <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick } disabled={ this.props.disabled }>{ this.props.children }</Button>
+                            <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick } color="primary" disabled={ this.props.disabled }>{ this.props.children }</Button>
                         </Grid>
                     </Grid>
                 );
@@ -47,7 +52,7 @@ export default class Feedback extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            disabled: false
+            selectedOption: null
         };
     }
 
@@ -73,9 +78,22 @@ export default class Feedback extends React.Component {
             <>
                 <h2>Hoe duidelijke vond je deze les?</h2>
                 <Grid container spacing={ 2 }>
-                    { fbItemProps.map(({imgName, id, text}) =>
+                    {
+                        this.state.selectedOption === null ? 
+                        null
+                        :
+                        <Grid item xs={ 12 }>
+                            <Grid container justify="center">
+                                <Grid item >
+                                    Bedankt voor je feedback!
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    }
+                    { fbItemProps.map(({imgName, id, text}, idx) =>
                         <Grid item xs={ 4 }>
-                            <FeedbackItem imgName={ imgName } id={ id } onClick={ () => this.setState({disabled: true}) } disabled={ this.state.disabled }>
+                            <FeedbackItem imgName={ imgName } id={ id } onClick={ () => this.setState({selectedOption: idx}) } disabled={ this.state.selectedOption !== null }
+                             selected={ this.state.selectedOption === idx }>
                                { text }
                             </FeedbackItem>
                         </Grid>

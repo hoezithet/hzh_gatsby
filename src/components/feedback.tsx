@@ -59,17 +59,17 @@ export default class Feedback extends React.Component {
     render() {
         const fbItemProps = [
             {
-                imgName: "lamp_broken", 
+                imgName: "lamp_broken",
                 id: "feedback_neg",
                 text: "Niet duidelijk",
             },
             {
-                imgName: "lamp_off", 
+                imgName: "lamp_off",
                 id: "feedback_neutr",
                 text: "Redelijk duidelijk",
             },
             {
-                imgName: "lamp_on", 
+                imgName: "lamp_on",
                 id: "feedback_pos",
                 text: "Heel duidelijk",
             },
@@ -79,7 +79,7 @@ export default class Feedback extends React.Component {
                 <h2>Hoe duidelijke vond je deze les?</h2>
                 <Grid container spacing={ 2 }>
                     {
-                        this.state.selectedOption === null ? 
+                        this.state.selectedOption === null ?
                         null
                         :
                         <Grid item xs={ 12 }>

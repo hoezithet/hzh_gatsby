@@ -31,16 +31,20 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-gtag`,
+            resolve: `gatsby-plugin-gdpr-cookies`,
             options: {
-                trackingId: `UA-133189848-1`,
-                anonymize: true,
-            },
-        },
-        {
-            resolve: "gatsby-plugin-google-tagmanager",
-            options: {
-                id: "GTM-KDR7S6V",
+                googleAnalytics: {
+                    trackingId: "UA-133189848-1",
+                    anonymize: true,
+                    allowAdFeatures: false,
+                },
+                googleTagManager: {
+                    trackingId: "GTM-KDR7S6V",
+                },
+                facebookPixel: {
+                    pixelId: "",
+                },
+                environments: ["production", "development"],
             },
         },
         {

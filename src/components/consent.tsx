@@ -39,8 +39,8 @@ class ConsentBanner extends React.Component {
     this.setState({
       confirmed: true,
     });
-    this.props.cookies.set('gatsby-gdpr-google-tagmanager', this.state.checkedGtCookie, { path: '/' });
-    this.props.cookies.set('gatsby-gdpr-google-analytics', this.state.checkedGaCookie, { path: '/' }); 
+    this.props.cookies.set('gatsby-gdpr-google-tagmanager', this.state.checkedGtCookie, { path: '/', maxAge: 2592000 });
+    this.props.cookies.set('gatsby-gdpr-google-analytics', this.state.checkedGaCookie, { path: '/', maxAge: 2592000 }); 
   }
   
   handleShowPrefs() {

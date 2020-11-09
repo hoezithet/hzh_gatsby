@@ -31,6 +31,23 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-plugin-gdpr-cookies`,
+            options: {
+                googleAnalytics: {
+                    trackingId: "UA-133189848-1",
+                    anonymize: true,
+                    allowAdFeatures: false,
+                },
+                googleTagManager: {
+                    trackingId: "GTM-KDR7S6V",
+                },
+                facebookPixel: {
+                    pixelId: "",
+                },
+                environments: ["production", "development"],
+            },
+        },
+        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `content`,

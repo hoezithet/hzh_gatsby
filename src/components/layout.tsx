@@ -10,10 +10,14 @@ import HzhAppBar from './appbar';
 import CookieConsent from './consent';
 import HzhTheme from './theme';
 import { theme } from './theme';
+import SEO from './seo';
 
 export interface LayoutProps {
     children: React.ReactNode;
-    crumbs?: CrumbProps["crumbs"];
+    crumbs: CrumbProps["crumbs"];
+    description?: string;
+    tags?: string[];
+    image?: string;
 }
 
 const HzhContainer = styled(Container)`
@@ -24,12 +28,14 @@ const HzhMain = styled.main`
     margin-bottom: ${theme.spacing(4)}px;
 `;
 
-
-const Layout = ({ children, crumbs }: LayoutProps) => {
-    const breadCrumbs = crumbs ? <Crumbs crumbs={ crumbs }/> : <></>;
+const Layout = ({ children, crumbs, description=``, tags=[],
+                  image=`` }: LayoutProps) => {
+    const breadCrumbs = <Crumbs crumbs={ crumbs }/>;
     return (
         <HzhTheme>
             <>
+            <SEO crumbs={ crumbs } description={ description }
+                 tags={ tags } image={ image } />
             <HzhAppBar />
             <HzhContainer maxWidth="md">
                 <>
@@ -43,9 +49,5 @@ const Layout = ({ children, crumbs }: LayoutProps) => {
         </HzhTheme>
     );
 };
-    
-Layout.propTypes = {
-    children: PropTypes.node.isRequired,
-};
-    
+
 export default Layout;

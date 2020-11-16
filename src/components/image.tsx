@@ -1,106 +1,95 @@
-import React from 'react';
-import { graphql, StaticQuery } from "gatsby";
+import React, { useState } from 'react';
+import { graphql, useStaticQuery } from "gatsby";
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 import Img from "gatsby-image";
+import styled from "styled-components";
 
-const allImgsQuery = graphql`
-    {
-        allFile(filter: { extension: { eq: "png" } }) {
-            edges {
-            node {
-                childImageSharp {
-                fluid(maxWidth: 500) {
-                    ...GatsbyImageSharpFluid_tracedSVG
-                }
-                }
-                publicURL
-                absolutePath
+export function useContentImage(src) {
+  const { allFile } = useStaticQuery(graphql`
+    query ImageQuery {
+      allFile(filter: { extension: { eq: "png" } }) {
+        edges {
+          node {
+            childImageSharp {
+              fluid(maxWidth: 500) {
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
             }
-            }
+            publicURL
+            absolutePath
+          }
         }
+      }
     }
-`;
-
-function getImageComponent(fluid, publicURL: string, alt: string) {
-    return (
-        <a href={publicURL}>
-            <Img loading="eager" fluid={fluid} alt={alt} />
-        </a>
-    );
+  `);
+  
+  const edge = allFile.edges.find(({ node }) =>
+    node.absolutePath.endsWith(src)
+  );
+  
+  if (edge !== undefined) {
+    return edge.node;
+  } else {
+    return null;
+  }
 }
 
-function renderStrippedImage(imgData, props) {
-    const imgEdge = imgData.allFile.edges.find(({ node }) =>
-        node.absolutePath.endsWith(props.src)
-    );
-    const absPath = imgEdge.node.absolutePath;
-    const strippedAbsPath = absPath.replace(/\.[^.]+$/, '_stripped.png');
-    const strippedImgEdge = imgData.allFile.edges.find(({ node }) =>
-        node.absolutePath === strippedAbsPath
-    );
-    if (strippedImgEdge !== undefined) {
-        const node = strippedImgEdge.node;
-        return getImageComponent(node.childImageSharp.fluid, node.publicURL, props.alt);
-    } else {
-        return null;
-    }
+export function LinkImg(props) {
+  const StyledAnchor = styled.a`
+    color: rgba(0,0,0,0);
+  `;
+  return (
+    <StyledAnchor href={props.src}>
+      <Img loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
+    </StyledAnchor>
+  );
 }
 
-function renderRegularImage(imgData, props) {
-    const imgEdge = imgData.allFile.edges.find(({ node }) =>
-        node.absolutePath.endsWith(props.src)
-    );
-    const node = imgEdge.node;
-    return getImageComponent(node.childImageSharp.fluid, node.publicURL, props.alt);
+export function MarkdownImage(props) {
+  const [state, setState] = useState({showStripped: true});
+                 
+  const strippedSrc = props.src.replace(/\.[^.]+$/, '_stripped.png');
+  const strippedNode = useContentImage(strippedSrc);
+  const strippedImg = strippedNode !== null
+                      ?
+                      <LinkImg fluid={strippedNode.childImageSharp.fluid}
+                       src={strippedNode.publicURL}
+                       alt={props.alt}
+                       loading="eager" />
+                      :
+                      null;
+
+  const useStripped = strippedImg !== null;
+  
+  const node = useContentImage(props.src);
+  const image = <LinkImg fluid={node.childImageSharp.fluid}
+                 src={node.publicURL}
+                 alt={props.alt}
+                 loading={useStripped ? "eager" : "lazy"} />;
+
+  const explanationSwitch = (
+    <Grid xs={ 12 } item>
+      <Grid container justify="flex-end" alignItems="center">
+        <Grid item>
+          <Switch color="primary" onChange={e => setState({showStripped: !e.target.checked}) } />
+        </Grid>
+        <Grid item>
+          <span>Toon uitleg</span>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+
+  return (
+    <Grid container>
+      <Grid xs={ 12 } item>
+        <Box maxWidth={ 500 } margin={ "auto" }>
+          { useStripped && state.showStripped ? strippedImg : image }
+        </Box>
+      </Grid>
+      { useStripped ? explanationSwitch : null }
+    </Grid>
+  );
 }
-
-class Image extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {showStripped: true};
-    }
-
-    switchPressed(event) {
-        this.setState({showStripped: !event.target.checked})
-    }
-
-    render() {
-        return <StaticQuery
-                query={ allImgsQuery }
-        render={imgData => {
-            const image = renderRegularImage(imgData, this.props);
-            const strippedImg = renderStrippedImage(imgData, this.props);
-
-            const useStripped = strippedImg !== null;
-
-            const explanationSwitch = (
-                    <Grid xs={ 12 } item>
-                        <Grid container justify="flex-end" alignItems="center">
-                            <Grid item>
-                                <Switch color="primary" onChange={e => this.switchPressed(e)} />
-                            </Grid>
-                            <Grid item>
-                                <span>Toon uitleg</span>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-            );
-
-            return (
-                <Grid container>
-                    <Grid xs={ 12 } item>
-                        <Box maxWidth={ 500 } margin={ "auto" }>
-                            { useStripped && this.state.showStripped ? strippedImg : image }
-                        </Box>
-                    </Grid>
-                    { useStripped ? explanationSwitch : null }
-                </Grid>
-            );
-        }
-        } />;
-    }
-}
-
-export default Image;

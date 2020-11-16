@@ -36,13 +36,27 @@ export function useContentImage(src) {
   }
 }
 
+export function CCImage(props) {
+  const StyledAnchor = styled.a`
+    color: rgba(0,0,0,0);
+    position: absolute;
+    left: -9999px;
+  `;
+  return (
+    <div about={props.src} >
+      <Img loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
+      <StyledAnchor rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</StyledAnchor>
+    </div>
+  );
+}
+
 export function LinkImg(props) {
   const StyledAnchor = styled.a`
     color: rgba(0,0,0,0);
   `;
   return (
     <StyledAnchor href={props.src}>
-      <Img loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
+      <CCImage loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
     </StyledAnchor>
   );
 }

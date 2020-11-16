@@ -10,7 +10,7 @@ import { Bokeh } from "../components/shortcodes/bokeh";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
-import Image from "../components/image";
+import { MarkdownImage } from "../components/image";
 import Feedback from "../components/feedback";
 
 
@@ -31,11 +31,16 @@ const components = {
     a: Link,
     blockquote: BlockquoteBox,
     table: Table,
-    img: Image,
+    img: MarkdownImage,
 }
 
 export interface MdxNode {
-    frontmatter: { title: string };
+    frontmatter: {
+        title: string;
+        description: string;
+        tags: string[];
+        title_img: string;
+    };
     body: string;
     tableOfContents: { items: {url: string; title: string}[] };
     fields: { slug: string };
@@ -76,7 +81,8 @@ export default function Template(
     );
     
     return (
-        <Layout crumbs={ crumbs }>
+        <Layout crumbs={ crumbs } description={ frontmatter.description }
+                tags={ frontmatter.tags } image={ frontmatter.title_img } >
             <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }
@@ -106,8 +112,10 @@ export const pageQuery = graphql`
     mdx(fileAbsolutePath: { eq: $filePath }) {
       body
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
+        description
+        tags
+        title_img
       }
       tableOfContents(maxDepth: 2)
       fields {

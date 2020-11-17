@@ -97,12 +97,14 @@ function WhyHzhItem(props: WhyHzhItemProps) {
 }
 
 export default function Landing() {
+    const exampleUrl = "/lessen/fysica/krachten_1/krachtvector";
+
     return (
         <HzhTheme>
             <>
             <HzhAppBar />
             <Box px={2} py={4} display="flex" justifyContent="center" >
-                <Link to="/lessen/fysica/krachten_1/intro/">
+                <Link to={ exampleUrl }>
                     <LandingImg src={landingImg} />
                 </Link>
             </Box>
@@ -123,7 +125,7 @@ export default function Landing() {
                             Omdat iedereen recht heeft op kennis, zijn alle lessen gratis. Voor vandaag. Voor morgen. Voor altijd.
                         </WhyHzhItem>
                     </WhyHzhGrid>
-                    <ShowLessonButton variant="contained" color="primary" size="large" to="/lessen/fysica/krachten_1/intro/">
+                    <ShowLessonButton variant="contained" color="primary" size="large" to={ exampleUrl }>
                         Toon mij een voorbeeld!
                     </ShowLessonButton>
                 </WhyHzhBox>

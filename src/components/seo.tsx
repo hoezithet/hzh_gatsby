@@ -187,7 +187,7 @@ function Meta({description, keywords, author}: MetaProps) {
   );
 }
 
-function SEO({ crumbs, description = ``, tags = [],
+function SEO({ crumbs, description = ``, tags = null,
                image = `` }: SEOProps) {
     const { site } = useStaticQuery(
       graphql`
@@ -233,7 +233,7 @@ function SEO({ crumbs, description = ``, tags = [],
         />
         <Meta
           description={description || site.siteMetadata.description}
-          keywords={tags.length > 0 ? tags : site.siteMetadata.tags}
+          keywords={tags || site.siteMetadata.tags}
           author={site.siteMetadata.organization.founder}
         />
         <JsonBreadcrumbs crumbs={crumbs} baseUrl={site.siteMetadata.siteUrl} />
@@ -267,7 +267,7 @@ function SEO({ crumbs, description = ``, tags = [],
 interface SEOProps {
     crumbs: Breadcrumb[];
     description?: string;
-    tags?: string[];
+    tags?: string[]|null;
     image?: string;
 }
 

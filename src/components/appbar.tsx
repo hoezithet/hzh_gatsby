@@ -6,8 +6,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Button, Link } from "gatsby-theme-material-ui";
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import logo from "../images/logo_header.png";
-import logo_yellow from "../images/logo_header_yellow_bulb.png";
+import logo from "../images/appbar/logo_header.png";
+import logo_yellow from "../images/appbar/logo_header_yellow_bulb.png";
 
 const LogoImg = styled.img`
     height: ${theme.typography.h4.fontSize};

@@ -7,3 +7,6 @@ coverage
 
 #gatsby modules
 gatsby-*.js
+
+#content
+src/content

@@ -77,7 +77,7 @@ module.exports = {
                             // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
                             macros: {
                                 "\\deg": "^{\\circ}",
-                                "\\norm": ["\\lVert#1\\rVert", 1],
+                                "\\norm": "\\lVert#1\\rVert",
                                 "\\breq": "\\stackrel{\\text{BR}}{=}",
                                 "\\darkred": "\\color{e7040f}",
                                 "\\red": "\\color{ff4136}",

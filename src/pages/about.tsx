@@ -30,8 +30,12 @@ const ProfileImg = styled.img`
 
 
 export default function About() {
+    const crumbs = [{
+        slug: "/about",
+        title: "Over Hoe Zit Het?",
+    }];
     return (
-        <Layout>
+        <Layout crumbs={ crumbs }>
             <h1>Over de website</h1>
             <StyledCite>
                 Het is zover. Morgen examen wiskunde. Ik heb al heel de namiddag en avond zitten studeren, maar het lijkt niet op te schieten. De stress neemt toe en ik begin wat paniekerig te bladeren door de cursus om te zien hoeveel ik nog moet studeren. Duidelijk meer dan verwacht. En dan heb ik eens de oefeningen nog niet gemaakt… Laat staan mijn toetsen opnieuw geprobeerd. Wat is dat toch met dat vak? Waarvoor ga ik dat trouwens ooit gebruiken? De moed zakt in mijn schoenen. Het licht gaat uit. Dit lukt nooit... 😞

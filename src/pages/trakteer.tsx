@@ -38,8 +38,12 @@ const TrakteerImg = styled.img`
 `
 
 export default function Trakteer() {
+    const crumbs = [{
+        slug: "/trakteer",
+        title: "Trakteer",
+    }];
     return (
-        <Layout>
+        <Layout crumbs={ crumbs } >
             <h1>🥤 Trakteer op een drankje!</h1>
             <Box width={ { xs: 3/4, md: 1/2 } } clone>
                 <TrakteerImg src={ donate } />

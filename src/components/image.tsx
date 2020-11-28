@@ -50,7 +50,7 @@ export function CCImage(props) {
   );
 }
 
-export function LinkImg(props) {
+export default function LinkImg(props) {
   const StyledAnchor = styled.a`
     color: rgba(0,0,0,0);
   `;

@@ -70,7 +70,12 @@ module.exports = {
             resolve: `gatsby-plugin-mdx`,
             options: {
                 gatsbyRemarkPlugins: [
-                    `gatsby-remark-autolink-headers`,
+                    {
+                        resolve: `gatsby-remark-autolink-headers`,
+                        options: {
+                            isIconAfterHeader: true,
+                        }
+                    },
                     {
                         resolve: `gatsby-remark-katex`,
                         options: {

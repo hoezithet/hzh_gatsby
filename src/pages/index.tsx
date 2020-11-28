@@ -102,7 +102,7 @@ export default function Landing() {
     return (
         <HzhTheme>
             <>
-            <HzhAppBar />
+            <HzhAppBar color="transparent" elevation={ 0 } />
             <Box px={2} py={4} display="flex" justifyContent="center" >
                 <Link to={ exampleUrl }>
                     <LandingImg src={landingImg} />

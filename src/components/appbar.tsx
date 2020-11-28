@@ -29,9 +29,9 @@ const PageButtonsGrid = styled(Grid)`
 `;
 
 
-export default function HzhAppBar() {
+export default function HzhAppBar({color = 'primary', elevation = 1 }) {
     return (
-        <AppBar position="static">
+        <AppBar position="static" color={color} elevation={elevation} >
             <Toolbar>
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item xs={ 12 } md={ 6 }>

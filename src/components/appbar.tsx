@@ -7,6 +7,7 @@ import { Button, Link } from "gatsby-theme-material-ui";
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import logo from "../images/logo_header.png";
+import logo_yellow from "../images/logo_header_yellow_bulb.png";
 
 const LogoImg = styled.img`
     height: ${theme.typography.h4.fontSize};
@@ -37,7 +38,7 @@ export default function HzhAppBar({color = 'primary', elevation = 1 }) {
                     <Grid item xs={ 12 } md={ 6 }>
                         <Box justifyContent="center">
                             <LogoLink to="/" color="inherit" variant="h5">
-                                <LogoImg src={logo} alt="Hoe Zit Het? logo"/>
+                                <LogoImg src={color == 'transparent' ? logo_yellow : logo} alt="Hoe Zit Het? logo"/>
                                 Hoe Zit Het?
                             </LogoLink>
                         </Box>

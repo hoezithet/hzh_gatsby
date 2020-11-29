@@ -91,7 +91,7 @@ export default class Feedback extends React.Component {
                         </Grid>
                     }
                     { fbItemProps.map(({imgName, id, text}, idx) =>
-                        <Grid item xs={ 4 }>
+                        <Grid item xs={ 4 } key={ id }>
                             <FeedbackItem imgName={ imgName } id={ id } onClick={ () => this.setState({selectedOption: idx}) } disabled={ this.state.selectedOption !== null }
                              selected={ this.state.selectedOption === idx }>
                                { text }

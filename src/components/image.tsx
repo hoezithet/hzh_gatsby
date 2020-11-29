@@ -42,23 +42,18 @@ position: absolute;
 left: -9999px;
 `;
 
-export function CCImage(props) {
-  return (
-    <div about={props.src} >
-      <Img loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
-      <CCImageAnchor rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</CCImageAnchor>
-    </div>
-  );
-}
-
 const LinkImgAnchor = styled.a`
 color: rgba(0,0,0,0);
 `;
-export default function LinkImg(props) {
+
+export default function CCImage(props) {
   return (
-    <LinkImgAnchor href={props.src}>
-      <CCImage loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
-    </LinkImgAnchor>
+      <div about={props.src} >
+          <LinkImgAnchor href={props.src}>
+              <Img loading={props.loading || "lazy"} fluid={props.fluid} alt={props.alt} />
+          </LinkImgAnchor>
+          <CCImageAnchor rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</CCImageAnchor>
+      </div>
   );
 }
 
@@ -69,7 +64,7 @@ export function MarkdownImage(props) {
   const strippedNode = useContentImage(strippedSrc);
   const strippedImg = strippedNode !== null
                       ?
-                      <LinkImg fluid={strippedNode.childImageSharp.fluid}
+                      <CCImage fluid={strippedNode.childImageSharp.fluid}
                        src={strippedNode.publicURL}
                        alt={props.alt}
                        loading="eager" />
@@ -79,7 +74,7 @@ export function MarkdownImage(props) {
   const useStripped = strippedImg !== null;
   
   const node = useContentImage(props.src);
-  const image = <LinkImg fluid={node.childImageSharp.fluid}
+  const image = <CCImage fluid={node.childImageSharp.fluid}
                  src={node.publicURL}
                  alt={props.alt}
                  loading={useStripped ? "eager" : "lazy"} />;

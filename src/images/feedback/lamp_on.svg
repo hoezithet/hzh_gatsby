@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -14,11 +12,11 @@
    viewBox="0 0 6.121273 10.733932"
    version="1.1"
    id="svg906"
-   inkscape:version="0.92.4 (unknown)"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)"
    sodipodi:docname="lamp_on.svg"
-   inkscape:export-filename="/home/fdf/projects/hoezithet/static/images/lamp_on.png"
-   inkscape:export-xdpi="299.957"
-   inkscape:export-ydpi="299.957">
+   inkscape:export-filename="/Users/floris/contabo/clones/hzh_gatsby/src/images/feedback/lamp_on.png"
+   inkscape:export-xdpi="331.28589"
+   inkscape:export-ydpi="331.28589">
   <defs
      id="defs900" />
   <sodipodi:namedview
@@ -34,11 +32,12 @@
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1055"
-     inkscape:window-x="1600"
-     inkscape:window-y="25"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="1440"
+     inkscape:window-height="770"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0" />
   <metadata
      id="metadata903">
     <rdf:RDF>

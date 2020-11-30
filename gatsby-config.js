@@ -134,6 +134,7 @@ module.exports = {
                                 "\\si": "\\text",
                             },
                             colorIsTextColor: true,
+                            strict: "ignore",
                         },
                     },
                 ],

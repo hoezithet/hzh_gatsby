@@ -53,7 +53,7 @@ function getPlotUrl(props: BokehProps): {jsonURL: string|undefined; imgURL: stri
     return {jsonURL: plotJsonURL, imgURL: plotImgURL};
 }
 
-export function BokehBare(props: BokehProps) {
+function BokehBare(props: BokehProps) {
     const { imgURL } = getPlotUrl(props);
     return (
         <Grid container justify="center" >
@@ -64,7 +64,7 @@ export function BokehBare(props: BokehProps) {
     );
 }
 
-export const Bokeh = (props: BokehProps) => {
+const Bokeh = (props: BokehProps) => {
     const id = `_${props.plot.replace("/", "")}_${Math.random().toString(36).substring(2)}`;
     const {jsonURL, imgURL} = getPlotUrl(props);
     return (
@@ -97,3 +97,5 @@ export const Bokeh = (props: BokehProps) => {
         </>
     );
 }
+
+export { Bokeh, BokehBare };

@@ -18,7 +18,7 @@ interface PlotData {
     }
 }
 
-function getPlotUrl(props: BokehProps) {
+function getPlotUrl(props: BokehProps): {jsonURL: string|undefined; imgURL: string|undefined;} {
     const { plot } = props;
 
     const data: PlotData = useStaticQuery(graphql`
@@ -34,7 +34,7 @@ function getPlotUrl(props: BokehProps) {
     }`);
 
     if (data.allFile.edges.length === 0) {
-        return null;
+        return {jsonURL: undefined, imgURL: undefined};
     }
 
     const plotJsonEdge = data.allFile.edges.find( ({ node }) =>
@@ -45,7 +45,7 @@ function getPlotUrl(props: BokehProps) {
     );
 
     if (!plotJsonEdge || !plotImgEdge) {
-        return <></>;
+        return {jsonURL: undefined, imgURL: undefined};
     }
 
     const plotJsonURL = plotJsonEdge.node.publicURL;

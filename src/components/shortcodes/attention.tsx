@@ -2,6 +2,19 @@ import React from "react";
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import COLORS from "../../colors";
+import unified from 'unified';
+import math from 'remark-math';
+import remark from 'remark-parse';
+import katex from 'rehype-katex';
+import remark2rehype from 'remark-rehype';
+import rehype2react from 'rehype-react';
+
+const to_katex = unified()
+    .use(remark)
+    .use(math)
+    .use(remark2rehype)
+    .use(katex)
+    .use(rehype2react, { createElement: React.createElement });
 
 const Frame = styled(Box)`
     border-radius: 10px;
@@ -16,6 +29,9 @@ const TitleBox = styled(Box)`
     padding: 10px;
     font-size: 1.2rem;
     font-weight: bold;
+    & > div > p {
+        margin: 0;
+    }
 `
 
 const ContentBox = styled(Box)`
@@ -24,18 +40,16 @@ const ContentBox = styled(Box)`
 
 interface AttentionProps {
     children: React.ReactNode;
+    title: string;
 }
 
-const Attention = ({ children }: AttentionProps) => (
+const Attention = ({ children, title }: AttentionProps) => (
     <Frame>
         <TitleBox>
-            { /* Get title from first child
-               * We can't use a separate property (e.g. "title") for the title,
-               * because then its markdown syntax will not be rendered */}
-            <div>{ children[0].props.children }</div>
+            { to_katex.processSync(title).result as JSX.Element }
         </TitleBox>
         <ContentBox>
-            { children.slice(1) }
+            { children }
         </ContentBox>
     </Frame>
 );

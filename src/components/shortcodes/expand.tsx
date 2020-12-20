@@ -5,9 +5,11 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import COLORS from "../../colors";
+import md2react from "../../utils/md2react";
 
 interface ExpandProps {
-    children: React.ReactNode;
+    children: JSX.Element;
+    title: string;
 }
 
 const ExpandFrame = styled(Accordion)`
@@ -31,41 +33,34 @@ const StyledAccDetails = styled(AccordionDetails)`
     display: block;
 `
 
-function ExpandTitle({ children }: ExpandProps) {
+function ExpandTitle({ title }: { title: string}) {
     return (
         <StyledAccSummary expandIcon={<ExpandIcon/>}>
-            { /* Get title from first child
-               * We can't use a separate property (e.g. "title") for the title,
-               * because then its markdown syntax will not be rendered */}
-            <div>{ children[0].props.children }</div>
+        { md2react(title) }
 		</StyledAccSummary>
     );
 }
 
-function ExpandBody({ children }: ExpandProps) {
+function ExpandBody({ children }: { children: JSX.Element }) {
     return (
         <StyledAccDetails>
-			{ children.slice(1) }
+			{ children }
 		</StyledAccDetails>
     );
 }
 
-const Expand = ({ children }: ExpandProps) => (
+const Expand = ({ children, title }: ExpandProps) => (
 	<ExpandFrame>
-	    <ExpandTitle>
-	        { children }
-	    </ExpandTitle>
+	    <ExpandTitle title={ title } />
 	    <ExpandBody>
 	        { children }
 	    </ExpandBody> 
 	</ExpandFrame>
 );
 
-const ExpandBare = ({ children }: ExpandProps) => (
+const ExpandBare = ({ children, title }: ExpandProps) => (
     <ExpandFrame expanded={ true } >
-	    <ExpandTitle>
-	        { children }
-	    </ExpandTitle>
+	    <ExpandTitle title={ title } />
 	    <ExpandBody>
 	        { children }
 	    </ExpandBody> 

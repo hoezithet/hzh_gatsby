@@ -2,19 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import COLORS from "../../colors";
-import unified from 'unified';
-import math from 'remark-math';
-import remark from 'remark-parse';
-import katex from 'rehype-katex';
-import remark2rehype from 'remark-rehype';
-import rehype2react from 'rehype-react';
-
-const to_katex = unified()
-    .use(remark)
-    .use(math)
-    .use(remark2rehype)
-    .use(katex)
-    .use(rehype2react, { createElement: React.createElement });
+import md2react from "../../utils/md2react";
 
 const Frame = styled(Box)`
     border-radius: 10px;
@@ -46,7 +34,7 @@ interface AttentionProps {
 const Attention = ({ children, title }: AttentionProps) => (
     <Frame>
         <TitleBox>
-            { to_katex.processSync(title).result as JSX.Element }
+            { md2react(title) }
         </TitleBox>
         <ContentBox>
             { children }

@@ -64,7 +64,7 @@ export function BokehBare(props: BokehProps) {
     );
 }
 
-export function Bokeh(props: BokehProps) {
+export const Bokeh = (props: BokehProps) => {
     const id = `_${props.plot.replace("/", "")}_${Math.random().toString(36).substring(2)}`;
     const {jsonURL, imgURL} = getPlotUrl(props);
     return (

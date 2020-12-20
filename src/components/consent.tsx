@@ -60,12 +60,12 @@ class ConsentBanner extends React.Component {
       <Grid item xs={12} >
         <FormGroup row>
           <FormControlLabel
-            control={<Checkbox checked={this.state.checkedGaCookie} onChange={ this.handleChangePrefs } name="checkedGaCookie" color="primary" />}
-            label="Cookies voor anonieme bezoekersaantallen"
+            control={<Checkbox id="analytics-cookies-checkbox" checked={this.state.checkedGaCookie} onChange={ this.handleChangePrefs } name="checkedGaCookie" color="primary" />}
+            label="Cookies voor anonieme bezoekersaantallen (Google Analytics)"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.checkedGtCookie} onChange={ this.handleChangePrefs } name="checkedGtCookie" color="primary" />}
-            label="Cookies voor anonieme gebruiksstatistieken"
+            control={<Checkbox id="tagmanager-cookies-checkbox" checked={this.state.checkedGtCookie} onChange={ this.handleChangePrefs } name="checkedGtCookie" color="primary" />}
+            label="Cookies voor anonieme gebruiksstatistieken (Google Tag Manager)"
           />
         </FormGroup>
       </Grid>
@@ -78,17 +78,17 @@ class ConsentBanner extends React.Component {
         <Slide direction="up" in={ !this.state.confirmed } mountOnEnter unmountOnExit >
           <Paper>
             <Grid container spacing={2} justify="space-between" alignItems="center" >
-            <Grid item >
+            <Grid id="cookie-consent-text" item >
               Wij gebruiken cookies. 🍪 Lees <Link to="/cookies">hier</Link> wat die cookies juist zijn en waarom wij ze nodig hebben.
             </Grid>
 
             <Grid item >
               <Grid container direction="row" alignItems="center" spacing={ 2 }>
                 <Grid item >
-                  <Button variant="contained" color="primary" disableElevation onClick={this.handleAccept} >Begrepen!</Button>
+                  <Button id="accept-cookies-btn" variant="contained" color="primary" disableElevation onClick={this.handleAccept} >Begrepen!</Button>
                 </Grid>
                 <Grid item >
-                  <Button disableElevation onClick={this.handleShowPrefs} >{ this.state.showPrefs ? "Verberg" : "Wijzig" } voorkeuren</Button> 
+                  <Button id="adjust-cookies-btn" disableElevation onClick={this.handleShowPrefs} >{ this.state.showPrefs ? "Verberg" : "Wijzig" } voorkeuren</Button> 
                 </Grid>
               </Grid>
             </Grid>

@@ -1,8 +1,7 @@
-import { Box } from '@material-ui/core';
-import styled from 'styled-components';
-import { theme } from '../components/theme';
-import COLORS from '../colors';
-
+import { Box } from "@material-ui/core";
+import styled from "styled-components";
+import { theme } from "../components/theme";
+import COLORS from "../colors";
 
 const BlockquoteBox = styled(Box)`
     color: ${COLORS.GRAY};

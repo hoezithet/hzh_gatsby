@@ -54,4 +54,4 @@ const HzhAppBar = ({ color = "primary", elevation = 1 }: { color: "primary" | "t
     );
 };
 
-export default AppBar;
+export default HzhAppBar;

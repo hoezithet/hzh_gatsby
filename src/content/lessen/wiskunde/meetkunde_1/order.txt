@@ -1,0 +1,9 @@
+basisbegrippen
+rechten
+hoeken
+figuren
+driehoeken
+vierhoeken
+cirkels
+omtrek
+oppervlakte

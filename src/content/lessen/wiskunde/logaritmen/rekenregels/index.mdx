@@ -12,7 +12,9 @@ Wanneer we willen **rekenen met logaritmen**, dan moeten we ons houden aan enkel
 ## De logaritme van een som en een verschil
 Wanneer we de **logaritme** nemen **van $x$** met een **grondtal $a$**, dan krijgen we **een exponent** waartoe we **$a$ moeten verheffen** om **$x$ te bekomen**. We weten ook dat een logaritmische functie het **inverse van een exponentiële functie** is. Tenslotte weten we dat we volgende bewerking niet meer kunnen vereenvoudigen:
 
-$$x^4 + 4x^3 - 2x + 6$$
+$$
+x^4 + 4x^3 - 2x + 6
+$$
 
 Net zoals er geen rekenregel bestaat voor de som of het verschil van machten, bestaat er ook **geen rekenregel voor de som of het verschil van een logaritme**.
 
@@ -20,14 +22,18 @@ $\log (5x + 3)$ kunnen we dus **niet verder oplossen**. We kunnen dit met andere
 > Weet je nog dat bovenstaand logaritme een **tiendelige <Mute text="of Briggse"/> logaritme** is? 🤔 Zo neen, bekijk dan nog even [de eerste les over logaritmen](..:logaritme). 🙌
 
 Geloof je me nog niet? Laten we even naar een ander voorbeeld kijken: $\log(1000 + 100)$. 
-$$\log(1100) \approx 3,041 \red{\neq} \log(1000) + \log(100) = 5$$
+$$
+\log(1100) \approx 3,041 \red{\neq} \log(1000) + \log(100) = 5
+$$
 
 ## Logaritmen van een product
 In tegenstelling tot de logaritmen van een som en een verschil, bestaat er **wel** een **rekenregel voor de logaritmen van een product en een quotiënt**. 😃
 
 Ook hier kunnen we weer vertrekken van **machten en exponentiële functies**. We weten:
 
-$$x^4 \orange{\cdot} x^3 = x^{4\orange{+}3} = x^7$$
+$$
+x^4 \orange{\cdot} x^3 = x^{4\orange{+}3} = x^7
+$$
 
 Net zoals het product van machten, de som van de exponenten is, is **de logaritme van een product de som van de logaritmen**. 
 
@@ -51,7 +57,9 @@ We merken dat wanneer we **twee getallen in de linkse kolom vermenigvuldigen** (
 De **logaritme van een product** is de **som van de logaritmen**.
 
 In symbolen:
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log (x_1 \orange{\cdot} x_2) = \\ ^a\\!\log x_1 \orange{+} \\ ^a\\!\log x_2$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log (x_1 \orange{\cdot} x_2) = \\ ^a\\!\log x_1 \orange{+} \\ ^a\\!\log x_2
+$$
 </Attention>
 
 ## De logaritme van een quotiënt
@@ -68,16 +76,22 @@ Om **de logaritme van een quotiënt** te berekenen, gaan we op **gelijkaardige m
 De **logaritme van een quotiënt** is het **verschil van de logaritmen**.
 
 In symbolen:
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{\frac{x_1}{x_2}} = \\ ^a\\!\log x_1 \orange{-} \\ ^a\\!\log x_2$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{\frac{x_1}{x_2}} = \\ ^a\\!\log x_1 \orange{-} \\ ^a\\!\log x_2
+$$
 </Attention>
 
 Er kan hier ook sprake zijn van een **bijzonder geval**, namelijk $\frac{1}{x}$. 🤨
 
-$$^a\\!\log{\frac{1}{x}} = \cancelto{0}{^a\\!\log 1} - \\ ^a\\!\log x = - \\ ^a\\!\log x$$
+$$
+^a\\!\log{\frac{1}{x}} = \cancelto{0}{^a\\!\log 1} - \\ ^a\\!\log x = - \\ ^a\\!\log x
+$$
 
 <Attention title="Bijzonder geval bij de logaritme van een quotiënt">
 
-$$^a\\!\log{\frac{1}{x}} = - \\ ^a\\!\log x$$
+$$
+^a\\!\log{\frac{1}{x}} = - \\ ^a\\!\log x
+$$
 </Attention>
 
 ## De logaritme van een macht
@@ -89,29 +103,39 @@ Ook hier gaan we op **analoge wijze** te werk en vinden we een **rekenregel**.
 De **logaritme van een macht** is gelijk aan een **veelvoud van de logaritmen**.
 
 In symbolen:
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{x^\orange{n}} = \orange{n} \cdot \\ ^a\\!\log x$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{x^\orange{n}} = \orange{n} \cdot \\ ^a\\!\log x
+$$
 </Attention>
 
 Dit werkt ook met **wortels**! Een **n-demachtswortel** kunnen we immers schrijven als **exponent** $\frac{1}{n}$. Deze breuk als exponent kunnen we vervolgens voorop plaatsen. **In het algemeen** geldt:
 
-$$^a\\!\log{\sqrt[n]{x}} = \\ ^a\\!\log{x^{\frac{1}{n}}} = \frac{1}{n} \cdot \\ ^a\\!\log{x}$$
+$$
+^a\\!\log{\sqrt[n]{x}} = \\ ^a\\!\log{x^{\frac{1}{n}}} = \frac{1}{n} \cdot \\ ^a\\!\log{x}
+$$
 
 ## Logaritmen met een verschillend grondtal
 Elk logaritme heeft een grondtal en **bovenstaande rekenregels** werken enkel en alleen wanneer het **grondtal gelijk** is. ⚠️  Gelukkig voor ons bestaan er ook rekenregels om het **grondtal van een logaritme *te wijzigen***.
 
 Het **verband tussen logaritmen met een verschillend grondtal** is als volgt:
 
-$$\orange{^b}\\!\log{\green{x}} = \frac{^a\\!\log{\green{x}}}{^a\\!\log{\orange{b}}}$$
+$$
+\orange{^b}\\!\log{\green{x}} = \frac{^a\\!\log{\green{x}}}{^a\\!\log{\orange{b}}}
+$$
 
 We zien dus dat een logaritme met **grondtal b**, omgezet kan worden naar een logaritme met **grondtal a**. Er zijn ook nog enkele **gevolgen** van deze rekenregel.
 
 Zo verkrijgen we door **kruiselingse vermenigvuldiging** volgende rekenregel:
 
-$$^a\\!\log \orange{b} \cdot \\ \orange{^b}\\!\log x = \\ ^a\\!\log x$$
+$$
+^a\\!\log \orange{b} \cdot \\ \orange{^b}\\!\log x = \\ ^a\\!\log x
+$$
 
 En ook het **getal waarvan we de logaritme nemen** en het **grondtal**, kunnen we **omdraaien** met een rekenregel. 🤯
 
-$$^a\\!\log b = \frac{1}{^b\\!\log a}$$
+$$
+^a\\!\log b = \frac{1}{^b\\!\log a}
+$$
 
 > Kan jij bovenstaande rekenregels afleiden/bewijzen? 🤔 Vertrek steeds vanuit een **basisformule**, of uit de eerste rekenregel als het om een gevolg gaat! 💡
 
@@ -121,7 +145,9 @@ $$^a\\!\log b = \frac{1}{^b\\!\log a}$$
 De **logaritme van een product** is de **som van de logaritmen**.
 
 In symbolen:
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log (x_1 \orange{\cdot} x_2) = \\ ^a\\!\log x_1 \orange{+} \\ ^a\\!\log x_2$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log (x_1 \orange{\cdot} x_2) = \\ ^a\\!\log x_1 \orange{+} \\ ^a\\!\log x_2
+$$
 </Attention>
 
 <Attention title="De logaritme van een quotiënt">
@@ -129,7 +155,9 @@ $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{
 De **logaritme van een quotiënt** is het **verschil van de logaritmen**.
 
 In symbolen:
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{\frac{x_1}{x_2}} = \\ ^a\\!\log x_1 \orange{-} \\ ^a\\!\log x_2$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{\frac{x_1}{x_2}} = \\ ^a\\!\log x_1 \orange{-} \\ ^a\\!\log x_2
+$$
 </Attention>
 
 <Attention title="De logaritme van een macht">
@@ -137,16 +165,24 @@ $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{
 De **logaritme van een macht** is gelijk aan een **veelvoud van de logaritmen**.
 
 In symbolen:
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{x^\orange{n}} = \orange{n} \cdot \\ ^a\\!\log x$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{x^\orange{n}} = \orange{n} \cdot \\ ^a\\!\log x
+$$
 
 Dit werkt ook met **wortels**! Een **n-demachtswortel** kunnen we immers schrijven als **exponent** $\frac{1}{n}$.
 </Attention>
 
 <Attention title="De logaritmen van een verschillend grondtal">
 
-$$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ \orange{^b}\\!\log{\green{x}} = \frac{^a\\!\log{\green{x}}}{^a\\!\log{\orange{b}}}$$
+$$
+\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ \orange{^b}\\!\log{\green{x}} = \frac{^a\\!\log{\green{x}}}{^a\\!\log{\orange{b}}}
+$$
 
 Er zijn ook twee **gevolgen**:
-$$^a\\!\log \orange{b} \cdot \\ \orange{^b}\\!\log x = \\ ^a\\!\log x$$
-$$^a\\!\log b = \frac{1}{^b\\!\log a}$$
+$$
+^a\\!\log \orange{b} \cdot \\ \orange{^b}\\!\log x = \\ ^a\\!\log x
+$$
+$$
+^a\\!\log b = \frac{1}{^b\\!\log a}
+$$
 </Attention>

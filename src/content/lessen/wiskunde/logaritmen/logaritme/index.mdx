@@ -7,7 +7,7 @@ description: "In deze les bestuderen we de logaritmen. We zien dat het de invers
 tags: ["Logaritmen", "Rekenen", "Exponentiële", "Algebra"]
 images: []
 ---
-Als je naar de **sterrenhemel** kijkt, dan zie je dat niet alle sterren even fel schijnen. :star2: Sommige zijn feller dan anderen en dat hadden de Oude-Grieken ook al gezien. 
+Als je naar de **sterrenhemel** kijkt, dan zie je dat niet alle sterren even fel schijnen. Sommige zijn feller dan anderen en dat hadden de Oude-Grieken ook al gezien. 
 
 Hipparchos stelde een **magnitudeschaal** op. Hij gaf de helderste sterren het cijfer 1 en de minst heldere sterren het cijfer 6. Dit is echter niet zomaar een schaal, maar een **logaritmische** schaal. Een ster van magnitude 6 is 2,512 helderder dan een ster van magnitude 5, maar 100 keer helderder dan een ster van magnitude 1. 🤯🌠⭐
 
@@ -15,18 +15,18 @@ Hipparchos stelde een **magnitudeschaal** op. Hij gaf de helderste sterren het c
 Een **logaritme** is eigenlijk steeds een **functie** <Mute text="(je stopt een getal in het machientje en je krijgt een ander ervoor terug)"/>, meer bepaald **het omgekeerde van de exponentiële functie**. Je hebt ook een **grondtal <span class="orange">a</span>** nodig.
 
 $$
-^\orange{a}\\!\log x = y \Leftrightarrow x = \orange{a}^y
+^\orange{a}\!\log x = y \Leftrightarrow x = \orange{a}^y
 $$
 
 | Je schrijft   | Je leest het als                   |
 |---------------|------------------------------------|
-| $^a\\!\log x$ | Het logaritme van x met grondtal a |
+| $^a\!\log x$ | Het logaritme van x met grondtal a |
 
-$^2\\!\log 8$ is het getal waartoe je $2$ moet **verheffen** om $8$ te bekomen. In dit geval dus $3$. 🎉
+$^2\!\log 8$ is het getal waartoe je $2$ moet **verheffen** om $8$ te bekomen. In dit geval dus $3$. 🎉
 
 <Attention title="De logaritme">
 
-De **logaritme** met **grondtal** $a \in \mathbb{R}^+_0 \backslash \\{1\\}$ van een **strikt positief reëel getal** is de **exponent van de macht** waartoe we $a$ moeten verheffen om dit getal te krijgen.
+De **logaritme** met **grondtal** $a \in \mathbb{R}^+_0 \backslash \{1\}$ van een **strikt positief reëel getal** is de **exponent van de macht** waartoe we $a$ moeten verheffen om dit getal te krijgen.
 </Attention>
 
 Bovenstaande definitie is een mondvol, dus laten we het goed analyseren. ️
@@ -40,9 +40,11 @@ Verder in de definitie krijgen we dan **de betekenis** van een logaritme. De **u
 <Attention title="Logaritmen met 1 en 0">
 
 $$
-^a\\!\log a = 1 \text{, want } a^1 = a
+^a\!\log a = 1 \text{, want } a^1 = a
 $$
-$$^a\\!\log 1 = 0 \text{, want } a^0 = 1$$  
+$$
+^a\!\log 1 = 0 \text{, want } a^0 = 1
+$$
 </Attention>
 
 Toch willen we ook nog even vermelden dat een **andere veelvoorkomende notatie** <Mute text="(voornamelijk in het buitenland)"/> het grondtal rechtsonder schrijft: $\log _a x$. 😉
@@ -50,17 +52,17 @@ Toch willen we ook nog even vermelden dat een **andere veelvoorkomende notatie**
 ## Basisformules
 Er zijn twee **basisformules**, waarmee we de rekenregels voor logaritmen kunnen bewijzen.
 
-De **eerste formule** is $\udotorange{^a\\!\log a^y = y}$. De logaritme van $a^y$ met **grondtal $a$** is $y$. Met andere woorden: we zochten de exponent waartoe we het **grondtal a** moesten verheffen om $a^y$ te bekomen. Aangezien $a^y$ reeds een exponent bevat ($y$), is dat dus de uitkomst! 🥳
+De **eerste formule** is $^a\!\log a^y = y$. De logaritme van $a^y$ met **grondtal $a$** is $y$. Met andere woorden: we zochten de exponent waartoe we het **grondtal a** moesten verheffen om $a^y$ te bekomen. Aangezien $a^y$ reeds een exponent bevat ($y$), is dat dus de uitkomst! 🥳
 
-De **tweede basisformule** is $\udotgreen{a^{^a\\!\log x} = x}$. Nu staat de logaritme in de exponent! 😮 Maar ook dit kan je intuïtief aanvoelen. $^a\\!\log x$ geeft je het getal waartoe je $a$ moet verheffen om $x$ te bekomen (definitie van een logaritme). Wanneer je dan $a$ verheft tot dat bekomen getal ($^a\\!\log x$), krijg je dus $x$. 🤯
+De **tweede basisformule** is $a^{^a\!\log x} = x$. Nu staat de logaritme in de exponent! 😮 Maar ook dit kan je intuïtief aanvoelen. $^a\!\log x$ geeft je het getal waartoe je $a$ moet verheffen om $x$ te bekomen (definitie van een logaritme). Wanneer je dan $a$ verheft tot dat bekomen getal ($^a\!\log x$), krijg je dus $x$. 🤯
 
 Twee **voorbeelden** om beide te illustreren.
 
 $$
-^3\\!\log 9 = {^3}\\!\log 3^\orange{2} = \orange{2}
+^3\!\log 9 = {^3}\!\log 3^\orange{2} = \orange{2}
 $$
 $$
-3^{^3\\!\log \green{9}} = 3^2 = \green{9}
+3^{^3\!\log \green{9}} = 3^2 = \green{9}
 $$
 
 ## Tiendelige en natuurlijke logaritmen
@@ -97,20 +99,23 @@ In de inleiding hadden we het reeds laten vallen: de **logaritmische schaal**. E
 ## Samengevat
 <Attention title="Definitie van een logaritme">
 
-De **logaritme** met **grondtal** $\orange{a} \in \mathbb{R}^+_0 \backslash \\{1\\}$ van een **strikt positief reëel getal** is de **exponent van de macht** waartoe we $a$ moeten verheffen om dit getal te krijgen.
+De **logaritme** met **grondtal** $\orange{a} \in \mathbb{R}^+_0 \backslash \{1\}$ van een **strikt positief reëel getal** is de **exponent van de macht** waartoe we $a$ moeten verheffen om dit getal te krijgen.
 
 In symbolen:
 $$
-\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x \in \mathbb{R}^+_0: {^\orange{a}}\\!\log x = y \Leftrightarrow x = \orange{a}^y
+\forall a \in \mathbb{R}^+_0 \backslash \{1\}, \forall x \in \mathbb{R}^+_0: {^\orange{a}}\!\log x = y \Leftrightarrow x = \orange{a}^y
 $$
 </Attention>
 
 <Attention title="De basisformules">
 
 $$
-^a\\!\log a^y = y
+^a\!\log a^y = y
 $$
-$$a^{^a\\!\log x} = x$$  
+
+$$
+a^{^a\!\log x} = x
+$$
 </Attention>
 
 <Attention title="Tiendelige en natuurlijke logaritmen">

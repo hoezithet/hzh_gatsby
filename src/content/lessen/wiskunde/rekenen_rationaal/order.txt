@@ -1,7 +1,0 @@
-rekenen_gehele_getallen
-breuk
-optellen_aftrekken
-vermenigvuldigen_delen
-machten
-vierkantswortels
-volgorde_van_de_bewerkingen

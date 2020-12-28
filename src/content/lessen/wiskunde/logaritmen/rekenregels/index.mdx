@@ -46,12 +46,13 @@ Om dit nogmaals te illustreren, nemen we er de functie $^2\\!\log x$ bij. We mak
 
 We merken dat wanneer we **twee getallen in de linkse kolom vermenigvuldigen** (bv. 4 en 8), we de **overeenkomstige getallen van de rechtse kolom kunnen optellen** (bv. 2 en 3) om het beoogde resultaat te verkrijgen. Want $4 \cdot 8 = 32$ en $2 + 3 = 5$. Deze getallen staan ook mooi naast elkaar in de tabel. Onze rekenregel werkt dus! 💪
 
-{{< attention "De logaritme van een product" >}}
+<Attention title="De logaritme van een product">
+
 De **logaritme van een product** is de **som van de logaritmen**.
 
 In symbolen:
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log (x_1 \orange{\cdot} x_2) = \\ ^a\\!\log x_1 \orange{+} \\ ^a\\!\log x_2$$
-{{< /attention >}}
+</Attention>
 
 ## De logaritme van een quotiënt
 Om **de logaritme van een quotiënt** te berekenen, gaan we op **gelijkaardige manier** te werk. Hier geven we het **bewijs**, gebruikmakend van één van de **{{< class "basisformules" "orange" >}}** en de regels voor **rekenen met machten**.
@@ -62,31 +63,34 @@ Om **de logaritme van een quotiënt** te berekenen, gaan we op **gelijkaardige m
     &= \\ ^a\\!\log x_1 - \\ ^a\\!\log x_2
 \end{split}
 
-{{< attention "De logaritme van een quotiënt" >}}
+<Attention title="De logaritme van een quotiënt">
+
 De **logaritme van een quotiënt** is het **verschil van de logaritmen**.
 
 In symbolen:
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{\frac{x_1}{x_2}} = \\ ^a\\!\log x_1 \orange{-} \\ ^a\\!\log x_2$$
-{{< /attention >}}
+</Attention>
 
 Er kan hier ook sprake zijn van een **bijzonder geval**, namelijk $\frac{1}{x}$. 🤨
 
 $$^a\\!\log{\frac{1}{x}} = \cancelto{0}{^a\\!\log 1} - \\ ^a\\!\log x = - \\ ^a\\!\log x$$
 
-{{< attention "Bijzonder geval bij de logaritme van een quotiënt" >}}
+<Attention title="Bijzonder geval bij de logaritme van een quotiënt">
+
 $$^a\\!\log{\frac{1}{x}} = - \\ ^a\\!\log x$$
-{{< /attention >}}
+</Attention>
 
 ## De logaritme van een macht
 Ook hier gaan we op **analoge wijze** te werk en vinden we een **rekenregel**.
 > Kan jij hiervoor een bewijs vinden? 🧐
 
-{{< attention "De logaritme van een macht" >}}
+<Attention title="De logaritme van een macht">
+
 De **logaritme van een macht** is gelijk aan een **veelvoud van de logaritmen**.
 
 In symbolen:
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{x^\orange{n}} = \orange{n} \cdot \\ ^a\\!\log x$$
-{{< /attention >}}
+</Attention>
 
 Dit werkt ook met **wortels**! Een **n-demachtswortel** kunnen we immers schrijven als **exponent** $\frac{1}{n}$. Deze breuk als exponent kunnen we vervolgens voorop plaatsen. **In het algemeen** geldt:
 
@@ -112,33 +116,37 @@ $$^a\\!\log b = \frac{1}{^b\\!\log a}$$
 > Kan jij bovenstaande rekenregels afleiden/bewijzen? 🤔 Vertrek steeds vanuit een **basisformule**, of uit de eerste rekenregel als het om een gevolg gaat! 💡
 
 ## Samengevat
-{{< attention "De logaritme van een product" >}}
+<Attention title="De logaritme van een product">
+
 De **logaritme van een product** is de **som van de logaritmen**.
 
 In symbolen:
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log (x_1 \orange{\cdot} x_2) = \\ ^a\\!\log x_1 \orange{+} \\ ^a\\!\log x_2$$
-{{< /attention >}}
+</Attention>
 
-{{< attention "De logaritme van een quotiënt" >}}
+<Attention title="De logaritme van een quotiënt">
+
 De **logaritme van een quotiënt** is het **verschil van de logaritmen**.
 
 In symbolen:
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{\frac{x_1}{x_2}} = \\ ^a\\!\log x_1 \orange{-} \\ ^a\\!\log x_2$$
-{{< /attention >}}
+</Attention>
 
-{{< attention "De logaritme van een macht" >}}
+<Attention title="De logaritme van een macht">
+
 De **logaritme van een macht** is gelijk aan een **veelvoud van de logaritmen**.
 
 In symbolen:
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ ^a\\!\log{x^\orange{n}} = \orange{n} \cdot \\ ^a\\!\log x$$
 
 Dit werkt ook met **wortels**! Een **n-demachtswortel** kunnen we immers schrijven als **exponent** $\frac{1}{n}$.
-{{< /attention >}}
+</Attention>
 
-{{< attention "De logaritmen van een verschillend grondtal" >}}
+<Attention title="De logaritmen van een verschillend grondtal">
+
 $$\forall a \in \mathbb{R}^+_0 \backslash \\{1\\}, \forall x_1, x_2 \in \mathbb{R}^+_0 :\\ \orange{^b}\\!\log{\green{x}} = \frac{^a\\!\log{\green{x}}}{^a\\!\log{\orange{b}}}$$
 
 Er zijn ook twee **gevolgen**:
 $$^a\\!\log \orange{b} \cdot \\ \orange{^b}\\!\log x = \\ ^a\\!\log x$$
 $$^a\\!\log b = \frac{1}{^b\\!\log a}$$
-{{< /attention >}}
+</Attention>

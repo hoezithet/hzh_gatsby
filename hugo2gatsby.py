@@ -117,6 +117,27 @@ class EOLMathCallback:
         replacement = r'\\'
         return line.replace(original, replacement)
 
+class TitleImageCallback:
+    def __init__(self, path):
+        m_path = re.search(r'.*(/lessen/.*)', str(path.parent))
+        if not m_path:
+            self.parent_name = None
+        else:
+            self.parent_name = f'{m_path.group(1)}/'
+
+        self.ptrn = re.compile(r'title_img: "(?P<title_image>[^"]+)"')
+
+    def __call__(self, line):
+        if self.parent_name is None:
+            return line
+        m = self.ptrn.search(line)
+        if m is None:
+            return line
+
+        original = m.group(0)
+        title_img = m.group("title_image")
+        replacement = f'title_image: {title_img.replace(self.parent_name, "")}'
+        return line.replace(original, replacement)
 
 lessen_paths = list(lessen_root.rglob('**/index.mdx'))
 
@@ -130,6 +151,7 @@ for mdx_file in lessen_paths:
         ClassCallback(),
         SplitMathCallback(),
         EOLMathCallback(),
+        TitleImageCallback(mdx_file)
     ]
     new_lines = []
     nothing_changed = True

@@ -15,8 +15,7 @@ interface SectionItemProps {
     title: string;
     titleImg: string;
     buttonLink: string;
-    buttonText: string;
-    children: React.ReactElement|string;
+    children?: React.ReactElement|string;
 }
 
 const StyledGrid = styled(Grid)`
@@ -29,31 +28,10 @@ const StyledCard = styled(Card)`
 `;
 
 export default function SectionItem({title, titleImg, buttonLink, children}: SectionItemProps) {
-    const imgData = useStaticQuery(graphql`
-    {
-      allFile(filter: { extension: { eq: "png" } }) {
-        edges {
-          node {
-            childImageSharp {
-                fixed(height: 140) {
-                    ...GatsbyImageSharpFixed_tracedSVG
-                }
-            }
-            publicURL
-            absolutePath
-          }
-        }
-      }
-    }
-    `);
-
     let imgSlug = titleImg;
     if (imgSlug == null || imgSlug === "") {
         imgSlug = "images/default_title_img.png";
     }
-    const imgFile = imgData.allFile.edges.find(file =>
-        file.node.absolutePath.includes(imgSlug)
-    );
     return (
         <Grid item xs={12} sm={4}>
             <StyledCard>

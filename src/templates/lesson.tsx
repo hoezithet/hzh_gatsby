@@ -10,7 +10,6 @@ import { Bokeh } from "../components/shortcodes/bokeh";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
-import { MarkdownImage } from "../components/image";
 import Feedback from "../components/feedback";
 
 
@@ -31,7 +30,6 @@ const components = {
     a: Link,
     blockquote: BlockquoteBox,
     table: Table,
-    img: MarkdownImage,
 }
 
 export interface MdxNode {
@@ -39,10 +37,16 @@ export interface MdxNode {
         title: string;
         description: string;
         tags: string[];
-        title_img: string;
+        title_img: {
+            childImageSharp: {
+                fixed: {
+                    src: string;
+                };
+            };
+        };
     };
     body: string;
-    tableOfContents: { items: {url: string; title: string}[] };
+    tableOfContents: { items: { url: string; title: string }[] };
     fields: { slug: string };
 }
 
@@ -52,7 +56,7 @@ export interface LessonData {
     };
     pageContext: {
       crumbs: LayoutProps["crumbs"];
-      siblings: object[];
+      siblings: MdxNode[];
     };
 }
 
@@ -68,21 +72,21 @@ export default function Template(
     const nextSibling = pageIdx + 1 < siblings.length ? siblings[pageIdx + 1] : null;
     const prevSiblingCard = (
       prevSibling ? 
-      <SectionItem title={ `👈 Vorige les: ${prevSibling.frontmatter.title}` } titleImg={prevSibling.frontmatter.title_img } buttonLink={prevSibling.fields.slug} />
+      <SectionItem title={ `👈 Vorige les: ${prevSibling.frontmatter.title}` } titleImg={prevSibling.frontmatter.title_img.childImageSharp.fixed.src } buttonLink={prevSibling.fields.slug} />
       :
       <></>
     );
     
     const nextSiblingCard = (
       nextSibling ? 
-      <SectionItem title={ `Volgende les: ${nextSibling.frontmatter.title} 👉` } titleImg={nextSibling.frontmatter.title_img } buttonLink={nextSibling.fields.slug} />
+      <SectionItem title={ `Volgende les: ${nextSibling.frontmatter.title} 👉` } titleImg={nextSibling.frontmatter.title_img.childImageSharp.fixed.src } buttonLink={nextSibling.fields.slug} />
       :
       <></>
     );
     
     return (
         <Layout crumbs={ crumbs } description={ frontmatter.description }
-                tags={ frontmatter.tags } image={ frontmatter.title_img } >
+                tags={ frontmatter.tags } image={ frontmatter.title_img.childImageSharp.fixed.src } >
             <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }
@@ -115,7 +119,13 @@ export const pageQuery = graphql`
         title
         description
         tags
-        title_img
+        title_img {
+          childImageSharp {
+            fixed {
+              src
+            }
+          }
+        }
       }
       tableOfContents(maxDepth: 2)
       fields {

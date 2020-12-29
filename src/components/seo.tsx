@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
-import { useContentImage } from './image';
 
 interface OpenGraphProps {
   title: string;
@@ -218,9 +217,7 @@ function SEO({ crumbs, description = ``, tags = null,
     const pageCrumb = crumbs.slice(-1)[0];
     const url = `${new URL(pageCrumb.slug, site.siteMetadata.siteUrl)}`;
     const title = pageCrumb.title;
-    const imgNode = useContentImage(image);
-    const nodeUrl = imgNode ? `${new URL(imgNode.publicURL, site.siteMetadata.siteUrl)}` : null;
-    const imgUrl = nodeUrl || site.siteMetadata.organization.logo;
+    const imgUrl = image ? `${new URL(image, url)}` : site.siteMetadata.organization.logo;
 
     return (
       <>

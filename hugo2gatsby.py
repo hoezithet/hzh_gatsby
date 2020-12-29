@@ -87,18 +87,35 @@ class DisplayMathCallback:
         replacement = f'$$\n{m.group("expr")}\n$$'
         return line.replace(original, replacement)
 
-class InlineMathCallback:
+class SplitMathCallback:
     def __init__(self):
-        self.ptrn = re.compile(r'^\$\$?(?P<expr>[^$]+)\$\$?$')
+        self.opening_ptrn = re.compile(r'\\begin{split}')
+        self.closing_ptrn = re.compile(r'\\end{split}')
+    
+    def __call__(self, line):
+        m_open = self.opening_ptrn.search(line)
+        m_close = self.closing_ptrn.search(line)
+
+        if m_open:
+            replacement = '$$\n\\begin{aligned}'
+            line = line.replace(m_open.group(0), replacement)
+        if m_close:
+            replacement = '\\end{aligned}\n$$'
+            line = line.replace(m_close.group(0), replacement)
+
+        return line
+
+class EOLMathCallback:
+    def __init__(self):
+        self.ptrn = re.compile(r'\\{5}$')
 
     def __call__(self, line):
         m = self.ptrn.search(line)
         if m is None:
             return line
         original = m.group(0)
-        replacement = f'$$\n{m.group("expr")}\n$$'
+        replacement = r'\\'
         return line.replace(original, replacement)
-
 
 
 lessen_paths = list(lessen_root.rglob('**/index.mdx'))
@@ -111,6 +128,8 @@ for mdx_file in lessen_paths:
         DisplayMathCallback(),
         ExpandCallback(),
         ClassCallback(),
+        SplitMathCallback(),
+        EOLMathCallback(),
     ]
     new_lines = []
     nothing_changed = True

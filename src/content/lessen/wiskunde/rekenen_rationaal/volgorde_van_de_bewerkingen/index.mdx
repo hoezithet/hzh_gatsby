@@ -93,23 +93,23 @@ omdat we de deling eerst tegenkomen wanneer we van links naar rechts lezen.
 We zullen die volgorde van de bewerkingen eens toepassen op $4 - 5 \cdot 8 ^ 2$.
 
 Er staan $3$ verschillende bewerkingen: min, maal en een macht. Moeten we eerst
-$\clra{4 - 5}$ doen of eerst $\clra{5 \cdot 8}$ of eerst $\clra{8 ^ 2}$? De
+$\orange{4 - 5}$ doen of eerst $\orange{5 \cdot 8}$ of eerst $\orange{8 ^ 2}$? De
 regels zeggen: _"Machten hebben
 voorrang op vermenigvuldigingen"_, de eerste stap is dus om de macht uit te rekenen:
 
 
 $$
- 4 - 5 \cdot \clra{8 ^ 2} = 4 - 5 \cdot \clra{64}
+ 4 - 5 \cdot \orange{8 ^ 2} = 4 - 5 \cdot \orange{64}
 $$
 
 
 Nu hebben we de uitdrukking $4 - 5 \cdot 64$ met nog twee bewerkingen:
-min en maal. Eerst $\clra{4 - 5}$ of eerst $\clra{5 \cdot 64}$?
+min en maal. Eerst $\orange{4 - 5}$ of eerst $\orange{5 \cdot 64}$?
 _"Vermenigvuldingen hebben voorrang op optellingen <Mute>(en aftrekkingen)</Mute>"_, dus:
 
 
 $$
- 4 - \clra{5 \cdot 64} = 4 - \clra{320} 
+ 4 - \orange{5 \cdot 64} = 4 - \orange{320} 
 $$
 
 
@@ -118,7 +118,7 @@ bewerking over; een aftrekking:
 
 
 $$
- \clra{4 - 320} = \clra{-316} 
+ \orange{4 - 320} = \orange{-316} 
 $$
 
 
@@ -148,7 +148,7 @@ stapje per stapje door. Ze zegt dat de **haakjes** altijd eerst moeten worden
 uitgerekend, zij hebben voorrang op **alles**. Hier staan **vier** dingen tussen haakjes:
 
 $$
--(\clra{4 - 7})^2 \cdot 2 + \sqrt{\clra{9 \cdot 4}} \div 3 - \frac{\clra{4 \cdot 3}}{\clra{-5 + 7}}
+-(\orange{4 - 7})^2 \cdot 2 + \sqrt{\orange{9 \cdot 4}} \div 3 - \frac{\orange{4 \cdot 3}}{\orange{-5 + 7}}
 $$
 
 
@@ -158,7 +158,10 @@ een deling $(1 - 4) \div (3 + 2)$. De teller en noemer staan dus eigenlijk tusse
 Al die haakjes uitrekenen is snel gebeurd:
 
 $$
--(\clra{-3})^2 \cdot 2 + \sqrt{\clra{36}}\div 3 - \frac{\clra{12}}{\clra{2}}
+\begin{gathered}
+  -(\underbrace{4 - 7}_{= \orange{-3}})^2 \cdot 2 + \sqrt{\underbrace{9 \cdot 4}_{= \orange{36}}} \div 3 - \frac{\overbrace{4 \cdot 3}^{= \orange{12}}}{\underbrace{-5 + 7}_{= \orange{2}}}\\
+  = -(\orange{-3})^2 \cdot 2 + \sqrt{\orange{36}}\div 3 - \frac{\orange{12}}{\orange{2}}
+\end{gathered}
 $$
 
 
@@ -166,27 +169,30 @@ De uitdrukking wordt al meteen een pak eenvoudiger. Na de haakjes hebben de
 **machten en wortels** voorrang. Er zijn **twee** machten en wortels:
 
 $$
--\clra{(-3)^2} \cdot 2 + \clra{\sqrt{36}}\div 3 - \frac{12}{2}
+-\orange{(-3)^2} \cdot 2 + \orange{\sqrt{36}}\div 3 - \frac{12}{2}
 $$
 
 
 Deze macht en wortel uitrekenen geeft:
 
 $$
--\clra{9} \cdot 2 + \clra{6}\div 3 - \frac{12}{2}
+\begin{gathered}
+  -\underbrace{(-3)^2}_{= \orange{9}} \cdot 2 + \underbrace{\sqrt{36}}_{= \orange{6}}\div 3 - \frac{12}{2}\\
+  = -\orange{9} \cdot 2 + \orange{6}\div 3 - \frac{12}{2}
+\end{gathered}
 $$
 
 
-Onthoud dat een negatief getal kwadrateren (zoals $\clra{(-3)^2}$), een
-positief getal oplevert (hier $\clra{9}$). Het minnetje voor de $\clra{9}$ in
-de bovenstaande uitdrukking komt van het zwarte minnetje dat helemaal vooraan stond
-bij $-\clra{(-3)^2}$.
+Onthoud dat een negatief getal kwadrateren (zoals $\orange{(-3)^2}$), een
+positief getal oplevert (hier $\orange{9}$). Het minnetje voor de $\orange{9}$ in
+de bovenstaande uitdrukking komt van het minnetje dat helemaal vooraan stond
+bij $-\orange{(-3)^2}$.
 
 Na de machten en wortels, hebben de **vermenigvuldigingen en delingen**
 voorrang. Zo zijn er **drie**:
 
 $$
-\clra{-9 \cdot 2} + \clra{6\div 3} - \clra{\frac{12}{2}}
+\orange{-9 \cdot 2} + \orange{6\div 3} - \orange{\frac{12}{2}}
 $$
 
 
@@ -194,7 +200,10 @@ Herinner je dat een breuk gewoon een deling is van de _teller_ gedeeld door de
 _noemer_. De vermenigvuldigingen en delingen uitrekenen geeft:
 
 $$
-\clra{-18} + \clra{2} - \clra{6}
+\begin{gathered}
+  \underbrace{-9 \cdot 2}_{= \orange{-18}} + \underbrace{6\div 3}_{= \orange{2}} - \underbrace{\frac{12}{2}}_{= \orange{6}}\\
+  = \orange{-18} + \orange{2} - \orange{6}
+\end{gathered}
 $$
 
 
@@ -202,7 +211,7 @@ Er schiet enkel nog een eenvoudig sommetje over met enkel optellingen en
 aftrekkingen. Die werken we gewoon uit van links naar rechts:
 
 $$
-\clra{-18 + 2 - 6} = \clra{-22}
+\orange{-18 + 2 - 6} = \orange{-22}
 $$
 
 
@@ -233,24 +242,21 @@ stoppen we dan in de oorspronkelijke uitdrukking.
 
 $$
 \begin{aligned}
-\sqrt{-6 + \clra{5^2} \cdot 2}
-&= \sqrt{-6 + \clra{25} \cdot 2} \\
- &= \sqrt{-6 + \clra{25 \cdot 2}} \\
- &= \sqrt{-6 + \clra{50}} \\
- &= \sqrt{\clra{-6 + 50}} \\
- &= \sqrt{\clra{44}} \\
- &= \clra{\sqrt{44}} \\
- &\approx \clra{6{,}63\ldots}
+\sqrt{-6 + \underbrace{5^2}_{= 25} \cdot 2}
+ &= \sqrt{-6 + \underbrace{25 \cdot 2}_{= 50}} \\
+ &= \sqrt{\underbrace{-6 + 50}_{= 44}} \\
+ &= \sqrt{44} \\
+ &\approx \orange{6{,}63\ldots}
 \end{aligned}
 $$
 
 De oorspronkelijke uitdrukking wordt dus:
 
 $$
--5^3 + \frac{\clra{6{,}63\ldots}}{2}
+-5^3 + \frac{\orange{6{,}63\ldots}}{2}
 $$
 
 
 Hier kan je weer de volgorde van de bewerkingen op toepassen. Je zult vinden
-dat de uitdrukking gelijk is aan $\clra{-121{,}6}$ (afgerond op 1 cijfer na de
+dat de uitdrukking gelijk is aan $\orange{-121{,}6}$ (afgerond op 1 cijfer na de
 komma).

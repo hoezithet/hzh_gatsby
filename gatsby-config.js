@@ -66,6 +66,7 @@ module.exports = {
                 path: `${__dirname}/src/content`,
             },
         },
+        `gatsby-remark-images`,
         {
             resolve: "gatsby-plugin-mdx",
             options: {
@@ -78,6 +79,9 @@ module.exports = {
                         options: {
                             isIconAfterHeader: true,
                         },
+                    },
+                    {
+                        resolve: `gatsby-remark-images`,
                     },
                     {
                         resolve: `gatsby-remark-unwrap-images`,

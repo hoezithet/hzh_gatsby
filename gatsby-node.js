@@ -181,7 +181,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                         frontmatter {
                             title
                             weight
-                            title_img
+                            image {
+                                childImageSharp {
+                                    fixed {
+                                        src
+                                        srcSet
+                                        width
+                                        height
+                                        tracedSVG
+                                    }
+                                }
+                            }
                         }
                     }
                 }

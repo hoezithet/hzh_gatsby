@@ -22,6 +22,7 @@ import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
 import Comments from "../components/comments";
 import SectionItem from "./sectionItem";
+import { FixedObject } from "gatsby-image";
 
 const shortcodes = { Mute, Attention, Expand, Bokeh }
 
@@ -37,11 +38,9 @@ export interface MdxNode {
         title: string;
         description: string;
         tags: string[];
-        title_img: {
+        image: {
             childImageSharp: {
-                fixed: {
-                    src: string;
-                };
+                fixed: FixedObject
             };
         };
     };
@@ -72,21 +71,21 @@ export default function Template(
     const nextSibling = pageIdx + 1 < siblings.length ? siblings[pageIdx + 1] : null;
     const prevSiblingCard = (
       prevSibling ? 
-      <SectionItem title={ `👈 Vorige les: ${prevSibling.frontmatter.title}` } titleImg={prevSibling.frontmatter.title_img.childImageSharp.fixed.src } buttonLink={prevSibling.fields.slug} />
+      <SectionItem title={ `👈 Vorige les: ${prevSibling.frontmatter.title}` } titleImgFixed={prevSibling.frontmatter.image.childImageSharp.fixed } buttonLink={prevSibling.fields.slug} />
       :
       <></>
     );
     
     const nextSiblingCard = (
       nextSibling ? 
-      <SectionItem title={ `Volgende les: ${nextSibling.frontmatter.title} 👉` } titleImg={nextSibling.frontmatter.title_img.childImageSharp.fixed.src } buttonLink={nextSibling.fields.slug} />
+      <SectionItem title={ `Volgende les: ${nextSibling.frontmatter.title} 👉` } titleImgFixed={nextSibling.frontmatter.image.childImageSharp.fixed } buttonLink={nextSibling.fields.slug} />
       :
       <></>
     );
     
     return (
         <Layout crumbs={ crumbs } description={ frontmatter.description }
-                tags={ frontmatter.tags } image={ frontmatter.title_img.childImageSharp.fixed.src } >
+                tags={ frontmatter.tags } image={ frontmatter.image.childImageSharp.fixed.src } >
             <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }
@@ -119,10 +118,14 @@ export const pageQuery = graphql`
         title
         description
         tags
-        title_img {
+        image {
           childImageSharp {
             fixed {
               src
+              srcSet
+              width
+              height
+              tracedSVG
             }
           }
         }

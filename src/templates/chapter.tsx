@@ -4,6 +4,7 @@ import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
 import SectionItem from "./sectionItem";
 import Grid from '@material-ui/core/Grid';
+import { FixedObject } from "gatsby-image";
 
 interface ChapterData {
     pageContext: {
@@ -18,7 +19,11 @@ interface ChapterData {
                 frontmatter: {
                     title: string;
                     description: string;
-                    title_img: string;
+                    image: {
+                        childImageSharp: {
+                            fixed: FixedObject
+                        };
+                    };
                 };
                 fileAbsolutePath: string;
                 excerpt: string;
@@ -32,10 +37,10 @@ export default function ChapterTemplate({ pageContext, data }: ChapterData) {
     
     const lessonLinks = data.allMdx.nodes.map(node => {
         const title = node.frontmatter.title;
-        const titleImg = node.frontmatter.title_img;
+        const titleImg = node.frontmatter.image;
         const buttonLink = node.fields.slug;
         const buttonText = "Lees meer";
-        return (<SectionItem key={ title } title={title} titleImg={titleImg} buttonLink={buttonLink} buttonText={buttonText}>
+        return (<SectionItem key={ title } title={title} titleImgFixed={titleImg.childImageSharp.fixed} buttonLink={buttonLink}>
                     { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
                 </SectionItem>
             );
@@ -63,7 +68,17 @@ export const chapterQuery = graphql`
         frontmatter {
           title
           description
-          title_img
+          image {
+            childImageSharp {
+                fixed {
+                    src
+                    srcSet
+                    width
+                    height
+                    tracedSVG
+                }
+            }
+          }
         }
         fileAbsolutePath
         excerpt(pruneLength: 200, truncate: true)

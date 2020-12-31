@@ -12,11 +12,62 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             name: `slug`,
             value: slug,
         });
-        createNodeField({
-            node,
-            name: `parent_slug`,
-            value: slug.split("/").slice(0, -1).join("/"),
-        });
+
+        if (isLesson(node)) {
+            createNodeField({
+                node,
+                name: `content_type`,
+                value: `lesson`,
+            });
+            createNodeField({
+                node,
+                name: `chapter_slug`,
+                value: slug.split("/").slice(0, -1).join("/"),
+            });
+            createNodeField({
+                node,
+                name: `course_slug`,
+                value: slug.split("/").slice(0, -2).join("/"),
+            });
+            createNodeField({
+                node,
+                name: `all_courses_slug`,
+                value: slug.split("/").slice(0, -3).join("/"),
+            });
+        } else if(isChapter(node)) {
+            createNodeField({
+                node,
+                name: `content_type`,
+                value: `chapter`,
+            });
+            createNodeField({
+                node,
+                name: `course_slug`,
+                value: slug.split("/").slice(0, -1).join("/"),
+            });
+            createNodeField({
+                node,
+                name: `all_courses_slug`,
+                value: slug.split("/").slice(0, -2).join("/"),
+            });
+        } else if(isCourse(node)) {
+            createNodeField({
+                node,
+                name: `content_type`,
+                value: `course`,
+            });
+            createNodeField({
+                node,
+                name: `all_courses_slug`,
+                value: slug.split("/").slice(0, -1).join("/"),
+            });
+        } else if(isAllCourses(node)) {
+            createNodeField({
+                node,
+                name: `content_type`,
+                value: `all_courses`,
+            });
+        }
     }
 };
 
@@ -181,17 +232,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                         frontmatter {
                             title
                             weight
-                            image {
-                                childImageSharp {
-                                    fixed {
-                                        src
-                                        srcSet
-                                        width
-                                        height
-                                        tracedSVG
-                                    }
-                                }
-                            }
                         }
                     }
                 }
@@ -210,13 +250,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     result.data.allMdx.edges.forEach(({ node }) => {
         if (isLesson(node)) {
+            const siblings = nodeToSiblingPaths(node, contentTree).map(p => _.get(contentTree, p));
+            const siblingSlugs = siblings.map(s => s.fields.slug);
+            const pageIdx = siblingSlugs.findIndex(s => s === node.fields.slug);
+            const prevNode = pageIdx - 1 >= 0 ? siblings[pageIdx - 1] : null;
+            const nextNode = pageIdx + 1 < siblings.length ? siblings[pageIdx + 1] : null;
             createPage({
                 path: node.fields.slug,
                 component: require.resolve("./src/templates/lesson.tsx"),
                 context: {
                     filePath: node.fileAbsolutePath,
+                    nextPath: nextNode ? nextNode.fileAbsolutePath : null,
+                    prevPath: prevNode ? prevNode.fileAbsolutePath : null,
                     crumbs: nodeToCrumbs(node, contentTree),
-                    siblings: nodeToSiblingPaths(node, contentTree).map(p => _.get(contentTree, p)),
                 },
             });
             createPage({

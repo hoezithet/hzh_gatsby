@@ -8,13 +8,19 @@ import { CardActionArea } from "gatsby-theme-material-ui";
 import Img from "gatsby-image/withIEPolyfill";
 import COLORS from "../colors.js";
 import { FixedObject } from "gatsby-image";
-import default_img from "../images/default_title_img.png";
+import { graphql } from "gatsby";
 
+
+export interface CardImage {
+    childImageSharp: {
+        fixed: FixedObject
+    };
+}
 
 interface SectionItemProps {
     title: string;
-    titleImgFixed: FixedObject;
-    buttonLink: string;
+    cardImage: CardImage;
+    link: string;
     children?: React.ReactElement|string;
 }
 
@@ -27,16 +33,12 @@ const StyledCard = styled(Card)`
 
 `;
 
-export default function SectionItem({title, titleImgFixed, buttonLink, children}: SectionItemProps) {
-    const img = titleImgFixed ? (
-        <Img fixed={titleImgFixed} objectFit="cover" objectPosition="50% 50%" />
-    ) : (
-        <img src={default_img} />
-    );
+export default function SectionCard({title, cardImage, link, children}: SectionItemProps) {
+    const img = <Img fixed={cardImage.childImageSharp.fixed} objectFit="cover" objectPosition="50% 50%" />;
     return (
         <Grid item xs={12} sm={4}>
             <StyledCard>
-                <CardActionArea to={ buttonLink }>
+                <CardActionArea to={ link }>
                     <StyledGrid container justify="center">
                         <Grid item>
                             { img }
@@ -55,3 +57,13 @@ export default function SectionItem({title, titleImgFixed, buttonLink, children}
         </Grid>
     );
 }
+
+export const cardImageFragment = graphql`
+    fragment CardImageFragment on File {
+        childImageSharp {
+            fixed(height: 140) {
+                ...GatsbyImageSharpFixed_tracedSVG
+            }
+        }
+    }
+`

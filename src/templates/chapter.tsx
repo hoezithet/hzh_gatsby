@@ -2,9 +2,9 @@ import React from "react";
 import { graphql } from "gatsby";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
-import SectionItem from "./sectionItem";
+import SectionCard, { CardImage } from "./sectionCard";
 import Grid from '@material-ui/core/Grid';
-import { FixedObject } from "gatsby-image";
+import { MdxNode } from "./lesson";
 
 interface ChapterData {
     pageContext: {
@@ -13,36 +13,24 @@ interface ChapterData {
         title: string;
     };
     data: {
-        allMdx: {
-            nodes: {
-                fields: { slug: string };
-                frontmatter: {
-                    title: string;
-                    description: string;
-                    image: {
-                        childImageSharp: {
-                            fixed: FixedObject
-                        };
-                    };
-                };
-                fileAbsolutePath: string;
-                excerpt: string;
-            }[];
+        lessons: {
+            nodes: MdxNode[];
         };
+        chapter: MdxNode;
+        defaultImg: CardImage;
     };
 }
 
 export default function ChapterTemplate({ pageContext, data }: ChapterData) {
     const { crumbs, title } = pageContext;
     
-    const lessonLinks = data.allMdx.nodes.map(node => {
+    const lessonLinks = data.lessons.nodes.map(node => {
         const title = node.frontmatter.title;
-        const titleImg = node.frontmatter.image;
-        const buttonLink = node.fields.slug;
-        const buttonText = "Lees meer";
-        return (<SectionItem key={ title } title={title} titleImgFixed={titleImg.childImageSharp.fixed} buttonLink={buttonLink}>
+        const cardImage = node.frontmatter.image || data.defaultImg;
+        const link = node.fields.slug;
+        return (<SectionCard key={ title } title={title} cardImage={cardImage} link={link}>
                     { node.frontmatter.description ? node.frontmatter.description : node.excerpt }
-                </SectionItem>
+                </SectionCard>
             );
     }
     );
@@ -58,31 +46,36 @@ export default function ChapterTemplate({ pageContext, data }: ChapterData) {
 }
 
 export const chapterQuery = graphql`
-  query ChapterQuery($slug: String!) {
-    allMdx(filter: {fields: {parent_slug: {eq: $slug}}},
-           sort: {fields: frontmatter___weight, order: ASC}) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          description
-          image {
-            childImageSharp {
-                fixed {
-                    src
-                    srcSet
-                    width
-                    height
-                    tracedSVG
+    query ChapterQuery($slug: String!) {
+        lessons: allMdx(
+            filter: { fields: { content_type: { eq: "lesson" }, chapter_slug: { eq: $slug } } }
+            sort: { fields: frontmatter___weight, order: ASC }
+        ) {
+            nodes {
+                fields {
+                    slug
                 }
+                frontmatter {
+                    title
+                    description
+                    image {
+                        ...CardImageFragment
+                    }
+                }
+                excerpt(pruneLength: 200, truncate: true)
             }
-          }
         }
-        fileAbsolutePath
-        excerpt(pruneLength: 200, truncate: true)
-      }
+        chapter: mdx(fields: {slug: {eq: $slug}}) {
+            frontmatter {
+              title
+            }
+        }
+        defaultImg: file(
+            sourceInstanceName: { eq: "images" }
+            name: { eq: "default_title_img" }
+            extension: { eq: "png" }
+        ) {
+            ...CardImageFragment
+        }
     }
-  }
 `;

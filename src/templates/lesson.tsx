@@ -16,12 +16,11 @@ import Feedback from "../components/feedback";
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
 import BlockquoteBox from "../components/blockquote";
 import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
 import Comments from "../components/comments";
-import SectionItem from "./sectionItem";
+import SectionCard, { CardImage } from "./sectionCard";
 import { FixedObject } from "gatsby-image";
 
 const shortcodes = { Mute, Attention, Expand, Bokeh }
@@ -38,54 +37,56 @@ export interface MdxNode {
         title: string;
         description: string;
         tags: string[];
-        image: {
-            childImageSharp: {
-                fixed: FixedObject
-            };
-        };
+        image: CardImage;
     };
     body: string;
     tableOfContents: { items: { url: string; title: string }[] };
-    fields: { slug: string };
+    fields: {
+        slug: string
+        content_type: string;
+        chapter_slug: string;
+        course_slug: string;
+        all_courses_slug: string;
+    };
+    excerpt: string;
 }
 
 export interface LessonData {
     data: {
-        mdx: MdxNode;
+        lesson: MdxNode;
+        nextLesson: MdxNode;
+        prevLesson: MdxNode;
+        defaultImg: CardImage;
     };
     pageContext: {
       crumbs: LayoutProps["crumbs"];
-      siblings: MdxNode[];
     };
 }
 
 export default function Template(
     { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
 ) {
-    const { mdx } = data; // data.mdx holds your post data
-    const { frontmatter, body, tableOfContents, fields } = mdx;
-    const { crumbs, siblings } = pageContext;
-    const siblingSlugs = siblings.map(s => s.fields.slug);
-    const pageIdx = siblingSlugs.findIndex(s => s === fields.slug);
-    const prevSibling = pageIdx - 1 >= 0 ? siblings[pageIdx - 1] : null;
-    const nextSibling = pageIdx + 1 < siblings.length ? siblings[pageIdx + 1] : null;
+    const { lesson, nextLesson, prevLesson, defaultImg } = data;
+    const { frontmatter, body, tableOfContents } = lesson;
+    const { crumbs } = pageContext;
     const prevSiblingCard = (
-      prevSibling ? 
-      <SectionItem title={ `👈 Vorige les: ${prevSibling.frontmatter.title}` } titleImgFixed={prevSibling.frontmatter.image.childImageSharp.fixed } buttonLink={prevSibling.fields.slug} />
+      prevLesson ? 
+      <SectionCard title={ `👈 Vorige les: ${prevLesson.frontmatter.title}` } cardImage={prevLesson.frontmatter.image } link={prevLesson.fields.slug} />
       :
       <></>
     );
     
     const nextSiblingCard = (
-      nextSibling ? 
-      <SectionItem title={ `Volgende les: ${nextSibling.frontmatter.title} 👉` } titleImgFixed={nextSibling.frontmatter.image.childImageSharp.fixed } buttonLink={nextSibling.fields.slug} />
+      nextLesson ? 
+      <SectionCard title={ `Volgende les: ${nextLesson.frontmatter.title} 👉` } cardImage={nextLesson.frontmatter.image} link={nextLesson.fields.slug} />
       :
       <></>
     );
     
+    const image = frontmatter.image;
     return (
         <Layout crumbs={ crumbs } description={ frontmatter.description }
-                tags={ frontmatter.tags } image={ frontmatter.image.childImageSharp.fixed.src } >
+                tags={ frontmatter.tags } image={ image ? image.childImageSharp.fixed.src : defaultImg.childImageSharp.fixed.src } >
             <h1>{frontmatter.title}</h1>
             <Toc>
                 { tableOfContents }
@@ -111,29 +112,51 @@ export default function Template(
 }
 
 export const pageQuery = graphql`
-  query LessonQuery($filePath: String!) {
-    mdx(fileAbsolutePath: { eq: $filePath }) {
-      body
-      frontmatter {
-        title
-        description
-        tags
-        image {
-          childImageSharp {
-            fixed {
-              src
-              srcSet
-              width
-              height
-              tracedSVG
+    query LessonQuery($filePath: String!, $prevPath: String, $nextPath: String) {
+        lesson: mdx(fileAbsolutePath: { eq: $filePath }) {
+            body
+            frontmatter {
+                title
+                description
+                tags
+                image {
+                    ...LessonImageFragment
+                }
             }
-          }
+            tableOfContents(maxDepth: 2)
+            fields {
+                slug
+            }
         }
-      }
-      tableOfContents(maxDepth: 2)
-      fields {
-        slug
-      }
+        prevLesson: mdx(fileAbsolutePath: { eq: $prevPath }) {
+          ...SiblingMdxFragment
+        }
+        nextLesson: mdx(fileAbsolutePath: { eq: $nextPath }) {
+          ...SiblingMdxFragment
+        }
+        defaultImg: file(sourceInstanceName: {eq: "images"}, name: {eq: "default_title_img"}, extension: {eq: "png"}) {
+          ...LessonImageFragment
+        }
     }
-  }
+
+    fragment LessonImageFragment on File {
+        childImageSharp {
+            fixed(height: 140) {
+                ...GatsbyImageSharpFixed_tracedSVG
+            }
+        }
+    }
+
+    fragment SiblingMdxFragment on Mdx {
+        fileAbsolutePath
+        frontmatter {
+            title
+            image {
+                ...LessonImageFragment
+            }
+        }
+        fields {
+            slug
+        }
+    }
 `;

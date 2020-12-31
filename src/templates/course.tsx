@@ -2,15 +2,33 @@ import React from "react";
 import { LayoutProps } from "../components/layout";
 import Layout from "../components/layout";
 import { Link } from "gatsby-theme-material-ui";
-import SectionItem from "./sectionItem";
+import SectionCard, { CardImage } from "./sectionCard";
 import Grid from '@material-ui/core/Grid';
 import styled from "styled-components";
 import _ from "lodash";
+import { MdxNode } from "./lesson";
+import { graphql } from "gatsby";
 
 
 const LessonListItem = styled.li`
     font-size: 12pt;
 `
+
+interface MdxGroup {
+    nodes: MdxNode[];
+}
+
+interface LessonGroups {
+    group: MdxGroup[];
+}
+
+interface QueryData {
+    chapters: {
+        nodes: MdxNode[];
+    };
+    lessons: LessonGroups;
+    defaultImg: CardImage;
+}
 
 interface CourseData {
     pageContext: {
@@ -18,63 +36,113 @@ interface CourseData {
         slug: string;
         title: string;
         tree: object;
-    }
+    };
+    data: QueryData;
 }
 
-interface CourseChapterProps {
-    treeContents: object;
+interface ChapterCardProps {
+    chapter: MdxNode;
+    chapterLessons: MdxNode[];
+    defaultImg: CardImage;
 }
 
-function renderContents(tree: object, contentsPath: string[]) {
-    const contentsNode = _.get(tree, contentsPath);
-
-    if ('section' in contentsNode) {
-        const contSectionNode = _.get(tree, contentsPath.concat(['section']));
-        const contContentsPath = contentsPath.concat(['contents']);
-        const contContentsNode = _.get(tree, contContentsPath);
-        const contContentsChildPaths = Object.keys(contContentsNode).map(k => contContentsPath.concat([k]));
-        
-        return (
-        <SectionItem
-             title={contSectionNode.frontmatter.title}
-             titleImg={contSectionNode.frontmatter.title_img}
-             buttonLink={contSectionNode.fields.slug}
-             buttonText={"Ga naar hoofdstuk"}>
+function ChapterCard({ chapter, chapterLessons, defaultImg}: ChapterCardProps) {
+    return (
+        <SectionCard
+        title={chapter.frontmatter.title}
+        cardImage={chapter.frontmatter.image || defaultImg}
+        link={chapter.fields.slug}>
             <ol>
-                { contContentsChildPaths.map(p => renderContents(tree, p)) }
+                { 
+                    chapterLessons.map(
+                        l => (
+                            <LessonListItem>
+                                <Link to={l.fields.slug}>
+                                    {l.frontmatter.title}
+                                </Link>
+                            </LessonListItem>
+                        )
+                    )
+                }
             </ol>
-        </SectionItem>
-        );
+        </SectionCard>
+
+    )
+}
+
+function getChapterLessons(chapter: MdxNode, lessons: LessonGroups) {
+    const chapterLessonGroups = lessons.group.filter(({ nodes }) =>
+        nodes.every(n => n.fields.chapter_slug === chapter.fields.slug)
+    );
+    if (chapterLessonGroups.length > 0) {
+        return chapterLessonGroups[0].nodes;
     } else {
-        return (
-            <LessonListItem>
-                <Link to={ contentsNode.fields.slug }>
-                    { contentsNode.frontmatter.title }
-                </Link>
-            </LessonListItem>
-        );
+        return [];
     }
 }
 
-export function compareContentKeys(k1: string, k2: string, tree: object) {
-    return _.get(tree, [k1, 'section']).frontmatter.weight - _.get(tree, [k2, 'section']).frontmatter.weight;
-}
-
-export function CourseChapters({treeContents}: CourseChapterProps) {
+export function CourseChapters({ chapters, lessons, defaultImg }: QueryData) {
+    const lessonsPerChapter = chapters.nodes.map(c => getChapterLessons(c, lessons));
     return (
     <Grid container spacing={2}>
-        { Object.keys(treeContents).sort((k1, k2) => compareContentKeys(k1, k2, treeContents)).map(p => renderContents(treeContents, [p])) }
+        { chapters.nodes.map((c, index) => (
+            <ChapterCard chapter={c} chapterLessons={lessonsPerChapter[index]} defaultImg={defaultImg} />
+        )
+         ) }
     </Grid>
     );
 }
 
-export default function CourseTemplate({ pageContext }: CourseData) {
+export default function CourseTemplate({ pageContext, data }: CourseData) {
     const { crumbs, title , tree } = pageContext;
-    const treeContents = _.get(tree, ['contents']);
     return (
         <Layout crumbs={ crumbs }>
             <h1>{ title }</h1>
-            <CourseChapters treeContents={treeContents}/>
+            <CourseChapters chapters={data.chapters} lessons={data.lessons} defaultImg={data.defaultImg} />
         </Layout>
     );
 }
+
+export const courseQuery = graphql`
+    query CourseQuery($slug: String!) {
+        chapters: allMdx(
+            filter: { fields: { content_type: { eq: "chapter" }, course_slug: { eq: $slug } } }
+            sort: { fields: frontmatter___weight, order: ASC }
+        ) {
+            nodes {
+                frontmatter {
+                    image {
+                        ...CardImageFragment
+                    }
+                    title
+                }
+                fields {
+                    slug
+                }
+            }
+        }
+        lessons: allMdx(
+            filter: { fields: { content_type: { eq: "lesson" }, course_slug: { eq: $slug } } }
+            sort: { fields: frontmatter___weight, order: ASC }
+        ) {
+            group(field: fields___chapter_slug) {
+                nodes {
+                    frontmatter {
+                        title
+                    }
+                    fields {
+                        slug
+                        chapter_slug
+                    }
+                }
+            }
+        }
+        defaultImg: file(
+            sourceInstanceName: { eq: "images" }
+            name: { eq: "default_title_img" }
+            extension: { eq: "png" }
+        ) {
+            ...CardImageFragment
+        }
+    }
+`;

@@ -29,9 +29,25 @@ export const Black = ({children}: ColorProps) => {
     )
 }
 
+export const LightBlue = ({children}: ColorProps) => {
+    return (
+        <Color color="LIGHT_BLUE">
+            { children }
+        </Color>
+    )
+}
+
 export const Blue = ({children}: ColorProps) => {
     return (
         <Color color="BLUE">
+            { children }
+        </Color>
+    )
+}
+
+export const DarkBlue = ({children}: ColorProps) => {
+    return (
+        <Color color="DARK_BLUE">
             { children }
         </Color>
     )
@@ -80,6 +96,14 @@ export const Orange = ({children}: ColorProps) => {
 export const Red = ({children}: ColorProps) => {
     return (
         <Color color="RED">
+            { children }
+        </Color>
+    )
+}
+
+export const DarkRed = ({children}: ColorProps) => {
+    return (
+        <Color color="DARK_RED">
             { children }
         </Color>
     )

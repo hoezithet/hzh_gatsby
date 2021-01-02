@@ -8,7 +8,21 @@ import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import { Bokeh } from "../components/shortcodes/bokeh";
 import ToggleImage from "../components/shortcodes/toggleImage";
-import Color, { Black, Blue, Navy, Green, Yellow, Gold, Orange, Red, Purple, Gray } from "../components/shortcodes/color";
+import Color, {
+    Black,
+    LightBlue,
+    Blue,
+    DarkBlue,
+    DarkRed,
+    Navy,
+    Green,
+    Yellow,
+    Gold,
+    Orange,
+    Red,
+    Purple,
+    Gray,
+} from "../components/shortcodes/color";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
@@ -32,13 +46,16 @@ export const shortcodes = {
     ToggleImage,
     Color,
     Black,
+    LightBlue,
     Blue,
+    DarkBlue,
     Navy,
     Green,
     Yellow,
     Gold,
     Orange,
     Red,
+    DarkRed,
     Purple,
     Gray,
 };

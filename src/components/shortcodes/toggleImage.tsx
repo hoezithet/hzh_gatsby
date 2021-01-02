@@ -1,7 +1,6 @@
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
-import { string } from "prop-types";
 import React, { useState } from "react";
 
 interface ToggleImageProps {

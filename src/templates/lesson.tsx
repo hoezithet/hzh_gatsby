@@ -71,14 +71,14 @@ export default function Template(
     const { crumbs } = pageContext;
     const prevSiblingCard = (
       prevLesson ? 
-      <SectionCard title={ `👈 Vorige les: ${prevLesson.frontmatter.title}` } cardImage={prevLesson.frontmatter.image } link={prevLesson.fields.slug} />
+      <SectionCard title={ `👈 Vorige les: ${prevLesson.frontmatter.title}` } cardImage={prevLesson.frontmatter.image || defaultImg } link={prevLesson.fields.slug} />
       :
       <></>
     );
     
     const nextSiblingCard = (
       nextLesson ? 
-      <SectionCard title={ `Volgende les: ${nextLesson.frontmatter.title} 👉` } cardImage={nextLesson.frontmatter.image} link={nextLesson.fields.slug} />
+      <SectionCard title={ `Volgende les: ${nextLesson.frontmatter.title} 👉` } cardImage={nextLesson.frontmatter.image || defaultImg } link={nextLesson.fields.slug} />
       :
       <></>
     );

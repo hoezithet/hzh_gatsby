@@ -5,7 +5,6 @@ import { Link } from "gatsby-theme-material-ui";
 import SectionCard, { CardImage } from "./sectionCard";
 import Grid from '@material-ui/core/Grid';
 import styled from "styled-components";
-import _ from "lodash";
 import { MdxNode } from "./lesson";
 import { graphql } from "gatsby";
 
@@ -14,19 +13,17 @@ const LessonListItem = styled.li`
     font-size: 12pt;
 `
 
-interface MdxGroup {
+export interface MdxNodes {
     nodes: MdxNode[];
 }
 
-interface LessonGroups {
-    group: MdxGroup[];
+export interface MdxGroup {
+    group: MdxNodes[]
 }
 
 interface QueryData {
-    chapters: {
-        nodes: MdxNode[];
-    };
-    lessons: LessonGroups;
+    chapters: MdxNodes;
+    lessons: MdxGroup;
     defaultImg: CardImage;
 }
 
@@ -70,7 +67,7 @@ function ChapterCard({ chapter, chapterLessons, defaultImg}: ChapterCardProps) {
     )
 }
 
-function getChapterLessons(chapter: MdxNode, lessons: LessonGroups) {
+function getChapterLessons(chapter: MdxNode, lessons: MdxGroup) {
     const chapterLessonGroups = lessons.group.filter(({ nodes }) =>
         nodes.every(n => n.fields.chapter_slug === chapter.fields.slug)
     );

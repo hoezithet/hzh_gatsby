@@ -156,15 +156,7 @@ lessen_paths = list(lessen_root.rglob('**/*index.mdx'))
 
 for mdx_file in lessen_paths:
     callbacks = [
-        SvgCallback(),
-        AttentionCallback(),
-        MuteCallback(),
-        DisplayMathCallback(),
-        ExpandCallback(),
-        ClassCallback(),
-        SplitMathCallback(),
-        EOLMathCallback(),
-        TitleImageCallback(mdx_file)
+        ColorCallback()
     ]
     new_lines = []
     nothing_changed = True

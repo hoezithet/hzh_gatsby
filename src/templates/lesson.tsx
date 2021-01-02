@@ -7,6 +7,7 @@ import { Mute } from "../components/shortcodes/mute";
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import { Bokeh } from "../components/shortcodes/bokeh";
+import ToggleImage from "../components/shortcodes/toggleImage";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
@@ -23,10 +24,9 @@ import Comments from "../components/comments";
 import SectionCard, { CardImage } from "./sectionCard";
 import { FixedObject } from "gatsby-image";
 
-const shortcodes = { Mute, Attention, Expand, Bokeh }
+export const shortcodes = { Mute, Attention, Expand, Bokeh, ToggleImage }
 
-
-const components = {
+export const components = {
     a: Link,
     blockquote: BlockquoteBox,
     table: Table,
@@ -112,51 +112,47 @@ export default function Template(
 }
 
 export const pageQuery = graphql`
-    query LessonQuery($filePath: String!, $prevPath: String, $nextPath: String) {
-        lesson: mdx(fileAbsolutePath: { eq: $filePath }) {
-            body
-            frontmatter {
-                title
-                description
-                tags
-                image {
-                    ...LessonImageFragment
-                }
-            }
-            tableOfContents(maxDepth: 2)
-            fields {
-                slug
-            }
-        }
-        prevLesson: mdx(fileAbsolutePath: { eq: $prevPath }) {
-          ...SiblingMdxFragment
-        }
-        nextLesson: mdx(fileAbsolutePath: { eq: $nextPath }) {
-          ...SiblingMdxFragment
-        }
-        defaultImg: file(sourceInstanceName: {eq: "images"}, name: {eq: "default_title_img"}, extension: {eq: "png"}) {
-          ...LessonImageFragment
-        }
-    }
+           query LessonQuery($filePath: String!, $prevPath: String, $nextPath: String) {
+               lesson: mdx(fileAbsolutePath: { eq: $filePath }) {
+                   body
+                   frontmatter {
+                       title
+                       description
+                       tags
+                       image {
+                           ...CardImageFragment
+                       }
+                   }
+                   tableOfContents(maxDepth: 2)
+                   fields {
+                       slug
+                   }
+               }
+               prevLesson: mdx(fileAbsolutePath: { eq: $prevPath }) {
+                   ...SiblingMdxFragment
+               }
+               nextLesson: mdx(fileAbsolutePath: { eq: $nextPath }) {
+                   ...SiblingMdxFragment
+               }
+               defaultImg: file(
+                   sourceInstanceName: { eq: "images" }
+                   name: { eq: "default_title_img" }
+                   extension: { eq: "png" }
+               ) {
+                   ...CardImageFragment
+               }
+           }
 
-    fragment LessonImageFragment on File {
-        childImageSharp {
-            fixed(height: 140) {
-                ...GatsbyImageSharpFixed_tracedSVG
-            }
-        }
-    }
-
-    fragment SiblingMdxFragment on Mdx {
-        fileAbsolutePath
-        frontmatter {
-            title
-            image {
-                ...LessonImageFragment
-            }
-        }
-        fields {
-            slug
-        }
-    }
-`;
+           fragment SiblingMdxFragment on Mdx {
+               fileAbsolutePath
+               frontmatter {
+                   title
+                   image {
+                       ...CardImageFragment
+                   }
+               }
+               fields {
+                   slug
+               }
+           }
+       `;

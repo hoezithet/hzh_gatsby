@@ -8,7 +8,6 @@ import { Attention } from "../components/shortcodes/attention";
 import { ExpandBare as Expand } from "../components/shortcodes/expand";
 import { BokehBare as Bokeh } from "../components/shortcodes/bokeh";
 import Sponsors from '../components/sponsors';
-import Image from "../components/image";
 import HzhTheme from '../components/theme';
 
 import { Link } from 'gatsby-theme-material-ui';
@@ -25,7 +24,6 @@ const components = {
     a: Link,
     blockquote: BlockquoteBox,
     table: Table,
-    img: Image,
 }
 
 export interface MdxNode {

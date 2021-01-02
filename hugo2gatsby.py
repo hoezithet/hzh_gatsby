@@ -136,10 +136,10 @@ class TitleImageCallback:
 
         original = m.group(0)
         title_img = m.group("title_image")
-        replacement = f'title_image: {title_img.replace(self.parent_name, "")}'
+        replacement = f'image: {title_img.replace(self.parent_name, "")}'
         return line.replace(original, replacement)
 
-lessen_paths = list(lessen_root.rglob('**/index.mdx'))
+lessen_paths = list(lessen_root.rglob('**/*index.mdx'))
 
 for mdx_file in lessen_paths:
     callbacks = [

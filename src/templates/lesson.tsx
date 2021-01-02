@@ -8,6 +8,7 @@ import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import { Bokeh } from "../components/shortcodes/bokeh";
 import ToggleImage from "../components/shortcodes/toggleImage";
+import Color, { Black, Blue, Navy, Green, Yellow, Gold, Orange, Red, Purple, Gray } from "../components/shortcodes/color";
 import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
@@ -22,9 +23,25 @@ import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
 import Comments from "../components/comments";
 import SectionCard, { CardImage } from "./sectionCard";
-import { FixedObject } from "gatsby-image";
 
-export const shortcodes = { Mute, Attention, Expand, Bokeh, ToggleImage }
+export const shortcodes = {
+    Mute,
+    Attention,
+    Expand,
+    Bokeh,
+    ToggleImage,
+    Color,
+    Black,
+    Blue,
+    Navy,
+    Green,
+    Yellow,
+    Gold,
+    Orange,
+    Red,
+    Purple,
+    Gray,
+};
 
 export const components = {
     a: Link,

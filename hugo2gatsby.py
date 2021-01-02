@@ -39,6 +39,19 @@ class ClassCallback:
         replacement = f'<span class="{m.group("class")}">{m.group("text")}</span>'
         return line.replace(original, replacement)
 
+class ColorCallback:
+    def __init__(self):
+        self.ptrn = re.compile(r'<span class="(?P<class>[^"]*)">(?P<text>[^<]*)</span>')
+
+    def __call__(self, line):
+        m = self.ptrn.search(line)
+        if m is None:
+            return line
+        original = m.group(0)
+        tag = m.group('class').title().replace('-', '')
+        replacement = f'<{tag}>{m.group("text")}</{tag}>'
+        return line.replace(original, replacement)
+
 class AttentionCallback:
     def __init__(self):
         self.opening_ptrn = re.compile(r'{{< ?attention ?"(?P<title>[^"]*)" ?>}}')

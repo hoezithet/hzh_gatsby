@@ -85,7 +85,7 @@ export const allCoursesQuery = graphql`
             }
         }
         lessons: allMdx(
-            filter: { fields: { content_type: { eq: "lesson" }, course_slug: { eq: $slug } } }
+            filter: { fields: { content_type: { eq: "lesson" }, all_courses_slug: { eq: $slug } } }
             sort: { fields: frontmatter___weight, order: ASC }
         ) {
             group(field: fields___chapter_slug) {

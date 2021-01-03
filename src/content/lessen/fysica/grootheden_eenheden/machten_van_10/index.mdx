@@ -2,14 +2,8 @@
 title: "Machten van 10"
 date: 2019-01-28T08:06:49+01:00
 weight: 2
-draft: false
-tags: ["grootheden_eenheden", "machten_van_10"]
-categories: ["grootheden_eenheden", "machten_van_10"]
-level: "3M"
-course: "Fysica"
-topic: "grootheden_eenheden"
-images: []
-title_img: ""
+tags: ["grootheden en eenheden", "machten van 10", "macht van 10 omvormen"]
+description: "Deze les vertelt je hoe we machten van 10 kunnen gebruiken om heel grote of heel kleine getallen korter te schrijven. We leggen ook uit hoe je machten van 10 kan omzetten."
 ---
 
 Het wordt snel lastig om heel grote of heel kleine getallen te lezen of te
@@ -42,7 +36,7 @@ $$
 
 
 Extra uitleg vind je in de les over [rekenen met
-machten](../../wiskunde/rekenen/machten/#producten-van-machten).
+machten](../../wiskunde/rekenen_rationaal/machten/#producten-van-machten).
 
 ## Machten van 10 uitrekenen
 
@@ -72,21 +66,14 @@ Vermenigvuldigingen met $10^{\orange{-3}}$, verschuift de komma <Orange>3 plaats
 Nu zullen we zien hoe we aan die $\orange{10^{-9}}$ kwamen bij het voorbeeld
 van $0{,}00000000334 = 3{,}34\cdot \orange{10^{-9}}$.
 We willen de komma van $0{,}00000000334$ met
-**<Blue>9 plaatsen naar rechts</Blue>** verschuiven tot na de eerste
-
-3. Dat zouden we kunnen doen door te
-   **<Blue>vermenigvuldigen met $10^9$</Blue>**.
-   **Maar** we willen dat onze uitkomst
-   **<Orange>nog steeds gelijk is</Orange>** aan $0{,}00000000334$. Daarom
-   moeten we ook terug
-   **<Orange>delen door $10^9$</Orange>**.
+**<Blue>9 plaatsen naar rechts</Blue>** verschuiven tot na de eerste 3. Dat zouden we kunnen doen door te **<Blue>vermenigvuldigen met $10^9$</Blue>**. **Maar** we willen dat onze uitkomst **<Orange>nog steeds gelijk is</Orange>** aan $0{,}00000000334$. Daarom moeten we ook terug **<Orange>delen door $10^9$</Orange>**.
 
 $$
 \begin{aligned}
 0{,}00000000334 &= 0{,}00000000334 \cdot \frac{\blue{10^9}}{\orange{10^9}} \\
  &= 0{,}00000000334 \cdot \blue{10^9} \cdot \frac{1}{\orange{10^9}} \\
- &= 0{,00000000334 \cdot \blue{10^{9}}} \cdot \orange{10^{-9}} \\
- &= 3{,34} \cdot \orange{10^{-9}}
+ &= \underbrace{0,00000000334 \cdot \blue{10^{9}}}_{= 3{,}34} \cdot \orange{10^{-9}} \\
+ &= 3{,}34 \cdot \orange{10^{-9}}
 \end{aligned}
 $$
 
@@ -111,8 +98,8 @@ Daarom moeten we ook terug delen door $10^{-11}$. Dat is echter hetzelfde als
 
 $$
 \begin{aligned}
-149\ 600\ 000\ 000 &= 149\ 600\ 000\ 000 \cdot \blue{10^{-11}} \cdot \orange{10^{11}} \\
- &= 1{,496} \cdot \orange{10^{11}} \\
+149\ 600\ 000\ 000 &= \underbrace{149\ 600\ 000\ 000 \cdot \blue{10^{-11}}}_{= 1{,}496} \cdot \orange{10^{11}} \\
+ &= 1{,}496 \cdot \orange{10^{11}} \\
 \end{aligned}
 $$
 
@@ -132,16 +119,15 @@ en vervolgens
 
 $$
 \begin{aligned}
-3{,}34 \cdot 10^{-9} &= 3{,}34 \cdot 10^{-9} \cdot \orange{10^{11}} \cdot \blue{10^{-11}} \\
- &= 3{,}34 \cdot 10^{2} \cdot \blue{10^{-11}} \\
- &= 3{,34 \cdot 10^{2}} \cdot \blue{10^{-11}} \\
+3{,}34 \cdot 10^{-9} &= 3{,}34 \cdot \underbrace{10^{-9} \cdot \orange{10^{11}}}_{= 10^{2}} \cdot \blue{10^{-11}} \\
+ &= \underbrace{3{,}34 \cdot 10^{2}}_{= 334} \cdot \blue{10^{-11}} \\
  &= 334 \cdot \blue{10^{-11}} \\
 \end{aligned}
 $$
 
 ## Samengevat
 
-<Attention title="Omzetten naar macht van 10">
+<Attention title="Een getal omzetten naar macht van 10">
 
 -   Als je de komma $N$ plaatsen **naar rechts** wilt opschuiven:
     Vermenigvuldig met <Blue>$10^{N}$ om de komma op te schuiven</Blue> en met <Orange>$10^{-N}$ om het getal gelijk te houden</Orange>.
@@ -150,14 +136,14 @@ $$
 
 </Attention>
 
-<Attention title="Omzetten van een macht van 10">
+<Attention title="Een macht van 10 omzetten naar een andere macht van 10">
 
 Als je $a \cdot 10^b$ wilt omzetten naar $\ldots\text{iets}\ldots \cdot
 \blue{10^c}$ <Mute>(met $a, b, c \in \mathbb{R}$)</Mute>:
 
-* Vermenigvuldig $a \cdot 10^b$ met <span class="blue">$10^{c}$ om de juiste
-  macht van 10 te hebben</span> en met <span class="orange">$10^{-c}$ om alles
-  gelijk te houden</span> aan $a \cdot 10^b$.
+* Vermenigvuldig $a \cdot 10^b$ met <Blue>$10^{c}$ om de juiste
+  macht van 10 te hebben</Blue> en met <Orange>$10^{-c}$ om alles
+  gelijk te houden</Orange> aan $a \cdot 10^b$.
 * Combineer vervolgens de $a \cdot 10^{b} \cdot \orange{10^{-c}}$ tot één getal
   en laat de $\cdot \blue{10^{c}}$ erachter staan.
 

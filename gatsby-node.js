@@ -5,8 +5,16 @@ const _ = require("lodash");
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions;
     if (node.internal.type === `Mdx`) {
-        let slug = createFilePath({ node, getNode, basePath: `src/content`, trailingSlash: false });
+        let slug = createFilePath({ node, getNode, basePath: `src/content`, trailingSlash: true });
         slug = slug.replace("/_index", ""); // Section mdx-files are named "_index.mdx", remove that part
+        const slugElements = slug.split("/");
+        const callbackBuilder = (inds) => {
+            return (_, i, arr) => !(inds.includes(i) || inds.includes(i - arr.length))
+        };
+        const slugToParent = callbackBuilder([-2]);
+        const slugToGrandParent = callbackBuilder([-2, -3]);
+        const slugToGreatGrandParent = callbackBuilder([-2, -3, -4]);
+
         createNodeField({
             node,
             name: `slug`,
@@ -22,17 +30,17 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             createNodeField({
                 node,
                 name: `chapter_slug`,
-                value: slug.split("/").slice(0, -1).join("/"),
+                value: slugElements.filter(slugToParent).join("/"),
             });
             createNodeField({
                 node,
                 name: `course_slug`,
-                value: slug.split("/").slice(0, -2).join("/"),
+                value: slugElements.filter(slugToGrandParent).join("/"),
             });
             createNodeField({
                 node,
                 name: `all_courses_slug`,
-                value: slug.split("/").slice(0, -3).join("/"),
+                value: slugElements.filter(slugToGreatGrandParent).join("/"),
             });
         } else if(isChapter(node)) {
             createNodeField({
@@ -43,12 +51,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             createNodeField({
                 node,
                 name: `course_slug`,
-                value: slug.split("/").slice(0, -1).join("/"),
+                value: slugElements.filter(slugToParent).join("/"),
             });
             createNodeField({
                 node,
                 name: `all_courses_slug`,
-                value: slug.split("/").slice(0, -2).join("/"),
+                value: slugElements.filter(slugToGrandParent).join("/"),
             });
         } else if(isCourse(node)) {
             createNodeField({
@@ -59,7 +67,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             createNodeField({
                 node,
                 name: `all_courses_slug`,
-                value: slug.split("/").slice(0, -1).join("/"),
+                value: slugElements.filter(slugToParent).join("/"),
             });
         } else if(isAllCourses(node)) {
             createNodeField({
@@ -70,6 +78,19 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         }
     }
 };
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type Mdx implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      image: File
+    }
+  `
+  createTypes(typeDefs)
+}
 
 function isLesson(node) {
     return /\/content(\/[^/]+){4}\/index\.mdx$/.test(node.fileAbsolutePath);
@@ -94,7 +115,7 @@ function isAllCourses(node) {
  */
 function nodeToPath(node) {
     const slug = node.fields.slug;
-    const slugItems = slug.split("/").slice(1);
+    const slugItems = slug.split("/").slice(1, -1);
     const pathItems = [];
     slugItems.forEach((item, index) => {
         if (index < slugItems.length - 1) {

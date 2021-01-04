@@ -152,11 +152,25 @@ class TitleImageCallback:
         replacement = f'image: {title_img.replace(self.parent_name, "")}'
         return line.replace(original, replacement)
 
+class FrontmatterImageCallback:
+    def __init__(self):
+        self.ptrn = re.compile(r'^image: (?P<image>.+)$')
+
+    def __call__(self, line):
+        m = self.ptrn.search(line)
+        if m is None:
+            return line
+
+        original = m.group(0)
+        image = m.group("image")
+        replacement = f'image: ../{image}'
+        return line.replace(original, replacement)
+
 lessen_paths = list(lessen_root.rglob('**/*index.mdx'))
 
 for mdx_file in lessen_paths:
     callbacks = [
-        ColorCallback()
+        FrontmatterImageCallback()
     ]
     new_lines = []
     nothing_changed = True

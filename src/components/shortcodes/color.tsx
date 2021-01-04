@@ -125,4 +125,12 @@ export const Gray = ({children}: ColorProps) => {
     )
 }
 
+export const Mute = ({children}: ColorProps) => {
+    return (
+        <Color color="GRAY">
+            { children }
+        </Color>
+    )
+}
+
 export default Color;

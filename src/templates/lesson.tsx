@@ -3,7 +3,6 @@ import { graphql } from "gatsby";
 import "katex/dist/katex.min.css";
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Mute } from "../components/shortcodes/mute";
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import { Bokeh } from "../components/shortcodes/bokeh";
@@ -22,6 +21,7 @@ import Color, {
     Red,
     Purple,
     Gray,
+    Mute,
 } from "../components/shortcodes/color";
 import Toc from "../components/toc";
 import Layout from "../components/layout";

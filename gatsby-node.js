@@ -79,19 +79,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     }
 };
 
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-  const typeDefs = `
-    type Mdx implements Node {
-      frontmatter: Frontmatter
-    }
-    type Frontmatter {
-      image: File
-    }
-  `
-  createTypes(typeDefs)
-}
-
 function isLesson(node) {
     return /\/content(\/[^/]+){4}\/index\.mdx$/.test(node.fileAbsolutePath);
 }

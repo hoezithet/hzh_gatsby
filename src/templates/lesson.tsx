@@ -27,6 +27,7 @@ import Toc from "../components/toc";
 import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
 import Feedback from "../components/feedback";
+import PrintLink from "../components/printlink";
 
 
 import { Link } from 'gatsby-theme-material-ui';
@@ -122,6 +123,7 @@ export default function Template(
         <Layout crumbs={ crumbs } description={ frontmatter.description }
                 tags={ frontmatter.tags } image={ image ? image.childImageSharp.fixed.src : defaultImg.childImageSharp.fixed.src } >
             <h1>{frontmatter.title}</h1>
+            <PrintLink to={ `/bare${lesson.fields.slug}` } />
             <Toc>
                 { tableOfContents }
             </Toc>
@@ -130,6 +132,7 @@ export default function Template(
                   <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
             </MDXProvider>
+            <PrintLink to={ `/bare${lesson.fields.slug}` } />
             <Feedback />
             <Box my={ 4 }>
                 <Grid container spacing={ 2 } justify="space-between">

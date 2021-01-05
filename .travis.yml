@@ -1,6 +1,5 @@
 os: linux
 dist: xenial
-sudo: required
 language: node_js
 node_js:
   - 14
@@ -13,7 +12,6 @@ script:
 - gatsby build
 deploy:
 - provider: script
-  skip_cleanup: true
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/public root@167.86.92.134:/root/hoezithet/dev_public
   on:
     branch: develop

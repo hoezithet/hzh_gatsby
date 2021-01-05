@@ -6,19 +6,6 @@ cache:
   directories:
     - node_modules
 install:
-  - sudo apt-get update
-  - sudo apt-get install xvfb libfontconfig
-  - wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-  - sudo tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-  - sudo mv wkhtmltox/bin/wkhtmlto* /usr/bin/
-  - printf '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' | sudo tee /usr/bin/wkhtmltopdf.sh
-  - sudo chmod a+x /usr/bin/wkhtmltopdf.sh
-  - sudo ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
-  - curl "https://www.fontsquirrel.com/fonts/download/Quicksand" > quicksand.zip
-  - sudo mkdir -p /usr/share/fonts/opentype/Quicksand
-  - sudo unzip quicksand.zip -d /usr/share/fonts/opentype/Quicksand
-  - sudo fc-cache -fv
-  - sudo echo "127.0.0.1	hoezithet.nu" >> /etc/hosts
   - npm install
 script:
   - gatsby build
@@ -45,5 +32,4 @@ branches:
 notifications:
   slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
 before_install:
-  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
+  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d

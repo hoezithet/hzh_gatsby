@@ -73,3 +73,7 @@ yarn-error.log
 
 # Vim swap files
 *.swp
+
+# Travis CI key
+deploy_rsa
+deploy_rsa.pub

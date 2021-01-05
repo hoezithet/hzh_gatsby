@@ -1,0 +1,49 @@
+os: linux
+dist: xenial
+sudo: required
+language: node_js
+cache:
+  directories:
+    - node_modules
+install:
+  - sudo apt-get update
+  - sudo apt-get install xvfb libfontconfig
+  - wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+  - sudo tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+  - sudo mv wkhtmltox/bin/wkhtmlto* /usr/bin/
+  - printf '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' | sudo tee /usr/bin/wkhtmltopdf.sh
+  - sudo chmod a+x /usr/bin/wkhtmltopdf.sh
+  - sudo ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
+  - curl "https://www.fontsquirrel.com/fonts/download/Quicksand" > quicksand.zip
+  - sudo mkdir -p /usr/share/fonts/opentype/Quicksand
+  - sudo unzip quicksand.zip -d /usr/share/fonts/opentype/Quicksand
+  - sudo fc-cache -fv
+  - sudo echo "127.0.0.1	hoezithet.nu" >> /etc/hosts
+  - npm install
+script:
+  - gatsby build
+deploy:
+  - provider: firebase
+    skip_cleanup: true
+    on:
+      branch: master
+    token:
+      secure: CytpvWcbHwufsuM4PnE3EpReSMSrSrlfyoYGrC1x/1RVKKID23Q+8kug/r3fGTFc+sxHJQSkg1j2EfswwkspsyXZ0m5inc/PopXo7BYqkvQscn8CEAM3W6OSbor1guDFOXWJ6Zr5PJCETnFeG0oqhea43x7nvpL6gonqk8VsVSCw2c9wHrk/tfvHrw8B12U5Nk3dNii3c6FZjQyNI+jPyVK3POCBsd3EUi1nivODbwxr8Nzis+yC5fixCZvWn2iAeDd7IzQw/XHLkDDwhA1PJyFm/tqwWWabtgi+mbkDnhzCnS2HRBqkscsgp2tqIgXAgoYfm6OHOIWzeHpTkcZtqgsF9h+goWmIjspvaGbu/sZ6kPfrLq259gu2DvxrTnb/ylxJj49VfLlhuu24LnakgPVCCOXPgMu5+WxtWTO3c1FJZ0y82V4lE4YRvq/ChELZX5R9jbvV+ETn/IQOJYqtb6a/fOUV7XbDI6RCgRwXGQqLP3tNoJMexGtExAIvySNymBTWJ3yBstWsYWduDeBSMr8oqqSAIcqJtuTHVcWlLkVuJchGKC3/KjQJ/Y9R3UZ8a1M544v9b/U2BI4ES8TAAWTdUNJNLaGm7UFqNGbsKPKjVF1yhiXFdCjz0L7MhbVsYo6cgtIOUCCY4iKY/q8yg1aWfy6k+gHphs0GomQ6yOk=
+  - provider: script
+    skip_cleanup: true
+    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/public root@167.86.92.134:/root/hoezithet/dev_public
+    on:
+      branch: develop
+
+env:
+  global:
+    - PRODUCTION=true
+branches:
+  only:
+    - master
+    - develop
+notifications:
+  slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
+before_install:
+  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
+  -in deploy_rsa.enc -out deploy_rsa -d

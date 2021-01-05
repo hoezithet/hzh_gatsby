@@ -33,7 +33,7 @@ const Crumbs = ({ crumbs }: CrumbProps) => {
 
     return (
         <header>
-            <Breadcrumbs aria-label="breadcrumb" maxItems={2}>
+            <Breadcrumbs aria-label="breadcrumb" maxItems={4}>
                 {breadCrumbLinks}
             </Breadcrumbs>
         </header>

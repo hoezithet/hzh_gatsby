@@ -1,0 +1,27 @@
+os: linux
+dist: xenial
+sudo: required
+language: node_js
+cache:
+  directories:
+    - node_modules
+install:
+  - npm install
+script:
+  - gatsby build
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/public root@167.86.92.134:/root/hoezithet/dev_public
+
+env:
+  global:
+    - PRODUCTION=true
+branches:
+  only:
+    - master
+    - develop
+notifications:
+  slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
+before_install:
+  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d

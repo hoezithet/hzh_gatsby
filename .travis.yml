@@ -13,6 +13,7 @@ script:
 deploy:
 - provider: script
   script: rsync -r --delete public root@167.86.92.134:/root/hoezithet/dev_public
+  cleanup: false
   on:
     branch: develop
 addons:

@@ -17,6 +17,8 @@ deploy:
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/public root@167.86.92.134:/root/hoezithet/dev_public
   on:
     branch: develop
+addons:
+  ssh_known_hosts: 167.86.92.134
 branches:
   only:
   - master

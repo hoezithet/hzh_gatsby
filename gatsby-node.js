@@ -85,12 +85,13 @@ exports.createSchemaCustomization = ({ actions }) => {
     type Mdx implements Node {
       frontmatter: Frontmatter
     }
-    type Frontmatter {
+    type Frontmatter @dontInfer {
       tags: [String!]
       description: String
-      date: Date
+      date: Date @dateformat
       title: String!
-      image: File
+      image: File @fileByRelativePath
+      weight: Int
     }
   `
   createTypes(typeDefs)

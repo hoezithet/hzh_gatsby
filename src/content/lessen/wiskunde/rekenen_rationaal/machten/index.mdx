@@ -6,60 +6,163 @@ tags: ["Machten", "Rekenen", "Bewerkingen", "Breuken", "Kommagetallen", "Rationa
 description: "In deze les herhalen we wat een macht precies is en leren we de macht te nemen van breuken en kommagetallen."
 image: ./img/terminologie.png
 ---
-Wij mensen hebben graag dat alles kort en netjes genoteerd wordt. 🖋️ Ook in
-de wiskunde proberen we alles zo kort mogelijk te noteren. Zo leerde je vroeger al
-dat je de som $5 + 5 + 5$ ook kan schrijven als $3 \cdot 5$. In deze les gaan we bekijken 
-hoe we producten zoals $5 \cdot 5 \cdot 5$ korter kunnen schrijven.
 
-> Voor je aan deze les begint, fris je best eerst even de [les over vermenigvuldigen](../rekenen_gehele_getallen) op! 😉
-
-## Wat is een grondtal en een exponent?
-De uitdrukking uit de inleiding kunnen we herschrijven als: 
-
-![Een macht bestaat uit een grondtal en een exponent. In dit voorbeeld is 5 het grondtal en 3 de exponent.](img/terminologie.png)
-
-Om een macht correct op te schrijven, schrijf je
-eerst het **grondtal** $a$. Vervolgens schrijf je de **exponent** $n$ iets kleiner
-en rechtsboven het grondtal.
+Het komt vaak voor dat we **meerdere keren een getal met zichzelf moeten vermenigvuldigen**. Denk maar aan de formule voor het berekenen van de oppervlakte van een cirkel:
 
 $$
- a^n 
+\text{Opp}_{\text{cirkel}} = \orange{r}\cdot \orange{r} \cdot \pi
 $$
 
-Een macht met als **exponent $2$** noemen we ook een **kwadraat**.
+Waarbij $r$ staat voor de straal van de cirkel. Je ziet dat we de straal inderdaad met zichzelf vermenigvuldigen. Een ander voorbeeld is het berekenen van het volume van een kubus:
+
+$$
+\text{V}_{\text{kubus}} = \orange{z} \cdot \orange{z} \cdot \orange{z}
+$$
+
+Waarbij $z$ staat voor de lengte van de ribbe van de kubus.
+
+Die formules zouden we graag korter willen kunnen schrijven. Dat kunnen we met behulp van een **machtsverheffing**.
+
+## Een machtsverheffing bestaat uit een grondtal en een exponent
+
+Met een **machtsverheffing** kunnen we een **vermenigvuldiging met hetzelfde getal** korter schrijven. De uitdrukking $5 \cdot 5 \cdot 5$ kunnen we met behulp van een machtsverheffing herschrijven als: 
+
+![Een machtsverheffing met grondtal 5 en exponent 3.](img/terminologie.png) 
+
+Je ziet dat een machtsverheffing bestaat uit twee getallen: een getal dat op de "grond" staat <Mute>($5$ in ons voorbeeld)</Mute> en een getal dat rechtsbovenaan "zweeft" <Mute>($3$ in ons voorbeeld)</Mute>.
+Dat getal op de grond noemen we het **grondtal** en het zwevende getal noemen we de **macht** of de **exponent** <Mute>(van het Latijnse *exponere*, wat "tentoonstellen" betekent)</Mute>.
+
+<Attention title="Opgelet! Het woord *macht* heeft twee betekenissen">
+
+Het woord **macht** kan twee betekenissen hebben:
+
+1. Als synoniem voor **exponent**, dus de $3$ in $5^3$;
+2. Als synoniem voor **machtsverheffing**, dus de volledige bewerking $5^3$.
+
+Dat is wat verwarrend helaas, maar meestal maakt de context wel duidelijk welke van de twee betekenissen bedoeld wordt.
+
+</Attention>
+
+In het algemeen ziet een machtsverheffing er dus zo uit:
+
+$$
+a^n 
+$$
+
+Waarbij $a$ het grondtal is en $n$ de exponent of de macht. Dit lees je als **$a$ tot de $n-$de macht**, of korter **$a$ tot de $n-$de**:
 
 | Je schrijft | Je leest het als |
 |-------------|------------------|
-| $a^n$       | a tot de n-ste   |
+| $a^n$       | $a$ tot de $n-$de |
+| $3^3$       | drie tot de derde |
+| $5^1$       | vijf tot de eerste |
+| $(-7)^4$       | min zeven tot de vierde |
+| $\big(-\frac{1}{6}\big)^2$       | min één zesde tot de tweede |
 
-## Hoe reken ik een macht uit?
-Nu we weten hoe een macht eruitziet, willen we ook weten hoe we deze kunnen berekenen. 🧮 We nemen hiervoor nog
-even het voorbeeld uit de inleiding <Mute text="($5 \cdot 5 \cdot 5$)"/>, waarvan we weten dat het gelijk is aan
-$5^3$. Hieruit kunnen we het volgende opmaken:
+Wanneer een machtsverheffing een **exponent gelijk aan $2$** heeft, noemen we die machtsverheffing een **kwadraat** <Mute>(van het Latijnse *quadratum*, wat "vierkant" betekent, denk maar aan $\si{m}^2$: *vierkante* meter)</Mute>:
+
+| Je schrijft | Je leest het als |
+|-------------|------------------|
+| $a^2$       | $a$ kwadraat  |
+| $3^2$     |  drie kwadraat  |
+| $7^2$    | zeven kwadraat  |
+| $\big(-\frac{1}{6}\big)^2$       | min één zesde kwadraat |
+
+We gaan het voorlopig houden op machten waarbij het **grondtal een rationaal getal** is <Mute>(bv. $2$, $\frac{3}{4}$ of $-\frac{7}{5}$)</Mute> en de **exponent een geheel getal**. Een gehele exponent betekent dus dat de exponent bv. $1$, $2$ of $3$ zou kunnen zijn, maar ook bijvoorbeeld $0$ of zelfs $-1$ of $-2$. In de volgende paragraaf gaan we het eenvoudigste geval uitleggen: dat de exponent een **strikt positief geheel getal** is <Mute>(dus bv. $1$ of $2$, maar niet $0$ of $-1$)</Mute>. In de paragrafen nadien leggen we uit wat er gebeurt wanneer de exponent $0$ is of negatief.
+
+## Strikt positieve gehele exponent
+
+We leerden al dat we met behulp van een machtsverheffing de vermenigvuldiging $5\cdot 5 \cdot 5$ korter konden schrijven als $5^3$. Wanneer $n > 0$ (bv. $1$, $2$, $3$,...), kan je $a^n$ uitrekenen door $a$ **met zichzelf te vermenigvuldigen tot je in totaal $n$ factoren hebt**:
 
 $$
- \underbrace{5 \cdot 5 \cdot 5}_{\orange{3}~\text{factoren}} = 5\orange{^3} = 125
+a^\orange{n} = \underbrace{a \cdot a \cdot ... \cdot a}_{\orange{n}~\text{dezelfde factoren}}\quad\text{waarbij}~a\in\mathbb{Q},~\orange{n}\in\mathbb{Z}^+_0
 $$
 
-Om $5^3$ te berekenen, vermenigvuldigen we $5$ dus $3$ keer met zichzelf, wat
-$125$ geeft. 
-
-**Algemeen** wordt dit:
+Enkele voorbeelden:
 
 $$
- \underbrace{a \cdot a \cdot ... \cdot a}_{n~\text{factoren}} = a^n 
+\begin{aligned}
+3^\orange{2} &= \underbrace{3 \cdot 3}_{\orange{2}~\text{dezelfde factoren}}\\
+(-2)^\orange{5} &= \underbrace{(-2) \cdot (-2) \cdot (-2) \cdot (-2)\cdot (-2)}_{\orange{5}~\text{dezelfde factoren}}\\
+\big(\frac{7}{3}\big)^\orange{4} &= \underbrace{\big(\frac{7}{3}\big) \cdot \big(\frac{7}{3}\big) \cdot \big(\frac{7}{3}\big) \cdot \big(\frac{7}{3}\big)}_{\orange{4}~\text{dezelfde factoren}}\\
+\big(-\frac{2}{3}\big)^\orange{1} &= \underbrace{\big(-\frac{2}{3}\big)}_{\orange{1}~\text{dezelfde factor}}\\
+\end{aligned}
 $$
 
-<Attention title="Speciale machten">
+Merk op dat $a^1 = a$. Dat valt te verwachten aangezien we maar één keer de factor $a$ hebben, dus dat is dan gelijk aan $a$ zelf. Enkele voorbeelden:
 
-Er zijn enkele 'speciale machten' die je best onthoudt:
+$$
+\begin{aligned}
+2^\orange{1} &= \underbrace{2}_{\orange{1}~\text{dezelfde factor}}\\
+4^\orange{1} &= \underbrace{4}_{\orange{1}~\text{dezelfde factor}}\\
+\big(-\frac{4}{5}\big)^\orange{1} &= \underbrace{\big(-\frac{4}{5}\big)}_{\orange{1}~\text{dezelfde factor}}\\
+\end{aligned}
+$$
 
-1. Als de **exponent $0$** is, dan is de uitkomst altijd **$1$**.
-2. Als de **exponent $1$** is, dan is de uitkomst altijd **het grondtal** zelf. Immers, een product met $1$ factor is die factor zelf.
-   
+## Exponent gelijk aan nul
+
+Oké, en wat nu als $n = 0$? Wel, **we spreken af dat $a^0 = 1$** <Mute>(met $a\in \mathbb{Q}_0$)</Mute>. Heel eenvoudig dus. Enkele voorbeelden:
+
+$$
+\begin{aligned}
+2^\orange{0} &= 1\\
+(-4)^\orange{0} &= 1\\
+\big(-\frac{9}{11}\big)^\orange{0} &= 1\\
+\big(\frac{2}{3}\big)}^0 &= 1
+\end{aligned}
+$$
+
+<Attention title="Opgelet! $0^0$ is niet gedefinieerd!">
+
+$a^0 = 1$ is enkel voor $a\in \mathbb{Q}_0$. Wanneer $a = 0$ en we dus $0^0$ moeten uitrekenen, is de uitkomst **niet gedefinieerd**!
+
+$0^0$ is er eentje van dezelfde familie als $\frac{0}{0}$, wat ook niet gedefinieerd is.
+
 </Attention>
 
-## Machten met negatieve grondtallen
+<Expand title="Waarom is $a^0 = 1$?">
+
+Zoals we hierboven zeiden, is het een **afspraak** dat $a^0 = 1$. Dat is een **keuze** waar de meeste wiskundigen het mee eens zullen zijn. Hieronder leggen we uit waarom dat een logische keuze is.
+
+Om de uitleg te kunnen begrijpen, hebben we iets nodig wat we pas later in deze les zullen zien, namelijk machten met tegengestelde exponenten. We zullen daar leren dat machtsverheffingen met **tegengestelde exponent elkaars omgekeerde zijn**, dus dat:
+
+$$
+a^{-c} = \frac{1}{a^c}
+$$
+
+Stel nu dat we $a^c \cdot a^{-c}$ willen berekenen (waarbij $a \in \mathbb{Q}_0$). Dat kunnen we dan als volgt doen:
+
+$$
+\begin{aligned}
+a^c \cdot \underbrace{a^{-c}}_{= \frac{1}{a^c}} &= a^c \cdot \frac{1}{a^c}\\
+&= \frac{a^c}{a^c}\\
+&= 1
+\end{aligned}
+$$
+
+We vinden dat $a^c \cdot a^{-c} = 1$.
+
+Een belangrijke rekenregel van machten zegt echter dat het **product van machten met hetzelfde grondtal** gelijk is aan een macht met als grondtal datzelfde grondtal en als exponent de **som van de oude exponenten**. In symbolen:
+
+$$
+a^b \cdot a^c = a^{b + c}
+$$
+
+Als we ervan uitgaan dat we die rekenregel ook mogen toepassen bij negatieve machten, dan kunnen we $a^c \cdot a^{-c}$ ook als volgt uitrekenen:
+
+$$
+\begin{aligned}
+a^c \cdot a^{-c} &= a^{c - c}\\
+&= a^0
+\end{aligned}
+$$
+
+We vinden dat $a^c \cdot a^{-c} = a^0$. Vorige keer vonden we echter dat $a^c \cdot a^{-c} = 1$. Als we ervan uitgaan dat de rekenregel $a^b \cdot a^c = a^{b + c}$ algemeen toepasbaar is op machten, volgt daaruit dus dat $a^0 = 1$!
+
+</Expand>
+
+
+## Machten met een negatief grondtal
 $$
  2\orange{^4}= \underbrace{2 \cdot 2 \cdot 2 \cdot 2}_{\orange{4}~\text{factoren}} = 16
 $$

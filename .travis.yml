@@ -14,7 +14,7 @@ deploy:
   provider: script
   script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public root@167.86.92.134:/root/hoezithet/dev_public
   cleanup: false
-  skip_cleanup: true
+  edge: true
   on:
     branch: develop
 addons:

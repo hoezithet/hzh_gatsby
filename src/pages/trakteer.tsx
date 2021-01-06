@@ -3,31 +3,28 @@ import Layout from '../components/layout';
 import Grid from "@material-ui/core/Grid";
 import { Button } from "gatsby-theme-material-ui";
 import Box from "@material-ui/core/Box";
-import COLORS from "../colors";
+import { NearWhite } from "../components/shortcodes/color";
 import donate from "../images/trakteer/donate.png";
 import styled from "styled-components";
 
 interface TrakteerProps {
     children: React.ReactNode;
     amount: string;
+    icon: string;
+    text: string;
     href: string;
 }
 
 function TrakteerButton(props: TrakteerProps) {
     return (
         <Grid item >
-            <Grid container direction="column" justify="center" alignItems="center" spacing={ 1 }>
-                <Grid item>
-                    <Button href={ props.href } variant="contained" color="primary" size="large">
-                        { props.children }
-                    </Button>
+            <Button href={ props.href } variant="contained" color="primary" size="large">
+                <Grid container direction="column" alignItems="center">
+                    <Grid item>{ props.icon }</Grid>
+                    <Grid item>{ props.text }</Grid>
+                    <Grid item><NearWhite>{ `(${props.amount})` }</NearWhite></Grid>
                 </Grid>
-                <Grid item>
-                    <Box color={ COLORS.GRAY } >
-                        { `(${props.amount})` }
-                    </Box>
-                </Grid>
-            </Grid>
+            </Button>
         </Grid>
     );
 }
@@ -54,18 +51,10 @@ export default function Trakteer() {
 
             <Box my={ 4 }>
                 <Grid container spacing={2} justify="center">
-                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YZBJ7U5JFSQ8G&source=url" amount="€2">
-                        🥤 Frisdrankje
-                    </TrakteerButton>
-                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NHE8CFLULN9WG&source=url" amount="€4">
-                        ☕ Frappuccino
-                    </TrakteerButton>
-                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCLFUBNZ3QUGN&source=url" amount="€10">
-                        🍻 Tournée Générale!
-                    </TrakteerButton>
-                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X8BH56ZVUG2BQ&source=url" amount="Eigen bedrag">
-                        🎁 Zelf iets kiezen
-                    </TrakteerButton>
+                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YZBJ7U5JFSQ8G&source=url" amount="€2" icon="🥤" text="Frisdrankje" />
+                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NHE8CFLULN9WG&source=url" amount="€4" icon="☕" text="Frappuccino"/>
+                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCLFUBNZ3QUGN&source=url" amount="€10" icon="🍻" text="Tournée Générale!"/>
+                    <TrakteerButton href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X8BH56ZVUG2BQ&source=url" amount="Eigen bedrag" icon="🎁" text="Zelf iets kiezen"/>
                 </Grid>
             </Box>
         </Layout>

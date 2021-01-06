@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { Button, Link } from "gatsby-theme-material-ui";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import Hidden from '@material-ui/core/Hidden';
 import logo from "../images/appbar/logo_header.png";
 import logo_yellow from "../images/appbar/logo_header_yellow_bulb.png";
 
@@ -29,24 +30,42 @@ const LogoLink = styled(Link)`
 const PageButtonsGrid = styled(Grid)``;
 
 const HzhAppBar = ({ color = "primary", elevation = 1 }: { color: "primary" | "transparent"; elevation: number }) => {
+    const logoLink = (
+        <Grid item>
+            <LogoLink to="/" color="inherit" variant="h5">
+                <LogoImg src={color == "transparent" ? logo_yellow : logo} alt="Hoe Zit Het? logo" />
+                Hoe Zit Het?
+            </LogoLink>
+        </Grid>
+    );
+    const buttonLinks = (
+        <Grid item>
+            <Button to="/lessen">Lessen</Button>
+            <span>|</span>
+            <Button to="/trakteer">Drankje trakteren</Button>
+            <span>|</span>
+            <Button to="/about">Over HZH</Button>
+        </Grid>
+    );
     return (
         <AppBar position="static" color={color} elevation={elevation}>
             <Toolbar>
-                <Grid container justify="space-between" alignItems="center">
-                    <Grid item xs={12} md={6}>
-                        <Box justifyContent="center">
-                            <LogoLink to="/" color="inherit" variant="h5">
-                                <LogoImg src={color == "transparent" ? logo_yellow : logo} alt="Hoe Zit Het? logo" />
-                                Hoe Zit Het?
-                            </LogoLink>
-                        </Box>
+                <Grid container alignItems="center">
+                    <Grid item xs={12} md={6} container>
+                        <Hidden mdUp>
+                            <Grid container justify="center">{ logoLink }</Grid>
+                        </Hidden>
+                        <Hidden smDown>
+                            <Grid container justify="flex-start">{ logoLink }</Grid>
+                        </Hidden>
                     </Grid>
-                    <PageButtonsGrid item>
-                        <Button to="/lessen">Lessen</Button>
-                        <span>|</span>
-                        <Button to="/trakteer">Drankje trakteren</Button>
-                        <span>|</span>
-                        <Button to="/about">Over HZH</Button>
+                    <PageButtonsGrid item xs={12} md={6} container>
+                        <Hidden mdUp>
+                            <Grid container justify="center">{ buttonLinks }</Grid>
+                        </Hidden>
+                        <Hidden smDown>
+                            <Grid container justify="flex-end">{ buttonLinks }</Grid>
+                        </Hidden>
                     </PageButtonsGrid>
                 </Grid>
             </Toolbar>

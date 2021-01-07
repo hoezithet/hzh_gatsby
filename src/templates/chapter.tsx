@@ -61,6 +61,7 @@ export const chapterQuery = graphql`
                     image {
                         ...CardImageFragment
                     }
+                    level
                 }
                 excerpt(pruneLength: 200, truncate: true)
             }

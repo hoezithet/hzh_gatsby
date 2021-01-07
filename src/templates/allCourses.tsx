@@ -35,10 +35,9 @@ export default function AllCoursesTemplate({ pageContext, data }: AllCoursesData
     const chaptersPerCourse = data.courses.nodes.map(c => getCourseChapters(c, data.chapters));
     return (
         <Layout crumbs={crumbs}>
-            <h1>{title}</h1>
             {data.courses.nodes.map((course, index) => (
                 <>
-                    <h2>{course.frontmatter.title}</h2>
+                    <h1>{course.frontmatter.title}</h1>
                     <CourseChapters
                         chapters={chaptersPerCourse[index]}
                         lessons={data.lessons}
@@ -76,6 +75,7 @@ export const allCoursesQuery = graphql`
                             ...CardImageFragment
                         }
                         title
+                        level
                     }
                     fields {
                         slug

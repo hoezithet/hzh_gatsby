@@ -4,10 +4,18 @@ import Layout from "../components/layout";
 import { Link } from "gatsby-theme-material-ui";
 import SectionCard, { CardImage } from "./sectionCard";
 import Grid from '@material-ui/core/Grid';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from "styled-components";
 import { MdxNode } from "./lesson";
 import { graphql } from "gatsby";
 
+
+const levelToGradeName = (level: number) => (
+  `${Math.ceil(level / 2)}e graad`
+);
 
 const LessonListItem = styled.li`
     font-size: 12pt;
@@ -80,13 +88,26 @@ function getChapterLessons(chapter: MdxNode, lessons: MdxGroup) {
 
 export function CourseChapters({ chapters, lessons, defaultImg }: QueryData) {
     const lessonsPerChapter = chapters.nodes.map(c => getChapterLessons(c, lessons));
+    const gradePerChapter = chapters.nodes.map(c => levelToGradeName(c.frontmatter.level));
+    const grades = Array.from(new Set(gradePerChapter));
     return (
-    <Grid container spacing={2}>
-        { chapters.nodes.map((c, index) => (
-            <ChapterCard chapter={c} chapterLessons={lessonsPerChapter[index]} defaultImg={defaultImg} />
-        )
-         ) }
-    </Grid>
+      grades.map(grade => (
+          <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}
+          aria-controls={ `${grade}-content` }
+          id={ `${grade}-header` } >
+              { grade }
+          </AccordionSummary>
+          <AccordionDetails id={ `${grade}-content` }>
+              <Grid container spacing={2}>
+                { chapters.nodes.filter(c => levelToGradeName(c.frontmatter.level) === grade).map((c, index) => (
+                    <ChapterCard chapter={c} chapterLessons={lessonsPerChapter[index]} defaultImg={defaultImg} />
+                )
+                 ) }
+              </Grid>
+          </AccordionDetails>
+          </Accordion>
+        ))
     );
 }
 
@@ -112,6 +133,7 @@ export const courseQuery = graphql`
                         ...CardImageFragment
                     }
                     title
+                    level
                 }
                 fields {
                     slug

@@ -87,27 +87,35 @@ function getChapterLessons(chapter: MdxNode, lessons: MdxGroup) {
 }
 
 export function CourseChapters({ chapters, lessons, defaultImg }: QueryData) {
-    const lessonsPerChapter = chapters.nodes.map(c => getChapterLessons(c, lessons));
     const gradePerChapter = chapters.nodes.map(c => levelToGradeName(c.frontmatter.level));
     const grades = Array.from(new Set(gradePerChapter));
     return (
-      grades.map(grade => (
-          <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}
-          aria-controls={ `${grade}-content` }
-          id={ `${grade}-header` } >
-              { grade }
-          </AccordionSummary>
-          <AccordionDetails id={ `${grade}-content` }>
-              <Grid container spacing={2}>
-                { chapters.nodes.filter(c => levelToGradeName(c.frontmatter.level) === grade).map((c, index) => (
-                    <ChapterCard chapter={c} chapterLessons={lessonsPerChapter[index]} defaultImg={defaultImg} />
-                )
-                 ) }
-              </Grid>
-          </AccordionDetails>
-          </Accordion>
-        ))
+      grades.map(grade => {
+          const gradeChapterNodes = chapters.nodes.filter(c => levelToGradeName(c.frontmatter.level) === grade);
+          const lessonsPerChapter = gradeChapterNodes.map(c => getChapterLessons(c, lessons));
+          return (
+              <Accordion>
+                  <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls={`${grade}-content`}
+                      id={`${grade}-header`}
+                  >
+                      {grade}
+                  </AccordionSummary>
+                  <AccordionDetails id={`${grade}-content`}>
+                      <Grid container spacing={2}>
+                          {gradeChapterNodes.map((c, index) => (
+                              <ChapterCard
+                                  chapter={c}
+                                  chapterLessons={lessonsPerChapter[index]}
+                                  defaultImg={defaultImg}
+                              />
+                          ))}
+                      </Grid>
+                  </AccordionDetails>
+              </Accordion>
+          );
+      })
     );
 }
 

@@ -92,6 +92,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String!
       image: File @fileByRelativePath
       weight: Int
+      level: Int
     }
   `
   createTypes(typeDefs)

@@ -42,7 +42,7 @@ export default function About() {
         </StyledCite>
         <AboutImg src={ demotivated } />
         <p>
-            Misschien herken je het bovenstaande verhaal wel, net als veel leerlingen van het middelbaar. Mijn naam is Floris De Feyter 👋 en tussen ons gezegd en gezwegen vind ik wiskunde en wetenschappen eigenlijk heel interessant. Het doet wat pijn om te zien dat de vakken die ik zelf heel graag doe zulke angst en paniek kunnen veroorzaken bij leerlingen. Het voelt alsof veel leerlingen bang zijn voor de Grote Vriendelijke Reus, maar <b>niemand hen ooit op zijn schouder heeft gezet</b>.
+            Misschien herken je het bovenstaande verhaal wel, net als veel leerlingen van het middelbaar. Mijn naam is Floris De Feyter 👋 en tussen ons gezegd en gezwegen vind ik wiskunde en wetenschappen eigenlijk heel interessant. Het doet wat pijn om te zien dat de vakken die ik zelf heel graag doe zulke angst en paniek kunnen veroorzaken bij leerlingen. Het voelt alsof veel leerlingen bang zijn voor de Grote Vriendelijke Reus, terwijl ze hem <b>nooit echt hebben leren kennen</b>.
         </p>
         <Grid container spacing={ 2 } justify="space-between">
             <Grid item xs={ 12 } sm={ 6 }>

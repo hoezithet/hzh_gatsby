@@ -73,6 +73,7 @@ export interface MdxNode {
         description: string;
         tags: string[];
         image: CardImage;
+        level: number;
     };
     body: string;
     tableOfContents: { items: { url: string; title: string }[] };

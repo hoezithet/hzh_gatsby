@@ -133,4 +133,12 @@ export const Mute = ({children}: ColorProps) => {
     )
 }
 
+export const NearWhite = ({children}: ColorProps) => {
+    return (
+        <Color color="NEAR_WHITE">
+            { children }
+        </Color>
+    )
+}
+
 export default Color;

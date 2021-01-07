@@ -23,7 +23,7 @@ branches:
   - master
   - develop
 notifications:
-  slack: "hoezithet:$SLACK_KEY"
+    slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
@@ -31,6 +31,3 @@ before_deploy:
 - ssh-add deploy_rsa
 - pwd
 - ls
-env:
-  global:
-  - secure: pHdLy97u7btKODk/hq2klsfekJgB7au/9wvTGPXbW2W/77LgIRQqvseYf0dbCUzDtUgESW0kAGLSyMX7RBNDwDwtDUdFxmrJ184yl+Q7qUc1vwqN0oge66WiEEhQHbZXUoluN4yCAe8Im5vEtrECFRu59Ee2TWgT4oiJ6sZBo5/zelvq5ACADvunRdieJ+MknAWUUcED6m5kS7/p+EnZF0X8zPFSd8YbTtMhCoN9C1yhpd8FNmVn2bQpVpM5Pxi9E/dZnr0+FenG2V+cBdX0feJT22KunbjEaq0s1rvje/iNGP+TCYTPJ3STK9Y4vN+Noy3VBN/iIrzOZZtt0Z2c2DCC5YGApQrLxLH9Azm+yXtr3cD57eVDQUZlACtN4km93man5dD7no/8UfcDwpFS8fmWRQJuLQ743ZeN4quEpZcPZ6zzF7BZIXqe6OTd3+mc0rr8qic3UhB+Vwkx1Hdc6SGm6sBRs73rzEL2f8lKhzXd3rNeDBHIJxvFadQToE+WxRWI4GPAofeGoUaV1sX+JHyUdV2HH1YkCrSYyr2t90MfSDkYirKK8ZsbH7t4yp1/oV8iWhJ/0PWLRCm6KU/bEbanbig91rsq+nOXk93/SMIH6xNHy3GhVuLecbzEowpOSsMPN2novoKmS99U+9eAMsidmi8xQYsNh14gDRne2vY=

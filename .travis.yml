@@ -1,9 +1,8 @@
 os: linux
 dist: xenial
-sudo: required
 language: node_js
 node_js:
-  - 14
+- 14
 cache:
   directories:
   - node_modules
@@ -12,14 +11,30 @@ install:
 script:
 - gatsby build
 deploy:
+- provider: firebase
+  token:
+    secure: Gr/f6zYuF8WXKxtiGtrlG3Kt8gcxxFC6aX2xfyR0FBX7LCe3+3WY6D0fhxI5Ic0HTCyvpI+ZTupkcj+W7sio91X/h8XcbHulQIopeJGZd1Hh6EP9qu2FdnUtofErmVxHcpiuOQSnGQJN/aPvZ1cHeGhg6uQjK2cH3gnhRG6wbi36LvtFlp08JAH2d9LEWmD/wHTpVSnid2Q6MqixI3R90t5i3kLAfCwb2630nPYNqZ6+hAMB+qnhBz4mvodCG9V9qr5UJshBQFrx248tjGwwT0TpPGaN4oCSSS+yKDJTr1Ln4GUTqqW2oC1hIguzuGTyK6kb+vjlw0itxumR/rnm4KCXYvQ0TCFKe0FnggGoydngEzwABPRiMhcZlLP1+I/gwdAKSKEbzHKXYKPcGUajUpVlDWdWQpPXgvkivmgcQdlUjB8ZjhZkTlpruE8FhbXIQtiGqK4iTWXzxqZXVf3V+xxxo4UN4P3weMP72YpiMo3vhP9AYgtpxf8eII3YCu5DA52SyQHHE+MnAY7r8cSk0tKLo9rjjSlxfOuiiCR8Mtqj8K77dnPw3UCPKipwi3E+3Pek9B7oESSx5U10qeQOUacwEo5VFPOEkGAHo8tit+8Xt89rb45mj6L7tGGZZxyZjxOrEsX9xXy3nd32hkdPcdVJlL8A3XwKqJq04EP1I10=
+  on:
+    branch: master
 - provider: script
-  skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/public root@167.86.92.134:/root/hoezithet/dev_public
+  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/dev_public
+  edge: true
+  on:
+    branch: develop
+addons:
+  ssh_known_hosts: 167.86.92.134
 branches:
   only:
   - master
   - develop
 notifications:
   slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
-before_install:
-- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d 
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 deploy_rsa
+- ssh-add deploy_rsa
+env:
+  global:
+    

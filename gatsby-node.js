@@ -79,6 +79,25 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     }
 };
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type Mdx implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter @dontInfer {
+      tags: [String!]
+      description: String
+      date: Date @dateformat
+      title: String!
+      image: File @fileByRelativePath
+      weight: Int
+      level: Int
+    }
+  `
+  createTypes(typeDefs)
+}
+
 function isLesson(node) {
     return /\/content(\/[^/]+){4}\/index\.mdx$/.test(node.fileAbsolutePath);
 }

@@ -36,16 +36,11 @@ const WhyHzhItemImgBox = styled(Box)`
     height: 8rem;
     width: 8rem;
     padding: 1rem;
-    margin: auto;
     background-color: ${COLORS.NEAR_WHITE};
 `
 
 const WhyHzhItemImg = styled.img`
     height: 100%;
-`;
-
-const WhyHzhItemText = styled.p`
-    width: 90%;
 `;
 
 const WhyHzhTriangle = styled.div`
@@ -64,10 +59,6 @@ const WhyHzhBox = styled(Box)`
     background-color: rgba(255, 183, 0, 0.25)
 `;
 
-const WhyHzhGrid = styled(Grid)`
-    margin: auto;
-`;
-
 const ShowLessonButton = styled(Button)`
     color: ${COLORS.NEAR_WHITE};
     font-weight: bold;
@@ -82,16 +73,20 @@ interface WhyHzhItemProps {
 
 function WhyHzhItem(props: WhyHzhItemProps) {
     return (
-        <Grid item xs={ 8 } sm={ 4 } md={ 3 }>
-            <WhyHzhItemImgBox>
-                <WhyHzhItemImg src={ props.img } />
-            </WhyHzhItemImgBox>
-            <Box>
+        <Grid item xs={ 12 } sm={ 4 } container direction="column" justify="flex-start" alignItems="center">
+            <Grid item>
+                <WhyHzhItemImgBox>
+                    <WhyHzhItemImg src={ props.img } />
+                </WhyHzhItemImgBox>
+            </Grid>
+            <Grid item>
                 <h2>{ props.title }</h2>
-                <WhyHzhItemText>
+            </Grid>
+            <Grid item container justify="center">
+                <Grid item xs={ 10 }>
                     { props.children }
-                </WhyHzhItemText>
-            </Box>
+                </Grid>
+            </Grid>
         </Grid>
     );
 }
@@ -110,11 +105,11 @@ export default function Landing() {
             </Box>
             <Box id="why" textAlign="center" justifyContent="center">
                 <WhyHzhTitle>Waarom <WhyHzhTitleSpan>Hoe Zit Het?</WhyHzhTitleSpan></WhyHzhTitle>
-                <WhyHzhBox pb={6} >
+                <WhyHzhBox pb={6}>
                     <a href="#why">
                         <WhyHzhTriangle />
                     </a>
-                    <WhyHzhGrid container spacing={2} justify="center" >
+                    <Grid container spacing={4} justify="center" >
                         <WhyHzhItem title="Doelgericht" img={ archer }>
                             Elke les is gericht op één onderwerp. Zo kan je gaatjes in je kennis snel opvullen, zonder omwegen. 
                         </WhyHzhItem>
@@ -124,10 +119,12 @@ export default function Landing() {
                         <WhyHzhItem title="Gratis" img={ free }>
                             Omdat iedereen recht heeft op kennis, zijn alle lessen gratis. Voor vandaag. Voor morgen. Voor altijd.
                         </WhyHzhItem>
-                    </WhyHzhGrid>
-                    <ShowLessonButton variant="contained" color="primary" size="large" to={ exampleUrl }>
+                        <Grid item>
+                            <ShowLessonButton variant="contained" color="primary" size="large" to={ exampleUrl }>
                         Toon mij een voorbeeld!
-                    </ShowLessonButton>
+                            </ShowLessonButton> 
+                        </Grid>
+                    </Grid>
                 </WhyHzhBox>
                 <Sponsors />
             </Box>

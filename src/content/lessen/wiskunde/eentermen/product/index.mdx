@@ -2,7 +2,6 @@
 title: "Vermenigvuldigen en delen van eentermen"
 date: 2020-06-05T07:02:35+01:00
 weight: 5
-draft: true
 description: "In deze les leggen we aan de hand van voorbeelden uit hoe je
 eentermen met elkaar kan vermenigvuldigen of door elkaar kan delen. Omdat het
 belangrijk is dat we hiervoor de rekenregels voor het vermenigvuldigen en delen
@@ -11,69 +10,111 @@ eerst nog eens uit."
 tags: ["eenterm", "eentermen delen", "eentermen vermenigvuldigen", "product van
 eentermen", "quotient van eentermen", "vermenigvuldigen met zelfde grondtal",
 "delen met zelfde grondtal", "bewerkingen met eentermen"]
-images: []
-title_img: ""
 ---
 
 Om eentermen met elkaar te vermenigvuldigen of te delen door elkaar, is het
 belangrijk dat we de **rekenregels voor het vermenigvuldigen en delen van
-machten met hetzelfde grondtal** in ons achterhoofd houden. Stel bijvoorbeeld
-dat we de volgende vermenigvuldiging hebben <Mute>(waarbij $a \in
-\mathbb{R}$)</Mute>:
+machten met hetzelfde grondtal** eerst begrijpen. Deze leggen we in de volgende twee paragrafen uit. Nadien tonen we hoe we deze rekenregels kunnen gebruiken om eentermen te gaan vermenigvuldigen.
 
+## Machten met hetzelfde grondtal vermenigvuldigen
+
+Stel bijvoorbeeld dat we de volgende vermenigvuldiging hebben <Mute>(waarbij $a \in
+\mathbb{R}$)</Mute>:
 
 $$
 a^2\cdot a^3
 $$
 
-
 We zien dat de twee factoren van de vermenigvuldiging allebei het **grondtal
-$a$** hebben. De rekenregel voor het vermenigvuldigen van machten met hetzelfde
-grondtal zegt dat we in dat geval de **exponenten bij elkaar moeten optellen**:
+$a$** hebben. Wanneer we de machtsverheffing voluit schrijven, zien we een rekenregel die we voortdurend zullen toepassen bij eentermen:
 
 $$
 \begin{aligned}
-a^2\cdot a^3 &= a^{2 + 3}\\
- &= a^5
+\orange{a^2}\cdot \blue{a^3}
+&= \underbrace{\underbrace{\orange{a \cdot a}}_{\orange{2}~\text{factoren}}\cdot\underbrace{\blue{a \cdot a\cdot a}}_{\blue{3}~\text{factoren}}}_{5~\text{factoren}}\\
+&= a^5
 \end{aligned}
 $$
 
-De rekenregel voor het _delen_ van machten met hetzelfde grondtal is heel
-gelijkaardig. Stel dat we de volgende deling moeten uitrekenen <Mute
-text="(waarbij $x \in \mathbb{R}_0$)" />:
-
+We zien dat
 
 $$
-x^5:x^2
+a^2\cdot a^3 = a^{5}
 $$
 
-
-We zien dat het deeltal $x^5$ hetzelfde grondtal heeft als de deler $x^2$. De
-rekenregel voor het delen van machten met hetzelfde grondtal zegt dat we in dat
-geval de **exponenten van elkaar moeten aftrekken**:
+Omdat $a^2$ en $a^3$ beide een grondtal $a$ hebben, krijgen we één lange reeks van vermenigvuldigen met in totaal $2 + 3 = 5$ vermenigvuldigen met $a$. Dat geldt natuurlijk ook voor andere exponenten dan $2$ en $3$. In het algemeen:
 
 $$
 \begin{aligned}
-x^5:x^2 &= x^{5 - 2}\\
- &= x^3
+\orange{a^n}\cdot \blue{a^m}
+&= \underbrace{\underbrace{\orange{a \cdot a \cdot \ldots \cdot a}}_{\orange{n}~\text{factoren}}\cdot\underbrace{\blue{a \cdot a\cdot\ldots \cdot a}}_{\blue{m}~\text{factoren}}}_{\orange{n} + \blue{m}~\text{factoren}}\\
+&= a^{\orange{n} + \blue{m}}
 \end{aligned}
 $$
 
-Als we deze rekenregels goed kunnen toepassen, zal het vermenigvuldigen en
-delen van eentermen veel eenvoudiger worden.
+Of korter gezegd:
 
-<Expand title="Alle variabelen in deze les zijn $\in \mathbb{R}$ (of $\in\mathbb{Q}$) en voor delingen $\in \mathbb{R}_0$ (of $\in\mathbb{Q}_0$)">
+$$
+a^n\cdot a^m = a^{n + m} 
+$$
 
-We gaan ervan uit dat alle variabelen in deze les een element zijn van de reële
-getallen. Als je nog niet weet wat reële getallen zijn, mag je ook aannemen
-dat de variabelen een element zijn van de rationale, gehele of zelfs natuurlijk
-getallen. Voor al die verzamelingen gelden dezelfde rekenregels wat
-betreft bewerkingen met eentermen.
+Waarbij $a\in\mathbb{Q}$ en $n, m\in\mathbb{Z}$.
 
-Voor delingen leggen we de beperking op dat de variabelen niet $0$ mogen zijn
-om delingen door $0$ te voorkomen.
+Wanneer we **machten met hetzelfde grondtal vermenigvuldigen**, dan mogen we de **exponenten bij elkaar optellen**.
 
-</Expand>
+## Machten met hetzelfde grondtal delen
+
+In de vorige paragraaf leerden we dat $a^n\cdot a^m = a^{n + m}$. In deze paragraaf zullen we leren dat er voor **delingen van machten met hetzelfde grondtal** een gelijkaardige rekenregel bestaat. We beginnen met een voorbeeld:
+
+$$
+\begin{aligned}
+\frac{\orange{a^5}}{\blue{a^3}} &= \frac{\overbrace{\orange{a\cdot a\cdot a\cdot a\cdot a}}^{\orange{5}~\text{factoren}}}{\underbrace{\blue{a\cdot a\cdot a}}_{\blue{3}~\text{factoren}}}
+\end{aligned}
+$$
+
+We zien dat **in teller en noemer dezelfde factoren** staan. We kunnen de breuk dus **vereenvoudigen** door deze gemeenschappelijke factoren te schrappen:
+
+$$
+\begin{aligned}
+\phantom{\frac{a^5}{a^3}}
+&= \frac{\orange{a\cdot a\cdot} \cancel{\orange{a\cdot a\cdot a}}}{\cancel{\blue{a\cdot a\cdot a}}}\\
+&= \frac{\orange{a\cdot a}}{1}\\
+&= a^2
+\end{aligned}
+$$
+
+We vinden dat $\frac{a^\orange{5}}{a^\blue{3}} = a^2$. Het is niet toevallig dat $\orange{5} - \blue{3} = 2$.
+
+Laat ons naar enkele andere voorbeelden kijken:
+
+$$
+\begin{aligned}
+\frac{a^\orange{7}}{a^\blue{2}}
+&= \frac{a\cdot a\cdot a\cdot a\cdot a\cdot \cancel{a\cdot a}}{\cancel{a\cdot a}}\\
+&= \frac{a\cdot a\cdot a\cdot a\cdot a}{1}\\
+&= a^5 = a^{\orange{7} - \blue{2}}\\
+\\
+\frac{a^\orange{2}}{a^\blue{5}}
+&= \frac{\cancel{a\cdot a}}{a\cdot a\cdot a \cdot \cancel{a\cdot a}}\\
+&= \frac{1}{a\cdot a\cdot a}\\
+&= a^{-3} = a^{\orange{2} - \blue{5}}\\
+\\
+\frac{a^\orange{6}}{a^\blue{4}}
+&= \frac{a\cdot a\cdot \cancel{a\cdot a\cdot a\cdot a}}{\cancel{a\cdot a\cdot a\cdot a}}\\
+&= \frac{a\cdot a}{1}\\
+&= a^2 = a^{\orange{6} - \blue{4}}\\
+\end{aligned}
+$$
+
+De **rekenregel voor het delen van machten met hetzelfde grondtal** is dan ook:
+
+$$
+\frac{a^n}{a^m} = a^{n - m} 
+$$
+
+Waarbij $a\in\mathbb{Q}_0$ en $n,m\in\mathbb{Z}$. 
+
+Wanneer we **machten met hetzelfde grondtal delen**, dan mogen we de **exponenten van elkaar aftrekken**.
 
 ## Eentermen met elkaar vermenigvuldigen
 
@@ -84,6 +125,12 @@ Het vermenigvuldigen van eentermen gaat als volgt:
 2. Vermenigvuldig het **lettergedeelte** van de ene eenterm met het
    lettergedeelte van de andere eenterm door **exponenten van machten met
    hetzelfde grondtal bij elkaar op te tellen**.
+   
+Merk op dat we in de tweede stap gebruikmaken van de **rekenregel voor het vermenigvuldigen van machten met hetzelfde grondtal**:
+
+$$
+a^n\cdot a^m = a^{n + m} 
+$$
 
 > Ben je even vergeten wat nu weer de _"coëfficiënt"_ en het _"lettergedeelte"_
 > was van een eenterm? Lees dan zeker onze [les over
@@ -151,11 +198,17 @@ Het delen van eentermen gaat als volgt:
    de andere eenterm door **exponenten van machten met hetzelfde grondtal van
    elkaar af te trekken**.
 
+Merk op dat we in de tweede stap gebruikmaken van de **rekenregel voor het delen van machten met hetzelfde grondtal**:
+
+$$
+\frac{a^n}{a^m} = a^{n - m} 
+$$
+
 Stel dat we de volgende deling moeten uitvoeren:
 
 
 $$
-21u^2v^4:(-7uv^2)
+\frac{21u^2v^4}{-7uv^2}
 $$
 
 
@@ -164,9 +217,9 @@ delen door de coëfficiënt van de eenterm in de deler (de $-7$):
 
 $$
 \begin{aligned}
-\orange{21}u^2v^4:(\orange{-7}uv^2)
-&= \big(\orange{21}:(\orange{-7})\big)u^2v^4:(uv^2)\\
- &= \orange{-3}u^2v^4:(uv^2)\\
+\frac{\orange{21}u^2v^4}{\orange{-7}uv^2}
+&= \frac{\orange{21}}{\orange{-7}}\cdot \frac{u^2v^4}{uv^2}\\
+ &= \orange{-3}\cdot\frac{u^2v^4}{uv^2}\\
 \end{aligned}
 $$
 
@@ -177,10 +230,10 @@ zullen beginnen met het delen van de machten met grondtal $u$:
 
 $$
 \begin{aligned}
--3\orange{u^2}v^4:(\orange{u}v^2)
-&= -3\orange{u^{2 - 1}}v^4:v^2\\
- &= -3\orange{u^{1}}v^4:v^2\\
- &= -3\orange{u}v^4:v^2\\
+-3\cdot\frac{\orange{u^2}v^4}{\orange{u}v^2}
+&= -3\orange{u^{2 - 1}}\cdot\frac{v^4}{v^2}\\
+ &= -3\orange{u^{1}}\cdot\frac{v^4}{v^2}\\
+ &= -3\orange{u}\cdot\frac{v^4}{v^2}\\
 \end{aligned}
 $$
 
@@ -188,7 +241,7 @@ Ten slotte delen we ook de factoren die grondtal $v$ hebben:
 
 $$
 \begin{aligned}
--3u\orange{v^4}:\orange{v^2}
+-3u\cdot\frac{\orange{v^4}}{\orange{v^2}}
 & = -3u\orange{v^{4 - 2}}\\
  & = -3u\orange{v^{2}}\\
 \end{aligned}
@@ -257,7 +310,7 @@ machten met hetzelfde grondtal toe. Een eenvoudig voorbeeld:
 
 $$
 \begin{aligned}
-a^{(m+2)}b^m:(a^{(2m - 1)}b^3)
+\frac{a^{(m+2)}b^m}{a^{(2m - 1)}b^3}
 &= a^{(m+2) - (2m - 1)}b^{m - 3}\\
  &= a^{m+ 2 - 2m + 1}b^{m - 3}\\
  &= a^{-m + 3}b^{m - 3}\\
@@ -273,6 +326,30 @@ $$
 
 
 ## Samengevat
+
+<Attention title="Machten met hetzelfde grondtal vermenigvuldigen">
+
+Wanneer we **machten met hetzelfde grondtal vermenigvuldigen**, dan mogen we de **exponenten bij elkaar optellen**.
+
+$$
+a^n\cdot a^m = a^{n + m} 
+$$
+
+Waarbij $a\in\mathbb{Q}$ en $n, m\in\mathbb{Z}$.
+
+</Attention>
+
+<Attention title="Machten met hetzelfde grondtal delen">
+
+Wanneer we **machten met hetzelfde grondtal delen**, dan mogen we de **exponenten van elkaar aftrekken**.
+
+$$
+\frac{a^n}{a^m} = a^{n - m} 
+$$
+
+Waarbij $a\in\mathbb{Q}_0$ en $n,m\in\mathbb{Z}$. 
+
+</Attention>
 
 <Attention title="Eentermen vermenigvuldigen">
 

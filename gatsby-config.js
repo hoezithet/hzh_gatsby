@@ -19,7 +19,12 @@ module.exports = {
     plugins: [
         `gatsby-plugin-typescript`,
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-sitemap`,
+        {
+            resolve: `gatsby-plugin-sitemap`,
+            options: {
+                exclude: [`/bare/*`]
+            }
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {

@@ -37,21 +37,23 @@ Een kommagetal met een **begrensde decimale vorm** is een getal dat een **eindig
 
 $$
 \begin{aligned}
-0{&,}6\\
--2{&,}81\\
-35{&,}1\\
-6{&,}09
+0&{,}6\\
+-2&{,}81\\
+35&{,}1\\
+6&{,}09
 \end{aligned}
 $$
 
 Een kommagetal van **onbegrensde decimale vorm** is een getal dat **oneindig veel cijfers na de komma** heeft <Mute>(waarvan de laatste cijfers niet allemaal gelijk zijn aan nul)</Mute>. Enkele voorbeelden:
 
 $$
-  2{&,}333333333\ldots\\
--12{&,}764646464\ldots\\
-  3{&,}141592653\ldots\\
-  1{&,}414213562\ldots\\
-  0{&,}000525252\ldots
+\begin{aligned}
+  2&{,}333333333\ldots\\
+-12&{,}764646464\ldots\\
+  3&{,}141592653\ldots\\
+  1&{,}414213562\ldots\\
+  0&{,}000525252\ldots
+\end{aligned}
 $$
 
 Het valt je hierboven misschien op dat er in sommige voorbeelden **decimalen zijn die zich herhalen**:
@@ -76,6 +78,18 @@ Wanneer **decimalen zich blijvend herhalen**, zeggen we dat het kommagetal een *
 | $$1{,}414213562\ldots$$    | **GEEN** |
 | $$0{,}000525252\ldots$$    | $$52$$   |
 
+Binnen de kommagetallen met een onbegrensde repeterende decimale vorm, bestaan er nog twee soorten: de **zuiver repterende** decimale vorm en de **gemengd repeterende** decimale vorm. Bij een **zuiver** repeterende decimale vorm, begint de **periode meteen na de komma**. Bij een **gemengd** repeterende decimale vorm, begint de **periode niet meteen na de komma**.
+
+| Kommagetal                 | Soort onbegrensde decimale vorm |
+|----------------------------|----------|
+| $$2{,}\orange{3}33333333\ldots$$    |  Zuiver repeterend   |
+| $$-12{,}7\orange{64}646464\ldots$$  | Gemengd repeterend |
+| $$3{,}141592653\ldots$$    | Niet-repeterend |
+| $$1{,}414213562\ldots$$    | Niet-repeterend |
+| $$0{,}000\orange{52}5252\ldots$$    | Gemengd repeterend   |
+| $$-7{,}\orange{54}545454\ldots$$ | Zuiver repeterend |
+| $$0{,}\orange{123}123123123\ldots$$ | Zuiver repeterend |
+
 Kommagetallen die een **onbegrensde niet-repeterende** decimale vorm hebben, zoals $3{,}141592653\ldots$, hebben **geen periode** en kun je **niet schrijven als een breuk** van gehele getallen. Dat zijn **irrational getallen** en die behoren niet tot de verzameling $\mathbb{Q}$. Voorbeelden van zulke getallen zijn $\pi$ en $\sqrt{2}$. We zeggen bv. dat
 
 $$
@@ -96,8 +110,7 @@ Enkele voorbeelden:
 
 $$
 \begin{aligned}
-0{,}6
-&= \frac{0{,}6}{1}\\
+0{,}6 &= \frac{0{,}6}{1}\\
 &= \frac{0{,}6\orange{\cdot 10}}{1\orange{\cdot 10}}\\
 &= \frac{6}{10}\\
 &= \frac{3}{5}\\
@@ -125,87 +138,227 @@ $$
 
 ## Onbegrensde repeterende decimale vorm omzetten naar breuk
 
-In het stappenplan dat we zo meteen zullen leren om een kommagetal met onbegrensde repeterende decimale vorm om te zetten naar een breuk, gaan we een **opmerkelijk wiskundig trucje** gebruiken. Met volgende voorbeelden zal je al een idee krijgen van wat dat trucje is. Geef volgende voorbeelden zeker eens in in je rekenmachine om de uitkomsten met je eigen ogen te zien!
+Alvorens we leren om een kommagetal met onbegrensde repeterende decimale vorm om te zetten naar een breuk, ga ik je eerst een **opmerkelijk wiskundig trucje** tonen. Met volgende voorbeelden zal je al een idee krijgen van wat dat trucje is. Geef volgende voorbeelden zeker eens in in je rekenmachine om de uitkomsten met je eigen ogen te zien!
 
 $$
 \begin{aligned}
-\frac{1}{9} &= 0{,}11111111\ldots\\ 
-\frac{2}{9} &= 0{,}22222222\ldots\\
-\frac{8}{9} &= 0{,}88888888\ldots\\ 
-\frac{62}{99} &= 0{,}62626262\ldots\\
-\frac{25}{99} &= 0{,}2525252525\ldots\\
-\frac{34}{99} &= 0{,}3434343434\ldots\\
-\frac{736}{999} &= 0{,}7367367367\ldots\\
-\frac{102}{999} &= 0{,}1021021021\ldots\\
-\frac{845}{999} &= 0{,}8458458458\ldots\\
+\frac{\orange{1}}{9} &= 0{,}\orange{1}1111111\ldots\\
+\\
+\frac{\orange{2}}{9} &= 0{,}\orange{2}2222222\ldots\\
+\\
+-\frac{\orange{8}}{9} &= -0{,}\orange{8}8888888\ldots\\
+\\
+\frac{\orange{62}}{99} &= 0{,}\orange{62}626262\ldots\\
+\\
+\frac{\orange{25}}{99} &= 0{,}\orange{25}25252525\ldots\\
+\\
+-\frac{\orange{34}}{99} &= -0{,}\orange{34}34343434\ldots\\
+\\
+\frac{\orange{736}}{999} &= 0{,}\orange{736}7367367\ldots\\
+\\
+-\frac{\orange{102}}{999} &= -0{,}\orange{102}1021021\ldots\\
+\\
+-\frac{\orange{845}}{999} &= -0{,}\orange{845}8458458\ldots\\
 \end{aligned}
 $$
 
-Je ziet dat wanneer we willen dat een bepaald getal zich telkens na de komma, we dat getal kunnen delen door een getal dat **even lang** is, maar **enkel het cijfer $9$ bevat**. Merk op dat wanneer we ons getal met de negens *langer* maken, er nulletjes *vóór* het getal tevoorschijn komen in de periode:
+Je ziet dat wanneer we een bepaald getal delen door **zoveel keer het cijfer $9$ als het aantal cijfers in ons getal**, we een kommagetal krijgen waarbij **ons getal zich na de komma steeds gaat herhalen**.
 
 $$
 \begin{aligned}
-\frac{8}{99} &= 0{,}0808080808\ldots\\
-\frac{6}{999} &= 0{,}0060060060\ldots\\
-\frac{47}{999} &= 0{,}0470470470\ldots\\
-\frac{51}{9999} &= 0{,}005100510051\ldots\\
+\frac{\overbrace{4}^{\text{\orange{één} cijfer\ldots}}}{\underbrace{9}_{\text{\ldots dus \orange{één} keer cijfer}~9}} &= 0{,}444444444\ldots\\
+\\
+\frac{\overbrace{81}^{\text{\orange{twee} cijfers\ldots}}}{\underbrace{99}_{\text{\ldots dus \orange{twee} keer cijfer}~9}} &= 0{,}8181818181\ldots\\
+\\
+-\frac{\overbrace{742}^{\text{\orange{drie} cijfers\ldots}}}{\underbrace{999}_{\text{\ldots dus \orange{drie} keer cijfer}~9}} &= -0{,}742742742742\ldots\\
 \end{aligned}
 $$
 
-Nu we dit weten, kunnen we al bepaalde kommagetallen met een onbegrensde repeterende decimale vorm omzetten, bijvoorbeeld:
+Door een bepaald getal te delen door zoveel keer het cijfer $9$ als het aantal cijfers in dat getal, krijgen we met andere woorden een kommagetal in **repeterende decimale vorm** waarbij **dat getal de periode is**. Merk daarenboven op dat het kommagetal steeds een **zuiver repeterende** decimale vorm heeft <Mute>(dus de periode begint meteen na de komma)</Mute> waarbij er vóór de komma gewoon een $0$ staat.
+
+| Deling          | Uitkomst      | Periode van uitkomst   |
+|-----------------|---------------|---------------|
+| $$\frac{\orange{1}}{9}$$ | $$0{,}\orange{1}1111111\ldots$$ | $$\orange{1}$$ |
+| $$\frac{\orange{2}}{9}$$ | $$0{,}\orange{2}2222222\ldots$$ | $$\orange{2}$$ |
+| $$-\frac{\orange{8}}{9}$$ | $$-0{,}\orange{8}8888888\ldots$$ | $$\orange{8}$$ |
+| $$\frac{\orange{62}}{99}$$ | $$0{,}\orange{62}626262\ldots$$ | $$\orange{62}$$ |
+| $$\frac{\orange{25}}{99}$$ | $$0{,}\orange{25}25252525\ldots$$ | $$\orange{25}$$ |
+| $$-\frac{\orange{34}}{99}$$ | $$-0{,}\orange{34}34343434\ldots$$ | $$\orange{34}$$ |
+| $$\frac{\orange{736}}{999}$$ | $$0{,}\orange{736}7367367\ldots$$ | $$\orange{736}$$ |
+| $$-\frac{\orange{102}}{999}$$ | $$-0{,}\orange{102}1021021\ldots$$ | $$\orange{102}$$ |
+| $$-\frac{\orange{845}}{999}$$ | $$-0{,}\orange{845}8458458\ldots$$ | $$\orange{845}$$ |
+
+Merk op dat wanneer we een getal delen door **meer cijfers $9$** dan dat dat getal heeft, we een kommagetal krijgen waarbij er **nulletjes vooraan in de periode** bij zijn gekomen. Er komen zoveel nulletjes bij **tot de periode evenveel cijfers heeft** als het aantal cijfers $9$ waardoor we gedeeld hebben:
 
 $$
 \begin{aligned}
-0{,}93939393\ldots &= \frac{93}{99}\\
+\frac{8}{\underbrace{99}_{\text{\orange{twee} keer cijfer}~9}} &= 0{,}\orange{08}08080808\ldots\\
+\\
+\frac{6}{\underbrace{999}_{\text{\orange{drie} keer cijfer}~9}} &= 0{,}\orange{006}0060060\ldots\\
+\\
+-\frac{47}{\underbrace{999}_{\text{\orange{drie} keer cijfer}~9}} &= -0{,}\orange{047}0470470\ldots\\
+\\
+\frac{51}{\underbrace{9999}_{\text{\orange{vier} keer cijfer}~9}} &= 0{,}\orange{0051}00510051\ldots\\
+\end{aligned}
+$$
+
+### Zuiver repeterende decimale vorm omzetten naar een breuk
+
+In de vorige paragraaf leerden we dat wanneer je een bepaald getal deelt door zoveel keer het cijfer $9$ als het aantal cijfers in dat getal, we een kommagetal krijgen in **zuiver repeterende decimale vorm** waarbij **dat getal de periode is** en er **voor de komma een $0$ staat**. We leerden ook dat wanneer we een getal delen door **meer cijfers $9$** dan dat dat getal heeft, we een kommagetal krijgen <Mute>(weer in zuiver repeterende decimale vorm met voor de komma een $0$)</Mute> waarbij er **nulletjes vooraan in de periode** bij zijn gekomen zodat de periode evenveel cijfers heeft als het aantal cijfers $9$ waardoor we deelden.
+
+We kunnen nu ook omgekeerd te werk gaan en kommagetallen met een **zuiver repeterende** decimale vorm en een **$0$ voor de komma** gaan **omzetten naar een breuk** <Mute>(wat overeenkomt met een deling)</Mute>. Bijvoorbeeld:
+
+$$
+\begin{aligned}
+0{,}\orange{93}939393\ldots &= \frac{\orange{93}}{99}\\
 &= \frac{31}{33}\\
 \\
-0{,}44444444\ldots &= \frac{4}{9}\\
+-0{,}\orange{4}4444444\ldots &= -\frac{\orange{4}}{9}\\
 \\
-0{,}02302323\ldots &= \frac{23}{999}
+-0{,}\orange{023}02323\ldots &= -\frac{\orange{23}}{999}\\
+\\
+0{,}\orange{6}66666666\ldots &= \frac{\orange{6}}{9}\\
+&= \frac{2}{3}
 \end{aligned}
 $$
 
-Maar wat nu als het repeterende deel voorafgegaan wordt door een reeks nullen? Bijvoorbeeld:
+Maar wat als we nu een kommagetal hebben in zuiver repeterende decimale vorm waarbij **het getal voor de komma niet gelijk is aan $0$**? Bijvoorbeeld:
 
 $$
 \begin{aligned}
-0&{,}003333333\ldots\\
-0&{,}000028282828\ldots\\
-0&{,}072727272727\ldots
+8{,}\orange{5}555555\ldots\\
+-42{,}\orange{83}83838383\ldots\\
+281{,}\orange{2}222222\ldots
 \end{aligned}
 $$
 
-Daar kunnen we geraken door onze breuk te vermenigvuldigen met $\frac{1}{10}$, $\frac{1}{100}$, $\frac{1}{1000}$,... afhankelijk van hoeveel nullen voorafgaan aan het repeterende deel:
+Wel in dat geval gaan we het **kommagetal opsplitsen** om het **getal voor de komma los te plaatsen van de decimalen**. Nadien kunnen we het getal voor de komma en de decimalen elk apart omzetten naar een breuk om vervolgens de som van die twee breuken uit te rekenen.
 
 $$
 \begin{aligned}
-0{,}\orange{00}3333333\ldots
-&= 0{,}333333333\ldots\cdot\frac{1}{1\orange{00}}\\
-&= \frac{3}{9}\cdot\frac{1}{100}\\
-&= \frac{1}{3}\cdot\frac{1}{100}\\
-&= \frac{1}{300}
+8{,}\orange{5}555555\ldots &= 8 + 0{,}\orange{5}555555\ldots\\
+&= \frac{8}{1} + \frac{\orange{5}}{9}\\
+&= \frac{72}{9} + \frac{5}{9}\\
+&= \frac{77}{9}\\
 \\
-0{,}\orange{0000}28282828\ldots
-&= 0{,}282828282828\ldots\cdot\frac{1}{\orange{10~000}}\\
-&= \frac{28}{99}\cdot\frac{1}{10~000}\\
-&= \frac{28}{990~000}\\
+-42{,}\orange{63}63636363\ldots &= -(42 + 0{,}\orange{63}63636363\ldots)\\
+&= - \left(\frac{42}{1} + \frac{\orange{63}}{99}\right)\\
+&= - \left(\frac{42}{1} + \frac{7}{11}\right)\\
+&= - \left(\frac{462}{11} + \frac{7}{11}\right)\\
+&= - \frac{469}{11}\\
 \\
-0{,}\orange{0}72727272727\ldots
-&= 0{,}72727272727\ldots \cdot \frac{1}{1\orange{0}}\\
-&= \frac{72}{99}\cdot \frac{1}{10}\\
-&= \frac{8}{11}\cdot \frac{1}{10}\\
-&= \frac{8}{110}\\
-&= \frac{4}{55}
+1{,}\orange{2}222222\ldots &= 1 + 0{,}\orange{2}222222\ldots\\
+&= \frac{1}{1} + \frac{\orange{2}}{9}\\
+&= \frac{9}{9} + \frac{\orange{2}}{9}\\
+&= \frac{11}{9}
 \end{aligned}
 $$
 
-Zuiver repeterend vs. gemengd repeterend
+Merk op dat we bij een negatief getal de opsplitsing **tussen haakjes zetten** en het **minteken vóór de haakjes**.
 
-1. Splits het kommagetal in een som van twee andere kommagetallen waarbij het ene kommagetal eindig is en het andere enkel de repeterende decimalen bevat (eventueel voorafgegaan door nullen).
-2. Zet het begrensde kommagetal om door de methode uit de vorige paragraaf.
-3. Schrijf de periode van het andere kommagetal in de noemer en deel door het getal dat bestaat uit $p$ negens en $d$ nullen.
+### Gemengd repeterende decimale vorm omzetten naar een breuk
+
+We moeten nu nog één soort repeterende decimale vorm leren omzetten naar een breuk: de **gemengd repeterende** decimale vorm. Zoals we in het begin van deze les leerden, heeft een kommagetal een gemengd repeterende decimale vorm wanneer het **repeterend deel niet meteen na de komma staat**. Enkele voorbeelden:
+
+$$
+\begin{aligned}
+2&{,}70\orange{36}3636\ldots\\
+-5&{,}1\orange{7}777777\ldots\\
+-0&{,}86\orange{94}949494\ldots\\
+0&{,}00\orange{3}333333\ldots\\
+\end{aligned}
+$$
+
+Om een gemengd repeterende decimale vorm om te zetten naar een breuk, gaan we ons eerst afvragen welke **zuiver repeterende** decimale vorm we kunnen krijgen door enkel de **komma te verschuiven**. Vervolgens kijken we door welke macht van $10$ <Mute>($10$, $100$, $1000$, $10~000$ etc.)</Mute> we die zuiver repeterende decimale vorm moeten **delen** om uit te komen bij de gemengde decimale vorm van de opgave.
+
+Neem bijvoorbeeld de volgende gemengd repeterende decimale vorm:
+
+$$
+2{,}70\orange{36}3636\ldots
+$$
+
+We kunnen de volgende **zuiver repeterende** decimale vorm krijgen door de **komma twee plaatsen naar rechts** te verschuiven:
+
+$$
+270{,}\orange{36}3636\ldots
+$$
+
+Maar dat getal is natuurlijk niet meer gelijk aan het getal in de opgave:
+
+$$
+\underbrace{2{,}70\orange{36}3636\ldots}_{\text{Opgave}} \neq 270{,}\orange{36}3636\ldots
+$$
+
+We moeten de zuiver repeterende decimale vorm nog **delen door een macht van $10$** om de gelijkheid wél te laten kloppen! Omdat de komma twee plaatsen naar rechts is verschoven, is ons getal aan de rechterkant **$100$ <Mute>(of $10^2$)</Mute> keer groter dan de opgave**. We kunnen het getal rechts dus gelijk maken aan de opgave door het terug **$100$ keer kleiner** te maken. Dat betekent dat we moeten **delen door $100$**:
+
+$$
+\underbrace{2{,}70363636\ldots}_{\text{Opgave}} = \frac{270{,}363636\ldots}{\orange{100}}
+$$
+
+Om alles proper gescheiden te houden, gaan we de deling door de macht van $10$ <Mute>(in dit geval $100$)</Mute> vóór het kommagetal schrijven:
+
+$$
+\underbrace{2{,}70363636\ldots}_{\text{Opgave}} = \frac{1}{100}\cdot 270{,}363636\ldots
+$$
+
+We hebben ons kommagetal met **gemengd repeterende** decimale vorm **omgezet naar een zuiver repeterende** decimale vorm. Met de technieken uit de vorige paragraaf kunnen we nu verder om het kommagetal om te zetten naar een breukvorm:
+
+$$
+\begin{aligned}
+2{,}70\orange{36}3636\ldots &= \frac{1}{100}\cdot 270{,}\orange{36}3636\ldots\\
+&= \frac{1}{100}\cdot\left( 270 + 0{,}\orange{36}3636\ldots \right)\\
+&= \frac{1}{100}\cdot\left(\frac{270}{1} + \frac{\orange{36}}{99}\right)\\
+&= \frac{1}{100}\cdot\left(\frac{270}{1} + \frac{4}{11}\right)\\
+&= \frac{1}{100}\cdot\left(\frac{2970}{11} + \frac{4}{11}\right)\\
+&= \frac{1}{100}\cdot\frac{2974}{11}\\
+&= \frac{2974}{1100}\\
+&= \boxed{\frac{1487}{550}}
+\end{aligned}
+$$
+
+Enkele andere voorbeelden:
+
+$$
+\begin{aligned}
+-5{,}1\orange{7}77\ldots &= - \frac{1}{10}\cdot 51{,}\orange{7}77\ldots\\
+&= -\frac{1}{10}\cdot\left(51 + 0{,}\orange{7}77\ldots\right)\\
+&= -\frac{1}{10}\cdot\left(\frac{51}{1} + \frac{\orange{7}}{9}\right)\\
+&= -\frac{1}{10}\cdot\left(\frac{459}{9} + \frac{\orange{7}}{9}\right)\\
+&= -\frac{1}{10}\cdot\frac{466}{9}\\
+&= -\frac{466}{90}\\
+&= \boxed{-\frac{233}{45}}\\
+\\
+-0{,}86\orange{94}9494\ldots &= - \frac{1}{100}\cdot 86{,}\orange{94}9494\ldots \\
+&= - \frac{1}{100}\cdot\left(86 + 0{,}\orange{94}9494\ldots \right)\\
+&= - \frac{1}{100}\cdot\left(\frac{86}{1} + \frac{\orange{94}}{99} \right)\\
+&= - \frac{1}{100}\cdot\left(\frac{8514}{99} + \frac{\orange{94}}{99} \right)\\
+&= - \frac{1}{100}\cdot\frac{8608}{99}\\
+&= - \frac{8608}{9900}\\
+&= \boxed{- \frac{2152}{2475}}\\
+\\
+0{,}00\orange{3}33\ldots &= \frac{1}{100}\cdot 0{,}\orange{3}33\ldots\\
+&= \frac{1}{100} \cdot 0{,}\orange{3}33\ldots\\
+&= \frac{1}{100} \cdot \frac{\orange{3}}{9}\\
+&= \frac{1}{100} \cdot \frac{1}{3}\\
+&= \boxed{\frac{1}{300}}
+\end{aligned}
+$$
+
 
 ## Vergelijkingen gebruiken om kommagetal om te zetten naar breuk
 
 ## Kommagetal omzetten naar breuk met rekenmachine
 
+## Samengevat
+
+<Attention title="Zuiver repeterende decimale vorm">
+
+Een kommagetal heeft een **zuiver repeterende** decimale vorm wanneer de **periode van de repeterende decimalen meteen na de komma begint**.
+
+</Attention>
+
+<Attention title="Gemengd repeterende decimale vorm">
+
+Een kommagetal heeft een **gemengd repeterende** decimale vorm wanneer de **periode van de repeterende decimalen *niet* meteen na de komma begint**.
+
+</Attention>

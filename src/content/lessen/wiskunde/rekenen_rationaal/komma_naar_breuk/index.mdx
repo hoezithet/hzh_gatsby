@@ -10,8 +10,8 @@ Hoewel breuken er soms wat angstaanjagend kunnen uitzien, is het in veel gevalle
 
 $$
 \begin{aligned}
-\frac{3}{5}\cdot\frac{2}{7} &= \frac{3\cdot 2}{5\cdot 7}\\
-&= \frac{6}{35}\\
+  \frac{3}{5}\cdot\frac{2}{7} &= \frac{3\cdot 2}{5\cdot 7}\\
+  &= \frac{6}{35}\\
 \end{aligned}
 $$
 
@@ -90,20 +90,37 @@ Binnen de kommagetallen met een onbegrensde repeterende decimale vorm, bestaan e
 | $$-7{,}\orange{54}545454\ldots$$ | Zuiver repeterend |
 | $$0{,}\orange{123}123123123\ldots$$ | Zuiver repeterend |
 
-Kommagetallen die een **onbegrensde niet-repeterende** decimale vorm hebben, zoals $3{,}141592653\ldots$, hebben **geen periode** en kun je **niet schrijven als een breuk** van gehele getallen. Dat zijn **irrational getallen** en die behoren niet tot de verzameling $\mathbb{Q}$. Voorbeelden van zulke getallen zijn $\pi$ en $\sqrt{2}$. We zeggen bv. dat
+Kommagetallen die een **onbegrensde niet-repeterende** decimale vorm hebben, zoals $3{,}141592653\ldots$, hebben **geen periode** en kun je **niet schrijven als een breuk** van gehele getallen. Dat zijn **irrationale getallen** en die behoren niet tot de verzameling $\mathbb{Q}$. Voorbeelden van zulke getallen zijn $\pi$ en $\sqrt{2}$. We zeggen bv. dat
 
 $$
 \sqrt{2}\notin\mathbb{Q}
 $$
 
-In de volgende paragrafen leren we hoe je kommagetallen van **begrensde decimale vorm** en van **onbegrensde repeterende decimale vorm** kan omzetten naar een breuk van gehele getallen.
+Enkel wanneer een kommagetal een **begrensde** of een **onbegrensd repeterende** decimale vorm heeft, kan je dat kommagetal **omzetten naar een breuk** en is het kommagetal een rationaal getal.
+
+| Kommagetal                 | Kan je omzetten naar breuk? |
+|----------------------------|----------|
+| $$2{,}\orange{3}33333333\ldots$$    |  **<Green>JA</Green>**   |
+| $$0{,}6$$ | **<Green>JA</Green>**   |
+| $$-12{,}7\orange{64}646464\ldots$$  | **<Green>JA</Green>** |
+| $$-2{,}81$$ | **<Green>JA</Green>**   |
+| $$3{,}141592653\ldots$$    | **<Red>NEEN</Red>** |
+| $$1{,}414213562\ldots$$    | **<Red>NEEN</Red>** |
+| $$35{,}1$$ | **<Green>JA</Green>**   |
+| $$6{,}09$$ | **<Green>JA</Green>**   |
+| $$0{,}000\orange{52}5252\ldots$$    | **<Green>JA</Green>**   |
+| $$-7{,}\orange{54}545454\ldots$$ | **<Green>JA</Green>**|
+| $$0{,}\orange{123}123123123\ldots$$ | **<Green>JA</Green>** |
+| $$-2{,}645751311$$ |  **<Red>NEEN</Red>** |
+
+Hoe je kommagetallen van **begrensde** en van **onbegrensd repeterende** decimale vorm nu kan omzetten naar een breuk van gehele getallen, leren we in de volgende paragrafen.
 
 ## Begrensde decimale vorm omzetten naar breuk
 
 De eenvoudigste omzetting van een kommagetal naar een breuk, is wanneer het kommagetal een **begrensde decimale vorm** heeft. Dat doe je in drie stappen:
 
 1. Zet het getal op **noemer $1$**.
-2. Vermenigvuldig teller en noemer met een **macht van $10$** zodat er **geen komma meer in de teller staat**.
+2. Vermenigvuldig teller en noemer met een **macht van $10$** <Mute>($10$, $100$, $1000$, $10~000$ etc.)</Mute> zodat er **geen komma meer in de teller staat**.
 3. **Vereenvoudig** de breuk.
 
 Enkele voorbeelden:
@@ -295,7 +312,7 @@ $$
 \underbrace{2{,}70363636\ldots}_{\text{Opgave}} = \frac{270{,}363636\ldots}{\orange{100}}
 $$
 
-Om alles proper gescheiden te houden, gaan we de deling door de macht van $10$ <Mute>(in dit geval $100$)</Mute> vóór het kommagetal schrijven:
+Om alles proper gescheiden te houden, gaan we de macht van $10$ in de noemer <Mute>(in dit geval $100$)</Mute> vóór het kommagetal schrijven:
 
 $$
 \underbrace{2{,}70363636\ldots}_{\text{Opgave}} = \frac{1}{100}\cdot 270{,}363636\ldots
@@ -305,7 +322,7 @@ We hebben ons kommagetal met **gemengd repeterende** decimale vorm **omgezet naa
 
 $$
 \begin{aligned}
-2{,}70\orange{36}3636\ldots &= \frac{1}{100}\cdot 270{,}\orange{36}3636\ldots\\
+\underbrace{2{,}70\orange{36}3636\ldots}_{\text{gemengd repeterend}} &= \frac{1}{100}\cdot \underbrace{270{,}\orange{36}3636\ldots}_{\text{zuiver repeterend}}\\
 &= \frac{1}{100}\cdot\left( 270 + 0{,}\orange{36}3636\ldots \right)\\
 &= \frac{1}{100}\cdot\left(\frac{270}{1} + \frac{\orange{36}}{99}\right)\\
 &= \frac{1}{100}\cdot\left(\frac{270}{1} + \frac{4}{11}\right)\\
@@ -345,9 +362,195 @@ $$
 $$
 
 
-## Vergelijkingen gebruiken om kommagetal om te zetten naar breuk
+## Vergelijkingen gebruiken om onbegrensd resulterende decimale vorm om te zetten naar breuk
+
+Hoera! 🎉 Met de technieken uit de vorige paragrafen kunnen we **eender welk kommagetal met een begrensde of onbegrensd repeterende decimale vorm omzetten naar een breuk**! We zijn weer een waardevolle vaardigheid rijker! 💃
+
+Het omzetten van een kommagetal met een onbegrensd repeterende decimale vorm, kunnen we echter nog op een tweede belangrijke manier doen: door gebruik te maken van **vergelijkingen**. Met behulp van deze manier gaan we ook kunnen begrijpen waar ons trucje met het delen door $9$ en $99$ en $999$ enz. vandaan komt.
+
+Eerst en vooral moeten we inzien dat we altijd een macht van $10$ kunnen vinden waarmee we een kommagetal met een onbegrensd repeterende decimale vorm kunnen vermenigvuldigen zodat de **uitkomst dezelfde cijfers na de komma heeft**. Neem bijvoorbeeld
+
+$$
+5{,}222222\ldots
+$$
+
+Wanneer we dat kommagetal met zuiver repeterende decimale vorm gaan vermenigvuldigen met $10$, krijgen we:
+
+$$
+\begin{aligned}
+5{,}\orange{222222\ldots}\cdot 10
+&= 52{,}\orange{222222\ldots}
+\end{aligned}
+$$
+
+Als we een kommagetal van zuiver repeterende decimale vorm met een langere periode hebben, kunnen we met een grotere macht van $10$ vermenigvuldigen om weer bij dezelfde cijfers na de komma uit te komen:
+
+$$
+\begin{aligned}
+9{,}\orange{373737\ldots}\cdot 100
+&= 937{,}\orange{373737\ldots}
+\end{aligned}
+$$
+
+Je ziet dat we in beide voorbeelden na de vermenigvuldiging met een bepaalde macht van $10$ een kommagetal krijgen met **identiek dezelfde decimalen**. Met welke macht van $10$ je moet vermenigvuldigen, hangt af van de **lengte van de periode** van de zuiver repeterende decimalen. Heeft de periode een lengte van $1$, dan vermenigvuldigen we met $10$ <Mute>($=10^1$)</Mute>, bij een periode met lengte $2$ vermenigvuldigen we met $100$ <Mute>($=10^2$)</Mute>, bij een periode met lengte $3$ vermenigvuldigen we met $1000$ <Mute>($=10^3$)</Mute> enzovoort.
+
+$$
+\begin{aligned}
+-13{,}\orange{666666\ldots} \cdot 10 &= - 136{,}\orange{666666\ldots}\\
+\\
+8{,}\orange{434343\ldots} \cdot 100 &= 843{,}\orange{434343\ldots} \\
+\\
+51{,}\orange{431431\ldots} \cdot 1000 &= 51{ }431{,}\orange{431431\ldots} \\
+\\
+\end{aligned}
+$$
+
+Het interessante gebeurt echter wanneer we het **oorspronkelijke kommagetal gaan aftrekken van de uitkomst van de vermenigvuldiging**:
+
+$$
+\begin{aligned}
+52{,}\orange{222222\ldots} - 5{,}\orange{222222\ldots} &= 47{,}\orange{000000}\\
+\\
+937{,}\orange{373737\ldots} - 9{,}\orange{373737\ldots} &= 928{,}\orange{000000}
+\end{aligned}
+$$
+
+Omdat de zuiver repeterende **decimalen identiek zijn**, krijgen we **allemaal nullen na de komma** wanneer we dat verschil berekenen. Die nullen na de komma hoeven we niet te schrijven. **We krijgen dus gehele getallen**:
+
+$$
+\begin{aligned}
+52{,}\cancel{\orange{222222\ldots}} - 5{,}\cancel {\orange{222222\ldots}} &= 47\\
+\\
+937{,}\cancel{\orange{373737\ldots}} - 9{,}\cancel {\orange{373737\ldots}} &= 928
+\end{aligned}
+$$
+
+Dit trucje gaan we nu combineren met vergelijkingen. Stel dat we bijvoorbeeld $5{,}222222\ldots$ willen omzetten naar een breuk. Dan gaan we eerst zeggen dat:
+
+$$
+x = 5{,}222222\ldots
+$$
+
+Vervolgens gaan we beide kanten van de vergelijking **vermenigvuldigen met de macht van $10$** die ervoor zorgt dat we een **kommagetal met dezelfde decimalen** krijgen:
+
+$$
+\begin{aligned}
+\orange{10}\cdot x &= \orange{10}\cdot 5{,}222222\ldots\\
+\Leftrightarrow 10\cdot x &= 52{,}222222\ldots
+\end{aligned}
+$$
+
+Wanneer we nu de laatste vergelijking aftrekken van de vergelijking waarmee we gestart zijn, krijgen we:
+
+$$
+\def\arraystretch{1.5}
+\begin{array}{rrl}
+   & 10\cdot x &= 52{,}\cancel{222222\ldots} \\
+  -(& x &= \phantom{5}5{,}\cancel{2222222\ldots})\\
+   \hline
+   & 9x &= 47\\
+\end{array}
+$$
+
+Vervolgens kunnen we die laatste vergelijking omvormen naar $x$ en **vinden we aan welke breuk $x$ gelijk is**:
+
+$$
+\begin{aligned}
+9x &= 47\ldots\\
+\Lrarr \frac{9x}{\orange{9}} &= \frac{47}{\orange{9}}\\
+\Lrarr x &= \frac{47}{9}
+\end{aligned}
+$$
+
+Een kommagetal een **gemengd repeterende** decimale vorm heeft, kunnen we op een gelijkaardige manier omzetten naar een breuk. Daar zullen we **met een extra macht van $10$ moeten vermenigvuldigen** om de niet-repeterende decimalen vóór de komma te krijgen. Stel bijvoorbeeld dat we het kommagetal $2{,}643333\ldots$ willen omzetten naar een breuk:
+
+$$
+x = 2{,}643333\ldots
+$$
+
+Dan moeten we er eerst voor zorgen dat we **rechts een kommagetal hebben met zuiver repterende decimalen**. Dat kunnen we hier doen door beide leden van de vergelijking te vermenigvuldigen met $100$ om zo de komma twee plaatsen naar rechts te verschuiven:
+
+$$
+\begin{aligned}
+100\cdot x &= 100\cdot 2{,}643333\ldots\\
+100\cdot x &= 264{,}333333\ldots\\
+\end{aligned}
+$$
+
+We hebben rechts nu een zuiver repterend decimale vorm. Nu kunnen we dus verder zoals voordien. Eerst zoeken we een macht van $10$ waarmee we kunnen vermenigvuldigen om een nieuw kommagetal te krijgen met dezelfde decimalen. Dat is in dit geval $10$:
+
+$$
+\begin{aligned}
+\underbrace{\orange{10\cdot}100}_{= 1000}\cdot x &= \orange{10\cdot}264{,}333333\ldots\\
+\Lrarr 1000\cdot x &= 2643{,}333333\ldots\\
+\end{aligned}
+$$
+
+Van dit getal kunnen we terug het eerste kommagetal met zuiver repeterende decimalen aftrekken:
+
+$$
+\begin{array}{rrl}
+   & 1000\cdot x &= 2643{,}\cancel{333333\ldots}\\
+  -(& 100\cdot x &= \phantom{3}264{,}\cancel{333333\ldots})\\
+   \hline
+   & 900x &= 2379\\
+\end{array}
+$$
+
+Even alles op een rijtje zetten. Om een bepaald kommagetal om te zetten naar een breuk, gaan we als volgt te werk:
+
+<Attention title="Vergelijking gebruiken om breuk naar kommagetal om te zetten">
+
+1. Stel $x$ gelijk aan het kommagetal.
+2. Vermenigvuldig de linker- en rechterkant van de vergelijking met de macht van $10$ die ervoor zorgt dat we een **nieuw kommagetal krijgen met dezelfde decimalen**.
+3. Trek de vergelijking uit stap 1 af van de vergelijking uit stap 2. Je krijgt zo een vergelijking met **enkel gehele getallen**.
+4. Deel de linker- en rechterkant van de vergelijking door de <Mute>(gehele)</Mute> coëfficiënt die bij de $x$ staat. Je krijgt rechts een **breukvorm van het oorspronkelijke kommagetal**.
+5. Vereenvoudig eventueel de breuk.
+
+</Attention>
+
+Enkele andere voorbeelden:
+
+* $-13{,}\orange{666666\ldots}$ omzetten naar een breuk: $$
+\begin{aligned}
+x &= -13{,}\orange{666666\ldots}\\
+\Lrarr 10\cdot x &= - 136{,}\orange{666666\ldots}\\
+\\
+\end{aligned}$$
+$$\begin{array}{rrl}
+   & 10\cdot x &= - 136{,}\orange{666666\ldots} \\
+  -(& x &= -\phantom{6}13{,}\orange{666666\ldots})\\
+   \hline
+   & 9x &= - 149\\
+   &&\\
+\end{array}
+$$
+
+$$
+\begin{aligned}
+\frac{9x}{\orange{9}} &= - \frac{149}{\orange{9}}\\
+\Lrarr \boxed{x &= - \frac{149}{9}}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+-13{,}\orange{666666\ldots} \cdot 10 &= - 136{,}\orange{666666\ldots}\\
+\\
+8{,}\orange{434343\ldots} \cdot 100 &= 843{,}\orange{434343\ldots} \\
+\\
+-6{,}\orange{777777\ldots} \cdot 10 &= - 67{,}\orange{777777\ldots} \\
+\\
+51{,}\orange{431431\ldots} \cdot 1000 &= 51{ }431{,}\orange{431431\ldots} \\
+\\
+-2{,}\orange{787878\ldots} \cdot 100 &= - 278{,}\orange{787878\ldots}
+\end{aligned}
+$$
+
 
 ## Kommagetal omzetten naar breuk met rekenmachine
+
+Ook een
 
 ## Samengevat
 

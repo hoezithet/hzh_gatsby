@@ -7,7 +7,6 @@ import Footer from './footer';
 import Crumbs from './crumbs';
 import { CrumbProps } from './crumbs';
 import HzhAppBar from './appbar';
-import CookieConsent from './consent';
 import HzhTheme from './theme';
 import { theme } from './theme';
 import SEO from './seo';
@@ -44,7 +43,6 @@ const Layout = ({ children, crumbs, description=``, tags=[],
                 <Footer />
                 </>
             </HzhContainer>
-            <CookieConsent />
             </>
         </HzhTheme>
     );

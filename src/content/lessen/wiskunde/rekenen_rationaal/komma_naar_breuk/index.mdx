@@ -486,7 +486,7 @@ $$
 \end{aligned}
 $$
 
-Van dit getal kunnen we terug het eerste kommagetal met zuiver repeterende decimalen aftrekken:
+Van dit getal kunnen we terug het kommagetal met zuiver repeterende decimalen aftrekken:
 
 $$
 \begin{array}{rrl}
@@ -502,55 +502,150 @@ Even alles op een rijtje zetten. Om een bepaald kommagetal om te zetten naar een
 <Attention title="Vergelijking gebruiken om breuk naar kommagetal om te zetten">
 
 1. Stel $x$ gelijk aan het kommagetal.
-2. Vermenigvuldig de linker- en rechterkant van de vergelijking met de macht van $10$ die ervoor zorgt dat we een **nieuw kommagetal krijgen met dezelfde decimalen**.
-3. Trek de vergelijking uit stap 1 af van de vergelijking uit stap 2. Je krijgt zo een vergelijking met **enkel gehele getallen**.
-4. Deel de linker- en rechterkant van de vergelijking door de <Mute>(gehele)</Mute> coëfficiënt die bij de $x$ staat. Je krijgt rechts een **breukvorm van het oorspronkelijke kommagetal**.
-5. Vereenvoudig eventueel de breuk.
+2. Als het kommagetal gemengd repeterend, vermenigvuldig dan beide leden van de vergelijking dan met een  macht van $10$ die ervoor zorgt dat het niet-repeterend deel vóór de komma komt te staan.
+3. Vermenigvuldig de linker- en rechterkant van de vergelijking met een macht van $10$ die ervoor zorgt dat we een **nieuw kommagetal krijgen met dezelfde decimalen**.
+4. Trek de vergelijking uit stap 1 af van de vergelijking uit stap 2. Je krijgt zo een vergelijking met **enkel gehele getallen**.
+5. Deel de linker- en rechterkant van de vergelijking door de <Mute>(gehele)</Mute> coëfficiënt die bij de $x$ staat. Je krijgt rechts een **breukvorm van het oorspronkelijke kommagetal**.
+6. Vereenvoudig eventueel de breuk.
 
 </Attention>
 
 Enkele andere voorbeelden:
 
-* $-13{,}\orange{666666\ldots}$ omzetten naar een breuk: $$
+* Zet $-13{,}\orange{666666\ldots}$ om naar een breuk.
+Eerst **stellen we $x$ gelijk aan het kommagetal**. Het kommagetal heeft al een zuiver repeterende vorm, dus we kunnen meteen zoeken naar de macht van $10$ die ervoor zorgt dat we een **nieuw kommagetal krijgen met dezelfde decimalen**. Dat is in dit geval $10$:
+$$
 \begin{aligned}
 x &= -13{,}\orange{666666\ldots}\\
+\Lrarr 10\cdot x &= 10\cdot \left(-13{,}\orange{666666\ldots}\right)\\
 \Lrarr 10\cdot x &= - 136{,}\orange{666666\ldots}\\
-\\
-\end{aligned}$$
-$$\begin{array}{rrl}
-   & 10\cdot x &= - 136{,}\orange{666666\ldots} \\
-  -(& x &= -\phantom{6}13{,}\orange{666666\ldots})\\
+\end{aligned}
+$$
+Vervolgens trekken we de eerste vergelijking <Mute>(namelijk $x = -13{,}666666\ldots$)</Mute> af van de laatste vergelijking <Mute>($10\cdot x = - 136{,}666666\ldots$)</Mute> :
+$$
+\begin{array}{rrl}
+   & 10\cdot x &= - 136{,}\cancel{\orange{666666\ldots}}\\
+  -(& x &= -\phantom{6}13{,}\cancel{\orange{666666\ldots}})\\
    \hline
-   & 9x &= - 149\\
-   &&\\
+   & 9x &= - 123\\
 \end{array}
 $$
-
+Merk op dat
 $$
 \begin{aligned}
-\frac{9x}{\orange{9}} &= - \frac{149}{\orange{9}}\\
-\Lrarr \boxed{x &= - \frac{149}{9}}
+-136 - (-13) &= - 136 + 13\\
+&= - 123
 \end{aligned}
 $$
-
+We krijgen de vergelijking
+$$
+9x = - 123 
+$$
+Die kunnen we omvormen naar $x$ door linker- en rechterlid te delen door $9$. We krijgen zo de breukvorm van $-13{,}\orange{666666\ldots}$:
 $$
 \begin{aligned}
--13{,}\orange{666666\ldots} \cdot 10 &= - 136{,}\orange{666666\ldots}\\
-\\
-8{,}\orange{434343\ldots} \cdot 100 &= 843{,}\orange{434343\ldots} \\
-\\
--6{,}\orange{777777\ldots} \cdot 10 &= - 67{,}\orange{777777\ldots} \\
-\\
-51{,}\orange{431431\ldots} \cdot 1000 &= 51{ }431{,}\orange{431431\ldots} \\
-\\
--2{,}\orange{787878\ldots} \cdot 100 &= - 278{,}\orange{787878\ldots}
+9x &= - 123\\
+\Lrarr \frac{9x}{\orange{9}} &= - \frac{123}{\orange{9}}\\
+\Lrarr x &= - \frac{123}{\orange{9}}\\
+\Lrarr x &= \boxed{- \frac{41}{3}}
 \end{aligned}
 $$
-
+Merk op dat we de breuk in de laatste stap hebben **vereenvoudigd**.
+* Zet $8{,}60\orange{4444\ldots}$ om naar een breuk. 
+Eerst **stellen we $x$ gelijk aan het kommagetal**. Het kommagetal heeft een **gemengd repeterende** decimale vorm, dus eerst moeten we vermenigvuldigen met een macht van $10$ die ervoor zorgt dat we een **zuiver repeterende** decimale vorm krijgen. Wanneer de komma twee plaatsen naar rechts zou schuiven, krijgen we een zuiver repeterende vorm. Dat betekent dat we moeten vermenigvuldigen met $100$ <Mute>($=10^2$)</Mute>:
+$$
+\begin{aligned}
+x &= 8{,}60\orange{4444\ldots}\\
+\Lrarr 100\cdot x &= 100\cdot 8{,}60\orange{4444\ldots}\\
+\Lrarr 100\cdot x &= 860{,}\orange{444444\ldots}\\
+\end{aligned}
+$$
+Nu hebben we een zuiver repeterende decimale vorm, dus moeten we zoeken naar de macht van $10$ die ervoor zorgt dat we een **nieuw kommagetal krijgen met dezelfde decimalen**. Dat is in dit geval $10$:
+$$
+\begin{aligned}
+100\cdot x &= 860{,}\orange{444444\ldots}\\
+\Lrarr 10\cdot 100\cdot x &= 10\cdot 860{,}\orange{444444\ldots}\\
+\Lrarr 10\cdot 100\cdot x &= 8604{,}\orange{444444\ldots}\\
+\Lrarr 1000\cdot x &= 8604{,}\orange{444444\ldots}\\
+\end{aligned}
+$$
+Vervolgens trekken we de eerste vergelijkingen met zuiver repeterende decimale vorm af van de laatste:
+$$
+\begin{array}{rrl}
+   & 1000\cdot x &= 8604{,}\cancel{\orange{444444\ldots}}\\
+  -(& 100\cdot x &= 860{,}\cancel{\orange{444444\ldots}})\\
+   \hline
+   & 900x &= 7744\\
+\end{array}
+$$
+De vergelijking die we nu krijgen, kunnen we omvormen  aar $x$ door linker- en rechterlid te delen door $900$. We krijgen zo de breukvorm van $8{,}60\orange{4444\ldots}$:
+$$
+\begin{aligned}
+900x &= 7744\\
+\frac{900x}{\orange{900}} &= \frac{7744}{\orange{900}}\\
+x &= \frac{7744}{\orange{900}}\\
+\Lrarr x &= \boxed{\frac{1936}{225}}
+\end{aligned}
+$$
+* Zet $-2{,}4\orange{787878\ldots}$ om naar een breuk.
+Eerst gelijkstellen aan $x$ en omvormen naar zuiver repeterende decimale vorm:
+$$
+\begin{aligned}
+x &= -2{,}4\orange{787878\ldots}\\
+\Lrarr 10\cdot x &= 10\cdot ( - 2{,}4\orange{787878\ldots})\\
+\Lrarr 10\cdot x &= - 24{,}\orange{787878\ldots}\\
+\end{aligned}
+$$
+Omvormen naar kommagetal met dezelfde decimalen:
+$$
+\begin{aligned}
+\Lrarr 100\cdot 10\cdot x &= 100\cdot (- 24{,}\orange{787878\ldots})\\
+\Lrarr 1000\cdot x &= - 2478{,}\orange{787878\ldots}\\
+\end{aligned}
+$$
+Laatste vergelijking aftrekken van de eerste vergelijking met een zuiver repeterende decimale vorm:
+$$
+\begin{array}{rrl}
+   & 1000\cdot x &= - 2478{,}\cancel{\orange{787878\ldots}}\\
+  -(& 10\cdot x &= - 24{,}\cancel{\orange{787878\ldots}})\\
+   \hline
+   & 990x &= 2502\\
+\end{array}
+$$
+Vergelijking oplossen naar $x$ en de breuk verder vereenvoudigen:
+$$
+\begin{aligned}
+990x &= 2502\\
+\Lrarr \frac{x}{\orange{990}} &= \frac{2502}{\orange{990}}\\
+\Lrarr x &= \frac{2502}{\orange{990}}\\
+\Lrarr x &= \frac{139}{\orange{55}}\\
+\end{aligned}
+$$
 
 ## Kommagetal omzetten naar breuk met rekenmachine
 
-Ook een
+We kunnen ook een rekenmachine gebruiken om een kommagetal om te zetten naar een breuk. Daarvoor moet je op zoek gaan naar een knop of functie die iets zegt als "**▶FRAC**" <Mute>(*frac* is een afkorting van het Engelse *fraction*, wat *breuk* betekent)</Mute>.
+
+Uiteraard bestaan er veel verschillende modellen van rekenmachines en kunnen we ze onmogelijk allemaal hier bespreken. Ik heb er twee populaire modellen uitgepikt. Normaal zou de werkwijze bij jouw rekentoestel niet veel mogen verschillen van een van deze twee modellen.
+
+### Grafisch rekenmachine: TI-84 Plus
+
+Bij de grafische rekenmachines van Texas Instruments, vind je de "**▶FRAC**"-functie terug als de eerste optie van  het **MATH**-menu. Je kan een kommagetal omzetten als volgt:
+
+1. Geef het kommagetal in dat je wilt omzetten.
+![Kommagetal ingegeven in grafisch rekentoestel](img/grm_kommagetal.png)
+2. Druk op de **MATH**-toets om het **MATH**-menu te openen.
+![Math menu van grafisch rekentoestel](img/grm_math.png)
+3. De eerste optie is "**▶FRAC**". Duw op **ENTER** om deze functie te selecteren.
+![Frac functie van GRM om kommagetal om te zetten naar breuk](img/grm_kommagetal_frac.png)
+4. Druk nogmaals op **ENTER** om de uitkomst te berekenen.
+![Kommagetal omgezet naar breuk met grafisch rekentoestel](img/grm_breuk_uitkomst.png)
+
+Als je een berekening hebt gedaan waarvan je de uitkomst wilt omzetten naar een breuk, hoef je die uitkomst niet helemaal over te typen. Wanneer je **MATH > FRAC** induwt zonder eerst een kommagetal ingegeven te hebben, zal je rekentoestel automatisch de laatste uitkomst nemen <Mute>(**ANS**, afkorting voor het Engelse *answer*, of antwoord/uitkomst in het Nederlands)</Mute>.
+
+### Wetenschappelijke rekenmachine: TI-30XB
+
+TI-30XB MultiView™ wetenschappelijke rekenmachine
 
 ## Samengevat
 

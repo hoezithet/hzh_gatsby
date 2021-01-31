@@ -39,6 +39,7 @@
     "gatsby-theme-material-ui": "^1.0.13",
     "gatsby-transformer-remark": "^2.11.0",
     "gatsby-transformer-sharp": "^2.7.0",
+    "gsap": "^3.6.0",
     "hast-util-is-element": "^1.1.0",
     "katex": "^0.10.0",
     "node-sass": "^4.14.1",

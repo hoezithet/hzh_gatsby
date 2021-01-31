@@ -92,7 +92,7 @@ function WhyHzhItem(props: WhyHzhItemProps) {
 }
 
 export default function Landing() {
-    const exampleUrl = "/lessen/fysica/krachten_1/krachtvector";
+    const exampleUrl = "/lessen/fysica/krachten_1/krachtvector/";
 
     return (
         <HzhTheme>

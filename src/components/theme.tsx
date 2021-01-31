@@ -2,6 +2,7 @@ import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import COLORS from '../colors';
+import Matomo from './matomo';
 import 'fontsource-quicksand';
 
 
@@ -64,6 +65,7 @@ interface HzhThemeProps {
 export default function HzhTheme({ children }: HzhThemeProps) {
     return (
         <ThemeProvider theme={theme}>
+            <Matomo />
             <CssBaseline />
             { children }
         </ThemeProvider>

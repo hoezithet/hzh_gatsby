@@ -98,24 +98,24 @@ function JsonOrganization({name, url, logo, email, legalName, foundingDate, foun
         {
           "@context": "https://schema.org",
           "@type": "Organization",
-          "url": ${url},
+          "url": "${url}",
           "logo": {
             "@type": "ImageObject",
-            "url": ${logo}
+            "url": "${logo}"
           },
-          "name": ${name},
-          "legalName": ${legalName},
-          "foundingDate": ${foundingDate},
+          "name": "${name}",
+          "legalName": "${legalName}",
+          "foundingDate": "${foundingDate}",
           "founders": [
             {
               "@type": "Person",
-              "name": ${founderName}
+              "name": "${founderName}"
             }],
             "contactPoint": {
               "@type": "ContactPoint",
-              "email": ${email}
+              "email": "${email}"
             },
-            "sameAs": [${socials.join(",")}]
+            "sameAs": [${socials.map(s => `"${s}"`).join(",")}]
           }
         `}
     </script>
@@ -138,8 +138,8 @@ function JsonBreadcrumbs({crumbs, baseUrl}: JsonBreadcrumbsProps) {
     `{
         "@type": "ListItem",
         "position": ${index},
-        "name": ${title},
-        "item": ${new URL(slug, baseUrl)},
+        "name": "${title}",
+        "item": "${new URL(slug, baseUrl)}"
      }`
   ));
   return (

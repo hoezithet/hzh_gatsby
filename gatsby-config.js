@@ -19,7 +19,12 @@ module.exports = {
     plugins: [
         `gatsby-plugin-typescript`,
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-sitemap`,
+        {
+            resolve: `gatsby-plugin-sitemap`,
+            options: {
+                exclude: [`/bare/*`]
+            }
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -43,23 +48,6 @@ module.exports = {
             },
         },
         `gatsby-plugin-offline`,
-        {
-            resolve: `gatsby-plugin-gdpr-cookies`,
-            options: {
-                googleAnalytics: {
-                    trackingId: "UA-133189848-1",
-                    anonymize: true,
-                    allowAdFeatures: false,
-                },
-                googleTagManager: {
-                    trackingId: "GTM-KDR7S6V",
-                },
-                facebookPixel: {
-                    pixelId: "",
-                },
-                environments: ["production", "development"],
-            },
-        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {

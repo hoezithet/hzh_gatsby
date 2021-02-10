@@ -10,6 +10,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+
+import styled from "styled-components";
 
 // Multiple choice and multiple answer exercises
 
@@ -35,15 +38,25 @@ interface AnswerProps {
     weight?: number;
     correct: number | string | number[];
     margin?: number | number[];
-    isInline?: boolean;
 }
 
 const FILL_IN = "fill";
 const MULTIPLE_CHOICE = "multiple choice";
 const MULTIPLE_ANSWER = "multiple answer";
 
-const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0, isInline = false }) => {
+export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0 }) => {
+    const options = (children && children.props
+                     ?
+                     (children.props.originalType === "ul"
+                     ?
+                     children.props.children.map(c => c.props.children)
+                     :
+                     [])
+                     :
+                     []);
     const correctAnswers = Array.isArray(correct) ? correct : [correct];
+    const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
+  
     const [answerValues, setAnswerValues] = useState([]);
 
     const ansEqual = (ans1, ans2) => {
@@ -80,54 +93,44 @@ const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0,
         )
     );
     const answerCallbacks = useContext(AnswerContext);
-    answerCallbacks.push(evaluateAnswer);
-
-    const options = React.Children.toArray(children);
-    const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
+    answerCallbacks.push(evaluateAnswers);
+    
+    const getChildrenArray = (children) => {
+        const childArr = React.Children.toArray(children);
+        if (childArr.length === 1) {
+            return getChildrenArray(childArr[0]);
+        } else {
+            return childArr;
+        }
+    };
 
     switch (answerType) {
-        case FILL_IN:
+        case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
             const handleChange = e => setAnswerValues([e.target.value]);
             return (
-                isInline
-                ?
-                <TextField variant="filled" type={ valueType } component={ span } size="small" onChange={ handleChange }/>
-                :
-                <TextField variant="filled" type={ valueType } onChange={ handleChange }/>
+                <TextField variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
             );
-        case MULTIPLE_CHOICE:
-            const handleChange = e => setAnswerValues([e.target.value]);
-            if (isInline) {
-                const selectItems = [<MenuItem value={ -1 } disabled/>];
-                selectItems.concat(options.map((option, index) =>
-                    <MenuItem key={ index } value={ index }>{ option }</MenuItem>)
-                );
-                return (
-                    <Select value={answerValues} onChange={handleChange}>
-                        { selectItems }
-                    </Select>
-                );
-            } else {
-                return (
-                    <RadioGroup value={answerValues} onChange={handleChange}>
-                        {
-                        options.map((option, index) => (
-                        <FormControlLabel key={index} value={index} control={<Radio />} label={ option }/>
-                        ))
-                        }
-                    </RadioGroup>
-                );
-            }
-        case MULTIPLE_ANSWER:
-            const handleChange = e => {
-                const val = e.target.value;
-                const checked = e.target.checked;
-                if (answerValues.includes(val) && !checked) {
-                    setAnswerValues(answerValues.filter(ans => ans !== val));
-                } else if (!answerValues.includes(val) && checked) {
-                    const newAnswerValues = answerValues.push(val);
-                    setAnswerValues(newAnswerValues);
+        }
+        case MULTIPLE_CHOICE: {
+            const handleChange = (e => setAnswerValues([Number(e.target.value)]));
+            return (
+                <RadioGroup value={answerValues.length > 0 ? answerValues[0] : null} onChange={handleChange}>
+                    {
+                    options.map((option, index) => (
+                    <FormControlLabel key={index} value={index} control={<Radio />} label={ option }/>
+                    ))
+                    }
+                </RadioGroup>
+            );
+        }
+        case MULTIPLE_ANSWER: {
+            const handleChange = (e => {
+                const val = Number(e.target.value);
+                if (e.target.checked) {
+                    setAnswerValues([...answerValues, val]);
+                } else {
+                    setAnswerValues([...answerValues.filter(ans => ans !== val)]);
                 }
             });
             return (
@@ -135,16 +138,18 @@ const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0,
                     {
                     options.map((option, index) => (
                     <FormControlLabel
-                        control={<Checkbox checked={ answerValues.includes(index) } onChange={handleChange}/>}
+                        key={index} 
+                        control={<Checkbox value={index} checked={ answerValues.includes(index) } onChange={handleChange}/>}
                         label={ option } />
                     ))
                     }
                 </FormGroup>
             );
+        }
     }
 };
 
-const Exercise = ({ children }) => {
+export const Exercise = ({ children }) => {
     return (
         <AnswerContext.Provider value={[]}>
             { children }

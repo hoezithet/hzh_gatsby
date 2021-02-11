@@ -44,7 +44,7 @@ const FILL_IN = "fill";
 const MULTIPLE_CHOICE = "multiple choice";
 const MULTIPLE_ANSWER = "multiple answer";
 
-export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0 }) => {
+export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0.01 }) => {
     const options = (children && children.props
                      ?
                      (children.props.originalType === "ul"
@@ -58,6 +58,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
   
     const [answerValues, setAnswerValues] = useState([]);
+    const [isAnswered, setIsAnswered] = useState(false);
 
     const ansEqual = (ans1, ans2) => {
         if (ans1 === ans2) {
@@ -103,18 +104,49 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             return childArr;
         }
     };
+    
+    function isNumeric(str) {
+        if (typeof str != "string") return false // we only process strings!
+        str = str.replace(",", ".");
+        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+               !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+    } 
 
+    const handleChange = e => {
+        if (!isNumeric(String(e.target.value))) {
+            if (answerType === FILL_IN) {
+                setIsAnswered(false);
+                setAnswerValues([]);
+            }
+            return
+        }
+        const val = Number(e.target.value);
+        if (answerType === MULTIPLE_ANSWER) {
+            if (e.target.checked) {
+                setAnswerValues([...answerValues, val]);
+            } else {
+                setAnswerValues([...answerValues.filter(ans => ans !== val)]);
+            }
+        } else {
+            setAnswerValues([val]);
+        }
+        setIsAnswered(true);
+    };
+    const Feedback = () => <p>{ (isAnswered ? (evaluateAnswers() ? "✔" : "️❌") : "Vul je antwoord in") }</p>; 
     switch (answerType) {
         case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
-            const handleChange = e => setAnswerValues([e.target.value]);
             return (
+            <>
+                <Feedback />
                 <TextField variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
+            </>
             );
         }
         case MULTIPLE_CHOICE: {
-            const handleChange = (e => setAnswerValues([Number(e.target.value)]));
             return (
+            <>
+                <Feedback />
                 <RadioGroup value={answerValues.length > 0 ? answerValues[0] : null} onChange={handleChange}>
                     {
                     options.map((option, index) => (
@@ -122,18 +154,13 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                     ))
                     }
                 </RadioGroup>
+            </>
             );
         }
         case MULTIPLE_ANSWER: {
-            const handleChange = (e => {
-                const val = Number(e.target.value);
-                if (e.target.checked) {
-                    setAnswerValues([...answerValues, val]);
-                } else {
-                    setAnswerValues([...answerValues.filter(ans => ans !== val)]);
-                }
-            });
             return (
+            <>
+                <Feedback />
                 <FormGroup>
                     {
                     options.map((option, index) => (
@@ -144,6 +171,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                     ))
                     }
                 </FormGroup>
+            </>
             );
         }
     }

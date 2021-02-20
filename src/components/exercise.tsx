@@ -1,8 +1,9 @@
-import React, { useContext, FunctionComponent, useState } from 'react';
+import React, { useContext, FunctionComponent, useState, useEffect } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,33 +12,30 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import Paper from '@material-ui/core/Paper';
 import styled from "styled-components";
 
-// Multiple choice and multiple answer exercises
-
-// Invuloefeningen (kan ook met multiple choice dropdown)
-// Foutenmarge bij invuloefening
-
-// Oefeningen in de les zelf staan in een Card met een reeks van een of meerdere vragen weergegeven met een Stepper.
-// Na het indienen van de volledige reeks, krijg je je score te zien samen met een knop "Toon oplossingen". De bolletjes van de stepper veranderen ook in vinkjes of kruisjes. Wanneer je op de knop "Toon oplossingen" klikt, spoelt de Stepper terug naar de eerste vraag en zie je welk antwoord je had gegeven en welk antwoord juist is. Onderaan komt een veld met uitleg hoe je tot de juiste oplossing kan komen.
-
-// Op apart oefenblad (per les) staan oefeningen genummerd onder elkaar. De titel van een oefening bestaat uit de nummering, samen met een korte versie van de opdracht (bv. "Vul in" of "Los op"), of een indicatie waar de oefening over gaat (bv. "De omheining van boer Teun").
-// Onder de oefening staat een knop "Controleer antwoord". Wanneer je hierop klikt, zie je of / welke antwoorden juist/fout waren. In een Card zie je hoe je tot de juiste oplossing kan komen.
-
-// In bare lessen staan de oefeningen in de les zelf onder elkaar. Helemaal onderaan de pagina staan de uitwerkingen van elke oefening. Op de oefenbladen staan de oefeningen genummerd onder elkaar, gevolgd door de titel "Oplossingen" en de uitwerkingen per oefening.
-
-// ! Vraag bestaat uit markdown tekst waarin op eender welke plek een antwoord-mogelijkheid kan voorkomen die in zekere mate mee de eindscore op die vraag bepaalt (bv. via weight-parameter die default overal op 1 staat). Hoe kan een Answer-component die tussen de markdown staat haar score communiceren met de ExerciseStepper-component?
-// Context provider in ExerciseStepper met een lege array als value. Array wordt opgevuld door answers met eenvoudige objecten ({score: int, weight: int, answered: boolean}).
-// "isCompleted" State in Exercise Stepper wordt berekend door combinatie van alle "answered" fields. De state van de icoontjes in de steps zijn een combinatie van isCompleted en de scores op de vragen die bij een bepaalde step hoorden (wordt uit context gehaald).
+import { theme } from "./theme";
 
 
-const AnswerContext = React.createContext([]);
+interface AnswerContextType {
+    registerHandler?: (answerIdCallback: AnswerIdCallbackType) => void;
+    submitHandler?: (id: number, isCorrect: boolean, isAnswered: boolean) => void;
+}
+
+const AnswerContext = React.createContext({
+    registerHandler: (answerIdCallback: AnswerIdCallbackType) => {return;},
+    submitHandler: (id: number, isCorrect: boolean, isAnswered: boolean) => {return;}
+});
+
+// ExerciseContext bevat callbacks van Exercise naar parent
+// Om me te delen wanneer oefening juist is opgelost
+const ExerciseContext = React.createContext([]);
 
 interface AnswerProps {
     weight?: number;
     correct: number | string | number[];
-    margin?: number | number[];
+    margin?: number;
 }
 
 const FILL_IN = "fill";
@@ -57,10 +55,17 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     const correctAnswers = Array.isArray(correct) ? correct : [correct];
     const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
   
-    const [answerValues, setAnswerValues] = useState([]);
-    const [isAnswered, setIsAnswered] = useState(false);
+    const [answerId, setAnswerId] = useState(-1);
+    const [answerValues, setAnswerValues] = useState<Array<number|string>>([]); 
+    const {registerHandler, submitHandler} = useContext(AnswerContext);
+    
+    useEffect(() => {
+        registerHandler((id) => {
+            setAnswerId(id);
+        });
+    }, []);
 
-    const ansEqual = (ans1, ans2) => {
+    const ansEqual = (ans1: number|string, ans2: number|string) => {
         if (ans1 === ans2) {
             return true;
         }
@@ -79,22 +84,25 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         return false;
     };
 
-    const evaluateAnswers = () => (
-        // All correct answers should be given...
-        correctAnswers.every(
-            corrAns => answerValues.some(
-                givAns => ansEqual(corrAns, givAns)
+    const evaluateAnswers = (answerValues: Array<number|string>) => {
+        return (
+            // All correct answers should be given...
+            correctAnswers.every(
+                corrAns => answerValues.some(
+                    givAns => ansEqual(corrAns, givAns)
+                )
             )
-        )
-        // ...and all given answers should be correct
-        && answerValues.every(
-            givAns => correctAnswers.some(
-                corrAns => ansEqual(corrAns, givAns)
+            // ...and all given answers should be correct
+            && answerValues.every(
+                givAns => correctAnswers.some(
+                    corrAns => ansEqual(corrAns, givAns)
+                )
             )
-        )
-    );
-    const answerCallbacks = useContext(AnswerContext);
-    answerCallbacks.push(evaluateAnswers);
+    )};
+    
+    useEffect(() => {
+        submitHandler(answerId, evaluateAnswers(answerValues), answerValues.length > 0)
+    }, [answerValues]);
     
     const getChildrenArray = (children) => {
         const childArr = React.Children.toArray(children);
@@ -105,40 +113,37 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
     
-    function isNumeric(str) {
+    function isNumeric(str: string) {
         if (typeof str != "string") return false // we only process strings!
         str = str.replace(",", ".");
         return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
                !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-    } 
+    }
 
     const handleChange = e => {
         if (!isNumeric(String(e.target.value))) {
             if (answerType === FILL_IN) {
-                setIsAnswered(false);
                 setAnswerValues([]);
             }
-            return
+            return;
         }
         const val = Number(e.target.value);
         if (answerType === MULTIPLE_ANSWER) {
             if (e.target.checked) {
-                setAnswerValues([...answerValues, val]);
+                setAnswerValues(answerValues => [...answerValues, val]);
             } else {
-                setAnswerValues([...answerValues.filter(ans => ans !== val)]);
+                setAnswerValues(answerValues => [...answerValues.filter(ans => ans !== val)]);
             }
         } else {
             setAnswerValues([val]);
         }
-        setIsAnswered(true);
     };
-    const Feedback = () => <p>{ (isAnswered ? (evaluateAnswers() ? "✔" : "️❌") : "Vul je antwoord in") }</p>; 
+   
     switch (answerType) {
         case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
             return (
             <>
-                <Feedback />
                 <TextField variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
             </>
             );
@@ -146,7 +151,6 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         case MULTIPLE_CHOICE: {
             return (
             <>
-                <Feedback />
                 <RadioGroup value={answerValues.length > 0 ? answerValues[0] : null} onChange={handleChange}>
                     {
                     options.map((option, index) => (
@@ -160,7 +164,6 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         case MULTIPLE_ANSWER: {
             return (
             <>
-                <Feedback />
                 <FormGroup>
                     {
                     options.map((option, index) => (
@@ -177,16 +180,57 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     }
 };
 
-export const Exercise = ({ children }) => {
+type AnswerIdCallbackType = (id: number) => void;
+interface AnswersStateType {
+    [id: number]: {answered: boolean, correct: boolean};
+};
+
+export const Exercise: FunctionComponent = ({ children }) => {
+    const [answers, setAnswers] = React.useState<AnswersStateType[]>([]);
+    const [answerIdCallbacks, setAnswerIdCallbacks] = React.useState<AnswerIdCallbackType[]>([]);
+    const registerHandler = (answerIdCallback: AnswerIdCallbackType) => {
+        setAnswerIdCallbacks(answerIdCallbacks => [...answerIdCallbacks, answerIdCallback]);
+    };
+
+    useEffect(() => {
+        answerIdCallbacks.forEach((callback, index) => {
+            callback(index);
+        });
+        setAnswers(answerIdCallbacks.map(() => ({answered: false, correct: false})));
+    }, [answerIdCallbacks]);
+
+    const submitHandler = (answerId: number, isCorrect: boolean, isAnswered: boolean) => {
+        const newAnswerState = {answered: isAnswered, correct: isCorrect};
+        setAnswers(answers => answers.map((a, i) => i === answerId ? newAnswerState : a));
+    };
+    const Feedback = ({answers}) => {
+        let message = "";
+        if (answers.length > 0 && answers.every(({answered}) => answered)) {
+            const score = Object.entries(answers).reduce((acc, entry, index) => acc + (entry[1].correct ? 1 : 0), 0);
+            const total = Object.keys(answers).length;
+            message = `${score}/${total}`;
+        } else {
+            message = `Vul je antwoord in`;
+        }
+        return <p>{ message }</p>
+    };  
     return (
-        <AnswerContext.Provider value={[]}>
+        <>
+        <Feedback answers={answers} />
+        <AnswerContext.Provider value={{registerHandler: registerHandler, submitHandler: submitHandler}}>
             { children }
         </AnswerContext.Provider>
+        </>
     );
 };
 
-const ExerciseStepper = (props) => {
-    const steps = React.Children.toArray(props.children);
+
+interface ExerciseStepperProps {
+    title?: string;
+}
+
+export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ children, title = "Oefening" }) => {
+    const steps = React.Children.toArray(children);
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState<{ [k: number]: boolean }>({});
@@ -237,16 +281,42 @@ const ExerciseStepper = (props) => {
         setCompleted({});
     };
 
+    const StyledPaper = styled(Paper)`
+        padding: ${theme.spacing(2)}px;
+        margin: ${theme.spacing(1)}px;
+    `;
+    
+    const StyledStepper = styled(Stepper)`
+        background-color: transparent;
+    `;
 
     return (
-        <AnswerContext.Provider value={[]}>
-            <Stepper nonLinear activeStep={activeStep}>
-                {steps.map((_, index) => (
-                <Step key={index}>
-                    <StepButton onClick={handleStep(index)} completed={completed[index]} />
-                </Step>
-                ))}
-            </Stepper>
-        </AnswerContext.Provider>
+        <>
+        <h3>{ title }</h3>
+        <StyledStepper nonLinear activeStep={activeStep}>
+            {steps.map((step, index) => (
+            <Step key={index}>
+                <StepButton onClick={handleStep(index)} completed={completed[index]} />
+            </Step>
+            ))}
+        </StyledStepper>
+        <StyledPaper elevation={1}>
+            {steps[activeStep]}
+        </StyledPaper>
+        <Grid container>
+            <Grid item>
+                <Button disabled={activeStep === 0} onClick={handleBack} >
+                    Vorige
+                </Button>
+            </Grid>
+            <Grid item>
+                <Button variant="contained"
+                    color="primary"
+                    onClick={handleNext}>
+                    { activeStep === steps.length - 1 ? 'Klaar' : 'Volgende'}
+                </Button>
+            </Grid>
+        </Grid>
+        </>
     );
 }

@@ -14,6 +14,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import styled from "styled-components";
+import SwipeableViews from 'react-swipeable-views';
 
 import { theme } from "./theme";
 
@@ -231,9 +232,9 @@ interface ExerciseStepperProps {
 
 export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ children, title = "Oefening" }) => {
     const steps = React.Children.toArray(children);
-
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [completed, setCompleted] = React.useState<{ [k: number]: boolean }>({});
+  
+    const [activeStep, setActiveStep] = useState(0);
+    const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
 
     const totalSteps = () => {
         return steps.length;
@@ -268,6 +269,10 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const handleStep = (step: number) => () => {
         setActiveStep(step);
     };
+    
+    const handleStepChange = (step: number) => {
+        handleStep(step)();
+    };
 
     const handleComplete = () => {
         const newCompleted = completed;
@@ -301,7 +306,9 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             ))}
         </StyledStepper>
         <StyledPaper elevation={1}>
-            {steps[activeStep]}
+            <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
+                {steps}
+            </SwipeableViews>
         </StyledPaper>
         <Grid container>
             <Grid item>

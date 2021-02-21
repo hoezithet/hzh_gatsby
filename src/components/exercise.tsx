@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent, useState, useEffect } from 'react';
+import React, { useContext, FunctionComponent, useState, useEffect, useCallback } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
@@ -18,20 +18,29 @@ import SwipeableViews from 'react-swipeable-views';
 
 import { theme } from "./theme";
 
+const StyledPaper = styled(Paper)`
+    padding: ${theme.spacing(2)}px;
+    margin: ${theme.spacing(1)}px;
+`;
+
+const StyledStepper = styled(Stepper)`
+    background-color: transparent;
+`;
 
 interface AnswerContextType {
     registerHandler?: (answerIdCallback: AnswerIdCallbackType) => void;
     submitHandler?: (id: number, isCorrect: boolean, isAnswered: boolean) => void;
 }
 
-const AnswerContext = React.createContext({
-    registerHandler: (answerIdCallback: AnswerIdCallbackType) => {return;},
-    submitHandler: (id: number, isCorrect: boolean, isAnswered: boolean) => {return;}
-});
+const AnswerContext = React.createContext([
+    [],  // answers
+    (answers) => {return;} // setAnswers
+]);
 
 // ExerciseContext bevat callbacks van Exercise naar parent
 // Om me te delen wanneer oefening juist is opgelost
-const ExerciseContext = React.createContext([]);
+const ExerciseContext = React.createContext([
+]);
 
 interface AnswerProps {
     weight?: number;
@@ -53,17 +62,15 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                      [])
                      :
                      []);
+
     const correctAnswers = Array.isArray(correct) ? correct : [correct];
     const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
   
     const [answerId, setAnswerId] = useState(-1);
-    const [answerValues, setAnswerValues] = useState<Array<number|string>>([]); 
-    const {registerHandler, submitHandler} = useContext(AnswerContext);
+    const [registerAnswer, setAnswer, getAnswer] = useContext(ExerciseContext);
     
     useEffect(() => {
-        registerHandler((id) => {
-            setAnswerId(id);
-        });
+        registerAnswer((assignedId) => setAnswerId(assignedId));
     }, []);
 
     const ansEqual = (ans1: number|string, ans2: number|string) => {
@@ -99,11 +106,8 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                     corrAns => ansEqual(corrAns, givAns)
                 )
             )
-    )};
-    
-    useEffect(() => {
-        submitHandler(answerId, evaluateAnswers(answerValues), answerValues.length > 0)
-    }, [answerValues]);
+        )
+    };
     
     const getChildrenArray = (children) => {
         const childArr = React.Children.toArray(children);
@@ -120,23 +124,40 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
                !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
     }
+    
+    const getAnswerValue = () => {
+        const answer = getAnswer(answerId);
+        if (answer && answer.value !== undefined) {
+            return answer.value;
+        } else {
+            return [];
+        }
+    };
+    
+    const setAnswerValue = (newValue) => {
+        setAnswer({
+            value: newValue,
+            correct: evaluateAnswers(newValue),
+            answered: newValue.length > 0
+        }, answerId);
+    };
 
     const handleChange = e => {
         if (!isNumeric(String(e.target.value))) {
             if (answerType === FILL_IN) {
-                setAnswerValues([]);
+                setAnswerValue([]);
             }
             return;
         }
         const val = Number(e.target.value);
         if (answerType === MULTIPLE_ANSWER) {
             if (e.target.checked) {
-                setAnswerValues(answerValues => [...answerValues, val]);
+                setAnswerValue([...getAnswerValue(), val]);
             } else {
-                setAnswerValues(answerValues => [...answerValues.filter(ans => ans !== val)]);
+                setAnswerValue([...getAnswerValue().filter(ans => ans !== val)]);
             }
         } else {
-            setAnswerValues([val]);
+            setAnswerValue([val]);
         }
     };
    
@@ -144,83 +165,62 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
             return (
-            <>
                 <TextField variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
-            </>
             );
         }
         case MULTIPLE_CHOICE: {
             return (
-            <>
-                <RadioGroup value={answerValues.length > 0 ? answerValues[0] : null} onChange={handleChange}>
+                <RadioGroup value={getAnswerValue().length > 0 ? getAnswerValue()[0] : null} onChange={handleChange}>
                     {
                     options.map((option, index) => (
                     <FormControlLabel key={index} value={index} control={<Radio />} label={ option }/>
                     ))
                     }
                 </RadioGroup>
-            </>
             );
         }
         case MULTIPLE_ANSWER: {
             return (
-            <>
                 <FormGroup>
                     {
                     options.map((option, index) => (
                     <FormControlLabel
                         key={index} 
-                        control={<Checkbox value={index} checked={ answerValues.includes(index) } onChange={handleChange}/>}
+                        control={<Checkbox value={index} checked={ getAnswerValue().includes(index) } onChange={handleChange}/>}
                         label={ option } />
                     ))
                     }
                 </FormGroup>
-            </>
             );
         }
     }
 };
 
-type AnswerIdCallbackType = (id: number) => void;
-interface AnswersStateType {
-    [id: number]: {answered: boolean, correct: boolean};
+
+type AnswerValueType = Array<number|string>;
+type AnswerType = {
+    value: AnswerValueType,
+    correct: boolean,
+    answered: boolean
+}; 
+
+const Feedback = ({answers}) => {
+    let message = "";
+
+    if (answers.length > 0 && answers.every(({answered}) => answered)) {
+        const score = answers.reduce((acc, {correct}, index) => acc + (correct ? 1 : 0), 0);
+        const total = answers.length;
+        message = `${score}/${total}`;
+    } else {
+        message = `Vul je antwoord in`;
+    }
+    return <p>{ message }</p>
 };
 
 export const Exercise: FunctionComponent = ({ children }) => {
-    const [answers, setAnswers] = React.useState<AnswersStateType[]>([]);
-    const [answerIdCallbacks, setAnswerIdCallbacks] = React.useState<AnswerIdCallbackType[]>([]);
-    const registerHandler = (answerIdCallback: AnswerIdCallbackType) => {
-        setAnswerIdCallbacks(answerIdCallbacks => [...answerIdCallbacks, answerIdCallback]);
-    };
-
-    useEffect(() => {
-        answerIdCallbacks.forEach((callback, index) => {
-            callback(index);
-        });
-        setAnswers(answerIdCallbacks.map(() => ({answered: false, correct: false})));
-    }, [answerIdCallbacks]);
-
-    const submitHandler = (answerId: number, isCorrect: boolean, isAnswered: boolean) => {
-        const newAnswerState = {answered: isAnswered, correct: isCorrect};
-        setAnswers(answers => answers.map((a, i) => i === answerId ? newAnswerState : a));
-    };
-    const Feedback = ({answers}) => {
-        let message = "";
-        if (answers.length > 0 && answers.every(({answered}) => answered)) {
-            const score = Object.entries(answers).reduce((acc, entry, index) => acc + (entry[1].correct ? 1 : 0), 0);
-            const total = Object.keys(answers).length;
-            message = `${score}/${total}`;
-        } else {
-            message = `Vul je antwoord in`;
-        }
-        return <p>{ message }</p>
-    };  
     return (
         <>
-        <Feedback answers={answers} />
-        <AnswerContext.Provider value={{registerHandler: registerHandler, submitHandler: submitHandler}}>
-            { children }
-        </AnswerContext.Provider>
+        { children }
         </>
     );
 };
@@ -232,7 +232,7 @@ interface ExerciseStepperProps {
 
 export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ children, title = "Oefening" }) => {
     const steps = React.Children.toArray(children);
-  
+    const [answers, setAnswers] = useState<AnswerType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
 
@@ -285,19 +285,46 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
         setActiveStep(0);
         setCompleted({});
     };
-
-    const StyledPaper = styled(Paper)`
-        padding: ${theme.spacing(2)}px;
-        margin: ${theme.spacing(1)}px;
-    `;
     
-    const StyledStepper = styled(Stepper)`
-        background-color: transparent;
-    `;
+    const [idCallbacks, setIdCallbacks] = useState([]);
+    const registerAnswer = (idCallback) => {
+        setIdCallbacks(idCallbacks => {
+            const newCallbacks = [...idCallbacks, idCallback];
+            newCallbacks.forEach((idCallback, index) => {
+                idCallback(index);
+            });
+            const answers = newCallbacks.map(() => ({
+                value: [],
+                correct: false,
+                answered: false
+            }));
+            setAnswers(answers);
+            return newCallbacks;
+        });
+    };
+
+    const setAnswer = (answer, id) => {
+        setAnswers(answers => {
+            if (id < 0 || id >= answers.length) {
+                return answers;
+            }
+            const newAnswers = [...answers];
+            newAnswers[id] = answer;
+            return newAnswers;
+        });
+    };
+    
+    const getAnswer = (id) => {
+        if (id === -1 || id >= answers.length) {
+            return null;
+        }
+        return answers[id];
+    };
 
     return (
-        <>
+        <ExerciseContext.Provider value={[registerAnswer, setAnswer, getAnswer]}>
         <h3>{ title }</h3>
+        <Feedback answers={answers} />
         <StyledStepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
             <Step key={index}>
@@ -305,11 +332,15 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             </Step>
             ))}
         </StyledStepper>
-        <StyledPaper elevation={1}>
-            <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
-                {steps}
-            </SwipeableViews>
-        </StyledPaper>
+        <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
+            {
+              steps.map((step, index) =>
+                  <StyledPaper key={index} elevation={1}>
+                  { step }
+                  </StyledPaper>
+              )
+            }
+        </SwipeableViews>
         <Grid container>
             <Grid item>
                 <Button disabled={activeStep === 0} onClick={handleBack} >
@@ -324,6 +355,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                 </Button>
             </Grid>
         </Grid>
-        </>
+        </ExerciseContext.Provider>
     );
 }

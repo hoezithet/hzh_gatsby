@@ -218,10 +218,33 @@ const Feedback = ({answers}) => {
 };
 
 export const Exercise: FunctionComponent = ({ children }) => {
+    const [registerAnswer, setAnswer, getAnswer] = useContext(ExerciseContext);
+    const [answerIds, setAnswerIds] = useState({});
+    
+    const registerExerciseAnswer = (idCallback) => {
+        registerAnswer((id) => {
+            setAnswerIds(answerIds => {
+                const localId = Object.keys(answerIds).length;
+                idCallback(localId);
+                const newAnsIds = {...answerIds, [localId]: id};
+                return newAnsIds;
+            });
+        });
+    };
+    
+    const setExerciseAnswer = (answer, id) => {
+        setAnswer(answer, answerIds[id]);
+    };
+    
+    const getExerciseAnswer = (id) => {
+        return getAnswer(answerIds[id]);
+    };
+    
     return (
-        <>
+        <ExerciseContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer]}>
+        <Feedback answers={Object.keys(answerIds).map(getExerciseAnswer)} />
         { children }
-        </>
+        </ExerciseContext.Provider>
     );
 };
 
@@ -289,10 +312,8 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const [idCallbacks, setIdCallbacks] = useState([]);
     const registerAnswer = (idCallback) => {
         setIdCallbacks(idCallbacks => {
+            idCallback(idCallbacks.length);
             const newCallbacks = [...idCallbacks, idCallback];
-            newCallbacks.forEach((idCallback, index) => {
-                idCallback(index);
-            });
             const answers = newCallbacks.map(() => ({
                 value: [],
                 correct: false,

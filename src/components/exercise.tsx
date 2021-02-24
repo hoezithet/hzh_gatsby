@@ -32,15 +32,7 @@ interface AnswerContextType {
     submitHandler?: (id: number, isCorrect: boolean, isAnswered: boolean) => void;
 }
 
-const AnswerContext = React.createContext([
-    [],  // answers
-    (answers) => {return;} // setAnswers
-]);
-
-// ExerciseContext bevat callbacks van Exercise naar parent
-// Om me te delen wanneer oefening juist is opgelost
-const ExerciseContext = React.createContext([
-]);
+const StoreContext = React.createContext([]);
 
 interface AnswerProps {
     weight?: number;
@@ -67,7 +59,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
   
     const [answerId, setAnswerId] = useState(-1);
-    const [registerAnswer, setAnswer, getAnswer] = useContext(ExerciseContext);
+    const [registerAnswer, setAnswer, getAnswer] = useContext(StoreContext);
     
     useEffect(() => {
         registerAnswer((assignedId) => setAnswerId(assignedId));
@@ -207,7 +199,7 @@ type AnswerType = {
 const Feedback = ({answers}) => {
     let message = "";
 
-    if (answers.length > 0 && answers.every(({answered}) => answered)) {
+    if (Array.isArray(answers) && answers.length > 0 && answers.every(({answered}) => answered)) {
         const score = answers.reduce((acc, {correct}, index) => acc + (correct ? 1 : 0), 0);
         const total = answers.length;
         message = `${score}/${total}`;
@@ -218,36 +210,101 @@ const Feedback = ({answers}) => {
 };
 
 export const Exercise: FunctionComponent = ({ children }) => {
-    const [registerAnswer, setAnswer, getAnswer] = useContext(ExerciseContext);
-    const [answerIds, setAnswerIds] = useState({});
+    const [registerExercise, setStoredExercise, getStoredExercise] = useContext(StoreContext);
+    const [exerciseId, setExerciseId] = useState(-1);
+    const [exercise, setExercise] = useState({});
     
+    useEffect(() => {
+        registerExercise((id) => {
+            setExerciseId(id);
+        });
+    }, []);
+
     const registerExerciseAnswer = (idCallback) => {
-        registerAnswer((id) => {
-            setAnswerIds(answerIds => {
-                const localId = Object.keys(answerIds).length;
-                idCallback(localId);
-                const newAnsIds = {...answerIds, [localId]: id};
-                return newAnsIds;
-            });
+        setExercise(exercise => {
+            const answers = exercise.answers ? exercise.answers : [];
+            const answerId = answers.length;
+            exercise.answers = [...answers, {}];
+            idCallback(answerId);
+            return exercise;
         });
     };
     
+    useEffect(() => {
+        setStoredExercise(exercise, exerciseId);
+    }, [exercise]);
+    
     const setExerciseAnswer = (answer, id) => {
-        setAnswer(answer, answerIds[id]);
+        if (!Array.isArray(exercise.answers)) {
+           return;
+        }
+        setExercise(exercise => {
+            const newExercise = {...exercise};
+            newExercise.answers[id] = {...answer};
+            return newExercise;
+        });
     };
     
     const getExerciseAnswer = (id) => {
-        return getAnswer(answerIds[id]);
+        return exercise.answers
+        ?
+        exercise.answers[id]
+        :
+        null;
     };
     
     return (
-        <ExerciseContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer]}>
-        <Feedback answers={Object.keys(answerIds).map(getExerciseAnswer)} />
+        <StoreContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer]}>
+        <Feedback answers={exercise.answers} />
         { children }
-        </ExerciseContext.Provider>
+        </StoreContext.Provider>
     );
 };
 
+const Store: FunctionComponent = ({ children, onChange }) => {
+    const [elements, setElements] = useState([]);
+    const [idCallbacks, setIdCallbacks] = useState([]);
+
+    const registerElement = (idCallback) => {
+        setIdCallbacks(idCallbacks => {
+            idCallback(idCallbacks.length);
+            const newCallbacks = [...idCallbacks, idCallback];
+            const elements = newCallbacks.map(() => ({}));
+            setElements(elements);
+            return newCallbacks;
+        });
+    };
+
+    const setElement = (element, id) => {
+        setElements(elements => {
+            if (id < 0 || id >= elements.length) {
+                return elements;
+            }
+            const newElements = [...elements];
+            newElements[id] = element;
+            return newElements;
+        });
+    };
+    
+    const getElement = (id) => {
+        if (id === -1 || id >= elements.length) {
+            return null;
+        }
+        return elements[id];
+    };
+    
+    useEffect(() => onChange(elements), [elements]);
+    
+    return (
+        <StoreContext.Provider value={[registerElement, setElement, getElement]}>
+        { children }
+        </StoreContext.Provider>
+    );
+}
+
+type ExerciseType = {
+    answers: AnswerType[]
+};
 
 interface ExerciseStepperProps {
     title?: string;
@@ -255,7 +312,7 @@ interface ExerciseStepperProps {
 
 export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ children, title = "Oefening" }) => {
     const steps = React.Children.toArray(children);
-    const [answers, setAnswers] = useState<AnswerType[]>([]);
+    const [exercises, setExercises] = useState<ExerciseType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
 
@@ -309,43 +366,14 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
         setCompleted({});
     };
     
-    const [idCallbacks, setIdCallbacks] = useState([]);
-    const registerAnswer = (idCallback) => {
-        setIdCallbacks(idCallbacks => {
-            idCallback(idCallbacks.length);
-            const newCallbacks = [...idCallbacks, idCallback];
-            const answers = newCallbacks.map(() => ({
-                value: [],
-                correct: false,
-                answered: false
-            }));
-            setAnswers(answers);
-            return newCallbacks;
-        });
-    };
-
-    const setAnswer = (answer, id) => {
-        setAnswers(answers => {
-            if (id < 0 || id >= answers.length) {
-                return answers;
-            }
-            const newAnswers = [...answers];
-            newAnswers[id] = answer;
-            return newAnswers;
-        });
-    };
-    
-    const getAnswer = (id) => {
-        if (id === -1 || id >= answers.length) {
-            return null;
-        }
-        return answers[id];
+    const handleExercisesChange = (exercises) => {
+        setExercises(exercises);
     };
 
     return (
-        <ExerciseContext.Provider value={[registerAnswer, setAnswer, getAnswer]}>
+        <Store onChange={handleExercisesChange} >
         <h3>{ title }</h3>
-        <Feedback answers={answers} />
+        <Feedback answers={exercises.reduce((acc, ex) => [...acc, ...(ex.answers ? Object.values(ex.answers) : [])], [])} />
         <StyledStepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
             <Step key={index}>
@@ -376,6 +404,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                 </Button>
             </Grid>
         </Grid>
-        </ExerciseContext.Provider>
+        </Store>
     );
 }

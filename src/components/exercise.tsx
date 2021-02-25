@@ -379,24 +379,24 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
               steps.map((step, index) =>
                   <StyledPaper key={index} elevation={1}>
                   { step }
+                  <Grid container spacing={2}>
+                      <Grid item>
+                          <Button disabled={activeStep === 0} onClick={handleBack} >
+                              Vorige
+                          </Button>
+                      </Grid>
+                      <Grid item>
+                          <Button variant="contained"
+                              color="primary"
+                              onClick={handleNext}>
+                              { activeStep === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
+                          </Button>
+                      </Grid>
+                  </Grid> 
                   </StyledPaper>
               )
             }
         </SwipeableViews>
-        <Grid container>
-            <Grid item>
-                <Button disabled={activeStep === 0} onClick={handleBack} >
-                    Vorige
-                </Button>
-            </Grid>
-            <Grid item>
-                <Button variant="contained"
-                    color="primary"
-                    onClick={handleNext}>
-                    { activeStep === steps.length - 1 ? 'Klaar' : 'Volgende'}
-                </Button>
-            </Grid>
-        </Grid>
         </Store>
     );
 }

@@ -319,17 +319,17 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const totalSteps = () => {
         return steps.length;
     };
-
-    const completedSteps = () => {
-        return Object.keys(completed).length;
-    };
+    
+    useEffect(() => {
+        setCompleted(exercises.reduce((acc, ex, index) => ({...acc, [index]: ex.answers ? ex.answers.every(a => a.answered) : false}), {}));
+    }, [exercises]);
 
     const isLastStep = () => {
         return activeStep === totalSteps() - 1;
     };
 
     const allStepsCompleted = () => {
-        return completedSteps() === totalSteps();
+        return Object.values(completed).every(isComplete => isComplete);
     };
 
     const handleNext = () => {
@@ -337,7 +337,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             isLastStep() && !allStepsCompleted()
             ? // It's the last step, but not all steps have been completed,
             // find the first step that has been completed
-            steps.findIndex((step, i) => !(i in completed))
+            parseInt(Object.entries(completed).filter((k, isComplete) => !isComplete)[0][0])
             : activeStep + 1;
         setActiveStep(newActiveStep);
     };
@@ -351,14 +351,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     };
     
     const handleStepChange = (step: number) => {
-        handleStep(step)();
-    };
-
-    const handleComplete = () => {
-        const newCompleted = completed;
-        newCompleted[activeStep] = true;
-        setCompleted(newCompleted);
-        handleNext();
+        handleStep(Math.min(step, exercises.length))();
     };
 
     const handleReset = () => {

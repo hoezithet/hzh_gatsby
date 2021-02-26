@@ -337,7 +337,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             isLastStep() && !allStepsCompleted()
             ? // It's the last step, but not all steps have been completed,
             // find the first step that has been completed
-            parseInt(Object.entries(completed).filter((k, isComplete) => !isComplete)[0][0])
+            parseInt(Object.keys(completed).find(k => !completed[k]))
             : activeStep + 1;
         setActiveStep(newActiveStep);
     };

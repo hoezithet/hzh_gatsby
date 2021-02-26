@@ -2,6 +2,8 @@ import React, { useContext, FunctionComponent, useState, useEffect, useCallback 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
+import { StepIconProps } from '@material-ui/core/StepIcon';
+import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +17,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import styled from "styled-components";
 import SwipeableViews from 'react-swipeable-views';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
 import { theme } from "./theme";
 
@@ -300,7 +304,17 @@ const Store: FunctionComponent = ({ children, onChange }) => {
         { children }
         </StoreContext.Provider>
     );
-}
+};
+
+function ExerciseStepIcon(props: StepIconProps) {
+  const { active, completed } = props;
+  // TODO Show outlined circle when incomplete, filled circle when complete and add shadow around circle when active
+  const Icon = completed ? RadioButtonCheckedIcon : RadioButtonUncheckedIcon;
+
+  return (
+      <Icon color={active ? "primary" : "disabled"}/>
+  );
+} 
 
 type ExerciseType = {
     answers: AnswerType[]
@@ -369,8 +383,8 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
         <Feedback answers={exercises.reduce((acc, ex) => [...acc, ...(ex.answers ? Object.values(ex.answers) : [])], [])} />
         <StyledStepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
-            <Step key={index}>
-                <StepButton onClick={handleStep(index)} completed={completed[index]} />
+            <Step key={index} completed={completed[index]}>
+                <StepLabel StepIconComponent={ExerciseStepIcon} onClick={handleStep(index)} />
             </Step>
             ))}
         </StyledStepper>

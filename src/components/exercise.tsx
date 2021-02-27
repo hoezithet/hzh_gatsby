@@ -19,6 +19,7 @@ import styled from "styled-components";
 import SwipeableViews from 'react-swipeable-views';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import COLORS from '../colors';
 
 import { theme } from "./theme";
 
@@ -307,12 +308,16 @@ const Store: FunctionComponent = ({ children, onChange }) => {
 };
 
 function ExerciseStepIcon(props: StepIconProps) {
-  const { active, completed } = props;
-  // TODO Show outlined circle when incomplete, filled circle when complete and add shadow around circle when active
+  const { active, completed, correct, showFeedback } = props;
   const Icon = completed ? RadioButtonCheckedIcon : RadioButtonUncheckedIcon;
+  
+  const StyledIcon = styled(Icon)`
+      color: ${showFeedback ? (correct ? COLORS.GREEN : COLORS.ORANGE) : (active ? COLORS.GOLD : COLORS.LIGHT_GRAY)};
+      opacity: ${active ? "100%" : "50%"};
+  `;
 
   return (
-      <Icon color={active ? "primary" : "disabled"}/>
+      <StyledIcon />
   );
 } 
 
@@ -328,22 +333,13 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const steps = React.Children.toArray(children);
     const [exercises, setExercises] = useState<ExerciseType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
-    const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
 
     const totalSteps = () => {
         return steps.length;
     };
-    
-    useEffect(() => {
-        setCompleted(exercises.reduce((acc, ex, index) => ({...acc, [index]: ex.answers ? ex.answers.every(a => a.answered) : false}), {}));
-    }, [exercises]);
 
     const isLastStep = () => {
         return activeStep === totalSteps() - 1;
-    };
-
-    const allStepsCompleted = () => {
-        return Object.values(completed).every(isComplete => isComplete);
     };
 
     const handleNext = () => {
@@ -351,7 +347,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             isLastStep() && !allStepsCompleted()
             ? // It's the last step, but not all steps have been completed,
             // find the first step that has been completed
-            parseInt(Object.keys(completed).find(k => !completed[k]))
+            exercises.map((ex, i) => i).find(i => !stepCompleted(i))
             : activeStep + 1;
         setActiveStep(newActiveStep);
     };
@@ -376,16 +372,50 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const handleExercisesChange = (exercises) => {
         setExercises(exercises);
     };
+    
+    const stepCompleted = useCallback((step: number) => {
+        return (
+            exercises[step] && Array.isArray(exercises[step].answers)
+            ?
+            exercises[step].answers.every(a => a.answered)
+            :
+            false
+        );
+    }, [exercises]);
 
+    const allStepsCompleted = () => {
+        return exercises.every((ex, index) => stepCompleted(index));
+    };
+    
+    const stepCorrect = useCallback((step: number) => {
+        return (
+            exercises[step] && exercises[step].answers
+            ?
+            exercises[step].answers.every(a => a.correct)
+            :
+            false
+        );
+    }, [exercises]);
+    
     return (
         <Store onChange={handleExercisesChange} >
         <h3>{ title }</h3>
         <Feedback answers={exercises.reduce((acc, ex) => [...acc, ...(ex.answers ? Object.values(ex.answers) : [])], [])} />
         <StyledStepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
-            <Step key={index} completed={completed[index]}>
-                <StepLabel StepIconComponent={ExerciseStepIcon} onClick={handleStep(index)} />
-            </Step>
+                <Step key={index}>
+                    <StepLabel
+                     StepIconComponent={ExerciseStepIcon}
+                     StepIconProps={
+                         {
+                             active: activeStep === index,
+                             completed: stepCompleted(index),
+                             correct: stepCorrect(index),
+                             showFeedback: allStepsCompleted()
+                         }
+                     }
+                     onClick={handleStep(index)} />
+                </Step>
             ))}
         </StyledStepper>
         <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>

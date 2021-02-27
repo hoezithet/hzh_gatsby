@@ -260,7 +260,6 @@ export const Exercise: FunctionComponent = ({ children }) => {
     
     return (
         <StoreContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer]}>
-        <Feedback answers={exercise.answers} />
         { children }
         </StoreContext.Provider>
     );
@@ -400,7 +399,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     return (
         <Store onChange={handleExercisesChange} >
         <h3>{ title }</h3>
-        <Feedback answers={exercises.reduce((acc, ex) => [...acc, ...(ex.answers ? Object.values(ex.answers) : [])], [])} />
         <StyledStepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
                 <Step key={index}>

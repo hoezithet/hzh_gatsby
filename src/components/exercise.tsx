@@ -201,16 +201,8 @@ type AnswerType = {
     answered: boolean
 }; 
 
-const Feedback = ({answers}) => {
-    let message = "";
-
-    if (Array.isArray(answers) && answers.length > 0 && answers.every(({answered}) => answered)) {
-        const score = answers.reduce((acc, {correct}, index) => acc + (correct ? 1 : 0), 0);
-        const total = answers.length;
-        message = `${score}/${total}`;
-    } else {
-        message = `Vul je antwoord in`;
-    }
+const Feedback = ({nCorrect, nTotal}) => {
+    let message = `${score}/${total}`;
     return <p>{ message }</p>
 };
 

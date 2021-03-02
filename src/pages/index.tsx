@@ -12,6 +12,8 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import styled from "styled-components";
 import { Button, Link } from "gatsby-theme-material-ui";
+import SEO from '../components/seo';
+import { useStaticQuery, graphql } from 'gatsby';
 
 
 const LandingImg = styled.img`
@@ -93,42 +95,66 @@ function WhyHzhItem(props: WhyHzhItemProps) {
 
 export default function Landing() {
     const exampleUrl = "/lessen/fysica/krachten_1/krachtvector/";
+    const { site } = useStaticQuery(
+      graphql`
+        query {
+          site {
+            siteMetadata {
+              title
+              description
+              tags
+            }
+          }
+        }
+      `,
+    );
+    
 
     return (
         <HzhTheme>
             <>
-            <HzhAppBar color="transparent" elevation={ 0 } />
-            <Box px={2} py={4} display="flex" justifyContent="center" >
-                <Link to={ exampleUrl }>
-                    <LandingImg src={landingImg} />
-                </Link>
-            </Box>
-            <Box id="why" textAlign="center" justifyContent="center">
-                <WhyHzhTitle>Waarom <WhyHzhTitleSpan>Hoe Zit Het?</WhyHzhTitleSpan></WhyHzhTitle>
-                <WhyHzhBox pb={6}>
-                    <a href="#why">
-                        <WhyHzhTriangle />
-                    </a>
-                    <Grid container spacing={4} justify="center" >
-                        <WhyHzhItem title="Doelgericht" img={ archer }>
-                            Elke les is gericht op één onderwerp. Zo kan je gaatjes in je kennis snel opvullen, zonder omwegen. 
-                        </WhyHzhItem>
-                        <WhyHzhItem title="Verteerbaar" img={ guts }>
-                            Niemand houdt van saai. Daarom bestaan onze lessen steeds uit een heldere uitleg met veel illustraties. Zo helpen we je om alles in een handomdraai te begrijpen.
-                        </WhyHzhItem>
-                        <WhyHzhItem title="Gratis" img={ free }>
-                            Omdat iedereen recht heeft op kennis, zijn alle lessen gratis. Voor vandaag. Voor morgen. Voor altijd.
-                        </WhyHzhItem>
-                        <Grid item>
-                            <ShowLessonButton variant="contained" color="primary" size="large" to={ exampleUrl }>
-                        Toon mij een voorbeeld!
-                            </ShowLessonButton> 
+                <SEO
+                    crumbs={[{ title: site.siteMetadata.title, slug: "/" }]}
+                    description={site.siteMetadata.description}
+                    tags={site.siteMetadata.tags}
+                />
+                <HzhAppBar color="transparent" elevation={0} />
+                <Box px={2} py={4} display="flex" justifyContent="center">
+                    <Link to={exampleUrl}>
+                        <LandingImg src={landingImg} />
+                    </Link>
+                </Box>
+                <Box id="why" textAlign="center" justifyContent="center">
+                    <WhyHzhTitle>
+                        Waarom <WhyHzhTitleSpan>Hoe Zit Het?</WhyHzhTitleSpan>
+                    </WhyHzhTitle>
+                    <WhyHzhBox pb={6}>
+                        <a href="#why">
+                            <WhyHzhTriangle />
+                        </a>
+                        <Grid container spacing={4} justify="center">
+                            <WhyHzhItem title="Doelgericht" img={archer}>
+                                Elke les is gericht op één onderwerp. Zo kan je gaatjes in je kennis snel opvullen,
+                                zonder omwegen.
+                            </WhyHzhItem>
+                            <WhyHzhItem title="Verteerbaar" img={guts}>
+                                Niemand houdt van saai. Daarom bestaan onze lessen steeds uit een heldere uitleg met
+                                veel illustraties. Zo helpen we je om alles in een handomdraai te begrijpen.
+                            </WhyHzhItem>
+                            <WhyHzhItem title="Gratis" img={free}>
+                                Omdat iedereen recht heeft op kennis, zijn alle lessen gratis. Voor vandaag. Voor
+                                morgen. Voor altijd.
+                            </WhyHzhItem>
+                            <Grid item>
+                                <ShowLessonButton variant="contained" color="primary" size="large" to={exampleUrl}>
+                                    Toon mij een voorbeeld!
+                                </ShowLessonButton>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </WhyHzhBox>
-                <Sponsors />
-            </Box>
-            <Footer />
+                    </WhyHzhBox>
+                    <Sponsors />
+                </Box>
+                <Footer />
             </>
         </HzhTheme>
     );

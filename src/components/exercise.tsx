@@ -202,7 +202,7 @@ type AnswerType = {
 }; 
 
 const Feedback = ({nCorrect, nTotal}) => {
-    let message = `${score}/${total}`;
+    let message = `${nCorrect}/${nTotal}`;
     return <p>{ message }</p>
 };
 
@@ -324,6 +324,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const steps = React.Children.toArray(children);
     const [exercises, setExercises] = useState<ExerciseType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
+    const [showFeedback, setShowFeedback] = useState(false);
 
     const totalSteps = () => {
         return steps.length;
@@ -334,25 +335,28 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     };
 
     const handleNext = () => {
+        handleStepChange(activeStep + 1);
+    };
+
+    const handleBack = () => {
+        handleStepChange(activeStep - 1);
+    };
+
+    const handleStep = (step: number) => () => {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
             ? // It's the last step, but not all steps have been completed,
             // find the first step that has been completed
             exercises.map((ex, i) => i).find(i => !stepCompleted(i))
-            : activeStep + 1;
-        setActiveStep(newActiveStep);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleStep = (step: number) => () => {
-        setActiveStep(step);
+            : step;
+        if (isLastStep() && allStepsCompleted()) {
+            setShowFeedback(true);
+        }
+        setActiveStep(newActiveStep % (allStepsCompleted() ? steps.length + 1 : steps.length));
     };
     
     const handleStepChange = (step: number) => {
-        handleStep(Math.min(step, exercises.length))();
+        handleStep(step)();
     };
 
     const handleReset = () => {
@@ -401,7 +405,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                              active: activeStep === index,
                              completed: stepCompleted(index),
                              correct: stepCorrect(index),
-                             showFeedback: allStepsCompleted()
+                             showFeedback: showFeedback
                          }
                      }
                      onClick={handleStep(index)} />
@@ -422,13 +426,28 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                       <Grid item>
                           <Button variant="contained"
                               color="primary"
+                              disabled={!stepCompleted(index) && exercises.filter((ex, i) => i !== index).every((ex, i) => stepCompleted(i))}
                               onClick={handleNext}>
-                              { activeStep === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
+                              { activeStep === steps.length - 1 && allStepsCompleted() && !showFeedback ? 'Klaar' : 'Volgende'}
                           </Button>
                       </Grid>
                   </Grid> 
                   </StyledPaper>
               )
+            }
+            {
+              showFeedback
+              ?
+              <StyledPaper>
+                  <Feedback nCorrect={exercises.reduce((acc, ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length}/>
+                  <Button variant="contained"
+                              color="primary"
+                              onClick={handleNext}>
+                              Toon feedback
+                          </Button>
+              </StyledPaper>
+              :
+              null
             }
         </SwipeableViews>
         </Store>

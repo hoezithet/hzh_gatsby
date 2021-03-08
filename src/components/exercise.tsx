@@ -62,10 +62,10 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
 
     const correctAnswers = Array.isArray(correct) ? correct : [correct];
     const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
-  
+
     const [answerId, setAnswerId] = useState(-1);
     const [registerAnswer, setAnswer, getAnswer] = useContext(StoreContext);
-    
+
     useEffect(() => {
         registerAnswer((assignedId) => setAnswerId(assignedId));
     }, []);
@@ -105,7 +105,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             )
         )
     };
-    
+
     const getChildrenArray = (children) => {
         const childArr = React.Children.toArray(children);
         if (childArr.length === 1) {
@@ -114,14 +114,14 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             return childArr;
         }
     };
-    
+
     function isNumeric(str: string) {
         if (typeof str != "string") return false // we only process strings!
         str = str.replace(",", ".");
         return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
                !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
     }
-    
+
     const getAnswerValue = () => {
         const answer = getAnswer(answerId);
         if (answer && answer.value !== undefined) {
@@ -130,12 +130,22 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             return [];
         }
     };
-    
+
+    const showFeedback = () => {
+        const answer = getAnswer(answerId);
+        if (answer && answer.showFeedback !== undefined) {
+            return answer.showFeedback;
+        } else {
+            return false;
+        }
+    };
+
     const setAnswerValue = (newValue) => {
         setAnswer({
             value: newValue,
             correct: evaluateAnswers(newValue),
-            answered: newValue.length > 0
+            answered: newValue.length > 0,
+            showFeedback: false
         }, answerId);
     };
 
@@ -157,12 +167,12 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             setAnswerValue([val]);
         }
     };
-   
+
     switch (answerType) {
         case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
             return (
-                <TextField variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
+                <TextField disabled={showFeedback()} variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
             );
         }
         case MULTIPLE_CHOICE: {
@@ -170,7 +180,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                 <RadioGroup value={getAnswerValue().length > 0 ? getAnswerValue()[0] : null} onChange={handleChange}>
                     {
                     options.map((option, index) => (
-                    <FormControlLabel key={index} value={index} control={<Radio />} label={ option }/>
+                    <FormControlLabel key={index} value={index} control={<Radio />} label={ option } disabled={showFeedback()}/>
                     ))
                     }
                 </RadioGroup>
@@ -184,7 +194,8 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                     <FormControlLabel
                         key={index} 
                         control={<Checkbox value={index} checked={ getAnswerValue().includes(index) } onChange={handleChange}/>}
-                        label={ option } />
+                        label={ option }
+                        disabled={showFeedback()} />
                     ))
                     }
                 </FormGroup>
@@ -198,7 +209,8 @@ type AnswerValueType = Array<number|string>;
 type AnswerType = {
     value: AnswerValueType,
     correct: boolean,
-    answered: boolean
+    answered: boolean,
+    showFeedback: boolean
 }; 
 
 const Feedback = ({nCorrect, nTotal}) => {
@@ -207,10 +219,10 @@ const Feedback = ({nCorrect, nTotal}) => {
 };
 
 export const Exercise: FunctionComponent = ({ children }) => {
-    const [registerExercise, setStoredExercise, getStoredExercise] = useContext(StoreContext);
+    const [registerExercise, setStoredExercise, getStoredExercise, allExercises] = useContext(StoreContext);
     const [exerciseId, setExerciseId] = useState(-1);
-    const [exercise, setExercise] = useState({});
-    
+    const [answers, setAnswers] = useState([]);
+
     useEffect(() => {
         registerExercise((id) => {
             setExerciseId(id);
@@ -218,47 +230,48 @@ export const Exercise: FunctionComponent = ({ children }) => {
     }, []);
 
     const registerExerciseAnswer = (idCallback) => {
-        setExercise(exercise => {
-            const answers = exercise.answers ? exercise.answers : [];
+        setAnswers(answers => {
             const answerId = answers.length;
-            exercise.answers = [...answers, {}];
             idCallback(answerId);
-            return exercise;
+            const newAnswers = [...answers, {}];
+            setStoredExercise({answers: newAnswers}, exerciseId);
+            return newAnswers;
         });
     };
-    
+
     useEffect(() => {
-        setStoredExercise(exercise, exerciseId);
-    }, [exercise]);
-    
-    const setExerciseAnswer = (answer, id) => {
-        if (!Array.isArray(exercise.answers)) {
-           return;
+        const exercise = getStoredExercise(exerciseId);
+        if (exercise && exercise.answers) {
+            setAnswers(exercise.answers);
         }
-        setExercise(exercise => {
-            const newExercise = {...exercise};
-            newExercise.answers[id] = {...answer};
-            return newExercise;
+    }, [allExercises]);
+
+    const setExerciseAnswer = (answer, id) => {
+        setAnswers(answers => {
+            answers[id] = {...answer};
+            setStoredExercise({answers: answers}, exerciseId);
+            return answers;
         });
     };
-    
+
     const getExerciseAnswer = (id) => {
-        return exercise.answers
+        return answers.length > id
         ?
-        exercise.answers[id]
+        answers[id]
         :
         null;
     };
-    
+
     return (
-        <StoreContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer]}>
+        <>
+        <StoreContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer, answers]}>
         { children }
         </StoreContext.Provider>
+        </>
     );
 };
 
-const Store: FunctionComponent = ({ children, onChange }) => {
-    const [elements, setElements] = useState([]);
+const Store: FunctionComponent = ({ children, elements, setElements }) => {
     const [idCallbacks, setIdCallbacks] = useState([]);
 
     const registerElement = (idCallback) => {
@@ -281,18 +294,16 @@ const Store: FunctionComponent = ({ children, onChange }) => {
             return newElements;
         });
     };
-    
-    const getElement = (id) => {
+
+    const getElement = useCallback((id) => {
         if (id === -1 || id >= elements.length) {
             return null;
         }
         return elements[id];
-    };
-    
-    useEffect(() => onChange(elements), [elements]);
-    
+    }, [elements]);
+
     return (
-        <StoreContext.Provider value={[registerElement, setElement, getElement]}>
+        <StoreContext.Provider value={[registerElement, setElement, getElement, elements]}>
         { children }
         </StoreContext.Provider>
     );
@@ -301,7 +312,7 @@ const Store: FunctionComponent = ({ children, onChange }) => {
 function ExerciseStepIcon(props: StepIconProps) {
   const { active, completed, correct, showFeedback } = props;
   const Icon = completed ? RadioButtonCheckedIcon : RadioButtonUncheckedIcon;
-  
+
   const StyledIcon = styled(Icon)`
       color: ${showFeedback ? (correct ? COLORS.GREEN : COLORS.ORANGE) : (active ? COLORS.GOLD : COLORS.LIGHT_GRAY)};
       opacity: ${active ? "100%" : "50%"};
@@ -350,11 +361,19 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             exercises.map((ex, i) => i).find(i => !stepCompleted(i))
             : step;
         if (isLastStep() && allStepsCompleted()) {
+            const newExercises = [];
+
+            exercises.forEach(ex => {
+                const newAnswers = ex.answers.map(ans => ({...ans, showFeedback: true}));
+                newExercises.push({answers: newAnswers});
+            });
+            setExercises(newExercises);
+
             setShowFeedback(true);
         }
         setActiveStep(newActiveStep % (allStepsCompleted() ? steps.length + 1 : steps.length));
     };
-    
+
     const handleStepChange = (step: number) => {
         handleStep(step)();
     };
@@ -363,11 +382,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
         setActiveStep(0);
         setCompleted({});
     };
-    
-    const handleExercisesChange = (exercises) => {
-        setExercises(exercises);
-    };
-    
+
     const stepCompleted = useCallback((step: number) => {
         return (
             exercises[step] && Array.isArray(exercises[step].answers)
@@ -381,7 +396,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const allStepsCompleted = () => {
         return exercises.every((ex, index) => stepCompleted(index));
     };
-    
+
     const stepCorrect = useCallback((step: number) => {
         return (
             exercises[step] && exercises[step].answers
@@ -391,9 +406,9 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             false
         );
     }, [exercises]);
-    
+
     return (
-        <Store onChange={handleExercisesChange} >
+        <Store elements={exercises} setElements={setExercises} >
         <h3>{ title }</h3>
         <StyledStepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (

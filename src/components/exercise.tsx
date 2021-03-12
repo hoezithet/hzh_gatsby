@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent, useState, useEffect, useCallback } from 'react';
+import React, { useContext, FunctionComponent, useState, useEffect, useCallback, useMemo } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
@@ -49,6 +49,14 @@ const FILL_IN = "fill";
 const MULTIPLE_CHOICE = "multiple choice";
 const MULTIPLE_ANSWER = "multiple answer";
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomArrElement(arr) {
+  return arr[getRandomInt(arr.length)];
+}
+
 export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0.01 }) => {
     const options = (children && children.props
                      ?
@@ -64,7 +72,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
 
     const [answerId, setAnswerId] = useState(-1);
-    const [registerAnswer, setAnswer, getAnswer] = useContext(StoreContext);
+    const [registerAnswer, setAnswer, getAnswer, allAnswers] = useContext(StoreContext);
 
     useEffect(() => {
         registerAnswer((assignedId) => setAnswerId(assignedId));
@@ -131,14 +139,14 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
 
-    const showFeedback = () => {
+    const showFeedback = useMemo(() => {
         const answer = getAnswer(answerId);
         if (answer && answer.showFeedback !== undefined) {
             return answer.showFeedback;
         } else {
             return false;
         }
-    };
+    }, [allAnswers]);
 
     const setAnswerValue = (newValue) => {
         setAnswer({
@@ -168,26 +176,31 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
 
+    let answerComponent;
+
     switch (answerType) {
         case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
-            return (
-                <TextField disabled={showFeedback()} variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
+            answerComponent = (
+                <TextField disabled={showFeedback} variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
             );
+            break;
         }
         case MULTIPLE_CHOICE: {
-            return (
-                <RadioGroup value={getAnswerValue().length > 0 ? getAnswerValue()[0] : null} onChange={handleChange}>
+            const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
+            answerComponent = (
+                <RadioGroup value={ansValue} onChange={handleChange}>
                     {
                     options.map((option, index) => (
-                    <FormControlLabel key={index} value={index} control={<Radio />} label={ option } disabled={showFeedback()}/>
+                    <FormControlLabel key={index} value={index} control={<Radio />} label={ option } disabled={showFeedback}/>
                     ))
                     }
                 </RadioGroup>
             );
+            break;
         }
         case MULTIPLE_ANSWER: {
-            return (
+            answerComponent = (
                 <FormGroup>
                     {
                     options.map((option, index) => (
@@ -195,13 +208,92 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                         key={index} 
                         control={<Checkbox value={index} checked={ getAnswerValue().includes(index) } onChange={handleChange}/>}
                         label={ option }
-                        disabled={showFeedback()} />
+                        disabled={showFeedback} />
                     ))
                     }
                 </FormGroup>
             );
+            break;
         }
     }
+
+    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const answerToReadable = answerType === FILL_IN ? (ans: number) => ans : (ans: number) => ALPHABET[ans];
+    const readableAnswers = correctAnswers.map(answerToReadable);
+    const correctAnswersText = (
+        readableAnswers.length > 1
+        ?
+        `${readableAnswers.slice(0, -1).join(',')} en ${readableAnswers.slice(-1)[0]}`
+        :
+        readableAnswers[0]
+    );
+    
+    const correctMessages = [
+        "Juist!",
+        "Klopt!",
+        "Correct!",
+        "Helemaal goed!"
+    ];
+    
+    const correctEmojis = [
+        "🎉", "🎈", "🎊", "🥳", "👍", "💪", "👏",
+        "🕺", "💃"
+    ];
+    
+    const incorrectMessages = [
+        "Niet juist...",
+        "Dat klopt niet helaas...",
+        "Jammer, dat is niet correct...",
+        "Dat is helaas niet het juiste antwoord..."
+    ];
+    
+    const incorrectEmojis = [
+        "😕", "😩", "🤷", "🤷‍♂️", "🤷‍♀️"
+    ];
+    
+    const correctFeedbackText = useMemo(
+        () => `${getRandomArrElement(correctMessages)} ${getRandomArrElement(correctEmojis)}`,
+        []);
+    const incorrectFeedbackText = useMemo(
+        () => (correctAnswers.length > 1
+        ?
+        `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} De juiste antwoorden waren ${correctAnswersText}.`
+        :
+        `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} Het juiste antwoord was ${correctAnswersText}.`),
+        []);
+
+    const FeedbackPaper = styled(Paper)`
+        padding: ${theme.spacing(1)}px;
+    `;
+    
+    const setShowExtraExplanation, showExtraExplanation = useState(false);
+
+    return (
+        showFeedback
+        ?
+        <Grid container spacing={1}>
+            <Grid xs={12} item>
+                { answerComponent }
+            </Grid>
+            <Grid xs={12} item>
+            <FeedbackPaper elevation={0} variant="outlined">
+                <b>
+                    { evaluateAnswers(getAnswerValue())
+                    ?
+                    correctFeedbackText
+                    :
+                    incorrectFeedbackText
+                    }
+                </b>
+                <p>
+                   ...Hier komt de uitleg...
+                </p>
+            </FeedbackPaper>
+            </Grid>
+        </Grid>
+        :
+        answerComponent
+    );
 };
 
 
@@ -355,20 +447,22 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
 
     const handleStep = (step: number) => () => {
         const newActiveStep =
-            isLastStep() && !allStepsCompleted()
+            isLastStep() && !allStepsCompleted() && step > activeStep
             ? // It's the last step, but not all steps have been completed,
             // find the first step that has been completed
             exercises.map((ex, i) => i).find(i => !stepCompleted(i))
             : step;
         if (isLastStep() && allStepsCompleted()) {
-            const newExercises = [];
-
-            exercises.forEach(ex => {
-                const newAnswers = ex.answers.map(ans => ({...ans, showFeedback: true}));
-                newExercises.push({answers: newAnswers});
-            });
-            setExercises(newExercises);
-
+            // All exercises are done. Feedback can be shown now.
+            setExercises(
+                exercises.map(ex => (
+                    {
+                        answers: ex.answers.map(ans => (
+                            {...ans, showFeedback: true}
+                        ))
+                    }
+                ))
+            );
             setShowFeedback(true);
         }
         setActiveStep(newActiveStep % (allStepsCompleted() ? steps.length + 1 : steps.length));

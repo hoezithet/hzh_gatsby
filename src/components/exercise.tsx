@@ -181,8 +181,10 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     switch (answerType) {
         case FILL_IN: {
             const valueType = typeof(correctAnswers[0]);
+            const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
             answerComponent = (
-                <TextField disabled={showFeedback} variant="filled" type={ valueType } onChange={ handleChange } placeholder="Vul in"/>
+                <TextField disabled={showFeedback} variant="filled" type={ valueType } onChange={ handleChange }
+                placeholder={showFeedback ? ansValue : "Vul in"}/>
             );
             break;
         }

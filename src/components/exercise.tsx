@@ -15,6 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
+import Collapse from '@material-ui/core/Collapse';
 import styled from "styled-components";
 import SwipeableViews from 'react-swipeable-views';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
@@ -268,7 +269,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         padding: ${theme.spacing(1)}px;
     `;
     
-    const setShowExtraExplanation, showExtraExplanation = useState(false);
+    const [showExtraExplanation, setShowExtraExplanation] = useState(false);
 
     return (
         showFeedback
@@ -290,6 +291,18 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                 <p>
                    ...Hier komt de uitleg...
                 </p>
+                <Collapse in={showExtraExplanation} timeout={2000}>
+                <p>
+                   ...Hier komt extra uitleg...
+                </p>
+                </Collapse>
+                <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
+                    showExtraExplanation
+                    ?
+                    "Verberg meer uitleg"
+                    :
+                    "Toon meer uitleg"
+                }</Button>
             </FeedbackPaper>
             </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent, useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useContext, FunctionComponent, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
@@ -21,6 +21,10 @@ import SwipeableViews from 'react-swipeable-views';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import COLORS from '../colors';
+import { gsap } from "gsap";
+import GSDevTools from "gsap/GSDevTools";
+
+gsap.registerPlugin(GSDevTools);
 
 import { theme } from "./theme";
 
@@ -270,6 +274,39 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     `;
     
     const [showExtraExplanation, setShowExtraExplanation] = useState(false);
+    const animRef = useRef(null);
+    const extraExplnRef = useCallback(node => {
+      if (node !== null) {
+          const anim = gsap.fromTo(
+              node,
+              {
+                  height: 0,
+                  opacity: 0,
+              },
+              {
+                  height: `${node.clientHeight}px`,
+                  opacity: 1,
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                  paused: true
+              }
+          );
+          animRef.current = anim;
+          GSDevTools.create({animation: anim});
+      }
+    }, []);
+    
+    useEffect(() => {
+        const anim = animRef.current;
+        if (anim === null) {
+            return;
+        }
+        if (showExtraExplanation) {
+            anim.play();
+        } else {
+            anim.reverse(0);
+        }
+    }, [showExtraExplanation]);
 
     return (
         showFeedback
@@ -291,11 +328,11 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                 <p>
                    ...Hier komt de uitleg...
                 </p>
-                <Collapse in={showExtraExplanation} timeout={2000}>
-                <p>
-                   ...Hier komt extra uitleg...
-                </p>
-                </Collapse>
+                <div ref={extraExplnRef}>
+                    <p>
+                    ...Hier komt extra uitleg...
+                    </p>
+                </div>
                 <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
                     showExtraExplanation
                     ?

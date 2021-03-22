@@ -274,38 +274,31 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     `;
     
     const [showExtraExplanation, setShowExtraExplanation] = useState(false);
-    const animRef = useRef(null);
+    const nodeHeight = useRef(0);
+    const nodeRef = useRef(null);
     const extraExplnRef = useCallback(node => {
       if (node !== null) {
-          const anim = gsap.fromTo(
-              node,
-              {
-                  height: 0,
-                  opacity: 0,
-              },
-              {
-                  height: `${node.clientHeight}px`,
-                  opacity: 1,
-                  duration: 0.5,
-                  ease: "power2.inOut",
-                  paused: true
-              }
-          );
-          animRef.current = anim;
-          GSDevTools.create({animation: anim});
+          nodeRef.current = node;
+          nodeHeight.current = node.clientHeight;
+          gsap.set(node, {
+              height: 0,
+              opacity: 0,
+          });
+          GSDevTools.create();
       }
     }, []);
     
     useEffect(() => {
-        const anim = animRef.current;
-        if (anim === null) {
+        const explnNode = nodeRef.current;
+        if (explnNode === null) {
             return;
         }
-        if (showExtraExplanation) {
-            anim.play();
-        } else {
-            anim.reverse(0);
-        }
+        gsap.to(explnNode, {
+            height: showExtraExplanation ? `${nodeHeight.current}px` : 0,
+            opacity: showExtraExplanation ? 1 : 0,
+            duration: 0.5,
+            ease: "power2.inOut"
+        });
     }, [showExtraExplanation]);
 
     return (

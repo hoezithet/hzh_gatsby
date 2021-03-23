@@ -22,9 +22,7 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import COLORS from '../colors';
 import { gsap } from "gsap";
-import GSDevTools from "gsap/GSDevTools";
 
-gsap.registerPlugin(GSDevTools);
 
 import { theme } from "./theme";
 
@@ -284,7 +282,6 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
               height: 0,
               opacity: 0,
           });
-          GSDevTools.create();
       }
     }, []);
     

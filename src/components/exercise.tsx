@@ -101,8 +101,36 @@ const FeedbackPaper = styled(Paper)`
     padding: ${theme.spacing(1)}px;
 `;
 
-export const AnswerFeedback = (props) => {
-    const {options, answeredOptions, correctOptions, margin} = props;
+type AnsFeedbackCtxType = {
+    options: AnswerValueType,
+    answeredOptions: AnswerValueType,
+    correctOptions: AnswerValueType,
+    margin: number,
+    showFeedback: boolean
+};
+
+const AnsFeedbackCtx = React.createContext<AnsFeedbackCtxType>(
+    {
+        options: [],
+        answeredOptions: [],
+        correctOptions: [],
+        margin: 0,
+        showFeedback: false
+    }
+);
+
+type AnsFeedbackProps = {
+    children: React.ReactNode|null
+};
+
+export const AnswerFeedback = ({children = null}: AnsFeedbackProps) => {
+    const {
+        options,
+        answeredOptions,
+        correctOptions,
+        margin,
+        showFeedback
+    } = useContext(AnsFeedbackCtx);
     const answerType = getAnswerType(options, correctOptions);
     const isCorrect = evaluateAnsweredOptions(answeredOptions, correctOptions, margin);
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -115,7 +143,7 @@ export const AnswerFeedback = (props) => {
         :
         readableAnswers[0]
     );
-    
+
     const correctMessages = [
         "Juist!",
         "Klopt!",
@@ -178,6 +206,8 @@ export const AnswerFeedback = (props) => {
     }, [showExtraExplanation]);
     
     return (
+        showFeedback
+        ?
         <FeedbackPaper elevation={0} variant="outlined">
             <b>
                 { isCorrect
@@ -187,35 +217,42 @@ export const AnswerFeedback = (props) => {
                 incorrectFeedbackText
                 }
             </b>
-            <p>
-               ...Hier komt de uitleg...
-            </p>
-            <div ref={extraExplnRef}>
-                <p>
-                ...Hier komt extra uitleg...
-                </p>
-            </div>
-            <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
-                showExtraExplanation
-                ?
-                "Verberg meer uitleg"
-                :
-                "Toon meer uitleg"
-            }</Button>
+            {
+              children
+              ?
+              <>
+              <div ref={extraExplnRef}>
+                  { children }
+              </div>
+              <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
+                  showExtraExplanation
+                  ?
+                  "Verberg meer uitleg"
+                  :
+                  "Toon meer uitleg"
+              }</Button>
+              </>
+              :
+              null
+            }
         </FeedbackPaper>
+        :
+        null
     );
 }
 
 export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0.01 }) => {
-    const options = (children && children.props
-                     ?
-                     (children.props.originalType === "ul"
-                     ?
-                     children.props.children.map(c => c.props.children)
-                     :
-                     [])
-                     :
-                     []);
+    let feedback = null;
+    let options = [];
+    if (children) {
+        const childArray = React.Children.toArray(children);
+        feedback = childArray.find(c => c.props && c.props.mdxType === "AnswerFeedback");
+        const optionsUl = childArray.find(c => c.props && c.props.originalType === "ul");
+        if (optionsUl && optionsUl.props) {
+            options = optionsUl.props.children.map(c => c.props.children);
+        }
+    }
+    feedback = feedback || <AnswerFeedback/>;
 
     const correctOptions = Array.isArray(correct) ? correct : [correct];
     const answerType = getAnswerType(options, correctOptions);
@@ -246,6 +283,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     const getCurrentAnswer = () => {
         return getAnswer(answerId);
     };
+
 
     const getAnswerValue = () => {
         const currentAnswer = getCurrentAnswer();
@@ -342,19 +380,19 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     }
 
+    const ctxValue = {
+        options: options,
+        answeredOptions: getAnswerValue(),
+        correctOptions: correctOptions,
+        margin: margin,
+        showFeedback: showFeedback()
+    };
+
     return (
-        showFeedback()
-        ?
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <AnswerComponent />
-            </Grid>
-            <Grid item xs={12}>
-                <AnswerFeedback options={options} answeredOptions={getAnswerValue()} correctOptions={correctOptions} margin={margin} />
-            </Grid>
-        </Grid>
-        :
-        <AnswerComponent />
+        <AnsFeedbackCtx.Provider value={ctxValue}>
+            <AnswerComponent />
+            { feedback }
+        </AnsFeedbackCtx.Provider>
     );
 };
 

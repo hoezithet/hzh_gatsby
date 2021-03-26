@@ -60,172 +60,55 @@ function getRandomArrElement(arr) {
   return arr[getRandomInt(arr.length)];
 }
 
-export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0.01 }) => {
-    const options = (children && children.props
-                     ?
-                     (children.props.originalType === "ul"
-                     ?
-                     children.props.children.map(c => c.props.children)
-                     :
-                     [])
-                     :
-                     []);
-
-    const correctAnswers = Array.isArray(correct) ? correct : [correct];
-    const answerType = (options.length === 0) ? FILL_IN : (correctAnswers.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
-
-    const [answerId, setAnswerId] = useState(-1);
-    const [registerAnswer, setAnswer, getAnswer, allAnswers] = useContext(StoreContext);
-
-    useEffect(() => {
-        registerAnswer((assignedId) => setAnswerId(assignedId));
-    }, []);
-
-    const ansEqual = (ans1: number|string, ans2: number|string) => {
-        if (ans1 === ans2) {
-            return true;
-        }
-        if (typeof(ans1) !== typeof(ans2)) {
-            return false;
-        }
-        if (typeof(ans1) === "number") {
-            return (
-                (ans1 - margin < ans2
-                    || ans1 - margin === ans2)
-                &&
-                (ans1 + margin > ans2
-                    || ans1 + margin === ans2)
-            );
-        }
+const getAnswerType = (options, correctOptions) => (options.length === 0) ? FILL_IN : (correctOptions.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
+const optEqual = (opt1: AnswerElementType, opt2: AnswerElementType, margin: number) => {
+    if (opt1 === opt2) {
+        return true;
+    }
+    if (typeof(opt1) !== typeof(opt2)) {
         return false;
-    };
-
-    const evaluateAnswers = (answerValues: Array<number|string>) => {
+    }
+    if (typeof(opt1) === "number") {
         return (
-            // All correct answers should be given...
-            correctAnswers.every(
-                corrAns => answerValues.some(
-                    givAns => ansEqual(corrAns, givAns)
-                )
-            )
-            // ...and all given answers should be correct
-            && answerValues.every(
-                givAns => correctAnswers.some(
-                    corrAns => ansEqual(corrAns, givAns)
-                )
+            (opt1 - margin < opt2
+                || opt1 - margin === opt2)
+            &&
+            (opt1 + margin > opt2
+                || opt1 + margin === opt2)
+        );
+    }
+    return false;
+};
+
+const evaluateAnsweredOptions = (answeredOptions: AnswerValueType, correctOptions: AnswerValueType, margin: number) => {
+    return (
+        // All correct answers should be given...
+        correctOptions.every(
+            corrOpt => answeredOptions.some(
+                ansOpt => optEqual(corrOpt, ansOpt, margin)
             )
         )
-    };
+        // ...and all given answers should be correct
+        && answeredOptions.every(
+            ansOpt => correctOptions.some(
+                corrOpt => optEqual(corrOpt, ansOpt, margin)
+            )
+        )
+    )
+};
 
-    const getChildrenArray = (children) => {
-        const childArr = React.Children.toArray(children);
-        if (childArr.length === 1) {
-            return getChildrenArray(childArr[0]);
-        } else {
-            return childArr;
-        }
-    };
+const FeedbackPaper = styled(Paper)`
+    padding: ${theme.spacing(1)}px;
+`;
 
-    function isNumeric(str: string) {
-        if (typeof str != "string") return false // we only process strings!
-        str = str.replace(",", ".");
-        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-               !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-    }
-
-    const getAnswerValue = () => {
-        const answer = getAnswer(answerId);
-        if (answer && answer.value !== undefined) {
-            return answer.value;
-        } else {
-            return [];
-        }
-    };
-
-    const showFeedback = useMemo(() => {
-        const answer = getAnswer(answerId);
-        if (answer && answer.showFeedback !== undefined) {
-            return answer.showFeedback;
-        } else {
-            return false;
-        }
-    }, [allAnswers]);
-
-    const setAnswerValue = (newValue) => {
-        setAnswer({
-            value: newValue,
-            correct: evaluateAnswers(newValue),
-            answered: newValue.length > 0,
-            showFeedback: false
-        }, answerId);
-    };
-
-    const handleChange = e => {
-        if (!isNumeric(String(e.target.value))) {
-            if (answerType === FILL_IN) {
-                setAnswerValue([]);
-            }
-            return;
-        }
-        const val = Number(e.target.value);
-        if (answerType === MULTIPLE_ANSWER) {
-            if (e.target.checked) {
-                setAnswerValue([...getAnswerValue(), val]);
-            } else {
-                setAnswerValue([...getAnswerValue().filter(ans => ans !== val)]);
-            }
-        } else {
-            setAnswerValue([val]);
-        }
-    };
-
-    let answerComponent;
-
-    switch (answerType) {
-        case FILL_IN: {
-            const valueType = typeof(correctAnswers[0]);
-            const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
-            answerComponent = (
-                <TextField disabled={showFeedback} variant="filled" type={ valueType } onChange={ handleChange }
-                placeholder={showFeedback ? ansValue : "Vul in"}/>
-            );
-            break;
-        }
-        case MULTIPLE_CHOICE: {
-            const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
-            answerComponent = (
-                <RadioGroup value={ansValue} onChange={handleChange}>
-                    {
-                    options.map((option, index) => (
-                    <FormControlLabel key={index} value={index} control={<Radio />} label={ option } disabled={showFeedback}/>
-                    ))
-                    }
-                </RadioGroup>
-            );
-            break;
-        }
-        case MULTIPLE_ANSWER: {
-            answerComponent = (
-                <FormGroup>
-                    {
-                    options.map((option, index) => (
-                    <FormControlLabel
-                        key={index} 
-                        control={<Checkbox value={index} checked={ getAnswerValue().includes(index) } onChange={handleChange}/>}
-                        label={ option }
-                        disabled={showFeedback} />
-                    ))
-                    }
-                </FormGroup>
-            );
-            break;
-        }
-    }
-
+export const AnswerFeedback = (props) => {
+    const {options, answeredOptions, correctOptions, margin} = props;
+    const answerType = getAnswerType(options, correctOptions);
+    const isCorrect = evaluateAnsweredOptions(answeredOptions, correctOptions, margin);
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
     const answerToReadable = answerType === FILL_IN ? (ans: number) => ans : (ans: number) => ALPHABET[ans];
-    const readableAnswers = correctAnswers.map(answerToReadable);
-    const correctAnswersText = (
+    const readableAnswers = correctOptions.map(answerToReadable);
+    const correctOptionsText = (
         readableAnswers.length > 1
         ?
         `${readableAnswers.slice(0, -1).join(',')} en ${readableAnswers.slice(-1)[0]}`
@@ -260,16 +143,12 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         () => `${getRandomArrElement(correctMessages)} ${getRandomArrElement(correctEmojis)}`,
         []);
     const incorrectFeedbackText = useMemo(
-        () => (correctAnswers.length > 1
+        () => (correctOptions.length > 1
         ?
-        `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} De juiste antwoorden waren ${correctAnswersText}.`
+        `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} De juiste antwoorden waren ${correctOptionsText}.`
         :
-        `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} Het juiste antwoord was ${correctAnswersText}.`),
+        `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} Het juiste antwoord was ${correctOptionsText}.`),
         []);
-
-    const FeedbackPaper = styled(Paper)`
-        padding: ${theme.spacing(1)}px;
-    `;
     
     const [showExtraExplanation, setShowExtraExplanation] = useState(false);
     const nodeHeight = useRef(0);
@@ -297,49 +176,191 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             ease: "power2.inOut"
         });
     }, [showExtraExplanation]);
+    
+    return (
+        <FeedbackPaper elevation={0} variant="outlined">
+            <b>
+                { isCorrect
+                ?
+                correctFeedbackText
+                :
+                incorrectFeedbackText
+                }
+            </b>
+            <p>
+               ...Hier komt de uitleg...
+            </p>
+            <div ref={extraExplnRef}>
+                <p>
+                ...Hier komt extra uitleg...
+                </p>
+            </div>
+            <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
+                showExtraExplanation
+                ?
+                "Verberg meer uitleg"
+                :
+                "Toon meer uitleg"
+            }</Button>
+        </FeedbackPaper>
+    );
+}
+
+export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0.01 }) => {
+    const options = (children && children.props
+                     ?
+                     (children.props.originalType === "ul"
+                     ?
+                     children.props.children.map(c => c.props.children)
+                     :
+                     [])
+                     :
+                     []);
+
+    const correctOptions = Array.isArray(correct) ? correct : [correct];
+    const answerType = getAnswerType(options, correctOptions);
+
+    const [answerId, setAnswerId] = useState(-1);
+    const [registerAnswer, setAnswer, getAnswer, allAnswers] = useContext(StoreContext);
+
+    useEffect(() => {
+        registerAnswer((assignedId) => setAnswerId(assignedId));
+    }, []);
+
+    const getChildrenArray = (children) => {
+        const childArr = React.Children.toArray(children);
+        if (childArr.length === 1) {
+            return getChildrenArray(childArr[0]);
+        } else {
+            return childArr;
+        }
+    };
+
+    function isNumeric(str: string) {
+        if (typeof str != "string") return false // we only process strings!
+        str = str.replace(",", ".");
+        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+               !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+    }
+
+    const getCurrentAnswer = () => {
+        return getAnswer(answerId);
+    };
+
+    const getAnswerValue = () => {
+        const currentAnswer = getCurrentAnswer();
+        if (currentAnswer && currentAnswer.value !== undefined) {
+            return currentAnswer.value;
+        } else {
+            return [];
+        }
+    };
+
+    const showFeedback = () => {
+        const currentAnswer = getCurrentAnswer();
+        if (currentAnswer && currentAnswer.showFeedback !== undefined) {
+            return currentAnswer.showFeedback;
+        } else {
+            return false;
+        }
+    };
+
+    const isCorrect = () => {
+        const currentAnswer = getCurrentAnswer();
+        if (currentAnswer && currentAnswer.showFeedback !== undefined) {
+            return currentAnswer.showFeedback;
+        } else {
+            return false;
+        }
+    };
+
+    const setAnsweredOption = (newValue: AnswerValueType) => {
+        setAnswer({
+            value: newValue,
+            correct: evaluateAnsweredOptions(newValue, correctOptions, margin),
+            answered: newValue.length > 0,
+            showFeedback: false
+        }, answerId);
+    };
+
+    const handleChange = e => {
+        if (!isNumeric(String(e.target.value))) {
+            if (answerType === FILL_IN) {
+                setAnsweredOption([]);
+            }
+            return;
+        }
+        const val = Number(e.target.value);
+        if (answerType === MULTIPLE_ANSWER) {
+            if (e.target.checked) {
+                setAnsweredOption([...getAnswerValue(), val]);
+            } else {
+                setAnsweredOption([...getAnswerValue().filter(ans => ans !== val)]);
+            }
+        } else {
+            setAnsweredOption([val]);
+        }
+    };
+
+    const AnswerComponent = (props: {}) => {
+        switch (answerType) {
+            case FILL_IN: {
+                const valueType = typeof(correctOptions[0]);
+                const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
+                return (
+                    <TextField disabled={showFeedback()} variant="filled" type={ valueType } onChange={ handleChange }
+                    placeholder={showFeedback() ? ansValue : "Vul in"} value={ansValue} />
+                );
+            }
+            case MULTIPLE_CHOICE: {
+                const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
+                return (
+                    <RadioGroup value={ansValue} onChange={handleChange}>
+                        {
+                        options.map((option, index) => (
+                        <FormControlLabel key={index} value={index} control={<Radio />} label={ option } disabled={showFeedback()}/>
+                        ))
+                        }
+                    </RadioGroup>
+                );
+            }
+            case MULTIPLE_ANSWER: {
+                return (
+                    <FormGroup>
+                        {
+                        options.map((option: AnswerElementType, index: number) => (
+                        <FormControlLabel
+                            key={index} 
+                            control={<Checkbox value={index} checked={ getAnswerValue().includes(index) } onChange={handleChange}/>}
+                            label={ option }
+                            disabled={showFeedback()} />
+                        ))
+                        }
+                    </FormGroup>
+                );
+            }
+        }
+    }
 
     return (
-        showFeedback
+        showFeedback()
         ?
-        <Grid container spacing={1}>
-            <Grid xs={12} item>
-                { answerComponent }
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <AnswerComponent />
             </Grid>
-            <Grid xs={12} item>
-            <FeedbackPaper elevation={0} variant="outlined">
-                <b>
-                    { evaluateAnswers(getAnswerValue())
-                    ?
-                    correctFeedbackText
-                    :
-                    incorrectFeedbackText
-                    }
-                </b>
-                <p>
-                   ...Hier komt de uitleg...
-                </p>
-                <div ref={extraExplnRef}>
-                    <p>
-                    ...Hier komt extra uitleg...
-                    </p>
-                </div>
-                <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
-                    showExtraExplanation
-                    ?
-                    "Verberg meer uitleg"
-                    :
-                    "Toon meer uitleg"
-                }</Button>
-            </FeedbackPaper>
+            <Grid item xs={12}>
+                <AnswerFeedback options={options} answeredOptions={getAnswerValue()} correctOptions={correctOptions} margin={margin} />
             </Grid>
         </Grid>
         :
-        answerComponent
+        <AnswerComponent />
     );
 };
 
 
-type AnswerValueType = Array<number|string>;
+type AnswerElementType = number|string;
+type AnswerValueType = Array<AnswerElementType>;
 type AnswerType = {
     value: AnswerValueType,
     correct: boolean,
@@ -347,7 +368,7 @@ type AnswerType = {
     showFeedback: boolean
 }; 
 
-const Feedback = ({nCorrect, nTotal}) => {
+const StepExercisesFeedback = ({nCorrect, nTotal}) => {
     let message = `${nCorrect}/${nTotal}`;
     return <p>{ message }</p>
 };
@@ -429,12 +450,12 @@ const Store: FunctionComponent = ({ children, elements, setElements }) => {
         });
     };
 
-    const getElement = useCallback((id) => {
+    const getElement = (id) => {
         if (id === -1 || id >= elements.length) {
             return null;
         }
         return elements[id];
-    }, [elements]);
+    };
 
     return (
         <StoreContext.Provider value={[registerElement, setElement, getElement, elements]}>
@@ -590,7 +611,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
               showFeedback
               ?
               <StyledPaper>
-                  <Feedback nCorrect={exercises.reduce((acc, ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length}/>
+                  <StepExercisesFeedback nCorrect={exercises.reduce((acc, ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length}/>
                   <Button variant="contained"
                               color="primary"
                               onClick={handleNext}>

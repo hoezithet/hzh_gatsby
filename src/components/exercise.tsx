@@ -99,6 +99,8 @@ const evaluateAnsweredOptions = (answeredOptions: AnswerValueType, correctOption
 
 const FeedbackPaper = styled(Paper)`
     padding: ${theme.spacing(1)}px;
+    margin-top: ${theme.spacing(1)}px;
+    margin-bottom: ${theme.spacing(2)}px;
 `;
 
 type AnsFeedbackCtxType = {
@@ -524,6 +526,10 @@ interface ExerciseStepperProps {
     title?: string;
 }
 
+const NextPrevBtnGrid = styled(Grid)`
+    margin-top: ${theme.spacing(1)}px;
+`
+
 export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ children, title = "Oefening" }) => {
     const steps = React.Children.toArray(children);
     const [exercises, setExercises] = useState<ExerciseType[]>([]);
@@ -627,7 +633,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
               steps.map((step, index) =>
                   <StyledPaper key={index} elevation={1}>
                   { step }
-                  <Grid container spacing={2}>
+                  <NextPrevBtnGrid container spacing={2}>
                       <Grid item>
                           <Button disabled={activeStep === 0} onClick={handleBack} >
                               Vorige
@@ -641,7 +647,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                               { activeStep === steps.length - 1 && allStepsCompleted() && !showFeedback ? 'Klaar' : 'Volgende'}
                           </Button>
                       </Grid>
-                  </Grid> 
+                  </NextPrevBtnGrid> 
                   </StyledPaper>
               )
             }

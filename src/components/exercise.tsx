@@ -644,7 +644,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                               color="primary"
                               disabled={!stepCompleted(index) && exercises.filter((ex, i) => i !== index).every((ex, i) => stepCompleted(i))}
                               onClick={handleNext}>
-                              { activeStep === steps.length - 1 && allStepsCompleted() && !showFeedback ? 'Klaar' : 'Volgende'}
+                              { index === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
                           </Button>
                       </Grid>
                   </NextPrevBtnGrid> 

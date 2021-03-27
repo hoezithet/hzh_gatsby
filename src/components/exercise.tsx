@@ -60,24 +60,30 @@ function getRandomArrElement(arr) {
   return arr[getRandomInt(arr.length)];
 }
 
+function isNumeric(str: string) {
+    if (typeof str != "string") return false // we only process strings!
+    str = str.replace(",", ".");
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+           !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+} 
+
 const getAnswerType = (options, correctOptions) => (options.length === 0) ? FILL_IN : (correctOptions.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
 const optEqual = (opt1: AnswerElementType, opt2: AnswerElementType, margin: number) => {
-    if (opt1 === opt2) {
-        return true;
-    }
-    if (typeof(opt1) !== typeof(opt2)) {
-        return false;
-    }
-    if (typeof(opt1) === "number") {
+    const strOpt1 = String(opt1).replace(",", ".");
+    const strOpt2 = String(opt2).replace(",", ".");
+    if (isNumeric(strOpt1) && isNumeric(strOpt2)) {
+        const numOpt1 = Number(strOpt1);
+        const numOpt2 = Number(strOpt2);
         return (
-            (opt1 - margin < opt2
-                || opt1 - margin === opt2)
+            (numOpt1 - margin < numOpt2
+                || numOpt1 - margin === numOpt2)
             &&
-            (opt1 + margin > opt2
-                || opt1 + margin === opt2)
+            (numOpt1 + margin > numOpt2
+                || numOpt1 + margin === numOpt2)
         );
+    } else {
+        return opt1 === opt2;
     }
-    return false;
 };
 
 const evaluateAnsweredOptions = (answeredOptions: AnswerValueType, correctOptions: AnswerValueType, margin: number) => {
@@ -275,13 +281,6 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
 
-    function isNumeric(str: string) {
-        if (typeof str != "string") return false // we only process strings!
-        str = str.replace(",", ".");
-        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-               !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-    }
-
     const getCurrentAnswer = () => {
         return getAnswer(answerId);
     };
@@ -324,21 +323,19 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
     };
 
     const handleChange = e => {
-        if (!isNumeric(String(e.target.value))) {
-            if (answerType === FILL_IN) {
-                setAnsweredOption([]);
-            }
-            return;
-        }
-        const val = Number(e.target.value);
-        if (answerType === MULTIPLE_ANSWER) {
-            if (e.target.checked) {
-                setAnsweredOption([...getAnswerValue(), val]);
-            } else {
-                setAnsweredOption([...getAnswerValue().filter(ans => ans !== val)]);
-            }
+        if (answerType === FILL_IN) {
+            setAnsweredOption([e.target.value]);
         } else {
-            setAnsweredOption([val]);
+            const val = Number(e.target.value);
+            if (answerType === MULTIPLE_ANSWER) {
+                if (e.target.checked) {
+                    setAnsweredOption([...getAnswerValue(), val]);
+                } else {
+                    setAnsweredOption([...getAnswerValue().filter(ans => ans !== val)]);
+                }
+            } else {
+                setAnsweredOption([val]);
+            }
         }
     };
 
@@ -348,7 +345,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                 const valueType = typeof(correctOptions[0]);
                 const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
                 return (
-                    <TextField disabled={showFeedback()} variant="filled" type={ valueType } onChange={ handleChange }
+                    <TextField disabled={showFeedback()} variant="filled" onChange={ handleChange }
                     placeholder={showFeedback() ? ansValue : "Vul in"} value={ansValue} />
                 );
             }

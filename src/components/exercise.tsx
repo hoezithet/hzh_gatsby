@@ -427,12 +427,14 @@ const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
         if (pct === 1.0) {
             query = getRandomArrElement(["party", "excited", "dance", "hooray", "proud"]);
             message = getRandomArrElement(["Proficiat!", "Mooi zo!", "Perfect!", "Hoera! Alles juist!", "Super goed!"]);
-            const emoji = getRandomArrElement([
+            const partyEmojis = [
                 "🎉", "🎈", "🎊", "🥳", "👏", "🕺", "💃"
-            ]);
-            message = `${emoji} ${message} ${emoji}`
+            ];
+            const emoji1 = getRandomArrElement(partyEmojis);
+            const emoji2 = getRandomArrElement(partyEmojis.filter(e => e !== emoji1));
+            message = `${emoji1}${emoji2} ${message} ${emoji2}${emoji1}`
         } else if (pct >= 0.6) {
-            query = getRandomArrElement(["okay", "not bad"]);
+            query = getRandomArrElement(["good job", "well done"]);
             message = getRandomArrElement(["Zeker niet slecht!", "Kan ermee door!"]);
         } else {
             query = getRandomArrElement(["darn"]);
@@ -603,19 +605,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
 
     const handleNext = () => {
         handleStepChange(activeStep + 1);
-    };
-
-    const handleBack = () => {
-        handleStepChange(activeStep - 1);
-    };
-
-    const handleStep = (step: number) => () => {
-        const newActiveStep =
-            isLastStep() && !allStepsCompleted() && step > activeStep
-            ? // It's the last step, but not all steps have been completed,
-            // find the first step that has been completed
-            exercises.map((ex, i) => i).find(i => !stepCompleted(i))
-            : step;
         if (isLastStep() && allStepsCompleted()) {
             // All exercises are done. Feedback can be shown now.
             setExercises(
@@ -629,6 +618,19 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             );
             setShowFeedback(true);
         }
+    };
+
+    const handleBack = () => {
+        handleStepChange(activeStep - 1);
+    };
+
+    const handleStep = (step: number) => () => {
+        const newActiveStep =
+            isLastStep() && !allStepsCompleted() && step > activeStep
+            ? // It's the last step, but not all steps have been completed,
+            // find the first step that has been completed
+            exercises.map((ex, i) => i).find(i => !stepCompleted(i))
+            : step;
         setActiveStep(newActiveStep % (allStepsCompleted() ? steps.length + 1 : steps.length));
     };
 

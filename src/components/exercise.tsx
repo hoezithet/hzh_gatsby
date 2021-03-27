@@ -405,9 +405,69 @@ type AnswerType = {
     showFeedback: boolean
 }; 
 
-const StepExercisesFeedback = ({nCorrect, nTotal}) => {
-    let message = `${nCorrect}/${nTotal}`;
-    return <p>{ message }</p>
+type ExercisesFeedbackProps = {
+    nCorrect: number,
+    nTotal: number
+};
+
+const ExercisesFeedbackDiv = styled.div`
+    text-align: center;
+    margin: ${theme.spacing(2)}px;
+`;
+
+const ExercisesFeedbackImg = styled.img`
+    border-radius: ${theme.spacing(1)}px;
+`;
+
+const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
+    const [imgSrc, setImgSrc] = useState(null);
+    const [query, message] = useMemo(() => {
+        let query, message;
+        const pct = nCorrect / nTotal;
+        if (pct === 1.0) {
+            query = getRandomArrElement(["party", "excited", "dance", "hooray", "proud"]);
+            message = getRandomArrElement(["Proficiat!", "Mooi zo!", "Perfect!", "Hoera! Alles juist!", "Super goed!"]);
+            const emoji = getRandomArrElement([
+                "🎉", "🎈", "🎊", "🥳", "👏", "🕺", "💃"
+            ]);
+            message = `${emoji} ${message} ${emoji}`
+        } else if (pct >= 0.6) {
+            query = getRandomArrElement(["okay", "not bad"]);
+            message = getRandomArrElement(["Zeker niet slecht!", "Kan ermee door!"]);
+        } else {
+            query = getRandomArrElement(["darn"]);
+            message = getRandomArrElement(["Helaas toch enkele foutjes...", "Jammer!", "Volgende keer beter!"]);
+        }
+        return [query, message];
+    }, []);
+    useEffect(() => {
+        const GIPHY_API_KEY = "kyY68tTKTZZwGCYpwYMhLEYOgoYy7Tu2";
+        const offset = Math.floor(Math.random() * Math.floor(20));
+        const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${query}&limit=1&offset=${offset}&rating=g&lang=en`;
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+              if (!(data && data.data && data.data[0] && data.data[0].images)) {
+                  return;
+              }
+              const giphyImg = data.data[0].images.fixed_width;
+              setImgSrc(giphyImg.url);
+          });
+    }, []);
+    return (
+        <ExercisesFeedbackDiv>
+            <p>Je behaalde:</p>
+            <h3>{ `${nCorrect}/${nTotal}` }</h3>
+            <p>{ message }</p>
+            {
+                imgSrc
+                ?
+                <ExercisesFeedbackImg src={imgSrc}/>
+                :
+                null
+            }
+        </ExercisesFeedbackDiv>
+    );
 };
 
 export const Exercise: FunctionComponent = ({ children }) => {
@@ -513,7 +573,7 @@ function ExerciseStepIcon(props: StepIconProps) {
   return (
       <StyledIcon />
   );
-} 
+}
 
 type ExerciseType = {
     answers: AnswerType[]
@@ -652,12 +712,12 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
               showFeedback
               ?
               <StyledPaper>
-                  <StepExercisesFeedback nCorrect={exercises.reduce((acc, ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length}/>
+                  <ExercisesFeedback nCorrect={exercises.reduce((acc, ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length}/>
                   <Button variant="contained"
-                              color="primary"
-                              onClick={handleNext}>
-                              Toon feedback
-                          </Button>
+                      color="primary"
+                      onClick={handleNext}>
+                      Toon feedback
+                  </Button>
               </StyledPaper>
               :
               null

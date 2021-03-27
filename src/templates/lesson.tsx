@@ -28,6 +28,7 @@ import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
 import Feedback from "../components/feedback";
 import PrintLink from "../components/printlink";
+import { Exercise, Answer, AnswerFeedback, ExerciseStepper } from "../components/exercise";
 
 
 import { Link } from 'gatsby-theme-material-ui';
@@ -59,6 +60,10 @@ export const shortcodes = {
     DarkRed,
     Purple,
     Gray,
+    Exercise,
+    Answer,
+    AnswerFeedback,
+    ExerciseStepper
 };
 
 export const components = {

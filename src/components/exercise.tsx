@@ -281,9 +281,9 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
 
-    const getCurrentAnswer = () => {
+    const getCurrentAnswer = useCallback(() => {
         return getAnswer(answerId);
-    };
+    }, [getAnswer, answerId]);
 
 
     const getAnswerValue = () => {
@@ -313,14 +313,14 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
 
-    const setAnsweredOption = (newValue: AnswerValueType) => {
+    const setAnsweredOption = useCallback((newValue: AnswerValueType) => {
         setAnswer({
             value: newValue,
             correct: evaluateAnsweredOptions(newValue, correctOptions, margin),
             answered: newValue.length > 0,
             showFeedback: false
         }, answerId);
-    };
+    }, [setAnswer]);
 
     const handleChange = e => {
         if (answerType === FILL_IN) {
@@ -339,20 +339,21 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         }
     };
 
-    const AnswerComponent = (props: {}) => {
+    const ansValue = getAnswerValue();
+    const answerComp = useMemo(() => {
         switch (answerType) {
             case FILL_IN: {
                 const valueType = typeof(correctOptions[0]);
-                const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
+                const filledValue = ansValue.length > 0 ? ansValue[0] : null;
                 return (
                     <TextField disabled={showFeedback()} variant="filled" onChange={ handleChange }
-                    placeholder={showFeedback() ? ansValue : "Vul in"} value={ansValue} />
+                    placeholder={showFeedback() ? filledValue : "Vul in"} value={filledValue} />
                 );
             }
             case MULTIPLE_CHOICE: {
-                const ansValue = getAnswerValue().length > 0 ? getAnswerValue()[0] : null;
+                const chosenIdx = ansValue.length > 0 ? ansValue[0] : null;
                 return (
-                    <RadioGroup value={ansValue} onChange={handleChange}>
+                    <RadioGroup value={chosenIdx} onChange={handleChange}>
                         {
                         options.map((option, index) => (
                         <FormControlLabel key={index} value={index} control={<Radio />} label={ option } disabled={showFeedback()}/>
@@ -377,7 +378,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                 );
             }
         }
-    }
+    }, [ansValue, showFeedback(), handleChange]);
 
     const ctxValue = {
         options: options,
@@ -389,7 +390,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
 
     return (
         <AnsFeedbackCtx.Provider value={ctxValue}>
-            <AnswerComponent />
+            { answerComp }
             { feedback }
         </AnsFeedbackCtx.Provider>
     );
@@ -482,7 +483,7 @@ export const Exercise: FunctionComponent = ({ children }) => {
         });
     }, []);
 
-    const registerExerciseAnswer = (idCallback) => {
+    const registerExerciseAnswer = useCallback((idCallback) => {
         setAnswers(answers => {
             const answerId = answers.length;
             idCallback(answerId);
@@ -490,7 +491,7 @@ export const Exercise: FunctionComponent = ({ children }) => {
             setStoredExercise({answers: newAnswers}, exerciseId);
             return newAnswers;
         });
-    };
+    }, [setAnswers]);
 
     useEffect(() => {
         const exercise = getStoredExercise(exerciseId);
@@ -499,21 +500,21 @@ export const Exercise: FunctionComponent = ({ children }) => {
         }
     }, [allExercises]);
 
-    const setExerciseAnswer = (answer, id) => {
+    const setExerciseAnswer = useCallback((answer, id) => {
         setAnswers(answers => {
             answers[id] = {...answer};
             setStoredExercise({answers: answers}, exerciseId);
             return answers;
         });
-    };
+    }, [answers, setAnswers]);
 
-    const getExerciseAnswer = (id) => {
+    const getExerciseAnswer = useCallback((id) => {
         return answers.length > id
         ?
         answers[id]
         :
         null;
-    };
+    }, [answers]);
 
     return (
         <>
@@ -527,7 +528,7 @@ export const Exercise: FunctionComponent = ({ children }) => {
 const Store: FunctionComponent = ({ children, elements, setElements }) => {
     const [idCallbacks, setIdCallbacks] = useState([]);
 
-    const registerElement = (idCallback) => {
+    const registerElement = useCallback((idCallback) => {
         setIdCallbacks(idCallbacks => {
             idCallback(idCallbacks.length);
             const newCallbacks = [...idCallbacks, idCallback];
@@ -535,9 +536,9 @@ const Store: FunctionComponent = ({ children, elements, setElements }) => {
             setElements(elements);
             return newCallbacks;
         });
-    };
+    }, [elements, setElements]);
 
-    const setElement = (element, id) => {
+    const setElement = useCallback((element, id) => {
         setElements(elements => {
             if (id < 0 || id >= elements.length) {
                 return elements;
@@ -546,14 +547,14 @@ const Store: FunctionComponent = ({ children, elements, setElements }) => {
             newElements[id] = element;
             return newElements;
         });
-    };
+    }, [elements, setElements]);
 
-    const getElement = (id) => {
+    const getElement = useCallback((id) => {
         if (id === -1 || id >= elements.length) {
             return null;
         }
         return elements[id];
-    };
+    }, [elements]);
 
     return (
         <StoreContext.Provider value={[registerElement, setElement, getElement, elements]}>

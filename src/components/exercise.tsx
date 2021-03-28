@@ -662,9 +662,9 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
         );
     }, [exercises]);
 
-    const allStepsCompleted = () => {
+    const allStepsCompleted = useCallback(() => {
         return exercises.every((ex, index) => stepCompleted(index));
-    };
+    }, [exercises]);
 
     const stepCorrect = useCallback((step: number) => {
         return (

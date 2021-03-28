@@ -443,9 +443,8 @@ const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
         return [query, message];
     }, []);
     useEffect(() => {
-        const GIPHY_API_KEY = "kyY68tTKTZZwGCYpwYMhLEYOgoYy7Tu2";
         const offset = Math.floor(Math.random() * Math.floor(20));
-        const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${query}&limit=1&offset=${offset}&rating=g&lang=en`;
+        const url = `${process.env.GATSBY_GIPHY_API_URL}?api_key=${process.env.GATSBY_GIPHY_API_KEY}&q=${query}&limit=1&offset=${offset}&rating=g&lang=en`;
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -593,7 +592,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
     const steps = React.Children.toArray(children);
     const [exercises, setExercises] = useState<ExerciseType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
-    const [showFeedback, setShowFeedback] = useState(false);
 
     const totalSteps = () => {
         return steps.length;
@@ -616,7 +614,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                     }
                 ))
             );
-            setShowFeedback(true);
         }
     };
 
@@ -640,7 +637,19 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
 
     const handleReset = () => {
         setActiveStep(0);
-        setCompleted({});
+        setExercises(
+            exercises.map(ex => (
+                {
+                    answers: ex.answers.map(ans => (
+                        {}
+                    ))
+                }
+            ))
+        );
+    };
+    
+    const showFeedback = () => {
+        return exercises.every(ex => ex.answers && ex.answers.every(ans => ans.showFeedback));
     };
 
     const stepCompleted = useCallback((step: number) => {
@@ -680,7 +689,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                              active: activeStep === index,
                              completed: stepCompleted(index),
                              correct: stepCorrect(index),
-                             showFeedback: showFeedback
+                             showFeedback: showFeedback()
                          }
                      }
                      onClick={handleStep(index)} />
@@ -706,20 +715,29 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                               { index === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
                           </Button>
                       </Grid>
-                  </NextPrevBtnGrid> 
+                  </NextPrevBtnGrid>
                   </StyledPaper>
               )
             }
             {
-              showFeedback
+              showFeedback()
               ?
               <StyledPaper>
                   <ExercisesFeedback nCorrect={exercises.reduce((acc, ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length}/>
-                  <Button variant="contained"
-                      color="primary"
-                      onClick={handleNext}>
-                      Toon feedback
-                  </Button>
+                  <NextPrevBtnGrid container spacing={2}>
+                      <Grid item>
+                          <Button onClick={handleReset}>
+                              Begin opnieuw
+                          </Button>
+                      </Grid>
+                      <Grid item>
+                          <Button variant="contained"
+                              color="primary"
+                              onClick={handleNext}>
+                              Toon feedback
+                          </Button>
+                      </Grid> 
+                  </NextPrevBtnGrid>  
               </StyledPaper>
               :
               null

@@ -344,7 +344,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         switch (answerType) {
             case FILL_IN: {
                 const valueType = typeof(correctOptions[0]);
-                const filledValue = ansValue.length > 0 ? ansValue[0] : null;
+                const filledValue = ansValue.length > 0 ? ansValue[0] : "";
                 return (
                     <TextField disabled={showFeedback()} variant="filled" onChange={ handleChange }
                     placeholder={showFeedback() ? filledValue : "Vul in"} value={filledValue} />
@@ -517,11 +517,9 @@ export const Exercise: FunctionComponent = ({ children }) => {
     }, [answers]);
 
     return (
-        <>
         <StoreContext.Provider value={[registerExerciseAnswer, setExerciseAnswer, getExerciseAnswer, answers]}>
         { children }
         </StoreContext.Provider>
-        </>
     );
 };
 

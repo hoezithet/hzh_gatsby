@@ -782,7 +782,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                   </NextPrevBtnGrid>
               </StyledPaper>
               :
-              null
+              <></>
             }
         </SwipeableViews>
         </Store>

@@ -1,4 +1,5 @@
 import React, { useContext, FunctionComponent, useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
@@ -587,17 +588,33 @@ const Store: FunctionComponent = ({ children, elements, setElements }) => {
     );
 };
 
+const useStyles = makeStyles({
+    icon: {
+        color: props => props.showFeedback ? (
+            props.correct
+            ?
+            COLORS.GREEN
+            :
+            COLORS.ORANGE
+        ) : (
+            props.active
+            ?
+            COLORS.GOLD
+            :
+            COLORS.LIGHT_GRAY
+        ),
+        opacity: props => props.active ? "100%" : "50%",
+        cursor: "pointer"
+    }
+});
+
 function ExerciseStepIcon(props: StepIconProps) {
   const { active, completed, correct, showFeedback } = props;
   const Icon = completed ? RadioButtonCheckedIcon : RadioButtonUncheckedIcon;
-
-  const StyledIcon = styled(Icon)`
-      color: ${showFeedback ? (correct ? COLORS.GREEN : COLORS.ORANGE) : (active ? COLORS.GOLD : COLORS.LIGHT_GRAY)};
-      opacity: ${active ? "100%" : "50%"};
-  `;
+  const classes = useStyles(props);
 
   return (
-      <StyledIcon />
+      <Icon className={classes.icon} />
   );
 }
 

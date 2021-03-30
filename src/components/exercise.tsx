@@ -416,12 +416,28 @@ const ExercisesFeedbackDiv = styled.div`
     margin: ${theme.spacing(2)}px;
 `;
 
+
 const ExercisesFeedbackImg = styled.img`
     border-radius: ${theme.spacing(1)}px;
 `;
 
 const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
-    const [imgSrc, setImgSrc] = useState(null);
+    const [gifSrc, setGifSrc] = useState<string>("");
+    const [gifHeight, setGifHeight] = useState<number>(0);
+    const imgRefNode = useRef(null);
+    const imgRefCallback = useCallback((node) => {
+        if (node) {
+            imgRefNode.current = node;
+            gsap.set(node,
+                {
+                    width: "200px", // Giphy GIFs with fixed_width will have width of 200px
+                    height: "200px", // Set same as width, will be animated to correct value
+                    opacity: 0
+                }
+            );
+        }
+    }, []);
+    
     const [query, message] = useMemo(() => {
         let query, message;
         const pct = nCorrect / nTotal;
@@ -443,6 +459,7 @@ const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
         }
         return [query, message];
     }, []);
+
     useEffect(() => {
         const offset = Math.floor(Math.random() * Math.floor(20));
         const url = `${process.env.GATSBY_GIPHY_API_URL}?api_key=${process.env.GATSBY_GIPHY_API_KEY}&q=${query}&limit=1&offset=${offset}&rating=g&lang=en`;
@@ -452,22 +469,31 @@ const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
               if (!(data && data.data && data.data[0] && data.data[0].images)) {
                   return;
               }
-              const giphyImg = data.data[0].images.fixed_width;
-              setImgSrc(giphyImg.url);
+              const {fixed_width} = data.data[0].images;
+              setGifSrc(fixed_width.url);
+              setGifHeight(fixed_width.height);
           });
     }, []);
+
+    const handleGifLoad = () => {
+        if (!imgRefNode.current) {
+            return;
+        }
+        gsap.to(imgRefNode.current,
+        {
+            height: `${gifHeight}px`,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.inOut"
+        });
+    };
+    
     return (
         <ExercisesFeedbackDiv>
             <p>Je behaalde:</p>
             <h3>{ `${nCorrect}/${nTotal}` }</h3>
             <p>{ message }</p>
-            {
-                imgSrc
-                ?
-                <ExercisesFeedbackImg src={imgSrc}/>
-                :
-                null
-            }
+            <ExercisesFeedbackImg ref={imgRefCallback} src={gifSrc} onLoad={handleGifLoad} />
         </ExercisesFeedbackDiv>
     );
 };

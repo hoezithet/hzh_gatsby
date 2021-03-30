@@ -65,7 +65,7 @@ function isNumeric(str: string) {
     str = str.replace(",", ".");
     return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-} 
+}
 
 const getAnswerType = (options, correctOptions) => (options.length === 0) ? FILL_IN : (correctOptions.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
 const optEqual = (opt1: AnswerElementType, opt2: AnswerElementType, margin: number) => {
@@ -158,23 +158,23 @@ export const AnswerFeedback = ({children = null}: AnsFeedbackProps) => {
         "Correct!",
         "Helemaal goed!"
     ];
-    
+
     const correctEmojis = [
         "🎉", "🎈", "🎊", "🥳", "👍", "💪", "👏",
         "🕺", "💃"
     ];
-    
+
     const incorrectMessages = [
         "Niet juist...",
         "Dat klopt niet helaas...",
         "Jammer, dat is niet correct...",
         "Dat is helaas niet het juiste antwoord..."
     ];
-    
+
     const incorrectEmojis = [
         "😕", "😩", "🤷", "🤷‍♂️", "🤷‍♀️"
     ];
-    
+
     const correctFeedbackText = useMemo(
         () => `${getRandomArrElement(correctMessages)} ${getRandomArrElement(correctEmojis)}`,
         []);
@@ -185,7 +185,7 @@ export const AnswerFeedback = ({children = null}: AnsFeedbackProps) => {
         :
         `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} Het juiste antwoord was ${correctOptionsText}.`),
         []);
-    
+
     const [showExtraExplanation, setShowExtraExplanation] = useState(false);
     const nodeHeight = useRef(0);
     const nodeRef = useRef(null);
@@ -199,7 +199,7 @@ export const AnswerFeedback = ({children = null}: AnsFeedbackProps) => {
           });
       }
     }, []);
-    
+
     useEffect(() => {
         const explnNode = nodeRef.current;
         if (explnNode === null) {
@@ -212,7 +212,7 @@ export const AnswerFeedback = ({children = null}: AnsFeedbackProps) => {
             ease: "power2.inOut"
         });
     }, [showExtraExplanation]);
-    
+
     return (
         showFeedback
         ?
@@ -368,7 +368,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                         {
                         options.map((option: AnswerElementType, index: number) => (
                         <FormControlLabel
-                            key={index} 
+                            key={index}
                             control={<Checkbox value={index} checked={ getAnswerValue().includes(index) } onChange={handleChange}/>}
                             label={ option }
                             disabled={showFeedback()} />
@@ -404,7 +404,7 @@ type AnswerType = {
     correct: boolean,
     answered: boolean,
     showFeedback: boolean
-}; 
+};
 
 type ExercisesFeedbackProps = {
     nCorrect: number,
@@ -437,7 +437,7 @@ const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
             );
         }
     }, []);
-    
+
     const [query, message] = useMemo(() => {
         let query, message;
         const pct = nCorrect / nTotal;
@@ -487,7 +487,7 @@ const ExercisesFeedback = ({nCorrect, nTotal}: ExercisesFeedbackProps) => {
             ease: "power2.inOut"
         });
     };
-    
+
     return (
         <ExercisesFeedbackDiv>
             <p>Je behaalde:</p>
@@ -672,7 +672,7 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
             ))
         );
     };
-    
+
     const showFeedback = useCallback(() => {
         return exercises.every(ex => ex.answers && ex.answers.every(ans => ans.showFeedback));
     }, [exercises]);
@@ -761,8 +761,8 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
                               onClick={handleNext}>
                               Toon feedback
                           </Button>
-                      </Grid> 
-                  </NextPrevBtnGrid>  
+                      </Grid>
+                  </NextPrevBtnGrid>
               </StyledPaper>
               :
               null

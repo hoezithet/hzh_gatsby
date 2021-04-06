@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useContext, useEffect, useCallback, useMemo, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -10,15 +10,22 @@ import { StoreContext, StoreContextType } from './store';
 import { AnswerFeedback, AnswerFeedbackContext } from './answerFeedback';
 import { isNumeric } from "../utils/number";
 
+interface MDXElementProps {
+    mdxType: string;
+    originalType: string;
+    children: React.ReactNode;
+}
+
 interface AnswerProps {
     weight?: number;
     correct: number | string | number[];
     margin?: number;
+    children: React.ReactNode;
 }
 
-type AnswerElementType = number | string;
+export type AnswerOptionType = number | string;
 
-export type AnswerValueType = Array<AnswerElementType>;
+export type AnswerValueType = AnswerOptionType[];
 
 export type AnswerType = {
     value: AnswerValueType,
@@ -31,9 +38,19 @@ export const FILL_IN = "fill";
 export const MULTIPLE_CHOICE = "multiple choice";
 export const MULTIPLE_ANSWER = "multiple answer";
 
-export const getAnswerType = (options, correctOptions) => (options.length === 0) ? FILL_IN : (correctOptions.length == 1) ? MULTIPLE_CHOICE : MULTIPLE_ANSWER;
+export const getAnswerType = (options: AnswerOptionType[], correctOptions: AnswerOptionType[]) => (
+    options.length === 0
+        ?
+        FILL_IN
+        :
+        (correctOptions.length == 1
+            ?
+            MULTIPLE_CHOICE
+            :
+            MULTIPLE_ANSWER)
+);
 
-const optEqual = (opt1: AnswerElementType, opt2: AnswerElementType, margin: number) => {
+const optEqual = (opt1: AnswerOptionType, opt2: AnswerOptionType, margin: number) => {
     const strOpt1 = String(opt1).replace(",", ".");
     const strOpt2 = String(opt2).replace(",", ".");
     if (isNumeric(strOpt1) && isNumeric(strOpt2)) {
@@ -51,7 +68,11 @@ const optEqual = (opt1: AnswerElementType, opt2: AnswerElementType, margin: numb
     }
 };
 
-export const evaluateAnsweredOptions = (answeredOptions: AnswerValueType, correctOptions: AnswerValueType, margin: number) => {
+export const evaluateAnsweredOptions = (
+    answeredOptions: AnswerValueType,
+    correctOptions: AnswerValueType,
+    margin: number
+) => {
     return (
         // All correct answers should be given...
         correctOptions.every(
@@ -68,15 +89,16 @@ export const evaluateAnsweredOptions = (answeredOptions: AnswerValueType, correc
     )
 };
 
-export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, margin = 0.01 }) => {
+export const Answer = ({ children, correct, margin = 0.01 }: AnswerProps) => {
     let feedback = null;
-    let options = [];
+    let options: AnswerOptionType[] = [];
     if (children) {
-        const childArray = React.Children.toArray(children);
+        const childArray = React.Children.toArray(children) as React.ReactElement<MDXElementProps>[];
         feedback = childArray.find(c => c.props && c.props.mdxType === "AnswerFeedback");
-        const optionsUl = childArray.find(c => c.props && c.props.originalType === "ul");
-        if (optionsUl && optionsUl.props) {
-            options = optionsUl.props.children.map(c => c.props.children);
+        const optionsList = childArray.find(c => c.props && c.props.originalType === "ul");
+        if (optionsList && optionsList.props) {
+            const listItems = React.Children.toArray(optionsList.props.children) as React.ReactElement<MDXElementProps>[];
+            options = listItems.map(c => c.props.children) as string[];
         }
     }
     feedback = feedback || <AnswerFeedback />;
@@ -95,7 +117,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
         setAnsweredOption([]);
     }, [answerIdRef.current]);
 
-    const getChildrenArray = (children) => {
+    const getChildrenArray = (children: React.ReactNode): React.ReactNode[] => {
         const childArr = React.Children.toArray(children);
         if (childArr.length === 1) {
             return getChildrenArray(childArr[0]);
@@ -137,7 +159,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
             });
     }, [setElement]);
 
-    const handleChange = e => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (answerType === FILL_IN) {
             setAnsweredOption([e.target.value]);
         } else {
@@ -181,7 +203,7 @@ export const Answer: FunctionComponent<AnswerProps> = ({ children, correct, marg
                 return (
                     <FormGroup>
                         {
-                            options.map((option: AnswerElementType, index: number) => (
+                            options.map((option: AnswerOptionType, index: number) => (
                                 <FormControlLabel
                                     key={index}
                                     control={<Checkbox value={index} checked={getAnswerValue().includes(index)} onChange={handleChange} />}

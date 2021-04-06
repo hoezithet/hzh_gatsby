@@ -6,7 +6,10 @@ import { gsap } from "gsap";
 
 import { getRandomArrElement } from "../utils/array";
 import { theme } from "./theme";
-import { AnswerValueType, evaluateAnsweredOptions, getAnswerType, FILL_IN } from "./answer";
+import {
+    AnswerValueType, AnswerElementType, evaluateAnsweredOptions,
+    getAnswerType, MULTIPLE_ANSWER, MULTIPLE_CHOICE
+} from "./answer";
 
 
 const FeedbackPaper = styled(Paper)`
@@ -48,7 +51,13 @@ export const AnswerFeedback = ({ children = null }: AnsFeedbackProps) => {
     const answerType = getAnswerType(options, correctOptions);
     const isCorrect = evaluateAnsweredOptions(answeredOptions, correctOptions, margin);
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    const answerToReadable = answerType === FILL_IN ? (ans: number) => ans : (ans: number) => ALPHABET[ans];
+    const answerToReadable = (
+        [MULTIPLE_ANSWER, MULTIPLE_CHOICE].includes(answerType)
+            ?
+            (ans: AnswerElementType) => ALPHABET[ans as number]
+            :
+            (ans: AnswerElementType) => `${ans}`
+    );
     const readableAnswers = correctOptions.map(answerToReadable);
     const correctOptionsText = (
         readableAnswers.length > 1

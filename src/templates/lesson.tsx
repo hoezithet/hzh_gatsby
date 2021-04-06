@@ -28,10 +28,10 @@ import Layout from "../components/layout";
 import Sponsors from '../components/sponsors';
 import Feedback from "../components/feedback";
 import PrintLink from "../components/printlink";
-import { Exercise } from "../components/exercise";
-import { Answer } from "../components/answer";
-import { AnswerFeedback } from "../components/answerFeedback";
-import { ExerciseStepper } from "../components/exerciseStepper";
+import { Exercise } from "../components/shortcodes/exercise";
+import { Answer } from "../components/shortcodes/answer";
+import { AnswerFeedback } from "../components/shortcodes/answerFeedback";
+import { ExerciseStepper } from "../components/shortcodes/exerciseStepper";
 
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';

@@ -1,12 +1,16 @@
-import React, { useContext, FunctionComponent, useEffect, useRef } from 'react';
-import { Store, StoreContext, StoreContextType } from './store';
+import React, { useContext, useEffect, useRef } from 'react';
+import { Store, StoreContext, StoreContextType } from '../store';
 import { AnswerType } from "./answer";
 
-export type ExerciseType = {
-    answers: AnswerType[]
+export interface ExerciseType {
+    answers: AnswerType[];
 };
 
-export const Exercise: FunctionComponent = ({ children }) => {
+interface ExerciseProps {
+    children: React.ReactNode;
+}
+
+export const Exercise = ({ children }: ExerciseProps) => {
     const { registerElement, setElement, getElement } = useContext(StoreContext) as StoreContextType<ExerciseType>;
     const exerciseIdRef = useRef(-1);
 
@@ -37,7 +41,7 @@ export const Exercise: FunctionComponent = ({ children }) => {
 
     return (
         <Store elements={getAnswers()} setElements={setAnswers}>
-            { children}
+            { children }
         </Store>
     );
 };

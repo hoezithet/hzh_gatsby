@@ -1,13 +1,13 @@
-import React, { useContext, FunctionComponent, useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import styled from "styled-components";
 import { gsap } from "gsap";
 
-import { getRandomArrElement } from "../utils/array";
-import { theme } from "./theme";
+import { getRandomArrElement } from "../../utils/array";
+import { theme } from "../theme";
 import {
-    AnswerValueType, AnswerElementType, evaluateAnsweredOptions,
+    AnswerValueType, AnswerOptionType, evaluateAnsweredOptions,
     getAnswerType, MULTIPLE_ANSWER, MULTIPLE_CHOICE
 } from "./answer";
 
@@ -54,9 +54,9 @@ export const AnswerFeedback = ({ children = null }: AnsFeedbackProps) => {
     const answerToReadable = (
         [MULTIPLE_ANSWER, MULTIPLE_CHOICE].includes(answerType)
             ?
-            (ans: AnswerElementType) => ALPHABET[ans as number]
+            (ans: AnswerOptionType) => ALPHABET[ans as number]
             :
-            (ans: AnswerElementType) => `${ans}`
+            (ans: AnswerOptionType) => `${ans}`
     );
     const readableAnswers = correctOptions.map(answerToReadable);
     const correctOptionsText = (

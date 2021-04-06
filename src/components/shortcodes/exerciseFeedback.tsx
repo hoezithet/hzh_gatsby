@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import styled from "styled-components";
 import { gsap } from "gsap";
 
-import { theme } from "./theme";
-import { getRandomArrElement } from "../utils/array";
+import { theme } from "../theme";
+import { getRandomArrElement } from "../../utils/array";
 
-type ExercisesFeedbackProps = {
-    nCorrect: number,
-    nTotal: number
+interface ExercisesFeedbackProps {
+    nCorrect: number;
+    nTotal: number;
 };
 
 const ExercisesFeedbackDiv = styled.div`

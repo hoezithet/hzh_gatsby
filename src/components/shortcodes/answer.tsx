@@ -6,9 +6,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import { StoreContext, StoreContextType } from './store';
+import { StoreContext, StoreContextType } from '../store';
 import { AnswerFeedback, AnswerFeedbackContext } from './answerFeedback';
-import { isNumeric } from "../utils/number";
+import { isNumeric } from "../../utils/number";
 
 interface MDXElementProps {
     mdxType: string;

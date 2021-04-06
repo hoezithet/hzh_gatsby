@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Step from '@material-ui/core/Step';
 import { StepIconProps } from '@material-ui/core/StepIcon';
@@ -14,16 +14,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import styled from "styled-components";
 import SwipeableViews from 'react-swipeable-views';
 
-import { theme } from "./theme";
+import { theme } from "../theme";
 import { ExerciseType } from "./exercise";
 import { ExercisesFeedback } from "./exerciseFeedback";
-import { Store } from './store';
-import COLORS from '../colors';
+import { Store } from '../store';
+import COLORS from '../../colors';
 import { AnswerType } from './answer';
 
 
 interface ExerciseStepperProps {
-    title?: string;
+    children: React.ReactNode;
 }
 
 const StyledPaper = styled(Paper)`
@@ -56,7 +56,7 @@ const NextPrevBtnGrid = styled(Grid)`
     margin-top: ${theme.spacing(1)}px;
 `
 
-export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ children, title = "Oefening" }) => {
+export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     const steps = React.Children.toArray(children);
     const [exercises, setExercises] = useState<ExerciseType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
@@ -144,7 +144,6 @@ export const ExerciseStepper: FunctionComponent<ExerciseStepperProps> = ({ child
 
     return (
         <Store elements={exercises} setElements={setExercises} >
-            <h3>{title}</h3>
             <StyledStepper nonLinear activeStep={activeStep}>
                 {steps.map((_step, index) => (
                     <Step key={index}>

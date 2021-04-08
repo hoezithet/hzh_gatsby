@@ -35,6 +35,10 @@ const StyledStepper = styled(Stepper)`
     background-color: transparent;
 `;
 
+const StyledStep = styled(Step)`
+    cursor: pointer;
+`;
+
 const useStyles = makeStyles({
     icon: {
         color: (props: StepIconProps) =>
@@ -45,10 +49,9 @@ const useStyles = makeStyles({
 
 function ExerciseStepIcon(props: StepIconProps) {
     const Icon = props.completed ? RadioButtonCheckedIcon : RadioButtonUncheckedIcon;
-    const classes = useStyles(props);
 
     return (
-        <Icon className={classes.icon} />
+        <Icon color={props.active ? "primary" : "disabled"} />
     );
 }
 
@@ -146,7 +149,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
         <Store elements={exercises} setElements={setExercises} >
             <StyledStepper nonLinear activeStep={activeStep}>
                 {steps.map((_step, index) => (
-                    <Step key={index}>
+                    <StyledStep key={index}>
                         <StepLabel
                             StepIconComponent={ExerciseStepIcon}
                             StepIconProps={
@@ -156,7 +159,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                                 }
                             }
                             onClick={handleStep(index)} />
-                    </Step>
+                    </StyledStep>
                 ))}
             </StyledStepper>
             <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>

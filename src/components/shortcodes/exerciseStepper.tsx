@@ -144,6 +144,51 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                 false
         );
     }, [exercises]);
+    
+    const views = (
+        steps.map((step, index) =>
+            <StyledPaper key={index} elevation={1}>
+                {step}
+                <NextPrevBtnGrid container spacing={2}>
+                    <Grid item>
+                        <Button disabled={activeStep === 0} onClick={handleBack} >
+                            { "Vorige" }
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained"
+                            color="primary"
+                            disabled={!stepCompleted(index) && exercises.filter((_ex, i) => i !== index).every((_ex, i) => stepCompleted(i))}
+                            onClick={handleNext}>
+                            {index === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
+                        </Button>
+                    </Grid>
+                </NextPrevBtnGrid>
+            </StyledPaper>
+        )
+    );
+    
+    if(showFeedback()) {
+        views.push(
+            <StyledPaper>
+                <ExercisesFeedback nCorrect={exercises.reduce((acc, _ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length} />
+                <NextPrevBtnGrid container spacing={2}>
+                    <Grid item>
+                        <Button onClick={handleReset}>
+                            { "Begin opnieuw" }
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained"
+                            color="primary"
+                            onClick={handleNext}>
+                            { "Toon feedback" }
+                        </Button>
+                    </Grid>
+                </NextPrevBtnGrid>
+            </StyledPaper>
+        );
+    }
 
     return (
         <Store elements={exercises} setElements={setExercises} >
@@ -163,51 +208,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                 ))}
             </StyledStepper>
             <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
-                {
-                    steps.map((step, index) =>
-                        <StyledPaper key={index} elevation={1}>
-                            {step}
-                            <NextPrevBtnGrid container spacing={2}>
-                                <Grid item>
-                                    <Button disabled={activeStep === 0} onClick={handleBack} >
-                                        Vorige
-                          </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained"
-                                        color="primary"
-                                        disabled={!stepCompleted(index) && exercises.filter((_ex, i) => i !== index).every((_ex, i) => stepCompleted(i))}
-                                        onClick={handleNext}>
-                                        {index === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
-                                    </Button>
-                                </Grid>
-                            </NextPrevBtnGrid>
-                        </StyledPaper>
-                    )
-                }
-                {
-                    showFeedback()
-                        ?
-                        <StyledPaper>
-                            <ExercisesFeedback nCorrect={exercises.reduce((acc, _ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length} />
-                            <NextPrevBtnGrid container spacing={2}>
-                                <Grid item>
-                                    <Button onClick={handleReset}>
-                                        Begin opnieuw
-                          </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained"
-                                        color="primary"
-                                        onClick={handleNext}>
-                                        Toon feedback
-                          </Button>
-                                </Grid>
-                            </NextPrevBtnGrid>
-                        </StyledPaper>
-                        :
-                        <></>
-                }
+                { views }
             </SwipeableViews>
         </Store>
     );

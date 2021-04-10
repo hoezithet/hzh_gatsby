@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -107,7 +107,13 @@ export const Answer = ({ children, correct, margin = 0.01 }: AnswerProps) => {
     const answerType = getAnswerType(options, correctOptions);
 
     const answerIdRef = useRef(-1);
-    const { registerElement, setElement, getElement } = useContext(StoreContext) as StoreContextType<AnswerType>;
+    const [answer, setAnswer] = useState(null);  // Only used when there's no context
+    let { registerElement, setElement, getElement } = useContext(StoreContext) as StoreContextType<AnswerType>;
+    if (!(registerElement && setElement && getElement)) {
+        registerElement = (idCallback) => idCallback(0);
+        setElement = (_id, ans) => setAnswer(ans);
+        getElement = (_id) => answer;
+    }
 
     useEffect(() => {
         registerElement((assignedId) => answerIdRef.current = assignedId);

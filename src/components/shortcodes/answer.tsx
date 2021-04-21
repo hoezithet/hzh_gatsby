@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
+import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -94,8 +95,8 @@ export const Answer = ({ children, correct, margin = 0.01 }: AnswerProps) => {
     let options: AnswerOptionType[] = [];
     if (children) {
         const childArray = React.Children.toArray(children) as React.ReactElement<MDXElementProps>[];
-        feedback = childArray.find(c => c.props && c.props.mdxType === "AnswerFeedback");
-        const optionsList = childArray.find(c => c.props && c.props.originalType === "ul");
+        feedback = childArray.length >= 2 ? childArray[1] : null;
+        const optionsList = childArray.length >= 1 ? childArray[0] : null;
         if (optionsList && optionsList.props) {
             const listItems = React.Children.toArray(optionsList.props.children) as React.ReactElement<MDXElementProps>[];
             options = listItems.map(c => c.props.children) as string[];
@@ -109,10 +110,12 @@ export const Answer = ({ children, correct, margin = 0.01 }: AnswerProps) => {
     const answerIdRef = useRef(-1);
     const [answer, setAnswer] = useState(null);  // Only used when there's no context
     let { registerElement, setElement, getElement } = useContext(StoreContext) as StoreContextType<AnswerType>;
+    let usingContext = true;
     if (!(registerElement && setElement && getElement)) {
         registerElement = (idCallback) => idCallback(0);
         setElement = (_id, ans) => setAnswer(ans);
         getElement = (_id) => answer;
+        usingContext = false;
     }
 
     useEffect(() => {
@@ -233,8 +236,20 @@ export const Answer = ({ children, correct, margin = 0.01 }: AnswerProps) => {
 
     return (
         <AnswerFeedbackContext.Provider value={ctxValue}>
-            { answerComp}
-            { feedback}
+            { answerComp }
+            { feedback }
+            {
+                 !usingContext && !showFeedback()
+                 ?
+                 <Button variant="contained"
+                      color="primary"
+                      disabled={!(answer && answer.answered)}
+                      onClick={() => setAnswer((prevAnswer) => ({...prevAnswer, showFeedback: true}))}>
+                      { "Toon feedback" }
+                 </Button>
+                 :
+                 null
+             }
         </AnswerFeedbackContext.Provider>
     );
 };

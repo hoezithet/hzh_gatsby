@@ -32,6 +32,7 @@ import { Exercise } from "../components/shortcodes/exercise";
 import { Answer } from "../components/shortcodes/answer";
 import { AnswerFeedback } from "../components/shortcodes/answerFeedback";
 import { ExerciseStepper } from "../components/shortcodes/exerciseStepper";
+import { Plot } from "../components/shortcodes/plot";
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -64,7 +65,8 @@ export const shortcodes = {
     Exercise,
     Answer,
     AnswerFeedback,
-    ExerciseStepper
+    ExerciseStepper,
+    Plot
 };
 
 export const components = {

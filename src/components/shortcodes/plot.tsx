@@ -2,10 +2,12 @@ import React from 'react';
 import { scaleLinear } from '@visx/scale';
 import { Group } from '@visx/group';
 import { AxisBottom, AxisLeft } from '@visx/axis';
-import { Line } from '@visx/shape';
+import { Line, LinePath } from '@visx/shape';
 import { ParentSize } from '@visx/responsive';
 import { Text } from '@visx/text';
+import { curveLinear } from '@visx/curve';
 import { makeStyles } from '@material-ui/core/styles';
+import COLORS from "../../colors";
 
 /** Set the tick style
     axis.selectAll(".tick line")
@@ -64,9 +66,20 @@ const useStyles = makeStyles({
   }
 });
 
+const useStylesFx = makeStyles({
+  fx: {
+    fill: "none",
+    stroke: props => props.color, 
+    strokeWidth: 3, 
+    strokeLinecap: "round", 
+    strokeLinejoin: "round", 
+    shapeRendering: "geometricPrecision"
+  }
+});
+
 
 const _Plot = ({
-  width, height, top, right, bottom, left,
+  fxs, width, height, top, right, bottom, left,
   xMin, yMin, xMax, yMax,
   xTicks, yTicks,
   xLabel, yLabel,
@@ -127,28 +140,42 @@ const _Plot = ({
           </Text>
           <path fill={xColor} stroke={xColor} strokeLinejoin="round" transform={`translate(${xScale(xMax) + xAxisMargin}, 0) rotate(180) scale(1.1)`} d={arrowPathD}/>
         </Group>
+        {
+            fxs.map(({fx, nSamples=width/2, xStart=xMin, xEnd=xMax, color=COLORS.BLUE}) => {
+              const classes = useStylesFx({color: color});
+              nSamples = Math.round(nSamples);
+              const xs = [...Array(nSamples + 1).keys()].map((x, i) => x*(xMax - xMin)/nSamples + xMin).filter(x => (x >= xStart) && (x <= xEnd));
+              return (
+                <LinePath data={xs} x={x => xScale(x)} y={x => yScale(fx(x))} curve={curveLinear} className={classes.fx}/>
+              );
+            })
+        }
     </svg>
   );
 }
 
 const Plot = ({
+  fx=null,
+  fxProps=[],
+  fxs=[],
   aspect=1.0,
   top=0.02, right=0.02, bottom=0.02, left=0.02,
   xMin=-10, yMin=-10, xMax=10, yMax=10,
   xTicks=null, yTicks=null,
   xLabel="x", yLabel="y",
   xTickFormat=(d, i) => d, yTickFormat=(d, i) => d,
-  xColor="#ff6300", yColor="#19a974",
+  xColor=COLORS.ORANGE, yColor=COLORS.GREEN,
   xFontSize=14, yFontSize=14,
   xAxisMargin=0.05, yAxisMargin=0.05
 }) => {
+  fxs = fx ? [{fx: fx, ...fxProps}, ...fxs] : fxs;
   return (
     <ParentSize>
     {
       ({width}) => {
         const height = width/aspect;
         return (
-          <_Plot width={width} height={height} 
+          <_Plot fxs={fxs} width={width} height={height} 
             top={top*height} right={right*width} bottom={bottom*height} left={left*width}
             xMin={xMin} yMin={yMin} xMax={xMax} yMax={yMax}
             xTicks={xTicks} yTicks={yTicks}

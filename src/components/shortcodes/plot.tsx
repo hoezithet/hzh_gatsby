@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { scaleLinear } from '@visx/scale';
 import { Group } from '@visx/group';
 import { AxisBottom, AxisLeft } from '@visx/axis';
-import { Line, LinePath } from '@visx/shape';
+import { Line, LinePath, Circle } from '@visx/shape';
 import { ParentSize } from '@visx/responsive';
 import { Text } from '@visx/text';
 import { curveLinear } from '@visx/curve';
@@ -77,9 +77,10 @@ const useStylesFx = makeStyles({
   }
 });
 
+const PlotContext = createContext();
 
 const _Plot = ({
-  fxs, width, height, top, right, bottom, left,
+  children=null, width, height, top, right, bottom, left,
   xMin, yMin, xMax, yMax,
   xTicks, yTicks,
   xLabel, yLabel,
@@ -104,13 +105,13 @@ const _Plot = ({
   const xScale = scaleLinear({
       range: [left + xAxisMargin, width - right - xAxisMargin],
       domain: [xMin, xMax],
-      round: true
+      round: false
   });
 
   const yScale = scaleLinear({
       range: [height - bottom - yAxisMargin, top + yAxisMargin],
       domain: [yMin, yMax],
-      round: true
+      round: false
   });
 
   const classes = useStyles({
@@ -123,6 +124,7 @@ const _Plot = ({
   const arrowPathD = "m8.7186 4.0337-10.926-4.0177 10.926-4.0177c-1.7455 2.3721-1.7354 5.6175-6e-7 8.0354z";
 
   return (
+    <PlotContext.Provider value={{xScale: xScale, yScale: yScale, xMin: xMin, xMax: xMax}}>
     <svg width={width} height={height}>
         <Group left={xScale(0)}>
           <AxisLeft scale={yScale} numTicks={yTicks} tickFormat={yTickFormat} hideAxisLine={true} tickClassName={`${classes.tick} ${classes.yTick}`}/>
@@ -141,23 +143,15 @@ const _Plot = ({
           <path fill={xColor} stroke={xColor} strokeLinejoin="round" transform={`translate(${xScale(xMax) + xAxisMargin}, 0) rotate(180) scale(1.1)`} d={arrowPathD}/>
         </Group>
         {
-            fxs.map(({fx, nSamples=width/2, xStart=xMin, xEnd=xMax, color=COLORS.BLUE}) => {
-              const classes = useStylesFx({color: color});
-              nSamples = Math.round(nSamples);
-              const xs = [...Array(nSamples + 1).keys()].map((x, i) => x*(xMax - xMin)/nSamples + xMin).filter(x => (x >= xStart) && (x <= xEnd));
-              return (
-                <LinePath data={xs} x={x => xScale(x)} y={x => yScale(fx(x))} curve={curveLinear} className={classes.fx}/>
-              );
-            })
+            children
         }
     </svg>
+    </PlotContext.Provider>
   );
 }
 
 const Plot = ({
-  fx=null,
-  fxProps=[],
-  fxs=[],
+  children=null,
   aspect=1.0,
   top=0.02, right=0.02, bottom=0.02, left=0.02,
   xMin=-10, yMin=-10, xMax=10, yMax=10,
@@ -168,14 +162,13 @@ const Plot = ({
   xFontSize=14, yFontSize=14,
   xAxisMargin=0.05, yAxisMargin=0.05
 }) => {
-  fxs = fx ? [{fx: fx, ...fxProps}, ...fxs] : fxs;
   return (
     <ParentSize>
     {
       ({width}) => {
         const height = width/aspect;
         return (
-          <_Plot fxs={fxs} width={width} height={height} 
+          <_Plot children={children} width={width} height={height} 
             top={top*height} right={right*width} bottom={bottom*height} left={left*width}
             xMin={xMin} yMin={yMin} xMax={xMax} yMax={yMax}
             xTicks={xTicks} yTicks={yTicks}
@@ -191,4 +184,16 @@ const Plot = ({
   );
 };
 
-export { Plot };
+const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue"}) => {
+  const classes = useStylesFx({color: COLORS[color.toUpperCase()]});
+  const {xScale, yScale, xMin, xMax} = useContext(PlotContext);
+  xStart = xStart || xMin;
+  xEnd = xEnd || xMax;
+  nSamples = nSamples ? Math.round(nSamples) : Math.round(xScale(xEnd - xStart));
+  const xs = [...Array(nSamples + 1).keys()].map((x, i) => x*(xEnd - xStart)/nSamples + xStart);
+  return (
+    <LinePath data={xs} x={x => xScale(x)} y={x => yScale(fx(x))} curve={curveLinear} className={classes.fx}/>
+  );
+};
+
+export { Plot, Fx };

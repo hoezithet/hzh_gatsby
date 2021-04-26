@@ -66,17 +66,6 @@ const useStyles = makeStyles({
   }
 });
 
-const useStylesFx = makeStyles({
-  fx: {
-    fill: "none",
-    stroke: props => props.color, 
-    strokeWidth: 3, 
-    strokeLinecap: "round", 
-    strokeLinejoin: "round", 
-    shapeRendering: "geometricPrecision"
-  }
-});
-
 const PlotContext = createContext();
 
 const _Plot = ({
@@ -184,8 +173,19 @@ const Plot = ({
   );
 };
 
-const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue"}) => {
-  const classes = useStylesFx({color: COLORS[color.toUpperCase()]});
+const useStylesFx = makeStyles({
+  fx: {
+    fill: "none",
+    stroke: props => props.color, 
+    strokeWidth: props => props.lineWidth, 
+    strokeLinecap: "round", 
+    strokeLinejoin: "round", 
+    shapeRendering: "geometricPrecision"
+  }
+});
+
+const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", lineWidth=3}) => {
+  const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth});
   const {xScale, yScale, xMin, xMax} = useContext(PlotContext);
   xStart = xStart || xMin;
   xEnd = xEnd || xMax;
@@ -196,4 +196,10 @@ const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue"}) => {
   );
 };
 
-export { Plot, Fx };
+const Point = ({x, y, color="blue", size=3}) => {
+  const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: size});
+  const {xScale, yScale} = useContext(PlotContext);
+  return <Line from={{x: xScale(x), y: yScale(y)}} to={{x: xScale(x), y: yScale(y)}} className={classes.fx}/>
+};
+
+export { Plot, Fx, Point };

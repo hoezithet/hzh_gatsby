@@ -189,8 +189,8 @@ const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", lineWidth=
   const {xScale, yScale, xMin, xMax} = useContext(PlotContext);
   xStart = xStart || xMin;
   xEnd = xEnd || xMax;
-  nSamples = nSamples ? Math.round(nSamples) : Math.round(xScale(xEnd - xStart));
-  const xs = [...Array(nSamples + 1).keys()].map((x, i) => x*(xEnd - xStart)/nSamples + xStart);
+  nSamples = nSamples ? Math.round(nSamples) : Math.round(xScale(xEnd) - xScale(xStart));
+  const xs = [...Array(nSamples).keys()].map((x, i) => x*(xEnd - xStart)/nSamples + xStart);
   return (
     <LinePath data={xs} x={x => xScale(x)} y={x => yScale(fx(x))} curve={curveLinear} className={classes.fx}/>
   );

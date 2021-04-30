@@ -220,7 +220,7 @@ const Annot = ({
     anchorAngleTarget=null, anchorRadiusTarget=20,
     anchorAngleAnnot=null, anchorRadiusAnnot=20,
     lineColor="light_gray", lineWidth=2,
-    arrow=true,
+    showArrow=true, showLine=true,
     children
 }) => {
     const {xScale, yScale, width, height} = useContext(PlotContext);
@@ -279,7 +279,7 @@ const Annot = ({
 
     let arrowX, arrowY, arrowAngle;
 
-    if (arrow) {
+    if (showArrow) {
         [arrowX, arrowY] = [xTargetLine, yTargetLine];
         arrowAngle = toDeg(anchorAngleTarget);
         [xTargetLine, xTargetAnch] = [xTargetLine, xTargetAnch].map(
@@ -336,10 +336,13 @@ const Annot = ({
                 { children }
             </div>
         </foreignObject>
-        <path d={`M ${xTargetLine} ${yTargetLine} C ${xTargetAnch} ${yTargetAnch}, ${xAnnotAnch} ${yAnnotAnch}, ${xAnnotLine} ${yAnnotLine}`}
-        stroke={color} fill="#00000000"
-        strokeLinecap="round" strokeWidth={lineWidth}/>
-        { arrow ?
+        { showLine ?
+            <path d={`M ${xTargetLine} ${yTargetLine} C ${xTargetAnch} ${yTargetAnch}, ${xAnnotAnch} ${yAnnotAnch}, ${xAnnotLine} ${yAnnotLine}`}
+            stroke={color} fill="#00000000"
+            strokeLinecap="round" strokeWidth={lineWidth}
+            />
+            : null }
+        { showArrow && showLine ?
             <path fill={color} stroke={color} strokeLinejoin="round"
                 transform={`translate(${arrowX}, ${arrowY}) rotate(${arrowAngle})`} d={ARROW}/>
             : null }

@@ -178,8 +178,8 @@ const useStylesFx = makeStyles({
         fill: "none",
         stroke: props => props.color, 
         strokeWidth: props => props.lineWidth, 
-        strokeLinecap: "round", 
-        strokeLinejoin: "round", 
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
         shapeRendering: "geometricPrecision"
     }
 });
@@ -187,10 +187,10 @@ const useStylesFx = makeStyles({
 const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", lineWidth=3}) => {
     const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth});
     const {xScale, yScale, xMin, xMax} = useContext(PlotContext);
-    xStart = xStart || xMin;
-    xEnd = xEnd || xMax;
+    xStart = xStart === null ? xMin : xStart;
+    xEnd = xEnd === null ? xMax : xEnd;
     nSamples = nSamples ? Math.round(nSamples) : Math.round(xScale(xEnd) - xScale(xStart));
-    const xs = [...Array(nSamples).keys()].map((x, i) => x*(xEnd - xStart)/nSamples + xStart);
+    const xs = [...Array(nSamples + 1).keys()].map((x, i) => x*(xEnd - xStart)/nSamples + xStart).filter(x => !isNaN(fx(x)));
     return (
         <LinePath data={xs} x={x => xScale(x)} y={x => yScale(fx(x))} curve={curveLinear} className={classes.fx}/>
     );

@@ -7,6 +7,8 @@ topic: analyse
 image: plt/fx.png
 ---
 
+import {Fragment} from "react";
+
 We kunnen niet altijd eender welk getal als $x$ kiezen om in ons
 [functievoorschrift](../voorschrift) te stoppen. Omgekeerd is het mogelijk dat
 niet eender welk getal als $y$ uit de functie komt. Deze twee eigenschappen van
@@ -41,7 +43,7 @@ enkel voor positieve x-waarden bestaat er een functiewaarde. We schrijven:
 
 
 $$
-dom f = \mathbb{R}^+
+\mathrm{dom}~f = \mathbb{R}^+
 $$
 
 
@@ -49,7 +51,7 @@ Dit kunnen we ook schrijven als een interval:
 
 
 $$
-dom f = [0; +\infty[%]
+\mathrm{dom}~f = [0; +\infty[%]
 $$
 
 
@@ -73,7 +75,7 @@ functie alle _positieve_ reële getallen. We schrijven:
 
 
 $$
-bld f = \mathbb{R}^+
+\mathrm{bld}~f = \mathbb{R}^+
 $$
 
 
@@ -81,7 +83,7 @@ Dit kunnen we natuurlijk ook schrijven als een interval:
 
 
 $$
-bld f = [0; +\infty[%]
+\mathrm{bld}~f = [0; +\infty[%]
 $$
 
 
@@ -96,25 +98,65 @@ $$
 
 Die grafiek ziet er zo uit:
 
-<Bokeh plot="plt/fx" />
+<Plot>
+<Fx fx={x => 3*Math.sqrt(x + 5) - 6} xStart={-5} xEnd={15} />
+</Plot>
 
 Om op deze grafiek het **domein** af te lezen, moet je de grafiek **projecteren
 op de x-as**. Het resultaat van de projectie is aangeduid **<span 
 class="green">in het groen op de x-as</span>**. <Mute>We gaan ervan uit 
 dat de grafiek oneindig blijft verder stijgen aan de rechterkant.</Mute> We zien 
-dan dat $\green{dom f = [-5; +\infty[}$.
+dan dat $\green{\mathrm{dom}~f = [-5; +\infty[}$.
 
-<Bokeh plot="plt/dom" />
+export const fx = x => 3*Math.sqrt(x + 5) - 6;
+
+<Plot>
+{[...Array(20).keys()].map(i => {
+const x = i - 5 + 0.0001;
+const y = fx(x);
+return (
+Math.abs(y) > 1 ?
+<ArrowLine xStart={x} yStart={y} xEnd={x} yEnd={0} margin={10} dashed={true} opacity={0.5} key={i} />
+: null
+);
+})}
+<Fx fx={fx} xStart={-5} xEnd={15} opacity={0.5} />
+<Line xStart={-5} yStart={0} xEnd={15} yEnd={0} color="green" lineWidth={4} />
+<Point x={-5} y={0} color="green" size={10} />
+<Annot xTarget={-5} yTarget={0} xAnnot={-6} yAnnot={5} showBackground={true}>
+
+$\green{\mathrm{dom}~f = [-5; +\infty[}$
+</Annot>
+</Plot>
 
 Het **beeld** <Mute>(of het bereik)</Mute> van diezelfde functie kunnen we
 vinden door de grafiek nu te **projecteren op de y-as**. Op de onderstaande
 grafiek zie je het resultaat van deze projectie
 **<Green>in het groen op de y-as</Green>**.
 
-<Bokeh plot="plt/bld" />
+export const fxi = x => Math.pow((x + 6)/3, 2) - 5;
+
+<Plot>
+{[...Array(20).keys()].map(i => {
+const y = i - 6;
+const x = fxi(y);
+return (
+Math.abs(x) > 1 ?
+<ArrowLine xStart={x} yStart={y} xEnd={0} yEnd={y} margin={10} dashed={true} opacity={0.5} key={i} />
+: null
+);
+})}
+<Fx fx={fx} xStart={-5} xEnd={15} opacity={0.5} />
+<Line xStart={0} yStart={-6} xEnd={0} yEnd={15} color="green" lineWidth={4} />
+<Point x={0} y={-6} color="green" size={10} />
+<Annot xTarget={0} yTarget={-6} xAnnot={2} yAnnot={-8} showBackground={true}>
+
+$\green{\mathrm{bld}~f = [-6; +\infty[}$
+</Annot>
+</Plot>
 
 We gaan ervan uit dat de grafiek oneindig blijft verder stijgen aan de 
-rechterkant. Je vindt dat $\green{bld f = [-6; +\infty[}$.
+rechterkant. Je vindt dat $\green{\mathrm{bld}~f = [-6; +\infty[}$.
 
 ## Samengevat
 

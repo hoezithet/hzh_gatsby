@@ -8,19 +8,6 @@ export default function HTML(props) {
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <link rel="stylesheet" href="https://cdn.bokeh.org/bokeh/release/bokeh-1.0.2.min.css" type="text/css" />
-                <script
-                    defer
-                    type="text/javascript"
-                    src="https://cdn.bokeh.org/bokeh/release/bokeh-1.0.2.min.js"
-                    crossOrigin="anonymous"
-                ></script>
-                <script
-                    defer
-                    type="text/javascript"
-                    src="https://cdn.bokeh.org/bokeh/release/bokeh-api-1.0.2.min.js"
-                    crossOrigin="anonymous"
-                ></script>
                 {props.headComponents}
             </head>
             <body {...props.bodyAttributes}>

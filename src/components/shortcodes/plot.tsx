@@ -7,10 +7,13 @@ import { ParentSize } from '@visx/responsive';
 import { Text } from '@visx/text';
 import { curveLinear } from '@visx/curve';
 import { makeStyles } from '@material-ui/core/styles';
-import COLORS from "../../colors";
+import COLORS, { hexToRGB } from "../../colors";
+import { theme } from "../theme";
 
 const ARROW = "m8.7186 4.0337-10.926-4.0177 10.926-4.0177c-1.7455 2.3721-1.7354 5.6175-6e-7 8.0354z";
 const [ARROW_WIDTH, ARROW_HEIGHT] = [12.35, 9.46667];
+
+const STROKE_DASHARRAY = "4";
 
 const useStyles = makeStyles({
     plot: {
@@ -145,7 +148,7 @@ const Plot = ({
     xTicks=null, yTicks=null,
     xLabel="x", yLabel="y",
     xTickFormat=(d, i) => d, yTickFormat=(d, i) => d,
-    xColor=COLORS.ORANGE, yColor=COLORS.GREEN,
+    xColor="gray", yColor="gray",
     xFontSize=14, yFontSize=14,
     xAxisMargin=0.05, yAxisMargin=0.05,
     maxWidth=500
@@ -163,7 +166,7 @@ const Plot = ({
                 xTicks={xTicks} yTicks={yTicks}
                 xLabel={xLabel} yLabel={yLabel}
                 xTickFormat={xTickFormat} yTickFormat={yTickFormat}
-                xColor={xColor} yColor={yColor}
+                xColor={COLORS[xColor.toUpperCase()]} yColor={COLORS[yColor.toUpperCase()]}
                 xFontSize={xFontSize} yFontSize={yFontSize}
                 xAxisMargin={xAxisMargin*width} yAxisMargin={yAxisMargin*height} />
             );
@@ -177,15 +180,16 @@ const useStylesFx = makeStyles({
     fx: {
         fill: "none",
         stroke: props => props.color, 
-        strokeWidth: props => props.lineWidth, 
+        strokeWidth: props => props.lineWidth,
         strokeLinecap: "round",
         strokeLinejoin: "round",
-        shapeRendering: "geometricPrecision"
+        strokeOpacity: props => props.opacity,
+        shapeRendering: "geometricPrecision",
     }
 });
 
-const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", lineWidth=3}) => {
-    const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth});
+const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", opacity=1, lineWidth=3}) => {
+    const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth, opacity: opacity});
     const {xScale, yScale, xMin, xMax} = useContext(PlotContext);
     xStart = xStart === null ? xMin : xStart;
     xEnd = xEnd === null ? xMax : xEnd;
@@ -202,26 +206,237 @@ const Point = ({x, y, color="blue", size=3}) => {
     return <Line from={{x: xScale(x), y: yScale(y)}} to={{x: xScale(x), y: yScale(y)}} className={classes.fx}/>
 };
 
-const useStylesAnnot = makeStyles({
-    parentDiv: {
+const _Line = ({xStart, yStart, xEnd, yEnd, color="blue", lineWidth=3}) => {
+    const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth});
+    const {xScale, yScale} = useContext(PlotContext);
+    if (xScale) {
+        [xStart, xEnd] = [xStart, xEnd].map(xScale);
+    }
+    if (yScale) {
+        [yStart, yEnd] = [yStart, yEnd].map(yScale);
+    }
+    return <Line from={{x: xStart, y: yStart}} to={{x: xEnd, y: yEnd}} className={classes.fx}/>
+};
+
+const sign = x => x >= 0 ? 1 : -1;  // We defign sign(0) = 1 to avoid a collapse when e.g. dx = 0
+const toRad = a => (a / 180) * Math.PI;
+const toDeg = a => (a * 180) / Math.PI; 
+
+const ArrowLine = ({
+    xStart, yStart, xEnd, yEnd, margin=0,
+    anchorAngleEnd=null, anchorRadiusEnd=0,
+    anchorAngleStart=null, anchorRadiusStart=0,
+    lineColor="light_gray", lineWidth=2, dashed=false, showArrow=true,
+    opacity=1, useContextScale=true,
+}) => {
+    const {xScale, yScale, width, height} = useContext(PlotContext);
+
+    if (xScale && yScale && useContextScale) {
+        [xEnd, xStart] = [xEnd, xStart].map(xScale);
+        [yEnd, yStart] = [yEnd, yStart].map(yScale);
+    }
+    
+    const [dx, dy] = [xEnd - xStart, yEnd - yStart];
+    const eps = 0.0001;
+    
+    if (anchorAngleStart === null) {
+        anchorAngleStart = Math.atan(dy/(dx + eps));
+        anchorAngleStart = dx < 0 ? Math.PI + anchorAngleStart : anchorAngleStart;
+        anchorRadiusStart = 0;
+    } else {
+        anchorAngleStart = - toRad(anchorAngleStart);
+    }
+    if (anchorAngleEnd === null) {
+        anchorAngleEnd = -Math.atan(dy/(dx + eps));
+        anchorAngleEnd = dx > 0 ? Math.PI + anchorAngleEnd : anchorAngleEnd;
+        anchorRadiusEnd = 0;
+    } else {
+        anchorAngleEnd = - toRad(anchorAngleEnd);
+    }
+    let [xEndLine, yEndLine, xStartLine, yStartLine] = [
+        xEnd + margin * Math.cos(anchorAngleEnd),
+        yEnd + margin * Math.sin(anchorAngleEnd),
+        xStart + margin * Math.cos(anchorAngleStart),
+        yStart + margin * Math.sin(anchorAngleStart),
+    ];
+    let [xEndAnch, yEndAnch, xStartAnch, yStartAnch] = [
+        xEndLine + anchorRadiusEnd * Math.cos(anchorAngleEnd),
+        yEndLine + anchorRadiusEnd * Math.sin(anchorAngleEnd),
+        xStartLine + anchorRadiusStart * Math.cos(anchorAngleStart),
+        yStartLine + anchorRadiusStart * Math.sin(anchorAngleStart),
+    ];
+
+    let arrowX, arrowY, arrowAngle, arrowScale;
+
+    if (showArrow) {
+        [arrowX, arrowY] = [xEndLine, yEndLine];
+        arrowAngle = toDeg(anchorAngleEnd);
+        arrowScale = lineWidth / 2.5;
+        [xEndLine, xEndAnch] = [xEndLine, xEndAnch].map(
+            x => x + 2/3 * ARROW_WIDTH * arrowScale * Math.cos(anchorAngleEnd),
+        );
+        [yEndLine, yEndAnch] = [yEndLine, yEndAnch].map(
+            y => y + 2/3 * ARROW_WIDTH * arrowScale * Math.sin(anchorAngleEnd),
+        );
+    }
+    const color = COLORS[lineColor.toUpperCase()];
+    return (
+    <>
+        <path d={`M ${xEndLine} ${yEndLine} C ${xEndAnch} ${yEndAnch}, ${xStartAnch} ${yStartAnch}, ${xStartLine} ${yStartLine}`}
+            stroke={color} fill="#00000000" strokeDasharray={dashed ? STROKE_DASHARRAY : "none"}
+            strokeLinecap="round" strokeWidth={lineWidth} strokeOpacity={opacity}
+            />
+        { showArrow ?
+            <path fill={color} stroke={color} strokeLinejoin="round" strokeOpacity={opacity} fillOpacity={opacity}
+                transform={`translate(${arrowX}, ${arrowY}) rotate(${arrowAngle}) scale(${arrowScale})`} d={ARROW}/>
+            : null }
+    </>
+    );
+};
+
+const Rectangle = ({x1, y1, x2, y2, fill=null, stroke=null, dashed=false, strokeOpacity=1, fillOpacity=1}) => {
+    const {xScale, yScale} = useContext(PlotContext);
+
+    if (xScale && yScale) {
+        [x1, x2] = [x1, x2].map(xScale);
+        [y1, y2] = [y1, y2].map(yScale);
+    }
+    fill = fill ? COLORS[fill.toUpperCase()] : "none";
+    stroke = stroke ? COLORS[stroke.toUpperCase()] : "none";
+    
+    return (
+        <path d={`M ${x1} ${y1} H ${x2} V ${y2} H ${x1} Z`}
+        fill={fill} stroke={stroke} strokeDasharray={dashed ? STROKE_DASHARRAY : "none"}
+        strokeOpacity={strokeOpacity} fillOpacity={fillOpacity} />
+    );
+};
+
+const useStylesSvgNote = makeStyles({
+    divNoteParent: {
         height: "100%",
         width: "100%",
         display: "flex",
         alignItems: props => props.alignItems,
         justifyContent: props => props.justifyContent,
+    },
+    divNoteChild: {
         '& p': {
             margin: "0",  // Remove paragraph margin
-        }
+        },
+        backgroundColor: props => props.showBackground ? props.backgroundColor : "none",
+        borderRadius: `${theme.spacing(0.5)}px`,
+        padding: props => props.showBackground ? `${theme.spacing(1)}px` : "0",
     }
 });
 
+const calcAnchorAngleAnnot = (dx, dy) => {
+    if (Math.abs(dx) >= Math.abs(dy)) {
+        // If moved more horizontally than vertically, put line on left/right
+        return dx >= 0 ? 0 : 180;
+    } else {
+        // Else, put line on top/bottom
+        return dy >= 0 ? -90 : 90;
+    }
+};
+
+const calcAnchorAngleTarget = (dx, dy) => {
+    if (dx >= 0 && dy >=0) {
+        // Target is on bottom right of annot
+        return 135;
+    } else if (dx >= 0 && dy < 0) {
+        // Target is on top right of annot
+        return -135;
+    } else if (dx < 0 && dy >= 0) {
+        // Target is on bottom left of annot
+        return 45;
+    } else {
+        // Target is on top left of annot
+        return -45;
+    }
+};
+
+const canonicalAngle = (angle) => {
+    // Return equivalent angle between ]-180; 180]
+    const posAngle = ((angle % 360) + 360) % 360;
+    return (posAngle > 180 ?
+        posAngle - 360
+        : posAngle
+    )
+}
+
+const SvgNote = ({x, y, backgroundColor="light_gray", backgroundOpacity=1, showBackground=true, hAlign="center",
+    vAlign="center", useContextScale=true, children}) => {
+    const {xScale, yScale, width, height} = useContext(PlotContext);
+
+    if (xScale && yScale && useContextScale) {
+        x = xScale(x);
+        y = yScale(y);
+    }
+
+    const [justifyContent, alignItems] = [
+        hAlign === "right" ? 
+        "flex-end"  // Right
+        : (
+            hAlign === "left" ?
+            "flex-start"  // Left
+            : "center"
+        ),
+        vAlign === "bottom" ? 
+        "flex-end"  // Bottom
+        : (
+            vAlign === "top" ?
+            "flex-start"  // Top
+            : "center"
+        ),
+    ];
+
+    [x, y] = [
+        hAlign === "center" ?
+        x - width/2
+        : (
+            hAlign === "right" ?
+            x - width
+            : x
+        ),
+        vAlign === "center" ?
+        y - height/2
+        : (
+            vAlign === "bottom" ?
+            y - height
+            : y
+        ),
+    ];
+
+
+    const backgroundColorUC = backgroundColor.toUpperCase();
+    backgroundColor = backgroundColorUC in COLORS ? COLORS[backgroundColorUC] : backgroundColor;
+    backgroundColor = hexToRGB(backgroundColor, backgroundOpacity);
+
+    const classes = useStylesSvgNote({
+        justifyContent: justifyContent, alignItems: alignItems,
+        backgroundColor: backgroundColor,
+        backgroundOpacity: backgroundOpacity,
+        showBackground: showBackground
+    }); 
+
+    return (
+        <foreignObject x={x} y={y} width={`${width}`} height={`${height}`}>
+            <div xmlns="http://www.w3.org/1999/xhtml" className={classes.divNoteParent}>
+                <div className={classes.divNoteChild}>
+                    { children }
+                </div>
+            </div>
+        </foreignObject>
+    );
+}
+
 const Annot = ({
-    xAnnot, yAnnot, xTarget, yTarget, margin=10,
+    xAnnot, yAnnot, xTarget, yTarget, margin=theme.spacing(1),
     anchorAngleTarget=null, anchorRadiusTarget=20,
     anchorAngleAnnot=null, anchorRadiusAnnot=20,
-    lineColor="light_gray", lineWidth=2,
-    showArrow=true, showLine=true,
-    children
+    lineColor="light_gray", lineOpacity=1, lineWidth=2,
+    showArrow=true, showLine=true, dashed=false, showBackground=false,
+    backgroundColor="light_gray", backgroundOpacity=0.5, children
 }) => {
     const {xScale, yScale, width, height} = useContext(PlotContext);
 
@@ -229,123 +444,42 @@ const Annot = ({
         [xTarget, xAnnot] = [xTarget, xAnnot].map(xScale);
         [yTarget, yAnnot] = [yTarget, yAnnot].map(yScale);
     }
-    
-    const sign = x => x >= 0 ? 1 : -1;  // We defign sign(0) = 1 to avoid a collapse when e.g. dx = 0
-    const toRad = a => (a / 180) * Math.PI;
-    const toDeg = a => (a * 180) / Math.PI;
-
-    const calcAnchorAngleAnnot = (dx, dy) => {
-        if (Math.abs(dx) >= Math.abs(dy)) {
-            // If moved more horizontally than vertically, put line on left/right
-            return dx >= 0 ? 0 : Math.PI;
-        } else {
-            // Else, put line on top/bottom
-            return dy >= 0 ? Math.PI/2 : -Math.PI/2;
-        }
-    };
-    
-    const calcAnchorAngleTarget = (dx, dy) => {
-        if (dx >= 0 && dy >=0) {
-            // Target is on bottom right of annot
-            return -3*Math.PI/4;
-        } else if (dx >= 0 && dy < 0) {
-            // Target is on top right of annot
-            return 3*Math.PI/4;
-        } else if (dx < 0 && dy >= 0) {
-            // Target is on bottom left of annot
-            return -Math.PI/4;
-        } else {
-            // Target is on top left of annot
-            return Math.PI/4;
-        }
-    };
 
     const [dx, dy] = [xTarget - xAnnot, yTarget - yAnnot];
-    anchorAngleTarget = anchorAngleTarget === null ? calcAnchorAngleTarget(dx, dy) : toRad(anchorAngleTarget);
-    anchorAngleAnnot = anchorAngleAnnot === null ? calcAnchorAngleAnnot(dx, dy) : toRad(anchorAngleAnnot);
+    anchorAngleTarget = canonicalAngle(anchorAngleTarget === null ? calcAnchorAngleTarget(dx, dy) : anchorAngleTarget);
+    anchorAngleAnnot = canonicalAngle(anchorAngleAnnot === null ? calcAnchorAngleAnnot(dx, dy) : anchorAngleAnnot);
 
-    let [xTargetLine, yTargetLine, xAnnotLine, yAnnotLine] = [
-        xTarget + margin * Math.cos(anchorAngleTarget),
-        yTarget + margin * Math.sin(anchorAngleTarget),
-        xAnnot + margin * Math.cos(anchorAngleAnnot),
-        yAnnot + margin * Math.sin(anchorAngleAnnot),
-    ];
-    let [xTargetAnch, yTargetAnch, xAnnotAnch, yAnnotAnch] = [
-        xTargetLine + anchorRadiusTarget * Math.cos(anchorAngleTarget),
-        yTargetLine + anchorRadiusTarget * Math.sin(anchorAngleTarget),
-        xAnnotLine + anchorRadiusAnnot * Math.cos(anchorAngleAnnot),
-        yAnnotLine + anchorRadiusAnnot * Math.sin(anchorAngleAnnot),
-    ];
+    const arrowLine = <ArrowLine xStart={xAnnot} yStart={yAnnot} xEnd={xTarget} yEnd={yTarget}
+            margin={margin}
+            anchorAngleStart={anchorAngleAnnot} anchorRadiusStart={anchorRadiusAnnot}
+            anchorAngleEnd={anchorAngleTarget} anchorRadiusEnd={anchorRadiusTarget}
+            lineColor={lineColor} lineWidth={lineWidth} dashed={dashed} showArrow={showArrow}
+            opacity={lineOpacity} useContextScale={false} />;
 
-    let arrowX, arrowY, arrowAngle;
-
-    if (showArrow) {
-        [arrowX, arrowY] = [xTargetLine, yTargetLine];
-        arrowAngle = toDeg(anchorAngleTarget);
-        [xTargetLine, xTargetAnch] = [xTargetLine, xTargetAnch].map(
-            x => x + 2/3 * ARROW_WIDTH * Math.cos(anchorAngleTarget),
-        );
-        [yTargetLine, yTargetAnch] = [yTargetLine, yTargetAnch].map(
-            y => y + 2/3 * ARROW_WIDTH * Math.sin(anchorAngleTarget),
-        );
+    let hAlign, vAlign;
+    if (anchorAngleAnnot >= -45 && anchorAngleAnnot < 45) {
+        [hAlign, vAlign] = ["right", "center"];
+    } else if (anchorAngleAnnot >= 45 && anchorAngleAnnot < 135) {
+        [hAlign, vAlign] = ["center", "top"];
+    } else if (anchorAngleAnnot >= -135 && anchorAngleAnnot < -45) {
+        [hAlign, vAlign] = ["center", "bottom"];
+    } else {
+        // anchorAngleAnnot > 135 || anchorAngleAnnot < -135
+        [hAlign, vAlign] = ["left", "center"];
     }
-
-    const [justifyContent, alignItems] = [
-        // justifyContent = horizontal alignment
-        xAnnotAnch === xAnnotLine ? 
-        "center"
-        : (
-            xAnnotAnch > xAnnotLine ?
-            "flex-end"  // Right
-            : "flex-start"  // Left
-        ),
-        // alignItems = vertical alignment
-        yAnnotAnch === yAnnotLine ? 
-        "center"
-        : (
-            yAnnotAnch > yAnnotLine ?
-            "flex-end"  // Bottom
-            : "flex-start"  // Top
-        ),
-    ];
-
-    const classes = useStylesAnnot({justifyContent: justifyContent, alignItems: alignItems}); 
-    const [xChild, yChild] = [
-        justifyContent === "center" ?
-        xAnnot - width/2
-        : (
-            justifyContent === "flex-end" ?
-            xAnnot - width
-            : xAnnot
-        ),
-        alignItems === "center" ?
-        yAnnot - height/2
-        : (
-            alignItems === "flex-end" ?
-            yAnnot - height
-            : yAnnot
-        ),
-    ];
-
-    const color = COLORS[lineColor.toUpperCase()];
 
     return (
         <>
-        <foreignObject x={xChild} y={yChild} width={`${width}`} height={`${height}`}>
-            <div xmlns="http://www.w3.org/1999/xhtml" className={classes.parentDiv}>
-                { children }
-            </div>
-        </foreignObject>
-        { showLine ?
-            <path d={`M ${xTargetLine} ${yTargetLine} C ${xTargetAnch} ${yTargetAnch}, ${xAnnotAnch} ${yAnnotAnch}, ${xAnnotLine} ${yAnnotLine}`}
-            stroke={color} fill="#00000000"
-            strokeLinecap="round" strokeWidth={lineWidth}
-            />
-            : null }
-        { showArrow && showLine ?
-            <path fill={color} stroke={color} strokeLinejoin="round"
-                transform={`translate(${arrowX}, ${arrowY}) rotate(${arrowAngle})`} d={ARROW}/>
-            : null }
+        <SvgNote x={xAnnot} y={yAnnot} showBackground={showBackground} backgroundColor={showBackground ? backgroundColor : "none"}
+        backgroundOpacity={backgroundOpacity} hAlign={hAlign}
+        vAlign={vAlign} useContextScale={false}>
+            { children }
+        </SvgNote>
+        {
+            showLine ?
+            arrowLine
+            : null
+        }
         </>
     );
 };
@@ -355,7 +489,7 @@ const useStylesHair = makeStyles({
         strokeWidth: 2,
         strokeLinecap: "round",
         stroke: COLORS["LIGHT_GRAY"],
-        strokeDasharray: "5,5"
+        strokeDasharray: STROKE_DASHARRAY
     }
 });
 
@@ -370,4 +504,4 @@ const Hair = ({x, y}) => {
     );
 }
 
-export { Plot, Fx, Point, Annot, Hair };
+export { Plot, Fx, Point, Annot, Hair, _Line as Line, ArrowLine, Rectangle, SvgNote };

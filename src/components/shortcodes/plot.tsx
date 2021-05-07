@@ -312,13 +312,6 @@ const Rectangle = ({x1, y1, x2, y2, fill=null, stroke=null, dashed=false, stroke
 };
 
 const useStylesSvgNote = makeStyles({
-    divNoteParent: {
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        alignItems: props => props.alignItems,
-        justifyContent: props => props.justifyContent,
-    },
     divNoteChild: {
         '& p': {
             margin: "0",  // Remove paragraph margin
@@ -419,9 +412,17 @@ const SvgNote = ({x, y, backgroundColor="light_gray", backgroundOpacity=1, showB
         showBackground: showBackground
     }); 
 
+    const divParentStyle = {
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        alignItems: alignItems,
+        justifyContent: justifyContent
+    };
+
     return (
         <foreignObject x={x} y={y} width={`${width}`} height={`${height}`}>
-            <div xmlns="http://www.w3.org/1999/xhtml" className={classes.divNoteParent}>
+            <div xmlns="http://www.w3.org/1999/xhtml" style={divParentStyle}>
                 <div className={classes.divNoteChild}>
                     { children }
                 </div>
@@ -463,8 +464,7 @@ const Annot = ({
         [hAlign, vAlign] = ["center", "top"];
     } else if (anchorAngleAnnot >= -135 && anchorAngleAnnot < -45) {
         [hAlign, vAlign] = ["center", "bottom"];
-    } else {
-        // anchorAngleAnnot > 135 || anchorAngleAnnot < -135
+    } else if (anchorAngleAnnot >= 135 || anchorAngleAnnot < -135) {
         [hAlign, vAlign] = ["left", "center"];
     }
 

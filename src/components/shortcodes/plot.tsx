@@ -112,10 +112,10 @@ const _Plot = ({
         xColor: xColor,
         yColor: yColor,
     });
-
+    
     return (
         <PlotContext.Provider value={{xScale: xScale, yScale: yScale, xMin: xMin, xMax: xMax, width: width, height: height}}>
-            <svg width={width} height={height} className={classes.plot} >
+            <svg width={width} height={height} className={`${classes.plot} plot`}>
                 <Group left={xScale(0)}>
                     <AxisLeft scale={yScale} numTicks={yTicks} tickFormat={yTickFormat} hideAxisLine={true} tickClassName={`${classes.tick} ${classes.yTick}`}/>
                     <Line from={{x: 0, y: yScale(yMin) + yAxisMargin}} to={{x: 0, y: yScale(yMax) - yAxisMargin}} className={`${classes.axisLine} ${classes.yAxisLine}`}/>

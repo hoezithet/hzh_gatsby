@@ -5,7 +5,7 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
-import ToggleImage from "../components/shortcodes/toggleImage";
+import { ToggleImage } from "../components/shortcodes/toggleImage";
 import Color, {
     Black,
     LightBlue,

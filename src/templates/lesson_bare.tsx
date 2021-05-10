@@ -9,6 +9,14 @@ import HzhTheme from "../components/theme";
 import { Link } from "gatsby-theme-material-ui";
 import Box from "@material-ui/core/Box";
 import { components, MdxNode, shortcodes } from "./lesson";
+import { ToggleImageBare } from "../components/shortcodes/toggleImage";
+import { ExpandBare } from "../components/shortcodes/expand";
+
+const bareShortcodes = {
+    ...shortcodes,
+    ToggleImage: ToggleImageBare,
+    Expand: ExpandBare
+};
 
 export interface LessonData {
     data: {
@@ -35,7 +43,7 @@ export default function Template({ data }: LessonData) {
                     <span>Bron: </span>
                     <Link to={absURL}>{absURL}</Link>
                 </p>
-                <MDXProvider components={shortcodes}>
+                <MDXProvider components={bareShortcodes}>
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>

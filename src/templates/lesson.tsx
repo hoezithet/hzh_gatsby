@@ -120,11 +120,13 @@ export default function Template(
     );
     
     const image = frontmatter.image;
+    const slug = lesson.fields.slug;
+    const pdfLink = `${slug.split('/').slice(3, -1).join("-").replace(" ", "_")}.pdf`;
     return (
         <Layout crumbs={ crumbs } description={ frontmatter.description }
                 tags={ frontmatter.tags } image={ image ? image.childImageSharp.fixed.src : defaultImg.childImageSharp.fixed.src } >
             <h1>{frontmatter.title}</h1>
-            <PrintLink to={ `/bare${lesson.fields.slug}` } />
+            <PrintLink to={ pdfLink } />
             <Toc>
                 { tableOfContents }
             </Toc>
@@ -133,7 +135,8 @@ export default function Template(
                   <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
             </MDXProvider>
-            <PrintLink to={ `/bare${lesson.fields.slug}` } />
+            ${}.pdf
+            <PrintLink to={ pdfLink } />
             <Feedback />
             <Box my={ 4 }>
                 <Grid container spacing={ 2 } justify="space-between">

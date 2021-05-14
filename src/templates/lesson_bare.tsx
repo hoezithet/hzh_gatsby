@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import "katex/dist/katex.min.css";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import { Helmet } from 'react-helmet';
 import Sponsors from "../components/sponsors";
 import HzhTheme from "../components/theme";
 
@@ -11,11 +12,32 @@ import Box from "@material-ui/core/Box";
 import { components, MdxNode, shortcodes } from "./lesson";
 import { ToggleImageBare } from "../components/shortcodes/toggleImage";
 import { ExpandBare } from "../components/shortcodes/expand";
+import { makeStyles } from '@material-ui/core/styles';
+import "./lesson_bare.css";
+
+const useStyles = makeStyles({
+  img: {
+    width: "100%",
+    height: "auto",
+  }
+});
 
 const bareShortcodes = {
     ...shortcodes,
     ToggleImage: ToggleImageBare,
     Expand: ExpandBare
+};
+
+const BareImage = (props) => {
+    const classes = useStyles();
+    return (
+        <img src={props.src} className={`gatsby-resp-image-image ${classes.img}`}/>
+    );
+}
+
+const bareComponents = {
+   ...components,
+   img: BareImage,
 };
 
 export interface LessonData {
@@ -38,13 +60,14 @@ export default function Template({ data }: LessonData) {
     return (
         <HzhTheme>
             <>
+                <Helmet title={frontmatter.title} />
                 <h1>{frontmatter.title}</h1>
                 <p>
                     <span>Bron: </span>
                     <Link to={absURL}>{absURL}</Link>
                 </p>
                 <MDXProvider components={bareShortcodes}>
-                    <MDXProvider components={components}>
+                    <MDXProvider components={bareComponents}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </MDXProvider>
@@ -71,6 +94,7 @@ export const pageQuery = graphql`
         site {
             siteMetadata {
                 siteUrl
+                title
             }
         }
     }

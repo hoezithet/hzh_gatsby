@@ -1,0 +1,20 @@
+.gatsby-resp-image-background-image {
+    display: none !important;
+}
+
+
+/* Hacky solution to avoid page breaks after headings */
+h1, h2, h3 {
+    break-inside: avoid;
+}
+h1::after, h2::after, h3::after{
+    content: "";
+    display: block;
+    height: 100px;
+    margin-bottom: -100px;
+}
+
+/* Don't show anchor after heading */
+a.anchor {
+  display: none;
+}

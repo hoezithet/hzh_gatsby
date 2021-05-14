@@ -10,10 +10,14 @@ const SponsorImg = styled.img`
     width: 56mm;
 `;
 
+const SponsorWrapper = styled.div`
+    break-inside: avoid;
+`;
+
 
 export default function Sponsors() {
     return (
-        <>
+        <SponsorWrapper>
         <h2>Hoe Zit Het? wordt met trots gesteund door</h2>
         <Grid container spacing={ 4 } justify="center" alignItems="center" >
           <Grid item>
@@ -30,6 +34,6 @@ export default function Sponsors() {
         <p>
             Wil jij ook steunen? Trakteer Hoe Zit Het? op een drankje! 🥤 Ga daarvoor naar <Link to="/trakteer">de trakteer-pagina</Link>.
         </p>
-        </>
+        </SponsorWrapper>
     );
 }

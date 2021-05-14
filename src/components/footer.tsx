@@ -23,6 +23,7 @@ IconLink.defaultProps = {
 
 
 const FooterGrid = styled(Grid)`
+    break-inside: avoid;
 `;
 
 FooterGrid.defaultProps = {

@@ -18,6 +18,7 @@ const ExpandFrame = styled(Accordion)`
     border-radius: 10px;
     background-color: ${COLORS.NEAR_WHITE};
     margin: 10px 0px;
+    break-inside: avoid;
 `
 
 const StyledAccSummary = styled(AccordionSummary)`

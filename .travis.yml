@@ -36,7 +36,7 @@ before_deploy:
 - chmod 600 deploy_rsa
 - ssh-add deploy_rsa
 after_deploy:
-- node scripts/create_lesson_pdfs.js
+- node scripts/create_lesson_pdfs_pngs.js
 env:
   global:
     

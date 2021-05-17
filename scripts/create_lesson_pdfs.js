@@ -17,8 +17,9 @@ const path = require('path');
         const title = await page.title();
         
         console.log("Saving pdf");
-        const footerHtml = `<div style="font-family: Quicksand; font-size: 10px; padding-right: 100px; padding-left: 100px; padding-bottom: 20px; display: flex; justify-content: space-between; width: 100%;">
-            <span>Hoe Zit Het? - <span class="title"></span></span> <span>p. <span class="pageNumber"></span>/<span class="totalPages"></span></span>
+        const footerHtml = `
+            <div style="font-family: Quicksand; font-size: 10px; padding-right: 100px; padding-left: 100px; padding-bottom: 20px; display: flex; justify-content: space-between; width: 100%;">
+                <span>Hoe Zit Het? - <span class="title"></span></span> <span>p. <span class="pageNumber"></span>/<span class="totalPages"></span></span>
             </div>
             `;
 

@@ -5,6 +5,7 @@ const path = require('path');
 (async () => {
     const browser = await puppeteer.launch({timeout: 0});
     const page = await browser.newPage();
+    await page.setViewport({width: 800, height: 800, deviceScaleFactor: 2});
     page.setDefaultTimeout(0);
     const files = glob.sync("public/bare/lessen/*/*/*/index.html");
     console.log(`Found ${files.length} files`);

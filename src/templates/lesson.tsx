@@ -31,7 +31,7 @@ import { Exercise } from "../components/shortcodes/exercise";
 import { Answer } from "../components/shortcodes/answer";
 import { AnswerFeedback } from "../components/shortcodes/answerFeedback";
 import { ExerciseStepper } from "../components/shortcodes/exerciseStepper";
-import { Plot, Fx, Point, Annot, Hair, Line, ArrowLine, Rectangle, SvgNote } from "../components/shortcodes/plot";
+import { SaveablePlot as Plot, Fx, Point, Annot, Hair, Line, ArrowLine, Rectangle, SvgNote } from "../components/shortcodes/plot";
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';

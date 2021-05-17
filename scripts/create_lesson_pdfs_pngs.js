@@ -47,9 +47,6 @@ const path = require('path');
 
         const svgs = await page.$$(".plot");
         for (const [i, svg] of svgs.entries()) {
-            const classNames = svg["_remoteObject"]["description"].split(".");
-            const plotName = classNames.find(c => c.match(/plot_[0-9]+\b/g));
-            console.log(plotName);
             await svg.screenshot({path: `${lessonPath}plot_${i + 1}.png`});
         }
     }

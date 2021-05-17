@@ -21,10 +21,16 @@ const path = require('path');
             <div style="font-family: Quicksand; font-size: 10px; padding-right: 100px; padding-left: 100px; padding-bottom: 20px; display: flex; justify-content: space-between; width: 100%;">
                 <span>Hoe Zit Het? - <span class="title"></span></span> <span>p. <span class="pageNumber"></span>/<span class="totalPages"></span></span>
             </div>
-            `;
+        `;
+
+        // E.g. /lessen/wiskunde/afgeleiden_1/afgeleide_functie
+        // becomes afgeleiden_1-afgeleide_functie
+        const pdfStem = slug.split('/').slice(3).join("-");
+
+        const lessonPath = f.replace("index.html", "").replace("/bare", "");
 
         await page.pdf({
-            path: `${f.replace("index.html", "").replace("/bare", "")}${slug.split('/').slice(3).join("-").replace(" ", "_")}.pdf`,
+            path: `${lessonPath}${pdfStem}.pdf`,
             format: 'A4',
             printBackground: true,
             margin: {
@@ -37,6 +43,14 @@ const path = require('path');
             footerTemplate: footerHtml,
             headerTemplate: '<span></span>',
         });
+
+        const svgs = await page.$$(".plot");
+        for (const [i, svg] of svgs.entries()) {
+            const classNames = svg["_remoteObject"]["description"].split(".");
+            const plotName = classNames.find(c => c.match(/plot_[0-9]+\b/g));
+            console.log(plotName);
+            await svg.screenshot({path: `${lessonPath}plot_${i + 1}.png`});
+        }
     }
-    await browser.close();                          // close browser
+    await browser.close();
 })();

@@ -1,4 +1,8 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { Link, IconButton } from 'gatsby-theme-material-ui';
+import { gsap } from "gsap";
+import { makeStyles } from '@material-ui/core/styles';
+import SaveIcon from '@material-ui/icons/Save';
 import { scaleLinear } from '@visx/scale';
 import { Group } from '@visx/group';
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -6,9 +10,11 @@ import { Line, LinePath, Circle } from '@visx/shape';
 import { ParentSize } from '@visx/responsive';
 import { Text } from '@visx/text';
 import { curveLinear } from '@visx/curve';
-import { makeStyles } from '@material-ui/core/styles';
-import COLORS, { hexToRGB } from "../../colors";
+
 import { theme } from "../theme";
+import COLORS, { hexToRGB } from "../../colors";
+import { LessonContext } from "../../templates/lesson";
+
 
 const ARROW = "m8.7186 4.0337-10.926-4.0177 10.926-4.0177c-1.7455 2.3721-1.7354 5.6175-6e-7 8.0354z";
 const [ARROW_WIDTH, ARROW_HEIGHT] = [12.35, 9.46667];
@@ -173,6 +179,72 @@ const Plot = ({
             }
             }
         </ParentSize>
+    );
+};
+
+const useSavePlotStyles = makeStyles({
+    wrapper: {
+        position: "relative",
+        width: "100%",
+    },
+    overlay: {
+        position: "absolute",
+        top: "0px",
+        right: "0px",
+        display: "flex",
+        flexDirection: "column",
+    },
+    overlayElement: {
+        opacity: 0,
+        padding: 0,
+        color: COLORS.LIGHT_GRAY,
+        '&:hover': {
+            color: COLORS.GRAY
+        }
+    },
+});
+
+const SaveablePlot = (props) => {
+    const [isHovering, setIsHovering] = useState(false);
+    const plotNrRef = useRef(0);
+    const lessonContext = useContext(LessonContext);
+    if (lessonContext && plotNrRef.current === 0) {
+        lessonContext.plotCount = (
+            lessonContext.plotCount
+            ? lessonContext.plotCount + 1
+            : 1
+        );
+        plotNrRef.current = lessonContext.plotCount;
+    }
+
+    const plotName = `plot_${plotNrRef.current}`;
+    const pngHref = `./${plotName}.png`;  // This png file should be generated on deploy!
+    const classes = useSavePlotStyles();
+
+    useEffect(() => {
+        if (isHovering) {
+            gsap.to(`.${classes.overlayElement}`, {
+                right: "0px",
+                opacity: 1,
+                stagger: 0.1
+            });
+        } else {
+            gsap.to(`.${classes.overlayElement}`, {
+                right: "-24px",
+                opacity: 0
+            }); 
+        }
+    }, [isHovering]);
+
+    return (
+        <div className={classes.wrapper} onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <Plot {...props}/>
+            <div className={classes.overlay}>
+                <IconButton aria-label="save" to={pngHref} className={classes.overlayElement} title="Afbeelding opslaan" download>
+                    <SaveIcon />
+                </IconButton>
+            </div>
+        </div>
     );
 };
 
@@ -504,4 +576,4 @@ const Hair = ({x, y}) => {
     );
 }
 
-export { Plot, Fx, Point, Annot, Hair, _Line as Line, ArrowLine, Rectangle, SvgNote };
+export { Plot, SaveablePlot, Fx, Point, Annot, Hair, _Line as Line, ArrowLine, Rectangle, SvgNote };

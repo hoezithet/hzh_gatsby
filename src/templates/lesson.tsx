@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from 'react';
 import { graphql } from "gatsby";
 import "katex/dist/katex.min.css";
 import { MDXProvider } from "@mdx-js/react"
@@ -99,6 +99,8 @@ export interface LessonData {
     };
 }
 
+export const LessonContext = createContext();
+
 export default function Template(
     { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
 ) {
@@ -123,32 +125,33 @@ export default function Template(
     const slug = lesson.fields.slug;
     const pdfLink = `${slug.split('/').slice(3, -1).join("-").replace(" ", "_")}.pdf`;
     return (
-        <Layout crumbs={ crumbs } description={ frontmatter.description }
-                tags={ frontmatter.tags } image={ image ? image.childImageSharp.fixed.src : defaultImg.childImageSharp.fixed.src } >
-            <h1>{frontmatter.title}</h1>
-            <PrintLink to={ pdfLink } />
-            <Toc>
-                { tableOfContents }
-            </Toc>
-            <MDXProvider components={ shortcodes }>
-              <MDXProvider components={ components }>
-                  <MDXRenderer>{body}</MDXRenderer>
-              </MDXProvider>
-            </MDXProvider>
-            ${}.pdf
-            <PrintLink to={ pdfLink } />
-            <Feedback />
-            <Box my={ 4 }>
-                <Grid container spacing={ 2 } justify="space-between">
-                    { prevSiblingCard }
-                    { nextSiblingCard }
-                </Grid>
-            </Box>
-            <Box my={ 4 } textAlign="center" justifyContent="center">
-                <Sponsors />
-            </Box>
-            <Comments />
-        </Layout>
+        <LessonContext.Provider value={{}}>
+            <Layout crumbs={ crumbs } description={ frontmatter.description }
+                    tags={ frontmatter.tags } image={ image ? image.childImageSharp.fixed.src : defaultImg.childImageSharp.fixed.src } >
+                <h1>{frontmatter.title}</h1>
+                <PrintLink to={ pdfLink } />
+                <Toc>
+                    { tableOfContents }
+                </Toc>
+                <MDXProvider components={ shortcodes }>
+                  <MDXProvider components={ components }>
+                      <MDXRenderer>{body}</MDXRenderer>
+                  </MDXProvider>
+                </MDXProvider>
+                <PrintLink to={ pdfLink } />
+                <Feedback />
+                <Box my={ 4 }>
+                    <Grid container spacing={ 2 } justify="space-between">
+                        { prevSiblingCard }
+                        { nextSiblingCard }
+                    </Grid>
+                </Box>
+                <Box my={ 4 } textAlign="center" justifyContent="center">
+                    <Sponsors />
+                </Box>
+                <Comments />
+            </Layout>
+        </LessonContext.Provider>
     );
 }
 

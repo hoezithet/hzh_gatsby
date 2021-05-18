@@ -71,10 +71,21 @@ const useStyles = makeStyles({
     }
 });
 
+const useStylesDrawing = makeStyles({
+    drawing: {
+        display: "block",
+        margin: "auto"
+    },
+    watermark: {
+        fill: COLORS.LIGHT_GRAY,
+        fontSize: 11,
+    },
+});
 const DrawingContext = createContext({width: null, height: null, xScale: null, yScale: null});
 
-const Drawing = ({children=null, aspect=1.0, maxWidth=500, top=0.05, right=0.05, bottom=0.05, left=0.05, xMin=0, yMin=0, xMax=100, yMax=100}) => {
+const Drawing = ({children=null, aspect=1.0, maxWidth=500, top=0.05, right=0.05, bottom=0.05, left=0.05, xMin=0, yMin=0, xMax=100, yMax=100, watermark=true}) => {
     // A Drawing takes the width of its parent, limited to maxWidth pixels. Its height is calculated from the width and the aspect ratio.
+    const classes = useStylesDrawing();
     return (
         <ParentSize>
         { ({width}) => {
@@ -94,7 +105,12 @@ const Drawing = ({children=null, aspect=1.0, maxWidth=500, top=0.05, right=0.05,
 
             return (
                 <DrawingContext.Provider value={{width: width, height: height, xScale: xScale, yScale: yScale}}>
-                    <svg width={width} height={height} className="drawing">
+                    <svg width={width} height={height} className={`${classes.drawing} drawing`}>
+                        { watermark ?
+                          <Text x={width - 10} y={height - 10} textAnchor="end" className={classes.watermark}>
+                              Meer op: https://hoezithet.nu
+                          </Text>
+                          : null }
                         { children }
                     </svg>
                 </DrawingContext.Provider>

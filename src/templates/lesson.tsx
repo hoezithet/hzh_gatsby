@@ -31,7 +31,7 @@ import { Exercise } from "../components/shortcodes/exercise";
 import { Answer } from "../components/shortcodes/answer";
 import { AnswerFeedback } from "../components/shortcodes/answerFeedback";
 import { ExerciseStepper } from "../components/shortcodes/exerciseStepper";
-import { SaveablePlot as Plot, Fx, Point, Annot, Hair, Line, ArrowLine, Rectangle, SvgNote } from "../components/shortcodes/plot";
+import { SaveablePlot as Plot, Drawing, Fx, Point, Annot, HairLines, Line, ArrowLine, Rectangle, Note as SvgNote } from "../components/shortcodes/plot";
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -58,7 +58,7 @@ export const shortcodes = {
     Orange,
     Red, DarkRed, Purple, Gray,
     Exercise, Answer, AnswerFeedback, ExerciseStepper,
-    Plot, Fx, Point, Annot, Hair, Line, ArrowLine, Rectangle, SvgNote
+    Plot, Drawing, Fx, Point, Annot, HairLines, Line, ArrowLine, Rectangle, SvgNote
 };
 
 export const components = {

@@ -22,10 +22,6 @@ const [ARROW_WIDTH, ARROW_HEIGHT] = [12.35, 9.46667];
 const STROKE_DASHARRAY = "4";
 
 const useStyles = makeStyles({
-    plot: {
-        display: "block",
-        margin: "auto"
-    },
     tick: {
         '& text': {
             fontFamily: "Quicksand,sans-serif",
@@ -75,11 +71,42 @@ const useStyles = makeStyles({
     }
 });
 
-const PlotContext = createContext();
+const DrawingContext = createContext({width: null, height: null, xScale: null, yScale: null});
 
-const _Plot = ({
-    children=null, width, height, top, right, bottom, left,
-    xMin, yMin, xMax, yMax,
+const Drawing = ({children=null, aspect=1.0, maxWidth=500, top=0.05, right=0.05, bottom=0.05, left=0.05, xMin=0, yMin=0, xMax=100, yMax=100}) => {
+    // A Drawing takes the width of its parent, limited to maxWidth pixels. Its height is calculated from the width and the aspect ratio.
+    return (
+        <ParentSize>
+        { ({width}) => {
+            width = Math.min(width, maxWidth);
+            const height = width/aspect;
+            const xScale = scaleLinear({
+                range: [width*left, width*(1 - right)],
+                domain: [xMin, xMax],
+                round: false
+            });
+
+            const yScale = scaleLinear({
+                range: [height*(1 - bottom), height*top],
+                domain: [yMin, yMax],
+                round: false
+            });
+
+            return (
+                <DrawingContext.Provider value={{width: width, height: height, xScale: xScale, yScale: yScale}}>
+                    <svg width={width} height={height} className="drawing">
+                        { children }
+                    </svg>
+                </DrawingContext.Provider>
+            );
+          }
+        }
+        </ParentSize>
+    ); 
+};
+
+const Axes = ({
+    children=null,
     xTicks, yTicks,
     xLabel, yLabel,
     xTickFormat, yTickFormat,
@@ -96,22 +123,12 @@ const _Plot = ({
   })
      **/
 
-    xTicks = xTicks || Math.min(10, Math.max((width - right - left) / 50, 2));
-
-    yTicks = yTicks || Math.min(10,  Math.max(2, (height - top - bottom) / 50));
-
-    const xScale = scaleLinear({
-        range: [left + xAxisMargin, width - right - xAxisMargin],
-        domain: [xMin, xMax],
-        round: false
-    });
-
-    const yScale = scaleLinear({
-        range: [height - bottom - yAxisMargin, top + yAxisMargin],
-        domain: [yMin, yMax],
-        round: false
-    });
-
+    const {xScale, yScale, width, height} = useContext(DrawingContext);
+    const [xMin, xMax] = xScale.domain();
+    const [yMin, yMax] = yScale.domain();
+    xAxisMargin = xAxisMargin*width;
+    yAxisMargin = yAxisMargin*height;
+    
     const classes = useStyles({
         xFontSize: xFontSize,
         yFontSize: yFontSize,
@@ -120,38 +137,41 @@ const _Plot = ({
     });
     
     return (
-        <PlotContext.Provider value={{xScale: xScale, yScale: yScale, xMin: xMin, xMax: xMax, width: width, height: height}}>
-            <svg width={width} height={height} className={`${classes.plot} plot`}>
-                <Group left={xScale(0)}>
-                    <AxisLeft scale={yScale} numTicks={yTicks} tickFormat={yTickFormat} hideAxisLine={true} tickClassName={`${classes.tick} ${classes.yTick}`}/>
-                    <Line from={{x: 0, y: yScale(yMin) + yAxisMargin}} to={{x: 0, y: yScale(yMax) - yAxisMargin}} className={`${classes.axisLine} ${classes.yAxisLine}`}/>
-                    <Text x={10} y={yScale(yMax) - yAxisMargin + 10} textAnchor="start" className={`${classes.axisLabel} ${classes.yAxisLabel}`}>
-                        { yLabel }
-                    </Text>
-                    <path fill={yColor} stroke={yColor} strokeLinejoin="round" transform={`translate(0, ${yScale(yMax) - yAxisMargin}) rotate(90) scale(1.1)`} d={ARROW}/>
-                </Group>
-                <Group top={yScale(0)}>
-                    <AxisBottom scale={xScale} numTicks={xTicks} tickFormat={xTickFormat} hideAxisLine={true} tickClassName={`${classes.tick} ${classes.xTick}`}/>
-                    <Line from={{x: xScale(xMin) - xAxisMargin, y: 0}} to={{x: xScale(xMax) + xAxisMargin, y: 0}} className={`${classes.axisLine} ${classes.xAxisLine}`}/>
-                    <Text x={xScale(xMax) + xAxisMargin} y={-10} textAnchor="end" className={`${classes.axisLabel} ${classes.xAxisLabel}`}>
-                        { xLabel }
-                    </Text>
-                    <path fill={xColor} stroke={xColor} strokeLinejoin="round" transform={`translate(${xScale(xMax) + xAxisMargin}, 0) rotate(180) scale(1.1)`} d={ARROW}/>
-                </Group>
-                {
-                children
-                }
-            </svg>
-        </PlotContext.Provider>
+        <>
+            <Group left={xScale(0)}>
+                <AxisLeft scale={yScale} numTicks={yTicks} tickFormat={yTickFormat} hideAxisLine={true} tickClassName={`${classes.tick} ${classes.yTick}`}/>
+                <Line from={{x: 0, y: yScale(yMin) + yAxisMargin}} to={{x: 0, y: yScale(yMax) - yAxisMargin}} className={`${classes.axisLine} ${classes.yAxisLine}`}/>
+                <Text x={10} y={yScale(yMax) - yAxisMargin + 10} textAnchor="start" className={`${classes.axisLabel} ${classes.yAxisLabel}`}>
+                    { yLabel }
+                </Text>
+                <path fill={yColor} stroke={yColor} strokeLinejoin="round" transform={`translate(0, ${yScale(yMax) - yAxisMargin}) rotate(90) scale(1.1)`} d={ARROW}/>
+            </Group>
+            <Group top={yScale(0)}>
+                <AxisBottom scale={xScale} numTicks={xTicks} tickFormat={xTickFormat} hideAxisLine={true} tickClassName={`${classes.tick} ${classes.xTick}`}/>
+                <Line from={{x: xScale(xMin) - xAxisMargin, y: 0}} to={{x: xScale(xMax) + xAxisMargin, y: 0}} className={`${classes.axisLine} ${classes.xAxisLine}`}/>
+                <Text x={xScale(xMax) + xAxisMargin} y={-10} textAnchor="end" className={`${classes.axisLabel} ${classes.xAxisLabel}`}>
+                    { xLabel }
+                </Text>
+                <path fill={xColor} stroke={xColor} strokeLinejoin="round" transform={`translate(${xScale(xMax) + xAxisMargin}, 0) rotate(180) scale(1.1)`} d={ARROW}/>
+            </Group>
+            { children }
+        </>
     );
 }
+
+const useStylesPlot = makeStyles({
+    plot: {
+        display: "block",
+        margin: "auto"
+    },
+});
 
 const Plot = ({
     children=null,
     aspect=1.0,
     top=0.05, right=0.05, bottom=0.05, left=0.05,
     xMin=-10, yMin=-10, xMax=10, yMax=10,
-    xTicks=null, yTicks=null,
+    xTicks=10, yTicks=10,
     xLabel="x", yLabel="y",
     xTickFormat=(d, i) => d, yTickFormat=(d, i) => d,
     xColor="gray", yColor="gray",
@@ -159,26 +179,22 @@ const Plot = ({
     xAxisMargin=0.05, yAxisMargin=0.05,
     maxWidth=500
 }) => {
+    // Wrapper class for Drawing + Axes
+    const classes = useStylesPlot();
     return (
-        <ParentSize>
-            {
-            ({width}) => {
-            width = Math.min(width, maxWidth);
-            const height = width/aspect;
-            return (
-            <_Plot children={children} width={width} height={height} 
-            top={top*height} right={right*width} bottom={bottom*height} left={left*width}
-                xMin={xMin} yMin={yMin} xMax={xMax} yMax={yMax}
-                xTicks={xTicks} yTicks={yTicks}
+        <Drawing maxWidth={maxWidth} aspect={aspect}
+            left={left + xAxisMargin} right={right + xAxisMargin} top={top + yAxisMargin} bottom={bottom + yAxisMargin}
+            xMin={xMin} yMin={yMin} xMax={xMax} yMax={yMax}
+            className={`${classes.plot} plot`}>
+            <Axes xTicks={xTicks} yTicks={yTicks}
                 xLabel={xLabel} yLabel={yLabel}
                 xTickFormat={xTickFormat} yTickFormat={yTickFormat}
                 xColor={COLORS[xColor.toUpperCase()]} yColor={COLORS[yColor.toUpperCase()]}
                 xFontSize={xFontSize} yFontSize={yFontSize}
-                xAxisMargin={xAxisMargin*width} yAxisMargin={yAxisMargin*height} />
-            );
-            }
-            }
-        </ParentSize>
+                xAxisMargin={xAxisMargin} yAxisMargin={yAxisMargin}>
+                {children} 
+            </Axes>
+        </Drawing>
     );
 };
 
@@ -262,7 +278,8 @@ const useStylesFx = makeStyles({
 
 const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", opacity=1, lineWidth=3}) => {
     const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth, opacity: opacity});
-    const {xScale, yScale, xMin, xMax} = useContext(PlotContext);
+    const {xScale, yScale} = useContext(DrawingContext);
+    const [xMin, xMax] = xScale.domain();
     xStart = xStart === null ? xMin : xStart;
     xEnd = xEnd === null ? xMax : xEnd;
     nSamples = nSamples ? Math.round(nSamples) : Math.round(xScale(xEnd) - xScale(xStart));
@@ -274,13 +291,13 @@ const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", opacity=1,
 
 const Point = ({x, y, color="blue", size=3}) => {
     const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: size});
-    const {xScale, yScale} = useContext(PlotContext);
+    const {xScale, yScale} = useContext(DrawingContext);
     return <Line from={{x: xScale(x), y: yScale(y)}} to={{x: xScale(x), y: yScale(y)}} className={classes.fx}/>
 };
 
 const _Line = ({xStart, yStart, xEnd, yEnd, color="blue", lineWidth=3}) => {
     const classes = useStylesFx({color: COLORS[color.toUpperCase()], lineWidth: lineWidth});
-    const {xScale, yScale} = useContext(PlotContext);
+    const {xScale, yScale} = useContext(DrawingContext);
     if (xScale) {
         [xStart, xEnd] = [xStart, xEnd].map(xScale);
     }
@@ -301,7 +318,7 @@ const ArrowLine = ({
     lineColor="light_gray", lineWidth=2, dashed=false, showArrow=true,
     opacity=1, useContextScale=true,
 }) => {
-    const {xScale, yScale, width, height} = useContext(PlotContext);
+    const {xScale, yScale} = useContext(DrawingContext);
 
     if (xScale && yScale && useContextScale) {
         [xEnd, xStart] = [xEnd, xStart].map(xScale);
@@ -367,7 +384,7 @@ const ArrowLine = ({
 };
 
 const Rectangle = ({x1, y1, x2, y2, fill=null, stroke=null, dashed=false, strokeOpacity=1, fillOpacity=1}) => {
-    const {xScale, yScale} = useContext(PlotContext);
+    const {xScale, yScale} = useContext(DrawingContext);
 
     if (xScale && yScale) {
         [x1, x2] = [x1, x2].map(xScale);
@@ -383,7 +400,7 @@ const Rectangle = ({x1, y1, x2, y2, fill=null, stroke=null, dashed=false, stroke
     );
 };
 
-const useStylesSvgNote = makeStyles({
+const useStylesNote = makeStyles({
     divNoteChild: {
         '& p': {
             margin: "0",  // Remove paragraph margin
@@ -429,9 +446,9 @@ const canonicalAngle = (angle) => {
     )
 }
 
-const SvgNote = ({x, y, backgroundColor="light_gray", backgroundOpacity=1, showBackground=true, hAlign="center",
+const Note = ({x, y, backgroundColor="light_gray", backgroundOpacity=1, showBackground=true, hAlign="center",
     vAlign="center", useContextScale=true, children}) => {
-    const {xScale, yScale, width, height} = useContext(PlotContext);
+    const {xScale, yScale, width, height} = useContext(DrawingContext);
 
     if (xScale && yScale && useContextScale) {
         x = xScale(x);
@@ -477,7 +494,7 @@ const SvgNote = ({x, y, backgroundColor="light_gray", backgroundOpacity=1, showB
     backgroundColor = backgroundColorUC in COLORS ? COLORS[backgroundColorUC] : backgroundColor;
     backgroundColor = hexToRGB(backgroundColor, backgroundOpacity);
 
-    const classes = useStylesSvgNote({
+    const classes = useStylesNote({
         justifyContent: justifyContent, alignItems: alignItems,
         backgroundColor: backgroundColor,
         backgroundOpacity: backgroundOpacity,
@@ -511,7 +528,7 @@ const Annot = ({
     showArrow=true, showLine=true, dashed=false, showBackground=false,
     backgroundColor="light_gray", backgroundOpacity=0.5, children
 }) => {
-    const {xScale, yScale, width, height} = useContext(PlotContext);
+    const {xScale, yScale} = useContext(DrawingContext);
 
     if (xScale && yScale) {
         [xTarget, xAnnot] = [xTarget, xAnnot].map(xScale);
@@ -542,11 +559,11 @@ const Annot = ({
 
     return (
         <>
-        <SvgNote x={xAnnot} y={yAnnot} showBackground={showBackground} backgroundColor={showBackground ? backgroundColor : "none"}
+        <Note x={xAnnot} y={yAnnot} showBackground={showBackground} backgroundColor={showBackground ? backgroundColor : "none"}
         backgroundOpacity={backgroundOpacity} hAlign={hAlign}
         vAlign={vAlign} useContextScale={false}>
             { children }
-        </SvgNote>
+        </Note>
         {
             showLine ?
             arrowLine
@@ -556,7 +573,7 @@ const Annot = ({
     );
 };
 
-const useStylesHair = makeStyles({
+const useStylesHairLines = makeStyles({
     hair: {
         strokeWidth: 2,
         strokeLinecap: "round",
@@ -565,9 +582,9 @@ const useStylesHair = makeStyles({
     }
 });
 
-const Hair = ({x, y}) => {
-    const {xScale, yScale} = useContext(PlotContext);
-    const classes = useStylesHair();
+const HairLines = ({x, y}) => {
+    const {xScale, yScale} = useContext(DrawingContext);
+    const classes = useStylesHairLines();
     return (
         <>
         <Line from={{x: xScale(0), y: yScale(y)}} to={{x: xScale(x), y: yScale(y)}} className={classes.hair}/>
@@ -576,4 +593,4 @@ const Hair = ({x, y}) => {
     );
 }
 
-export { Plot, SaveablePlot, Fx, Point, Annot, Hair, _Line as Line, ArrowLine, Rectangle, SvgNote };
+export { Drawing, Plot, SaveablePlot, Fx, Point, Annot, HairLines, _Line as Line, ArrowLine, Rectangle, Note };

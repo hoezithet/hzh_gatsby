@@ -127,7 +127,7 @@ export default function Template(
     return (
         <LessonContext.Provider value={{}}>
             <Layout crumbs={ crumbs } description={ frontmatter.description }
-                    tags={ frontmatter.tags } image={ image ? image.childImageSharp.fixed.src : defaultImg.childImageSharp.fixed.src } >
+                    tags={ frontmatter.tags } image={ image ? image.childImageSharp.gatsbyImageData.src : defaultImg.childImageSharp.gatsbyImageData.src } >
                 <h1>{frontmatter.title}</h1>
                 <PrintLink to={ pdfLink } />
                 <Toc>

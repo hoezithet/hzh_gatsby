@@ -2,18 +2,15 @@ import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 
-const feedbackBtnsQuery = graphql`
-{
+const feedbackBtnsQuery = graphql`{
   allFile(filter: {absolutePath: {glob: "**/images/feedback/lamp_*.png"}}) {
     edges {
       node {
         childImageSharp {
-          fixed(height: 75) {
-            ...GatsbyImageSharpFixed_tracedSVG
-          }
+          gatsbyImageData(height: 75, placeholder: TRACED_SVG, layout: FIXED)
         }
         name
       }
@@ -24,10 +21,10 @@ const feedbackBtnsQuery = graphql`
 
 class FeedbackItem extends React.Component {
     render() {
-        const UnselectedImg = styled(Img)`
+        const UnselectedImg = styled(GatsbyImage)`
             opacity: 0.3
         `;
-        const ImgComp = (this.props.selected || !this.props.disabled) ? Img : UnselectedImg;
+        const ImgComp = (this.props.selected || !this.props.disabled) ? GatsbyImage : UnselectedImg;
         return (
             <StaticQuery query={ feedbackBtnsQuery }
             render={ imgData => {
@@ -35,7 +32,7 @@ class FeedbackItem extends React.Component {
                 return (
                     <Grid container spacing={ 2 } alignItems="center" direction="column">
                         <Grid item >
-                            <ImgComp fixed={ node.childImageSharp.fixed } />
+                            <ImgComp fixed={ node.childImageSharp.gatsbyImageData } />
                         </Grid>
                         <Grid item >
                             <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick } color="primary" disabled={ this.props.disabled }>{ this.props.children }</Button>

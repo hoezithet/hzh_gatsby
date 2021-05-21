@@ -1,0 +1,7 @@
+a.anchor {
+  display: none;
+  margin: 8px !important;
+}
+h2:hover > .anchor {
+  display: inline;
+}

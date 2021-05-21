@@ -13,13 +13,24 @@ import { components, MdxNode, shortcodes } from "./lesson";
 import { ToggleImageBare } from "../components/shortcodes/toggleImage";
 import { ExpandBare } from "../components/shortcodes/expand";
 import { makeStyles } from '@material-ui/core/styles';
-import "./lesson_bare.css";
+import "./lesson.css";
 
 const useStyles = makeStyles({
-  img: {
-    width: "100%",
-    height: "auto",
-  }
+    img: {
+        width: "100%",
+        height: "auto",
+        position: "absolute",
+        top: "0px",
+    },
+    header: {
+        breakInside: "avoid",
+        "&::after": {
+            content: '""',
+            display: "block",
+            height: "100px",
+            marginBottom: "-100px",
+        }
+    }
 });
 
 const bareShortcodes = {
@@ -31,13 +42,37 @@ const bareShortcodes = {
 const BareImage = (props) => {
     const classes = useStyles();
     return (
-        <img src={props.src} className={`gatsby-resp-image-image ${classes.img}`}/>
+        <img src={props.src} className={`gatsby-resp-image-image bare-img ${classes.img}`}/>
     );
-}
+};
+
+const BareH1 = (props) => {
+    const classes = useStyles();
+    return (
+        <h1 {...props} className={`${props.className || ""} ${classes.header}`}/>
+    );
+};
+
+const BareH2 = (props) => {
+    const classes = useStyles();
+    return (
+        <h2 {...props} className={`${props.className || ""} ${classes.header}`}/>
+    );
+};
+
+const BareH3 = (props) => {
+    const classes = useStyles();
+    return (
+        <h3 {...props} className={`${props.className || ""} ${classes.header}`}/>
+    );
+};
 
 const bareComponents = {
-   ...components,
-   img: BareImage,
+    ...components,
+    img: BareImage,
+    h1: BareH1,
+    h2: BareH2,
+    h3: BareH3
 };
 
 export interface LessonData {

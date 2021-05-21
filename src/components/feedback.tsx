@@ -32,7 +32,7 @@ class FeedbackItem extends React.Component {
                 return (
                     <Grid container spacing={ 2 } alignItems="center" direction="column">
                         <Grid item >
-                            <ImgComp fixed={ node.childImageSharp.gatsbyImageData } />
+                            <ImgComp fixed={ node.childImageSharp.gatsbyImageData } alt={ this.props.imgName } />
                         </Grid>
                         <Grid item >
                             <Button variant="contained" id={ this.props.id } onClick={ this.props.onClick } color="primary" disabled={ this.props.disabled }>{ this.props.children }</Button>

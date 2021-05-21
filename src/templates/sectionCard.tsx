@@ -35,6 +35,7 @@ const StyledCard = styled(Card)`
 export default function SectionCard({title, cardImage, link, children}: SectionItemProps) {
     const img = <GatsbyImage
         image={cardImage.childImageSharp.gatsbyImageData}
+        alt={title}
         objectFit="cover"
         objectPosition="50% 50%" />;
     return (

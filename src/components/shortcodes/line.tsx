@@ -3,7 +3,7 @@ import { Line as VisxLine } from '@visx/shape';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Drawing, DrawingContext } from "./drawing";
-import COLORS from "../../colors";
+import { getColor } from "../../colors";
 
 export const STROKE_DASHARRAY = "4";
 const toRad = a => (a / 180) * Math.PI;
@@ -28,7 +28,7 @@ export const Line = ({
     lineWidth=3, useContextScale=true, dashed=false,
     opacity=1
 }) => {
-    const classes = useStyles({color: COLORS[color.toUpperCase()], lineWidth: lineWidth});
+    const classes = useStyles({color: getColor(color), lineWidth: lineWidth});
     const {xScale, yScale} = useContext(DrawingContext);
     if (xScale && yScale && useContextScale) {
         [xStart, xEnd] = [xStart, xEnd].map(xScale);
@@ -51,12 +51,9 @@ export const Line = ({
         yStartLine + anchorRadiusStart * Math.sin(anchorAngleStart),
     ];
     
-    const ucColor = color.toUpperCase();
-    color = ucColor in COLORS ? COLORS[ucColor] : color;
-    
     return (
         <path d={`M ${xEndLine} ${yEndLine} C ${xEndAnch} ${yEndAnch}, ${xStartAnch} ${yStartAnch}, ${xStartLine} ${yStartLine}`}
-            stroke={color} fill="#00000000" strokeDasharray={dashed ? STROKE_DASHARRAY : "none"}
+            stroke={getColor(color)} fill="#00000000" strokeDasharray={dashed ? STROKE_DASHARRAY : "none"}
             strokeLinecap="round" strokeWidth={lineWidth} strokeOpacity={opacity} />
     );
 };

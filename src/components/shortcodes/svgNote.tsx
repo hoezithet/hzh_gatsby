@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import COLORS, { hexToRGB } from "../../colors";
+import { hexToRGB, getColor } from "../../colors";
 import { makeStyles } from '@material-ui/core/styles';
 
 import { theme } from "../theme";
@@ -61,8 +61,7 @@ export const SvgNote = ({x, y, backgroundColor="light_gray", backgroundOpacity=1
     ];
 
 
-    const backgroundColorUC = backgroundColor.toUpperCase();
-    backgroundColor = backgroundColorUC in COLORS ? COLORS[backgroundColorUC] : backgroundColor;
+    backgroundColor = getColor(backgroundColor);
     backgroundColor = hexToRGB(backgroundColor, backgroundOpacity);
 
     const classes = useStylesNote({

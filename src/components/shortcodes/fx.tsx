@@ -3,13 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Line, LinePath, Circle } from '@visx/shape';
 import { curveLinear } from '@visx/curve';
 
-import COLORS from "../../colors";
+import { getColor } from "../../colors";
 import { DrawingContext } from "./drawing";
 import { useStyles } from "./line";
 
 
 export const Fx = ({fx, nSamples=null, xStart=null, xEnd=null, color="blue", opacity=1, lineWidth=3}) => {
-    const classes = useStyles({color: COLORS[color.toUpperCase()], lineWidth: lineWidth, opacity: opacity});
+    const classes = useStyles({color: getColor(color), lineWidth: lineWidth, opacity: opacity});
     const {xScale, yScale} = useContext(DrawingContext);
     const [xMin, xMax] = xScale.domain();
     xStart = xStart === null ? xMin : xStart;

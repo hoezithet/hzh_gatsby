@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 
-import COLORS from "../../colors";
+import { getColor } from "../../colors";
 import { LessonContext } from "../../templates/lesson";
 import { Drawing, DrawingContext } from "./drawing";
 import { Axes } from "./axes";
@@ -40,7 +40,7 @@ const Plot = ({
             <Axes xTicks={xTicks} yTicks={yTicks}
                 xLabel={xLabel} yLabel={yLabel}
                 xTickFormat={xTickFormat} yTickFormat={yTickFormat}
-                xColor={COLORS[xColor.toUpperCase()]} yColor={COLORS[yColor.toUpperCase()]}
+                xColor={getColor(xColor)} yColor={getColor(yColor)}
                 xFontSize={xFontSize} yFontSize={yFontSize}
                 xAxisMargin={xAxisMargin} yAxisMargin={yAxisMargin}>
                 {children} 
@@ -64,9 +64,9 @@ const useSavePlotStyles = makeStyles({
     overlayElement: {
         opacity: 0,
         padding: 0,
-        color: COLORS.LIGHT_GRAY,
+        color: getColor("light_gray"),
         '&:hover': {
-            color: COLORS.GRAY
+            color: getColor("gray")
         }
     },
 });

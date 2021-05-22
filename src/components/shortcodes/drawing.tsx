@@ -4,7 +4,7 @@ import { ParentSize } from '@visx/responsive';
 import { scaleLinear } from '@visx/scale';
 import { Text } from '@visx/text';
 
-import COLORS from "../../colors";
+import { getColor } from "../../colors";
 
 
 const useStyles = makeStyles({
@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         margin: "auto"
     },
     watermark: {
-        fill: COLORS.LIGHT_GRAY,
+        fill: getColor("light_gray"),
         fontSize: 11,
     },
 });

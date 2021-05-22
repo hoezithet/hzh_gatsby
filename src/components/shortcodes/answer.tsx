@@ -58,11 +58,11 @@ const optEqual = (opt1: AnswerOptionType, opt2: AnswerOptionType, margin: number
         const numOpt1 = Number(strOpt1);
         const numOpt2 = Number(strOpt2);
         return (
-            (numOpt1 - margin < numOpt2
-                || numOpt1 - margin === numOpt2)
+            ((numOpt1 - margin < numOpt2)
+                || (numOpt1 - margin === numOpt2))
             &&
-            (numOpt1 + margin > numOpt2
-                || numOpt1 + margin === numOpt2)
+            ((numOpt1 + margin > numOpt2)
+                || (numOpt1 + margin === numOpt2))
         );
     } else {
         return opt1 === opt2;

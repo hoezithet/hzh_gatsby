@@ -13,7 +13,6 @@ import { components, MdxNode, shortcodes } from "./lesson";
 import { ToggleImageBare } from "../components/shortcodes/toggleImage";
 import { ExpandBare } from "../components/shortcodes/expand";
 import { makeStyles } from '@material-ui/core/styles';
-import "./lesson.css";
 
 const useStyles = makeStyles({
     img: {

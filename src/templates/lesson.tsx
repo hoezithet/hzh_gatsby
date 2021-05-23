@@ -49,7 +49,6 @@ import Table from '../components/table';
 import { LayoutProps } from "../components/layout";
 import Comments from "../components/comments";
 import SectionCard, { CardImage } from "./sectionCard";
-import "./lesson.css";
 
 export const shortcodes = {
     Mute,

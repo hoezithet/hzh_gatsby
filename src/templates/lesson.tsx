@@ -31,7 +31,7 @@ import { Exercise } from "../components/shortcodes/exercise";
 import { Answer } from "../components/shortcodes/answer";
 import { AnswerFeedback } from "../components/shortcodes/answerFeedback";
 import { ExerciseStepper } from "../components/shortcodes/exerciseStepper";
-import { SaveablePlot as Plot  } from "../components/shortcodes/plot";
+import { Plot  } from "../components/shortcodes/plot";
 import { Drawing, DrawingContext } from "../components/shortcodes/drawing";
 import { ArrowLine } from "../components/shortcodes/arrow";
 import { Fx } from "../components/shortcodes/fx";

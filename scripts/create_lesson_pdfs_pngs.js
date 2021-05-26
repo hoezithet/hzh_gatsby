@@ -53,9 +53,11 @@ const {
             headerTemplate: '<span></span>',
         });
 
-        const svgs = await page.$$(".plot");
+        const svgs = await page.$$(".drawing");
         for (const [i, svg] of svgs.entries()) {
-            await svg.screenshot({path: `${lessonPath}plot_${i + 1}.png`});
+            const pngPath = `${lessonPath}drawing_${i + 1}.png`;
+            console.log(`Saving ${pngPath}`);
+            await svg.screenshot({path: pngPath});
         }
     }
     await browser.close();

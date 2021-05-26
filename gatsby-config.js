@@ -23,7 +23,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                exclude: [`/bare/*`]
+                excludes: [`/bare/*`]
             }
         },
         {

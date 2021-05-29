@@ -7,6 +7,7 @@ import { Text } from '@visx/text';
 
 import { DrawingContext } from "./drawing";
 import { ArrowLine } from "./arrow";
+import { getColor } from "../../colors";
 
 const useStyles = makeStyles({
     tick: {
@@ -85,8 +86,8 @@ export const Axes = ({
     const classes = useStyles({
         xFontSize: xFontSize,
         yFontSize: yFontSize,
-        xColor: xColor,
-        yColor: yColor,
+        xColor: getColor(xColor),
+        yColor: getColor(yColor),
     });
     
     return (

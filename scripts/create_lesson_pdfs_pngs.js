@@ -55,7 +55,7 @@ const {
 
         const svgs = await page.$$(".drawing");
         for (const [i, svg] of svgs.entries()) {
-            const pngPath = `${lessonPath}drawing_${i + 1}.png`;
+            const pngPath = `${lessonPath}${slug.split('/').slice(2).join('_')}-${i + 1}.png`;
             console.log(`Saving ${pngPath}`);
             await svg.screenshot({path: pngPath});
         }

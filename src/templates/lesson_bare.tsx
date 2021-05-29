@@ -13,6 +13,8 @@ import { components, MdxNode, shortcodes } from "./lesson";
 import { ToggleImageBare } from "../components/shortcodes/toggleImage";
 import { ExpandBare } from "../components/shortcodes/expand";
 import { makeStyles } from '@material-ui/core/styles';
+import { Plot } from "../components/shortcodes/plot";
+import { Drawing } from "../components/shortcodes/drawing";
 
 const useStyles = makeStyles({
     img: {
@@ -35,7 +37,9 @@ const useStyles = makeStyles({
 const bareShortcodes = {
     ...shortcodes,
     ToggleImage: ToggleImageBare,
-    Expand: ExpandBare
+    Expand: ExpandBare,
+    Plot: Plot,
+    Drawing: Drawing,
 };
 
 const BareImage = (props) => {

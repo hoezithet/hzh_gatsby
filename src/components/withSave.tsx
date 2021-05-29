@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     overlayElement: {
         opacity: 0,
         padding: 0,
+        position: "relative",
         color: getColor("light_gray"),
         '&:hover': {
             color: getColor("gray")
@@ -54,7 +55,6 @@ export const withSave = (Component, fileExtension) => {
                 gsap.to(overlayElRef.current, {
                     right: "0px",
                     opacity: 1,
-                    stagger: 0.1
                 });
             } else {
                 gsap.to(overlayElRef.current, {

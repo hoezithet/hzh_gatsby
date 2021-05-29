@@ -134,7 +134,7 @@ export default function Template(
     const slug = lesson.fields.slug;
     const pdfLink = `${slug.split('/').slice(3, -1).join("-").replace(" ", "_")}.pdf`;
     return (
-        <LessonContext.Provider value={{}}>
+        <LessonContext.Provider value={{title: frontmatter.title, slug: slug}}>
             <Layout crumbs={ crumbs } description={ frontmatter.description }
                     tags={ frontmatter.tags } image={ image ? image.childImageSharp.gatsbyImageData.src : defaultImg.childImageSharp.gatsbyImageData.src } >
                 <h1>{frontmatter.title}</h1>

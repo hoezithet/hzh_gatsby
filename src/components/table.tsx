@@ -4,6 +4,7 @@ import COLORS from '../colors';
 const Table = styled.table`
     text-align: center;
     margin: auto;
+    break-inside: avoid;
     & thead {
         background-color: ${COLORS.LIGHT_GRAY};
         border: solid 1px black;

@@ -1,4 +1,5 @@
 module.exports = {
+    flags: { PRESERVE_WEBPACK_CACHE: true, FAST_DEV: true, PARALLEL_SOURCING: true },
     siteMetadata: {
         organization: {
             name: `Hoe Zit Het?`,
@@ -22,7 +23,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                exclude: [`/bare/*`]
+                excludes: [`/bare/*`]
             }
         },
         {
@@ -32,9 +33,9 @@ module.exports = {
                 path: `${__dirname}/src/images`,
             },
         },
-        `gatsby-plugin-sass`,
-        `gatsby-transformer-sharp`,
+        `gatsby-plugin-image`,
         `gatsby-plugin-sharp`,
+        `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-plugin-manifest`,
             options: {

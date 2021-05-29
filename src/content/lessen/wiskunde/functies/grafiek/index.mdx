@@ -4,8 +4,10 @@ date: 2018-10-01T22:13:11+02:00
 weight: 4
 wiski: "http://wiski.be/oefenen/grafische-voorstelling-van-elementaire-functies/take"
 tags: ["Functies", "grafieken", "plot", "Analyse"]
-image: plt/single_x.png
+image: img/wiskunde_functies_grafiek-2.png
 ---
+
+import {Fragment} from "react";
 
 We kunnen de waarden voor $\orange{x}$ en $\green{y}$ in een
 [waardentabel](../waardentabel) zien als coördinaten van punten op een
@@ -22,18 +24,32 @@ waardentabel:
 | $\orange{4}$        | $\green{2}$                         |
 | $\orange{5}$        | $\green{1{,}5}$                     |
 
-In de laatste rij van die waardentabel is $\orange{x = 5}$ en $\green{y =
-1{,}5}$. We kunnen dit voorstellen door een puntje met coördinaten
-$(\orange{5};~\green{1{,}5})$. <Mute>(Probeer eens op het puntje te
-klikken.)</Mute>
+In de voorlaatste rij van die waardentabel is $\orange{x = 4}$ en $\green{y =
+2}$. We kunnen dit voorstellen door een puntje met coördinaten
+$(\orange{4};~\green{2})$.
 
-<Bokeh plot="plt/single_x" />
+<Plot xColor="orange" yColor="green">
+<HairLines x={4} y={2}/>
+<Annot xTarget={4} yTarget={2} xAnnot={8} yAnnot={4}>
+
+$(\orange{4};~\green{2})$
+</Annot>
+<Point x={4} y={2} size={5} />
+</Plot>
 
 
 Zo kunnen we alle rijen in onze waardentabel voorstellen als puntjes in een
 assenstelsel.
 
-<Bokeh plot="plt/multiple_x" />
+<Plot xColor="orange" yColor="green" >
+{ [...Array(7).keys()].map(i => {
+  const x = i - 1;
+  const y = -(1/2)*x**2 + 4*x - 6;
+  return (
+    <Point x={x} y={y} size={5} key={i}/>
+  );
+})}
+</Plot>
 
 ## Veel puntjes vormen een curve
 
@@ -41,14 +57,21 @@ We laten ons even gaan en we zoeken $f(\orange{x})$ voor waanzinnig veel
 waarden van $\orange{x}$. Bijvoorbeeld voor alle waarden tussen $\orange{-1}$
 en $\orange{9}$ in stapjes van $0{,}01$ (dus $\orange{-1}$, $\orange{-0{,}99}$,
 $\orange{-0{,}98}$, $\orange{-0{,}97}$ enzovoort tot $\orange{9}$). Wat gebeurt
-er als we die enorme hoeveelheid puntjes nu op een assenstelsel zetten? We
+er als we die grote hoeveelheid puntjes nu op een assenstelsel zetten? We
 krijgen deze mooie figuur:
 
-<Bokeh plot="plt/loads_of_x" />
+<Plot xColor="orange" yColor="green">
+{ [...Array(1000).keys()].map(i => {
+  const x = i*6/1000 - 1;
+  const y = -(1/2)*x**2 + 4*x - 6;
+  return (
+    <Point x={x} y={y} size={5} key={i}/>
+  );
+})}
+</Plot>
 
-We hebben nu zoveel puntjes op ons assenstelsel dat we eigenlijk niet meer zien
-dat het _aparte_ puntjes zijn. Het zijn wel degelijk aparte puntjes <Mute
-text="(beweeg maar eens over de grafiek)" />, maar we zien het als **één
+We hebben nu zoveel puntjes op ons assenstelsel dat we bijna niet meer zien
+dat het _aparte_ puntjes zijn. We zien het als **één
 doorlopende curve**.  Deze curve noemen we de **grafiek van de functie**.
 
 ## Hoogstens één $y$ voor elke $x$
@@ -61,4 +84,10 @@ hieronder is een voorbeeld van een curve waar er voor bepaalde waarden van $x$
 functie van** $x$. Zonder het onderste stukje dat lijkt "terug te keren" is
 $y$ _wel_ een functie van $x$.
 
-<Bokeh plot="plt/no_fx" />
+<Plot xColor="orange" yColor="green">
+<Fx fx={x => Math.sqrt(-x + 1)} xEnd={1} />
+<Fx fx={x => -Math.sqrt(-x + 1)} xStart={-4} xEnd={1} />
+<Annot xTarget={-2} yTarget={-Math.sqrt(3)} xAnnot={-5} yAnnot={-4} anchorAngleTarget={-90} >
+Geen functie
+</Annot>
+</Plot>

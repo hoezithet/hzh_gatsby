@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+import { getSrc } from "gatsby-plugin-image"
 
 interface OpenGraphProps {
   title: string;
@@ -217,7 +218,7 @@ function SEO({ crumbs, description = ``, tags = null,
     const pageCrumb = crumbs.slice(-1)[0];
     const url = `${new URL(pageCrumb.slug, site.siteMetadata.siteUrl)}`;
     const title = pageCrumb.title;
-    const imgUrl = image || site.siteMetadata.organization.logo;
+    const imgUrl = getSrc(image || site.siteMetadata.organization.logo);
 
     return (
       <>

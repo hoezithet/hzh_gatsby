@@ -3,7 +3,7 @@ title: "Nulpunten en nulwaarden"
 date: 2018-07-01T22:13:11+02:00
 weight: 6
 tags: ["Functies", "Analyse"]
-image: plt/nulpunten.png
+image: img/wiskunde_functies_nulpunten-1.png
 ---
 
 In veel toepassingen van functies zijn we geïnteresseerd in de waarde die we
@@ -60,7 +60,13 @@ Hieronder staat de grafiek getekend van de functie $f(x) = -x^2 + 9$ die de
 nul*waarden* $x=-3$ en $x=3$ heeft en dus de nul*punten* $(-3,~0)$ en $(3,~0)$.
 De twee nulpunten zijn aangeduid in het **<Orange>oranje</Orange>**.
 
-<Bokeh plot="plt/nulpunten" />
+<Plot xColor="gray" yColor="gray">
+  <Fx fx={x => -Math.pow(x, 2) + 9}/>
+  <Point x={3} y={0} color="orange" size={10}/>
+  <Annot xTarget={3} yTarget={0} xAnnot={6} yAnnot={2}>Nulpunt</Annot>
+  <Point x={-3} y={0} color="orange" size={10}/>
+  <Annot xTarget={-3} yTarget={0} xAnnot={-6} yAnnot={2}>Nulpunt</Annot>
+</Plot>
 
 ## Samengevat
 

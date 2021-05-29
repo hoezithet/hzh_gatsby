@@ -9,6 +9,8 @@ const Frame = styled(Box)`
     border-style: solid;
     border-color: ${COLORS.GRAY};
     margin: 20px 0px;
+    break-inside: avoid;
+    break-before: avoid;
 `
 
 const TitleBox = styled(Box)`

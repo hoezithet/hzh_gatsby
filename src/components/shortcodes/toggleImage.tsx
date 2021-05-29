@@ -12,7 +12,7 @@ interface ToggleImageProps {
     toggleText: string;
 }
 
-const ToggleImage = ({children, toggleText}: ToggleImageProps) => {
+export const ToggleImage = ({children, toggleText}: ToggleImageProps) => {
     const [state, setState] = useState({ toggled: false });
     const imgs = children.props.children.filter(c => c !== "\n")
     const img1 = imgs[0];
@@ -43,4 +43,26 @@ const ToggleImage = ({children, toggleText}: ToggleImageProps) => {
   );
 }
 
-export default ToggleImage;
+export const ToggleImageBare = ({children, toggleText}: ToggleImageProps) => {
+    const imgs = children.props.children.filter(c => c !== "\n")
+    const img = imgs[1];
+
+  const explanationSwitch = (
+      <Grid xs={12} item>
+          <Grid container justify="flex-end" alignItems="center">
+              <Grid item>
+                  <Switch color="primary" onChange={e => setState({ toggled: e.target.checked })} />
+              </Grid>
+              <Grid item>
+                  <span>{ toggleText }</span>
+              </Grid>
+          </Grid>
+      </Grid>
+  );
+
+  return (
+      <Box margin={ "auto" }>
+        { img }
+      </Box>
+  );
+}

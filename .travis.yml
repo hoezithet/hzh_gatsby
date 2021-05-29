@@ -8,7 +8,7 @@ before_install:
 - npm config set //npm.greensock.com/:_authToken=$GSAP_TOKEN
 - npm config set @gsap:registry=https://npm.greensock.com
 install:
-- yarn install --verbose
+- yarn install
 cache:
   yarn: true
 script:

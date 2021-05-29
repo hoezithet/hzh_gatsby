@@ -3,15 +3,11 @@ dist: xenial
 language: node_js
 node_js:
 - 14
-cache:
-  directories:
-  - node_modules
+
 before_install:
 - npm config set //npm.greensock.com/:_authToken=$GSAP_TOKEN
 - npm config set @gsap:registry=https://npm.greensock.com
 - yarn add gsap@npm:@gsap/shockingly
-install:
-- yarn
 script:
 - gatsby build
 deploy:

@@ -21,18 +21,30 @@ deploy:
   on:
     branch: develop
 - provider: script
-  script: node scripts/create_lesson_pdfs_pngs.js --host=dev.hoezithet.nu --cwd=/root/hoezithet/dev_public
+  script: node scripts/create_lesson_pdfs_pngs.js --host=dev.hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
   on:
     branch: develop
+- provider: script
+  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/dev_public
+  edge: true
+  on:
+    branch: develop
+
 - provider: script
   script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public
   edge: true
   on:
     branch: master
 - provider: script
-  script: node scripts/create_lesson_pdfs_pngs.js --host=hoezithet.nu --cwd=/root/hoezithet/public 
+  script: node scripts/create_lesson_pdfs_pngs.js --host=hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
   on:
-    branch: master 
+    branch: master
+- provider: script
+  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public
+  edge: true
+  on:
+    branch: master
+
 addons:
   ssh_known_hosts: 167.86.92.134
 branches:

@@ -9,7 +9,7 @@ const {
     port=null,
     cwd=process.cwd(),
     pattern="public/bare/lessen/*/*/*/index.html"
-} = require('minimist')(process.argv.slice(2));;
+} = require('minimist')(process.argv.slice(2));
 
 (async () => {
     const browser = await puppeteer.launch({timeout: 0});
@@ -28,7 +28,7 @@ const {
         
         console.log("Saving pdf");
         const footerHtml = `
-            <div style="font-family: Quicksand; font-size: 10px; padding-right: 100px; padding-left: 100px; padding-bottom: 20px; display: flex; justify-content: space-between; width: 100%;">
+            <div style="font-family: Quicksand; color: #D3D3D3; font-size: 10px; padding-right: 100px; padding-left: 100px; padding-bottom: 20px; display: flex; justify-content: space-between; width: 100%;">
                 <span>Hoe Zit Het? - <span class="title"></span></span> <span>p. <span class="pageNumber"></span>/<span class="totalPages"></span></span>
             </div>
         `;

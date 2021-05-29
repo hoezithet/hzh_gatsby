@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getColor } from "../../colors";
 import { Drawing, DrawingContext, SaveableDrawing } from "./drawing";
 import { Axes } from "./axes";
+import { withSave } from "../withSave";
 
 
 const useStyles = makeStyles({
@@ -28,18 +29,20 @@ export const Plot = ({
     // Wrapper class for Drawing + Axes
     const classes = useStyles();
     return (
-        <SaveableDrawing maxWidth={maxWidth} aspect={aspect}
+        <Drawing maxWidth={maxWidth} aspect={aspect}
             left={left + xAxisMargin} right={right + xAxisMargin} top={top + yAxisMargin} bottom={bottom + yAxisMargin}
             xMin={xMin} yMin={yMin} xMax={xMax} yMax={yMax}
             className={classes.plot}>
             <Axes xTicks={xTicks} yTicks={yTicks}
                 xLabel={xLabel} yLabel={yLabel}
                 xTickFormat={xTickFormat} yTickFormat={yTickFormat}
-                xColor={getColor(xColor)} yColor={getColor(yColor)}
+                xColor={xColor} yColor={yColor}
                 xFontSize={xFontSize} yFontSize={yFontSize}
                 xAxisMargin={xAxisMargin} yAxisMargin={yAxisMargin}>
                 {children} 
             </Axes>
-        </SaveableDrawing>
+        </Drawing>
     );
 };
+
+export const SaveablePlot = withSave(Plot, ".png");

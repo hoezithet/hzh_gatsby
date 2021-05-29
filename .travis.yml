@@ -9,7 +9,6 @@ before_install:
 - npm config set @gsap:registry=https://npm.greensock.com
 install:
 - yarn add gsap@npm:@gsap/shockingly
-- yarn add puppeteer
 - yarn install
 cache:
   yarn: true
@@ -22,7 +21,7 @@ deploy:
   on:
     branch: develop
 - provider: script
-  script: node scripts/create_lesson_pdfs_pngs.js --host=dev.hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
+  script: yarn add puppeteer && node scripts/create_lesson_pdfs_pngs.js --host=dev.hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
   on:
     branch: develop
 - provider: script
@@ -37,7 +36,7 @@ deploy:
   on:
     branch: master
 - provider: script
-  script: node scripts/create_lesson_pdfs_pngs.js --host=hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
+  script: yarn add puppeteer &&  node scripts/create_lesson_pdfs_pngs.js --host=hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
   on:
     branch: master
 - provider: script

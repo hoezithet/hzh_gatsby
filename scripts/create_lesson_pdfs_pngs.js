@@ -7,6 +7,7 @@ const {
     host="hoezithet.nu",
     protocol="https",
     port=null,
+    cwd=process.cwd(),
     pattern="public/bare/lessen/*/*/*/index.html"
 } = require('minimist')(process.argv.slice(2));;
 
@@ -15,12 +16,12 @@ const {
     const page = await browser.newPage();
     await page.setViewport({width: 800, height: 800, deviceScaleFactor: 2});
     page.setDefaultTimeout(0);
-    const files = glob.sync(pattern);
+    const files = glob.sync(pattern, {cwd: cwd});
     console.log(`Found ${files.length} files`);
 
     for (const f of files) {
         const slug = f.split("/").slice(-6, -1).join("/");
-        const htmlPath = `${protocol}://${host}${port ? ":" + port : null}/${slug}/`;
+        const htmlPath = `${protocol}://${host}${port ? ":" + port : ""}/${slug}/`;
         console.log(`Fetching page ${htmlPath}`);
         await page.goto(htmlPath, {waitUntil: "networkidle2"});
         const title = await page.title();

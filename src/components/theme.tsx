@@ -47,7 +47,10 @@ export const theme = createMuiTheme({
                 },
                 "h2:hover > .anchor": {
                     display: "inline"
-                }
+                },
+                ".gatsby-resp-image-wrapper": {
+                    breakInside: "avoid"
+                },
             }
         },
         MuiLink: {

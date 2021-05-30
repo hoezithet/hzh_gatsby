@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import kuLeuvenLogo from "../images/sponsor/KULEUVEN_RGB_LOGO.png";
-import vivesLogo from "../images/sponsor/VIVES.png";
+import kuLeuvenLogo from "../../images/sponsor/KULEUVEN_RGB_LOGO.png";
+import vivesLogo from "../../images/sponsor/VIVES.png";
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from "@material-ui/core/Grid";
 

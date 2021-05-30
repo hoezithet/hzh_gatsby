@@ -1,19 +1,19 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 const _ = require("lodash");
+const path = require("path");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions;
     if (node.internal.type === `Mdx`) {
-        let slug = createFilePath({ node, getNode, basePath: `src/content`, trailingSlash: true });
-        slug = slug.replace("/_index", ""); // Section mdx-files are named "_index.mdx", remove that part
-        const slugElements = slug.split("/");
-        const callbackBuilder = (inds) => {
-            return (_, i, arr) => !(inds.includes(i) || inds.includes(i - arr.length))
+        const slug = path.join('/lessen', createFilePath({ node, getNode, basePath: "content", trailingSlash: true }));
+        const getParentSlug = (slug) => {
+            return `${path.parse(slug).dir}/`;
         };
-        const slugToParent = callbackBuilder([-2]);
-        const slugToGrandParent = callbackBuilder([-2, -3]);
-        const slugToGreatGrandParent = callbackBuilder([-2, -3, -4]);
+        
+        const parentSlug = getParentSlug(slug);
+        const grandParentSlug = getParentSlug(parentSlug);
+        const greatGrandParentSlug = getParentSlug(grandParentSlug);
 
         createNodeField({
             node,
@@ -30,17 +30,17 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             createNodeField({
                 node,
                 name: `chapter_slug`,
-                value: slugElements.filter(slugToParent).join("/"),
+                value: parentSlug,
             });
             createNodeField({
                 node,
                 name: `course_slug`,
-                value: slugElements.filter(slugToGrandParent).join("/"),
+                value: grandParentSlug,
             });
             createNodeField({
                 node,
                 name: `all_courses_slug`,
-                value: slugElements.filter(slugToGreatGrandParent).join("/"),
+                value: greatGrandParentSlug,
             });
         } else if(isChapter(node)) {
             createNodeField({
@@ -51,12 +51,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             createNodeField({
                 node,
                 name: `course_slug`,
-                value: slugElements.filter(slugToParent).join("/"),
+                value: parentSlug,
             });
             createNodeField({
                 node,
                 name: `all_courses_slug`,
-                value: slugElements.filter(slugToGrandParent).join("/"),
+                value: grandParentSlug,
             });
         } else if(isCourse(node)) {
             createNodeField({
@@ -67,7 +67,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             createNodeField({
                 node,
                 name: `all_courses_slug`,
-                value: slugElements.filter(slugToParent).join("/"),
+                value: parentSlug,
             });
         } else if(isAllCourses(node)) {
             createNodeField({
@@ -98,20 +98,25 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs)
 }
 
+function isIndexAtDepth(node, depth) {
+    const re = new RegExp(`\/content(\/[^/]+){${depth}}\/index\.mdx$`);
+    return re.test(node.fileAbsolutePath);
+}
+
 function isLesson(node) {
-    return /\/content(\/[^/]+){4}\/index\.mdx$/.test(node.fileAbsolutePath);
+    return isIndexAtDepth(node, 3);
 }
 
 function isChapter(node) {
-    return /\/content(\/[^/]+){3}\/_index\.mdx$/.test(node.fileAbsolutePath);
+    return isIndexAtDepth(node, 2); 
 }
 
 function isCourse(node) {
-    return /\/content(\/[^/]+){2}\/_index\.mdx$/.test(node.fileAbsolutePath);
+    return isIndexAtDepth(node, 1);
 }
 
 function isAllCourses(node) {
-    return /\/content(\/[^/]+){1}\/_index\.mdx$/.test(node.fileAbsolutePath);
+    return isIndexAtDepth(node, 0);
 }
 
 /**
@@ -293,7 +298,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 },
             });
             createPage({
-                path: `/bare${node.fields.slug}`,
+                path: path.join("/bare", node.fields.slug),
                 component: require.resolve("./src/templates/lesson_bare.tsx"),
                 context: {
                     filePath: node.fileAbsolutePath,

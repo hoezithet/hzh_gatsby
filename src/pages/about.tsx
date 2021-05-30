@@ -3,11 +3,11 @@ import Layout from "../components/layout";
 import Grid from "@material-ui/core/Grid";
 import COLORS from "../colors";
 import styled from "styled-components";
-import demotivated from "../images/about/leerling_gedemotiveerd.png";
-import bfg_watch from "../images/about/HZH_GVR_watching.png";
-import bfg_run from "../images/about/HZH_GVR_run.png";
-import bfg_lift from "../images/about/HZH_GVR_lifter.png";
-import floris from "../images/about/floris.jpg";
+import demotivated from "../../images/about/leerling_gedemotiveerd.png";
+import bfg_watch from "../../images/about/HZH_GVR_watching.png";
+import bfg_run from "../../images/about/HZH_GVR_run.png";
+import bfg_lift from "../../images/about/HZH_GVR_lifter.png";
+import floris from "../../images/about/floris.jpg";
 
 const StyledCite = styled.cite`
     color: ${COLORS.GRAY};

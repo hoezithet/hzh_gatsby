@@ -7,44 +7,14 @@ node_js:
 before_install:
 - npm config set //npm.greensock.com/:_authToken=$GSAP_TOKEN
 - npm config set @gsap:registry=https://npm.greensock.com
-install:
 - yarn add gsap@npm:@gsap/shockingly
-- yarn install
 cache:
   yarn: true
 script:
 - gatsby build
-deploy:
-- provider: script
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/dev_public
-  edge: true
-  on:
-    branch: develop
-- provider: script
-  script: node scripts/create_lesson_pdfs_pngs.js --host=dev.hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
-  edge: true
-  on:
-    branch: develop
-- provider: script
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/dev_public
-  edge: true
-  on:
-    branch: develop
-- provider: script
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public
-  edge: true
-  on:
-    branch: master
-- provider: script
-  script: node scripts/create_lesson_pdfs_pngs.js --host=hoezithet.nu --cwd=$TRAVIS_BUILD_DIR
-  edge: true
-  on:
-    branch: master
-- provider: script
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public
-  edge: true
-  on:
-    branch: master
+- rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public_$TRAVIS_BRANCH
+- node scripts/create_lesson_pdfs_pngs.js --host=$(if [[ $TRAVIS_BRANCH = "develop" ]]; then echo "dev.hoezithet.nu"; else echo "hoezithet.nu"; fi) --cwd=$TRAVIS_BUILD_DIR
+- rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public_$TRAVIS_BRANCH
 addons:
   ssh_known_hosts: 167.86.92.134
 branches:
@@ -53,7 +23,7 @@ branches:
   - develop
 notifications:
   slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
-before_deploy:
+before_script:
 - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
   -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"

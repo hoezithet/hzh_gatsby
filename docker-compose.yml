@@ -1,0 +1,97 @@
+version: '2'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: unless-stopped
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DEFAULT_EMAIL=${HZH_EMAIL}
+
+  commento:
+    image: florisdf/commento
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=commento.hoezithet.nu
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=commento.hoezithet.nu
+      - COMMENTO_ORIGIN=https://commento.hoezithet.nu
+      - COMMENTO_PORT=8080
+      - COMMENTO_POSTGRES=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${COMMENTO_DB}?sslmode=disable
+      - COMMENTO_GOOGLE_KEY=${COMMENTO_GOOGLE_KEY}
+      - COMMENTO_GOOGLE_SECRET=${COMMENTO_GOOGLE_SECRET}
+      - COMMENTO_SMTP_HOST=mail.gandi.net
+      - COMMENTO_SMTP_PORT=587
+      - COMMENTO_SMTP_USERNAME=${COMMENTO_SMTP_USERNAME}
+      - COMMENTO_SMTP_PASSWORD=${COMMENTO_SMTP_PASSWORD}
+      - COMMENTO_SMTP_FROM_ADDRESS=${COMMENTO_SMTP_FROM_ADDRESS}
+      - COMMENTO_FORBID_NEW_OWNERS=true
+    depends_on:
+      - postgres
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=db.hoezithet.nu
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=db.hoezithet.nu
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${COMMENTO_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data_volume:/var/lib/postgresql/data
+
+  dev:
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      - ${HTML_DIR_DEV}:/usr/share/nginx/html:ro
+    environment:
+      - NGINX_HOST=dev.hoezithet.nu
+      - NGINX_PORT=80
+      - VIRTUAL_HOST=dev.hoezithet.nu
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=dev.hoezithet.nu
+
+  hoezithet:
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      - ${HTML_DIR}:/usr/share/nginx/html:ro
+    environment:
+      - NGINX_HOST=hoezithet.nu
+      - NGINX_PORT=80
+      - VIRTUAL_HOST=hoezithet.nu
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=hoezithet.nu
+volumes:
+  conf:
+  vhost:
+  html:
+  dhparam:
+  certs:
+  postgres_data_volume:
+      
+  

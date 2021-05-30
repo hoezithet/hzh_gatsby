@@ -110,7 +110,7 @@ export default function Template({ data }: LessonData) {
                     </MDXProvider>
                 </MDXProvider>
                 <Box my={4} textAlign="center" justifyContent="center">
-                    <Sponsors />
+                    <Sponsors width="28mm" showTreat={false} />
                 </Box>
             </>
         </HzhTheme>

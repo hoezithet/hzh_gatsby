@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from '../components/layout';
-import cookiesImg from '../images/cookies/cookies.png';
+import cookiesImg from '../../images/cookies/cookies.png';
 import styled from "styled-components";
 
 const Img = styled.img`

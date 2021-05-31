@@ -5,14 +5,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { CardActionArea } from "gatsby-theme-material-ui";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import COLORS from "../colors.js";
 import { graphql } from "gatsby";
 
 
 export interface CardImage {
     childImageSharp: {
-        fixed: GatsbyImage
+        gatsbyImageData: IGatsbyImageData;
     };
 }
 

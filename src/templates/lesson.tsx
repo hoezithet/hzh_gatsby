@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import "katex/dist/katex.min.css";
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { getSrc } from "gatsby-plugin-image";
 import { Attention } from "../components/shortcodes/attention";
 import { Expand } from "../components/shortcodes/expand";
 import { ToggleImage } from "../components/shortcodes/toggleImage";
@@ -108,7 +109,7 @@ export interface LessonData {
     };
 }
 
-export const LessonContext = createContext();
+export const LessonContext = createContext({title: "", slug: ""});
 
 export default function Template(
     { data, pageContext }: LessonData // this prop will be injected by the GraphQL query below.
@@ -136,7 +137,7 @@ export default function Template(
     return (
         <LessonContext.Provider value={{title: frontmatter.title, slug: slug}}>
             <Layout crumbs={ crumbs } description={ frontmatter.description }
-                    tags={ frontmatter.tags } image={ image ? image.childImageSharp.gatsbyImageData.src : defaultImg.childImageSharp.gatsbyImageData.src } >
+                    tags={ frontmatter.tags } image={ image ? getSrc(image.childImageSharp.gatsbyImageData) : getSrc(defaultImg.childImageSharp.gatsbyImageData) } >
                 <h1>{frontmatter.title}</h1>
                 <PrintLink to={ pdfLink } />
                 <Toc>

@@ -1,35 +1,46 @@
 import React from 'react';
 import styled from "styled-components";
-import kuLeuvenLogo from "../images/sponsor/KULEUVEN_RGB_LOGO.png";
-import vivesLogo from "../images/sponsor/VIVES.png";
+import kuLeuvenLogo from "../../images/sponsor/KULEUVEN_RGB_LOGO.png";
+import vivesLogo from "../../images/sponsor/VIVES.png";
 import { Link } from 'gatsby-theme-material-ui';
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    img: {
+        width: props => props.imgWidth
+    },
+    wrapper: {
+        breakInside: "avoid"
+    },
+    headText: {
+        fontWeight: "bold"
+    }
+});
 
 
-const SponsorImg = styled.img`
-    width: 56mm;
-`;
-
-
-export default function Sponsors() {
+export default function Sponsors({ width = "56mm", showTreat = true}) {
+    const classes = useStyles({imgWidth: width});
     return (
-        <>
-        <h2>Hoe Zit Het? wordt met trots gesteund door</h2>
+        <div className={classes.wrapper}>
+        <p className={classes.headText}>Hoe Zit Het? wordt met trots gesteund door</p>
         <Grid container spacing={ 4 } justify="center" alignItems="center" >
           <Grid item>
             <a href="https://www.kuleuven.be/kuleuven">
-                <SponsorImg src={ kuLeuvenLogo } alt="KU Leuven sponsor" />
+                <img src={ kuLeuvenLogo } className={classes.img} alt="KU Leuven sponsor" />
             </a>
           </Grid>
           <Grid item>
             <a href="https://www.vives.be/">
-                <SponsorImg src={ vivesLogo } alt="VIVES sponsor" />
+                <img src={ vivesLogo } className={classes.img} alt="VIVES sponsor" />
             </a>
           </Grid>
         </Grid>
-        <p>
-            Wil jij ook steunen? Trakteer Hoe Zit Het? op een drankje! 🥤 Ga daarvoor naar <Link to="/trakteer">de trakteer-pagina</Link>.
-        </p>
-        </>
+        { showTreat ?
+          <p>
+              Wil jij ook steunen? Trakteer Hoe Zit Het? op een drankje! 🥤 Ga daarvoor naar <Link to="/trakteer">de trakteer-pagina</Link>.
+          </p>
+          : null }
+        </div>
     );
 }

@@ -5,15 +5,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { CardActionArea } from "gatsby-theme-material-ui";
-import Img from "gatsby-image/withIEPolyfill";
+import { GatsbyImage } from "gatsby-plugin-image";
 import COLORS from "../colors.js";
-import { FixedObject } from "gatsby-image";
 import { graphql } from "gatsby";
 
 
 export interface CardImage {
     childImageSharp: {
-        fixed: FixedObject
+        fixed: GatsbyImage
     };
 }
 
@@ -34,7 +33,11 @@ const StyledCard = styled(Card)`
 `;
 
 export default function SectionCard({title, cardImage, link, children}: SectionItemProps) {
-    const img = <Img fixed={cardImage.childImageSharp.fixed} objectFit="cover" objectPosition="50% 50%" />;
+    const img = <GatsbyImage
+        image={cardImage.childImageSharp.gatsbyImageData}
+        alt={title}
+        objectFit="cover"
+        objectPosition="50% 50%" />;
     return (
         <Grid item xs={12} sm={4}>
             <StyledCard>
@@ -58,12 +61,9 @@ export default function SectionCard({title, cardImage, link, children}: SectionI
     );
 }
 
-export const cardImageFragment = graphql`
-    fragment CardImageFragment on File {
-        childImageSharp {
-            fixed(height: 140) {
-                ...GatsbyImageSharpFixed_tracedSVG
-            }
-        }
-    }
+export const cardImageFragment = graphql`fragment CardImageFragment on File {
+  childImageSharp {
+    gatsbyImageData(height: 140, placeholder: TRACED_SVG, layout: FIXED)
+  }
+}
 `

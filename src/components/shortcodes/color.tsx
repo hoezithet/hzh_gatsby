@@ -1,23 +1,29 @@
 import React from "react";
-import COLORS from "../../colors";
+import { getColor } from "../../colors";
 import styled from "styled-components";
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 interface ColorProps {
     children: JSX.Element;
     color: string;
 }
 
+type ColorSpanProps = {
+    colorValue: string
+};
+
+const useStyles = makeStyles<Theme, ColorSpanProps>({
+    colorSpan: {
+        color: props => props.colorValue
+    }
+});
 
 const Color = ({ color, children }: ColorProps) => {
-    const colorName = color.toUpperCase();
-    const colorValue = colorName in COLORS ? COLORS[colorName] : COLORS.BLACK;
-    const StyledSpan = styled.span`
-        color: ${colorValue};
-    `;
+    const classes = useStyles({colorValue: getColor(color)});
     return (
-    <StyledSpan>
+    <span className={classes.colorSpan}>
         { children }
-    </StyledSpan>
+    </span>
     );
 }
 

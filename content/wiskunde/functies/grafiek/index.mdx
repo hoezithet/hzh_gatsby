@@ -1,0 +1,93 @@
+---
+title: "Grafieken van functies"
+date: 2018-10-01T22:13:11+02:00
+weight: 4
+wiski: "http://wiski.be/oefenen/grafische-voorstelling-van-elementaire-functies/take"
+tags: ["Functies", "grafieken", "plot", "Analyse"]
+image: img/wiskunde_functies_grafiek-2.png
+---
+
+import {Fragment} from "react";
+
+We kunnen de waarden voor $\orange{x}$ en $\green{y}$ in een
+[waardentabel](../waardentabel) zien als coördinaten van punten op een
+assenstelsel. Stel bijvoorbeeld dat we een functie hebben met de volgende
+waardentabel:
+
+| Ingang $\orange{x}$ | Uitgang $\green{y} = f(\orange{x})$ |
+| ------------------- | ----------------------------------- |
+| $\orange{-1}$       | $\green{-10{,}5}$                   |
+| $\orange{0}$        | $\green{-6}$                        |
+| $\orange{1}$        | $\green{-2{,}5}$                    |
+| $\orange{2}$        | $\green{0}$                         |
+| $\orange{3}$        | $\green{1{,}5}$                     |
+| $\orange{4}$        | $\green{2}$                         |
+| $\orange{5}$        | $\green{1{,}5}$                     |
+
+In de voorlaatste rij van die waardentabel is $\orange{x = 4}$ en $\green{y =
+2}$. We kunnen dit voorstellen door een puntje met coördinaten
+$(\orange{4};~\green{2})$.
+
+<Plot xColor="orange" yColor="green">
+<HairLines x={4} y={2}/>
+<Annot xTarget={4} yTarget={2} xAnnot={8} yAnnot={4}>
+
+$(\orange{4};~\green{2})$
+</Annot>
+<Point x={4} y={2} size={5} />
+</Plot>
+
+
+Zo kunnen we alle rijen in onze waardentabel voorstellen als puntjes in een
+assenstelsel.
+
+<Plot xColor="orange" yColor="green" >
+{ [...Array(7).keys()].map(i => {
+  const x = i - 1;
+  const y = -(1/2)*x**2 + 4*x - 6;
+  return (
+    <Point x={x} y={y} size={5} key={i}/>
+  );
+})}
+</Plot>
+
+## Veel puntjes vormen een curve
+
+We laten ons even gaan en we zoeken $f(\orange{x})$ voor waanzinnig veel
+waarden van $\orange{x}$. Bijvoorbeeld voor alle waarden tussen $\orange{-1}$
+en $\orange{9}$ in stapjes van $0{,}01$ (dus $\orange{-1}$, $\orange{-0{,}99}$,
+$\orange{-0{,}98}$, $\orange{-0{,}97}$ enzovoort tot $\orange{9}$). Wat gebeurt
+er als we die grote hoeveelheid puntjes nu op een assenstelsel zetten? We
+krijgen deze mooie figuur:
+
+<Plot xColor="orange" yColor="green">
+{ [...Array(1000).keys()].map(i => {
+  const x = i*6/1000 - 1;
+  const y = -(1/2)*x**2 + 4*x - 6;
+  return (
+    <Point x={x} y={y} size={5} key={i}/>
+  );
+})}
+</Plot>
+
+We hebben nu zoveel puntjes op ons assenstelsel dat we bijna niet meer zien
+dat het _aparte_ puntjes zijn. We zien het als **één
+doorlopende curve**.  Deze curve noemen we de **grafiek van de functie**.
+
+## Hoogstens één $y$ voor elke $x$
+
+We weten dat er bij een functie voor een bepaalde waarde van $x$ [hoogstens
+één](../intro#samengevat) waarde van $y$ bestaat. Grafisch betekent dit dat er op
+de curve van een functie **nooit twee punten boven elkaar liggen**. De curve
+hieronder is een voorbeeld van een curve waar er voor bepaalde waarden van $x$
+**meerdere** waarden van $y$ bestaan. Met andere woorden is hier $y$ **geen
+functie van** $x$. Zonder het onderste stukje dat lijkt "terug te keren" is
+$y$ _wel_ een functie van $x$.
+
+<Plot xColor="orange" yColor="green">
+<Fx fx={x => Math.sqrt(-x + 1)} xEnd={1} />
+<Fx fx={x => -Math.sqrt(-x + 1)} xStart={-4} xEnd={1} />
+<Annot xTarget={-2} yTarget={-Math.sqrt(3)} xAnnot={-5} yAnnot={-4} anchorAngleTarget={-90} >
+Geen functie
+</Annot>
+</Plot>

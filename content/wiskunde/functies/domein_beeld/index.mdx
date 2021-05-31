@@ -1,0 +1,182 @@
+---
+title: "Domein en beeld"
+date: 2018-07-01T22:13:11+02:00
+weight: 5
+tags: ["Functies", "Analyse"]
+topic: analyse
+image: img/wiskunde_functies_domein_beeld-2.png
+---
+
+import {Fragment} from "react";
+
+We kunnen niet altijd eender welk getal als $x$ kiezen om in ons
+[functievoorschrift](../voorschrift) te stoppen. Omgekeerd is het mogelijk dat
+niet eender welk getal als $y$ uit de functie komt. Deze twee eigenschappen van
+een functie worden beschreven door het **domein** en het **beeld** van de
+functie.
+
+## Domein van een functie
+
+Het _domein_ van een functie is de verzameling
+van x-waarden waarvoor er een functiewaarde <Mute>(een y-waarde)</Mute> bestaat.
+
+-   Voor elke x-waarde die **niet in het domein** zit, bestaat er **géén
+    y-waarde**.
+-   Voor elke x-waarde die **wel in het domein** zit, bestaat er **juist één
+    y-waarde**.
+
+Een typisch voorbeeld is het domein van de functie die als
+[functievoorschrift](../voorschrift) heeft
+
+
+$$
+f(x) = \sqrt{x}
+$$
+
+
+Omdat de wortel van een negatief
+getal niet bestaat, kan $f(x)$ niet bestaan
+wanner x negatief is. Er bestaan met andere woorden géén y-waarden voor
+negatieve x-waarden.
+Het domein van deze functie $f$ is dus alle _positieve_ reële getallen, want
+enkel voor positieve x-waarden bestaat er een functiewaarde. We schrijven:
+
+
+$$
+\mathrm{dom}~f = \mathbb{R}^+
+$$
+
+
+Dit kunnen we ook schrijven als een interval:
+
+
+$$
+\mathrm{dom}~f = [0; +\infty[%]
+$$
+
+
+## Beeld van een functie
+
+Het _beeld_ of het _bereik_ van een functie is de verzameling
+van alle y-waarden die ooit uit de functie kunnen komen.
+
+Een typisch voorbeeld is het beeld van de functie die als
+[functievoorschrift](../voorschrift) heeft
+
+
+$$
+f(x) = x^2
+$$
+
+
+Omdat het kwadraat van elk reëel getal positief is, kunnen er uit deze functie
+$f$ enkel _positieve_ getallen komen. Met andere woorden is het beeld van deze
+functie alle _positieve_ reële getallen. We schrijven:
+
+
+$$
+\mathrm{bld}~f = \mathbb{R}^+
+$$
+
+
+Dit kunnen we natuurlijk ook schrijven als een interval:
+
+
+$$
+\mathrm{bld}~f = [0; +\infty[%]
+$$
+
+
+## Domein en beeld op een grafiek
+
+Het domein en beeld van een functie kan je ook aflezen van de [grafiek van die
+functie](../grafiek). Neem bijvoorbeeld de grafiek van de functie
+
+$$
+f(x) = 3\cdot \sqrt{x + 5} - 6
+$$
+
+Die grafiek ziet er zo uit:
+
+<Plot>
+<Fx fx={x => 3*Math.sqrt(x + 5) - 6} xStart={-5} xEnd={15} />
+</Plot>
+
+Om op deze grafiek het **domein** af te lezen, moet je de grafiek **projecteren
+op de x-as**. Het resultaat van de projectie is aangeduid **<span 
+class="green">in het groen op de x-as</span>**. <Mute>We gaan ervan uit 
+dat de grafiek oneindig blijft verder stijgen aan de rechterkant.</Mute> We zien 
+dan dat $\green{\mathrm{dom}~f = [-5; +\infty[}$.
+
+export const fx = x => 3*Math.sqrt(x + 5) - 6;
+
+<Plot>
+{[...Array(20).keys()].map(i => {
+const x = i - 5 + 0.0001;
+const y = fx(x);
+return (
+Math.abs(y) > 1 ?
+<ArrowLine xStart={x} yStart={y} xEnd={x} yEnd={0} margin={10} dashed={true} opacity={0.5} key={i} />
+: null
+);
+})}
+<Fx fx={fx} xStart={-5} xEnd={15} opacity={0.5} />
+<Line xStart={-5} yStart={0} xEnd={15} yEnd={0} color="green" lineWidth={4} />
+<Point x={-5} y={0} color="green" size={10} />
+<Annot xTarget={-5} yTarget={0} xAnnot={-6} yAnnot={5} showBackground={true}>
+
+$\green{\mathrm{dom}~f = [-5; +\infty[}$
+</Annot>
+</Plot>
+
+Het **beeld** <Mute>(of het bereik)</Mute> van diezelfde functie kunnen we
+vinden door de grafiek nu te **projecteren op de y-as**. Op de onderstaande
+grafiek zie je het resultaat van deze projectie
+**<Green>in het groen op de y-as</Green>**.
+
+export const fxi = x => Math.pow((x + 6)/3, 2) - 5;
+
+<Plot>
+{[...Array(20).keys()].map(i => {
+const y = i - 6;
+const x = fxi(y);
+return (
+Math.abs(x) > 1 ?
+<ArrowLine xStart={x} yStart={y} xEnd={0} yEnd={y} margin={10} dashed={true} opacity={0.5} key={i} />
+: null
+);
+})}
+<Fx fx={fx} xStart={-5} xEnd={15} opacity={0.5} />
+<Line xStart={0} yStart={-6} xEnd={0} yEnd={15} color="green" lineWidth={4} />
+<Point x={0} y={-6} color="green" size={10} />
+<Annot xTarget={0} yTarget={-6} xAnnot={2} yAnnot={-8} showBackground={true}>
+
+$\green{\mathrm{bld}~f = [-6; +\infty[}$
+</Annot>
+</Plot>
+
+We gaan ervan uit dat de grafiek oneindig blijft verder stijgen aan de 
+rechterkant. Je vindt dat $\green{\mathrm{bld}~f = [-6; +\infty[}$.
+
+## Samengevat
+
+<Attention title="Definitie domein">
+
+Het **domein van een functie** is de verzameling van alle mogelijke **x-waarden
+waarvoor er een functiewaarde bestaat**.
+</Attention>
+
+<Attention title="Definitie beeld">
+
+Het **beeld van een functie** is de verzameling van **alle mogelijke functiewaarden**.
+</Attention>
+
+<Attention title="Domein aflezen op een grafiek">
+
+Het **domein van een functie** lees je af op een grafiek door de grafiek te **projecteren op de x-as**.
+</Attention>
+
+<Attention title="Beeld aflezen op een grafiek">
+
+Het **beeld van een functie** lees je af op een grafiek door de grafiek te **projecteren op de y-as**.
+</Attention>

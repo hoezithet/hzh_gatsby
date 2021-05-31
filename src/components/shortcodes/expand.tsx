@@ -18,6 +18,7 @@ const ExpandFrame = styled(Accordion)`
     border-radius: 10px;
     background-color: ${COLORS.NEAR_WHITE};
     margin: 10px 0px;
+    break-inside: avoid;
 `
 
 const StyledAccSummary = styled(AccordionSummary)`
@@ -36,9 +37,9 @@ const StyledAccDetails = styled(AccordionDetails)`
     display: block;
 `
 
-function ExpandTitle({ title }: { title: string}) {
+function ExpandTitle({ title, expandIcon }: { title: string, expandIcon: JSX.Element}) {
     return (
-        <StyledAccSummary expandIcon={<ExpandIcon/>}>
+        <StyledAccSummary expandIcon={expandIcon}>
         { md2react(title) }
 		</StyledAccSummary>
     );
@@ -54,7 +55,7 @@ function ExpandBody({ children }: { children: JSX.Element }) {
 
 const Expand = ({ children, title }: ExpandProps) => (
 	<ExpandFrame>
-	    <ExpandTitle title={ title } />
+	    <ExpandTitle title={ title } expandIcon={<ExpandIcon/>} />
 	    <ExpandBody>
 	        { children }
 	    </ExpandBody> 
@@ -63,7 +64,7 @@ const Expand = ({ children, title }: ExpandProps) => (
 
 const ExpandBare = ({ children, title }: ExpandProps) => (
     <ExpandFrame expanded={ true } >
-	    <ExpandTitle title={ title } />
+	    <ExpandTitle title={ title } expandIcon={ null } />
 	    <ExpandBody>
 	        { children }
 	    </ExpandBody> 

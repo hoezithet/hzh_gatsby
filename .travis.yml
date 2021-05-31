@@ -3,44 +3,38 @@ dist: xenial
 language: node_js
 node_js:
 - 14
+before_install:
+- npm config set //npm.greensock.com/:_authToken=$GSAP_TOKEN
+- npm config set @gsap:registry=https://npm.greensock.com
+- yarn add gsap@npm:@gsap/shockingly
 cache:
-  directories:
-  - node_modules
-install:
-- npm install
+  yarn: true
 script:
 - gatsby build
-deploy:
-- provider: firebase
-  edge: true
-  token:
-    secure: Gr/f6zYuF8WXKxtiGtrlG3Kt8gcxxFC6aX2xfyR0FBX7LCe3+3WY6D0fhxI5Ic0HTCyvpI+ZTupkcj+W7sio91X/h8XcbHulQIopeJGZd1Hh6EP9qu2FdnUtofErmVxHcpiuOQSnGQJN/aPvZ1cHeGhg6uQjK2cH3gnhRG6wbi36LvtFlp08JAH2d9LEWmD/wHTpVSnid2Q6MqixI3R90t5i3kLAfCwb2630nPYNqZ6+hAMB+qnhBz4mvodCG9V9qr5UJshBQFrx248tjGwwT0TpPGaN4oCSSS+yKDJTr1Ln4GUTqqW2oC1hIguzuGTyK6kb+vjlw0itxumR/rnm4KCXYvQ0TCFKe0FnggGoydngEzwABPRiMhcZlLP1+I/gwdAKSKEbzHKXYKPcGUajUpVlDWdWQpPXgvkivmgcQdlUjB8ZjhZkTlpruE8FhbXIQtiGqK4iTWXzxqZXVf3V+xxxo4UN4P3weMP72YpiMo3vhP9AYgtpxf8eII3YCu5DA52SyQHHE+MnAY7r8cSk0tKLo9rjjSlxfOuiiCR8Mtqj8K77dnPw3UCPKipwi3E+3Pek9B7oESSx5U10qeQOUacwEo5VFPOEkGAHo8tit+8Xt89rb45mj6L7tGGZZxyZjxOrEsX9xXy3nd32hkdPcdVJlL8A3XwKqJq04EP1I10=
-  on:
-    branch: master
-- provider: script
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/dev_public
-  edge: true
-  on:
-    branch: develop
-- provider: script
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ root@167.86.92.134:/root/hoezithet/public
-  edge: true
-  on:
-    branch: master
+- rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ $HZH_USER@$HZH_IP:$HZH_DIR/public_$TRAVIS_BRANCH
+- node scripts/create_lesson_pdfs_pngs.js --host=$(if [[ $TRAVIS_BRANCH = "develop"
+  ]]; then echo "dev.hoezithet.nu"; else echo "hoezithet.nu"; fi) --cwd=$TRAVIS_BUILD_DIR
+- rsync -r --delete-after $TRAVIS_BUILD_DIR/public/ $HZH_USER@$HZH_IP:$HZH_DIR/public_$TRAVIS_BRANCH
 addons:
   ssh_known_hosts: 167.86.92.134
 branches:
   only:
   - master
   - develop
-notifications:
-  slack: hoezithet:XvtMGEvLV8a37LQTUioGFVoa
-before_deploy:
+before_script:
 - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
   -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_rsa
 - ssh-add deploy_rsa
+- bash scripts/install_quicksand.sh
+notifications:
+  slack:
+    secure: f9d/W5/dQki+CJ72YNKmTIGiHXWuubrqBOCS0M2yX6HpaCZq6tsWhIwRyvXHbHjyX3icGve3zdp+tvs7dAQEutftyy8mvfpNZ0tk50uju5Zj9C5E0Q9ER7XJcu9ynFgQQ5feS+FgkCcYwOaUTREVRqzmkf6yAO+71I5825m5xiGINxtrUqbQO76R8zBLRSg7rYDtvTNxU1PfYIGMejgz+vDrDvpIc07lJJqBf/qHdtyS8THRUkQe+U6brR+d2AknuB5N1Db6WCF9OpDv386z7cecPE3P2DOKRFCmX/Yd+ExVO4zFNNJdttP2JYSIZUJYWusKrFyTltlM0YfeTUgVtsP+gs+FfJraOWXarrnDubkFWYsl37J4UWAdk99OSf4IBxM3uVil1c2/Nwj4/jZnGK0w+bYLVWZx3Q7SXDmrzFstRdHuHk+dOy61ZiDu8K6Q8cSXyhhRQCCSQjYamZGv8L0zLcqQ0sDrFrZIBJ2cxFd2gCwOTXXet6lMHbqD+Poy9ny/XGpWg/6/AhpfxQFt8vZNluPxAWFbJ5foKmgAvx6ZI6RLatBLkOIOwZZClD0a4dB4cG9V9OjszooFN8kWkHJ2+xX5Ht3yQ+hvUsB7nyDQG+Q/JicEKbBFBa67OaC0RcBu+PMqw9xCZgE1KZ3gSUq1UZlzZUCnlRtDN7ipkEE=
 env:
   global:
-    
+  - secure: EV4OJQAseQ5qUwa4OQXTIQp4XXVl8IdzeXkO27gvGwdIY6VVZjS0+biwopDXKBiRyNUJdIYbW/2Tt3AcND+zMgXiPHoXudCNgibDIiKZ001+3acPDp2S71HbugaRM3J+MBjerUhw7c2WRiE3qpTjRvHilcEi3s7I8KcI56w63wCpvYpCufjqG9slAaFC+DpZ28sFlKBRlaiP+3eqS8y7Rgsv+366pYn6jkWfsau2bRaTGa4dLwzEfcDiGSe/7DHRYkxb1iDBuqAzlIdcJveyIIBWidcmbRbQ/neTU63HYgfHcw9WPmXACQyy7i+FyCm9I7Q8DXtV9rydWDfUlTGyWzcxFXFnvcLX8Tbx2N1fPYQWE1PV6B38WT20C3yfIxCxTs3wEx5xeqvgnqGg9AY057CypGf5DqriTkckoJrx8D2NgoLJCsCeu1amyuBvCVfP4MgPxUHSAxUGvBTEYf8ok539IBu/b77kWIRufVaNZTUxE0WV208R/mBCA28+lJbdBn0CKMQLTap9Go275LsYtvCZiQp1g+NuYsEySI5AUGrw6rcHyq4NYFkj1DAdmBbjRHTdCxeoiKse1jbnaYTTcKUZgreOnhi0JO00UPyETHoUrvyTfPYLUH8HOEFkXjxLVpSzxpgnGjeKHOf954Kiqvz1UdHoBdNapyTkK5MQPM8=
+  - secure: b9G00OJDVXRn1y+vKHeoTDSWw7/QhQeasKs7ufwTVgRQSdD2so4FIBH5gPYv8TYLqOKoMzpSKfWZjqNL0c5pAI256TW3/VZCCO0q84jCrSGT1cwdMyxJJodmLNiTJg74TXgoKbltJUxT5yddwxxfy6fGB4SvHTgwInTjSkqRoGKknnWR7AE40JwehXvwzwqfMHkXRaTEPMgmpW7P6iIfl5KBxQmmLFSRL2UF+uxG4KoWjfLwaKQbfdl8i1JuZaoEBijG/K7PTknuBLCOV4JR/oAJVxc0Hu3yt/VQj6bs2r6+Bq5IUxUUhgvgj2fY5mJL2W3LatTkPJbVqNIMmeEDp9S38sYcTx5ZuMjNsh04T62zAsFDCGAjOMtB3PHQ7cHGpviS6PTBR4WcbuanBrjLfz88pA33NdSeXCwPA+jGlmwIQ4mkTQJtL/GmA/QNhGlJ548K4PKxuISQlZyKi8WVkxx3earvdZl1zbwO+QJghL8PultESEDQkCXG+Qzj0sCEZkdm9lEpr5ZWNSJE4FIxNW7MSypF9LxTeqNtbQMjmjtLId2J1bMFqt7wzIsxYaLObaXz2+xZeSBJUH2ZUxOprF5A8jSutqmB2Cnolrxc1nZaEjs9SKp+mmvlVCtqHza8d6eBXcHKrT+RLhxvDtyWYNcsjdcWuJVZyYorfwGRpiA=
+  - secure: mu/PsWNciyhvIDylrIWc6TvrEW5pOWU8F4ddaRM+ECQBPJ83WDI6u6MKGaMOtmi08XsW9sc5ajbAkkSTySliI4fbOiDy3AaRS9zaYNR4lAfat+zc2rJImelfTL4a8AdnZvoPKb494LtbFs8IhxAA1AXSJxESfSgwiB79EqK4+gWW7UwbRiILznYK1ui+iCDjUJALfpboXBnFzfCQWHTXYEVa2I2Q+JCzbS4tvm3ZV/+Z5hrABun1rRDWSvplGIALQKLgNdn6s2JymhU6HLoOFTIMqYEHe8PuTAFz2t7BZbo0xqs2u/PAZJttbfmstyLqLBwAWKEF5vV8XWo+RPclLaCe4YxDUGVLaIaCgSoKp38y/n+Tqi/e6bOBz6JNeeFLMEc0TuF/hcpOTxC9kpkeY+WDe425W7UCB1hz7gV+3+PE6ktDu0RHMNUcL36YHkTfGBLDsQfR3xwmaAvyGfouEEmd1C49dXF/EfXVT8MzaYk3IP+xvUHD2yK1z/h3ybApE3KSC9XxWizZU0Hguh0FQEi5zsqcXWTw0jR0Qu4vfSq/3fR1J+jQVq0H04Iu0q9tTHxbRqRicrK5Xktu90Muy1HJI3M8ZMcnesj8t3t/URsAewNOv+1nA5tj/c3KfWS+zcgtIPXg4vlJth6YSEaPIsdSOWgCDwh83AQaF4BM9Qk=
+  - secure: r4OHByo1o42FleMx87Un08SomPwP9C88m6l6hID60qydq8oIbiIopdTKlNBt2CjdUaFiWiTexqhfk52CPuBQACqwpEHKSRYDKQAVTwNk89Lu5TBnv0i2WCmuZwx2nMhxVMGjKs3np/4aYttj8wTBbqz4utVeByzmpW37XTeifoLkBean1fjPolPVjpIawG+K44ks/K9md/mnR5kA44EYLARo7hmQRMvJsopfba+oYjY6mRJbZFBooma7KwHTve3DK6aa6lmQVvcwS0Y0/4YUGsB8mXhbQbTMUmhj/eGhJxOZkAJXQy9wdBiLR2INGKGCDmuCrhbtueExzAdQAlYc0r5xWtyUKgX4YR7IND/XPUgVOqZeNiJo9enT3nrzKL5x5e/hlFplCPS9gNAmPI92lT2ifGCReO9B5o0x42p+TEc3Fnp89gI1UcZCXeV3rL+fNqErDYNiVhRWW6eFiWO3ma6HtgIUu38r9ISYQZx2QTU1znn7PKLTqfvsquzgtZpaCTAFXaH/q2QjuQ4qhYZSD1RJ45Pa8WckKVHP/zLnWbnQju31M/3qmp/2NEvBUKLBE0hSVbAJsmGfo1Z4YkKTNeZJKhAbpfMvns2Bze7xyudYraKgCR//W3p/M/fgiUklMJXLmQfLXVcY6WmK4j3GpzZDuQfM1nak8BXwHg0WLqc=
+  - HZH_IP="167.86.92.134"

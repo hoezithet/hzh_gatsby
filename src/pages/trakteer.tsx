@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { Button } from "gatsby-theme-material-ui";
 import Box from "@material-ui/core/Box";
 import { NearWhite } from "../components/shortcodes/color";
-import donate from "../images/trakteer/donate.png";
+import donate from "../../images/trakteer/donate.png";
 import styled from "styled-components";
 
 interface TrakteerProps {

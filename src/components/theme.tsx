@@ -42,7 +42,14 @@ export const theme = createMuiTheme({
                     lineHeight: 1.5,
                 },
                 "a.anchor": {
-                    margin: "0 8px 0 0",
+                    display: "none",
+                    margin: "0 0 0 8px",
+                },
+                "h2:hover > .anchor": {
+                    display: "inline"
+                },
+                ".gatsby-resp-image-wrapper": {
+                    breakInside: "avoid"
                 },
             }
         },

@@ -8,6 +8,7 @@ const BlockquoteBox = styled(Box)`
     border-left: 2px solid ${COLORS.GRAY};
     margin: ${theme.spacing(4)}px;
     padding: 0 ${theme.spacing(2)}px;
+    break-inside: avoid;
 `;
 
 export default BlockquoteBox;

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { makeStyles } from '@material-ui/core/styles';
+
+import { trackEvent } from "./matomo";
+import { LessonContext } from "../templates/lesson";
 
 const feedbackBtnsQuery = graphql`{
   allFile(filter: {absolutePath: {glob: "**/images/feedback/lamp_*.png"}}) {
@@ -49,18 +52,34 @@ const Feedback = (props) => {
             imgName: "lamp_broken",
             id: "feedback_neg",
             text: "Niet duidelijk",
+            action: "Negative Feedback",
+            value: -1,
         },
         {
             imgName: "lamp_off",
             id: "feedback_neutr",
             text: "Redelijk duidelijk",
+            action: "Neutral Feedback",
+            value: 0,
         },
         {
             imgName: "lamp_on",
             id: "feedback_pos",
             text: "Heel duidelijk",
+            action: "Positive Feedback",
+            value: 1,
         },
     ];
+
+    const lessonContext = useContext(LessonContext);
+
+    const handleClick = (idx) => {
+        setSelectedOption(idx);
+        const { action, value } = fbItemProps[idx];
+        const name = lessonContext?.title;
+        trackEvent("Lesson Feedback", action, name, value);
+    };
+
     return (
         <>
             <h2>Hoe duidelijke vond je deze les?</h2>
@@ -79,7 +98,7 @@ const Feedback = (props) => {
                 }
                 { fbItemProps.map(({imgName, id, text}, idx) =>
                     <Grid item xs={ 4 } key={ id }>
-                        <FeedbackItem imgName={ imgName } id={ id } onClick={ () => setSelectedOption(idx) } disabled={ selectedOption !== null }
+                        <FeedbackItem imgName={ imgName } id={ id } onClick={ () => handleClick(idx) } disabled={ selectedOption !== null }
                          selected={ selectedOption === idx }>
                            { text }
                         </FeedbackItem>

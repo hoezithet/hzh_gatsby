@@ -26,4 +26,11 @@ function Matomo(props: MatomoProps) {
     )
 }
 
+export const trackEvent = (category, action, name, value) => {
+    if (typeof window !== `undefined`) {
+        const _paq = window._paq = window._paq || [];
+        _paq.push(['trackEvent', category, action, name, value]);
+    }
+};
+
 export default Matomo;

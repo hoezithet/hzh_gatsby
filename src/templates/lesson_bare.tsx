@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { graphql } from "gatsby";
 import "katex/dist/katex.min.css";
 import { MDXProvider } from "@mdx-js/react";
@@ -9,7 +9,7 @@ import HzhTheme from "../components/theme";
 
 import { Link } from "gatsby-theme-material-ui";
 import Box from "@material-ui/core/Box";
-import { components, MdxNode, shortcodes } from "./lesson";
+import { components, MdxNode, shortcodes, LessonContext } from "./lesson";
 import { ToggleImageBare } from "../components/shortcodes/toggleImage";
 import { ExpandBare } from "../components/shortcodes/expand";
 import { makeStyles } from '@material-ui/core/styles';
@@ -70,12 +70,32 @@ const BareH3 = (props) => {
     );
 };
 
+type AnchorProps = {
+    href: string
+};
+
+const BareAnchor = (props: AnchorProps) => {
+    const lessonContext = useContext(LessonContext);
+    const href = lessonContext && lessonContext.absURL
+        ?
+        new URL(props.href, lessonContext.absURL).href
+        : props.href;
+    const newProps = {
+        ...props,
+        href: href
+    };
+    return (
+        <a {...newProps} />
+    );
+};
+
 const bareComponents = {
     ...components,
     img: BareImage,
     h1: BareH1,
     h2: BareH2,
-    h3: BareH3
+    h3: BareH3,
+    a: BareAnchor
 };
 
 export interface LessonData {
@@ -94,8 +114,10 @@ export default function Template({ data }: LessonData) {
     const { siteMetadata } = site;
     const { frontmatter, body, fields } = lesson;
     const absURL = `${new URL(fields.slug, siteMetadata.siteUrl)}`;
+    const slug = lesson.fields.slug;
 
     return (
+        <LessonContext.Provider value={{title: frontmatter.title, slug: slug, absURL: absURL}}>
         <HzhTheme>
             <>
                 <Helmet title={frontmatter.title} />
@@ -114,6 +136,7 @@ export default function Template({ data }: LessonData) {
                 </Box>
             </>
         </HzhTheme>
+        </LessonContext.Provider>
     );
 }
 

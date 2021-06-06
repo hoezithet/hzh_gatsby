@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, createContext, useState } from "react";
 import { graphql } from "gatsby";
 import "katex/dist/katex.min.css";
 import { MDXProvider } from "@mdx-js/react";
@@ -15,6 +15,7 @@ import { ExpandBare } from "../components/shortcodes/expand";
 import { makeStyles } from '@material-ui/core/styles';
 import { Plot } from "../components/shortcodes/plot";
 import { Drawing } from "../components/shortcodes/drawing";
+import { BareExerciseStepper } from "../components/shortcodes/exerciseStepper";
 
 const useStyles = makeStyles({
     img: {
@@ -33,14 +34,6 @@ const useStyles = makeStyles({
         }
     }
 });
-
-const bareShortcodes = {
-    ...shortcodes,
-    ToggleImage: ToggleImageBare,
-    Expand: ExpandBare,
-    Plot: Plot,
-    Drawing: Drawing,
-};
 
 const BareImage = (props) => {
     const classes = useStyles();
@@ -75,7 +68,7 @@ type AnchorProps = {
 };
 
 const BareAnchor = (props: AnchorProps) => {
-    const lessonContext = useContext(LessonContext);
+    const lessonContext = useContext(BareLessonContext);
     const href = lessonContext && lessonContext.absURL
         ?
         new URL(props.href, lessonContext.absURL).href
@@ -87,6 +80,17 @@ const BareAnchor = (props: AnchorProps) => {
     return (
         <a {...newProps} />
     );
+};
+
+const BareLessonContext = createContext({});
+
+const bareShortcodes = {
+    ...shortcodes,
+    ToggleImage: ToggleImageBare,
+    Expand: ExpandBare,
+    Plot: Plot,
+    Drawing: Drawing,
+    ExerciseStepper: BareExerciseStepper,
 };
 
 const bareComponents = {
@@ -115,9 +119,11 @@ export default function Template({ data }: LessonData) {
     const { frontmatter, body, fields } = lesson;
     const absURL = `${new URL(fields.slug, siteMetadata.siteUrl)}`;
     const slug = lesson.fields.slug;
-
+    
+    const [answerSolutions, setAnswerSolutions] = useState([]);
     return (
-        <LessonContext.Provider value={{title: frontmatter.title, slug: slug, absURL: absURL}}>
+        <BareLessonContext.Provider value={{absURL: absURL, setAnswerSolutions: setAnswerSolutions}}>
+        <LessonContext.Provider value={{title: frontmatter.title, slug: slug}}>
         <HzhTheme>
             <>
                 <Helmet title={frontmatter.title} />
@@ -137,6 +143,7 @@ export default function Template({ data }: LessonData) {
             </>
         </HzhTheme>
         </LessonContext.Provider>
+        </BareLessonContext.Provider>
     );
 }
 

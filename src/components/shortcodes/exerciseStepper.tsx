@@ -29,6 +29,7 @@ interface ExerciseStepperProps {
 const StyledPaper = styled(Paper)`
     padding: ${theme.spacing(2)}px;
     margin: ${theme.spacing(1)}px;
+    break-inside: avoid;
 `;
 
 const StyledStepper = styled(Stepper)`
@@ -59,8 +60,12 @@ const NextPrevBtnGrid = styled(Grid)`
     margin-top: ${theme.spacing(1)}px;
 `
 
+const getExerciseStepsFromChildren = (children: React.ReactNode) => {
+    return React.Children.toArray(children);
+};
+
 export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
-    const steps = React.Children.toArray(children);
+    const steps = getExerciseStepsFromChildren(children);
     const [exercises, setExercises] = useState<ExerciseType[]>([]);
     const [activeStep, setActiveStep] = useState(0);
 
@@ -82,12 +87,12 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 
     const handleStep = (step: number) => () => {
         if (isLastStep() && allStepsCompleted()) {
-            // All exercises are done. Feedback can be shown now.
+            // All exercises are done. The solution can be shown now.
             setExercises(
                 exercises.map(ex => (
                     {
                         answers: ex.answers.map(ans =>
-                            ({ ...ans, showFeedback: true })
+                            ({ ...ans, showingSolution: true })
                         )
                     }
                 ))
@@ -107,7 +112,6 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     };
 
     const handleReset = () => {
-        setActiveStep(0);
         setExercises(exercises =>
             exercises.map(ex => (
                 {
@@ -115,20 +119,15 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                 }
             ))
         );
+        setActiveStep(0);
     };
 
     const showFeedback = useCallback(() => {
-        return exercises.every(ex => ex.answers && ex.answers.every(ans => ans.showFeedback));
+        return exercises.every(ex => Array.isArray(ex?.answers) ? ex.answers.every(ans => ans?.showingSolution) : false);
     }, [exercises]);
 
     const stepCompleted = useCallback((step: number) => {
-        return (
-            exercises[step] && exercises[step].answers
-                ?
-                exercises[step].answers.every(a => a.answered)
-                :
-                false
-        );
+        return Array.isArray(exercises[step]?.answers) ? exercises[step].answers.every(a => a.answered) : false;
     }, [exercises]);
 
     const allStepsCompleted = useCallback(() => {
@@ -136,15 +135,9 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     }, [exercises]);
 
     const stepCorrect = useCallback((step: number) => {
-        return (
-            exercises[step] && exercises[step].answers
-                ?
-                exercises[step].answers.every(a => a.correct)
-                :
-                false
-        );
+        return  Array.isArray(exercises[step]?.answers) ? exercises[step].answers.every(a => a.correct) : false;
     }, [exercises]);
-    
+
     const views = (
         steps.map((step, index) =>
             <StyledPaper key={index} elevation={1}>
@@ -170,7 +163,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     
     if(showFeedback()) {
         views.push(
-            <StyledPaper>
+            <StyledPaper key={views.length} >
                 <ExercisesFeedback nCorrect={exercises.reduce((acc, _ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length} />
                 <NextPrevBtnGrid container spacing={2}>
                     <Grid item>
@@ -213,3 +206,18 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
         </Store>
     );
 }
+
+export const BareExerciseStepper = ({ children }: ExerciseStepperProps) => {
+    const [exercises, setExercises] = useState<ExerciseType[]>([]);
+    return (
+        <Store elements={exercises} setElements={setExercises} >
+        {
+            getExerciseStepsFromChildren(children).map((step, index) =>
+                <StyledPaper key={index} elevation={1}>
+                    {step}
+                </StyledPaper>
+            )
+        }
+        </Store>
+    );
+};

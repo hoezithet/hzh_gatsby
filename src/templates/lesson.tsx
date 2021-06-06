@@ -29,8 +29,10 @@ import Sponsors from '../components/sponsors';
 import Feedback from "../components/feedback";
 import PrintLink from "../components/printlink";
 import { Exercise } from "../components/shortcodes/exercise";
-import { Answer } from "../components/shortcodes/answer";
-import { AnswerFeedback } from "../components/shortcodes/answerFeedback";
+import { FillStringWithFeedback as FillString } from "../components/shortcodes/fillAnswer";
+import { MultipleAnswerWithFeedback as MultipleAnswer } from "../components/shortcodes/multipleAnswer";
+import { MultipleChoiceWithFeedback as MultipleChoice } from "../components/shortcodes/multipleChoice";
+import { Explanation } from "../components/shortcodes/explanation";
 import { ExerciseStepper } from "../components/shortcodes/exerciseStepper";
 import { SaveablePlot as Plot } from "../components/shortcodes/plot";
 import { SaveableDrawing as Drawing } from "../components/shortcodes/drawing";
@@ -67,7 +69,8 @@ export const shortcodes = {
     Gold,
     Orange,
     Red, DarkRed, Purple, Gray,
-    Exercise, Answer, AnswerFeedback, ExerciseStepper,
+    FillString, MultipleAnswer, MultipleChoice, Explanation,
+    Exercise, ExerciseStepper,
     Plot, Drawing, Fx, Point, Annot, HairLines, Line, ArrowLine, Rectangle, SvgNote
 };
 

@@ -33,7 +33,12 @@ export const MultipleAnswer = ({ children, solution }: MultipleAnswerProps) => {
         } else if (e.target.checked) {
             setAnswerValue([...answerValue, val]);
         } else {
-            setAnswerValue([...answerValue.filter(ans => ans !== val)]);
+            const newAnsVal = [...answerValue.filter(ans => ans !== val)];
+            if (newAnsVal.length !== 0) {
+                setAnswerValue(newAnsVal);
+            } else {
+                setAnswerValue(null);
+            }
         }
     }
 

@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import Stepper from '@material-ui/core/Stepper';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 import styled from "styled-components";
@@ -20,17 +19,12 @@ import { ExercisesFeedback } from "./exerciseFeedback";
 import { Store } from '../store';
 import COLORS from '../../colors';
 import { AnswerType } from './answer';
+import Paper from '../paper';
 
 
 interface ExerciseStepperProps {
     children: React.ReactNode;
 }
-
-const StyledPaper = styled(Paper)`
-    padding: ${theme.spacing(2)}px;
-    margin: ${theme.spacing(1)}px;
-    break-inside: avoid;
-`;
 
 const StyledStepper = styled(Stepper)`
     background-color: transparent;
@@ -115,7 +109,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
         setExercises(exercises =>
             exercises.map(ex => (
                 {
-                    answers: ex.answers.map(_ans => ({} as AnswerType))
+                    answers: ex.answers.map(_ans => ({} as AnswerType<any>))
                 }
             ))
         );
@@ -140,7 +134,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 
     const views = (
         steps.map((step, index) =>
-            <StyledPaper key={index} elevation={1}>
+            <Paper key={index} elevation={1}>
                 {step}
                 <NextPrevBtnGrid container spacing={2}>
                     <Grid item>
@@ -157,13 +151,13 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                         </Button>
                     </Grid>
                 </NextPrevBtnGrid>
-            </StyledPaper>
+            </Paper>
         )
     );
     
     if(showFeedback()) {
         views.push(
-            <StyledPaper key={views.length} >
+            <Paper key={views.length} >
                 <ExercisesFeedback nCorrect={exercises.reduce((acc, _ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length} />
                 <NextPrevBtnGrid container spacing={2}>
                     <Grid item>
@@ -179,7 +173,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                         </Button>
                     </Grid>
                 </NextPrevBtnGrid>
-            </StyledPaper>
+            </Paper>
         );
     }
 
@@ -213,9 +207,9 @@ export const BareExerciseStepper = ({ children }: ExerciseStepperProps) => {
         <Store elements={exercises} setElements={setExercises} >
         {
             getExerciseStepsFromChildren(children).map((step, index) =>
-                <StyledPaper key={index} elevation={1}>
+                <Paper key={index} elevation={1}>
                     {step}
-                </StyledPaper>
+                </Paper>
             )
         }
         </Store>

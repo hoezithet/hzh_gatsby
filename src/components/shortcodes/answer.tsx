@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
-import { useStore } from '../store';
+import { useStoredElement } from '../store';
 
 
 export type AnswerType<T> = {
@@ -17,17 +17,24 @@ export function useAnswerValue<T> (
     solution: React.ReactNode|React.ReactNode[],
     explanation: React.ReactNode,
 ): {answerValue: T|null, setAnswerValue: (newValue: T|null) => void, showingSolution: boolean} {
-    const [answer, setAnswer] = useStore<AnswerType<T>>();
+    const [answer, setAnswer] = useStoredElement<AnswerType<T>>({
+        value: null,
+        correct: false,
+        answered: false,
+        solution: solution,
+        explanation: explanation,
+        showingSolution: false,
+    });
 
     const setAnswerValue = (newValue: T|null) => {
         setAnswer({
-                value: newValue,
-                correct: evaluateAnswerValue(newValue),
-                answered: newValue !== null,
-                solution: solution,
-                explanation: explanation,
-                showingSolution: answer?.showingSolution || false,
-            });
+            value: newValue,
+            correct: evaluateAnswerValue(newValue),
+            answered: newValue !== null,
+            solution: solution,
+            explanation: explanation,
+            showingSolution: answer?.showingSolution || false,
+        });
     };
     return {answerValue: answer?.value !== undefined ? answer.value : null, setAnswerValue: setAnswerValue, showingSolution: answer?.showingSolution || false};
 }

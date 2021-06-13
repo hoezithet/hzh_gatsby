@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import Stepper from '@material-ui/core/Stepper';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 import styled from "styled-components";
@@ -16,15 +17,20 @@ import SwipeableViews from 'react-swipeable-views';
 import { theme } from "../theme";
 import { ExerciseType } from "./exercise";
 import { ExercisesFeedback } from "./exerciseFeedback";
-import { Store } from '../store';
+import { Store, useStoredElement } from '../store';
 import COLORS from '../../colors';
 import { AnswerType } from './answer';
-import Paper from '../paper';
 
 
 interface ExerciseStepperProps {
     children: React.ReactNode;
 }
+
+const StyledPaper = styled(Paper)`
+    padding: ${theme.spacing(2)}px;
+    margin: ${theme.spacing(1)}px;
+    break-inside: avoid;
+`;
 
 const StyledStepper = styled(Stepper)`
     background-color: transparent;
@@ -58,9 +64,25 @@ const getExerciseStepsFromChildren = (children: React.ReactNode) => {
     return React.Children.toArray(children);
 };
 
+const getCircularReplacer = () => {
+      const seen = new WeakSet();
+    return (key, value) => {
+            if (typeof value === "object" && value !== null) {
+                      if (seen.has(value)) {
+                                  return;
+                                }
+                      seen.add(value);
+                    }
+            return value;
+          };
+};
+
+
 export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     const steps = getExerciseStepsFromChildren(children);
-    const [exercises, setExercises] = useState<ExerciseType[]>([]);
+    // const [exercises, setExercises, usingContext] = useStoredElement<ExerciseType[]>([]);
+    const [exercises, setExercises] = React.useState<ExerciseType[]>([]);
+    const usingContext = false;
     const [activeStep, setActiveStep] = useState(0);
 
     const totalSteps = () => {
@@ -84,11 +106,9 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
             // All exercises are done. The solution can be shown now.
             setExercises(
                 exercises.map(ex => (
-                    {
-                        answers: ex.answers.map(ans =>
-                            ({ ...ans, showingSolution: true })
-                        )
-                    }
+                    ex.map(ans =>
+                        ({ ...ans, showingSolution: true })
+                    )
                 ))
             );
         }
@@ -107,21 +127,24 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 
     const handleReset = () => {
         setExercises(exercises =>
-            exercises.map(ex => (
-                {
-                    answers: ex.answers.map(_ans => ({} as AnswerType<any>))
-                }
-            ))
+            exercises.map(ex => 
+                ex.map(_ans => ({} as AnswerType))
+            )
         );
         setActiveStep(0);
     };
 
     const showFeedback = useCallback(() => {
-        return exercises.every(ex => Array.isArray(ex?.answers) ? ex.answers.every(ans => ans?.showingSolution) : false);
+        return exercises.every(ex => Array.isArray(ex) ? ex.every(ans => ans?.showingSolution) : false);
     }, [exercises]);
 
     const stepCompleted = useCallback((step: number) => {
-        return Array.isArray(exercises[step]?.answers) ? exercises[step].answers.every(a => a.answered) : false;
+        if (exercises && Array.isArray(exercises[step])) {
+            console.log(JSON.stringify(exercises[step], getCircularReplacer()));
+            return exercises[step].every(a => a.answered);
+        } else {
+            return false;
+        }
     }, [exercises]);
 
     const allStepsCompleted = useCallback(() => {
@@ -129,12 +152,12 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     }, [exercises]);
 
     const stepCorrect = useCallback((step: number) => {
-        return  Array.isArray(exercises[step]?.answers) ? exercises[step].answers.every(a => a.correct) : false;
+        return  Array.isArray(exercises[step]) ? exercises[step].every(a => a.correct) : false;
     }, [exercises]);
 
     const views = (
         steps.map((step, index) =>
-            <Paper key={index} elevation={1}>
+            <StyledPaper key={index} elevation={1}>
                 {step}
                 <NextPrevBtnGrid container spacing={2}>
                     <Grid item>
@@ -151,13 +174,13 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                         </Button>
                     </Grid>
                 </NextPrevBtnGrid>
-            </Paper>
+            </StyledPaper>
         )
     );
     
     if(showFeedback()) {
         views.push(
-            <Paper key={views.length} >
+            <StyledPaper key={views.length} >
                 <ExercisesFeedback nCorrect={exercises.reduce((acc, _ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0)} nTotal={exercises.length} />
                 <NextPrevBtnGrid container spacing={2}>
                     <Grid item>
@@ -173,12 +196,22 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                         </Button>
                     </Grid>
                 </NextPrevBtnGrid>
-            </Paper>
+            </StyledPaper>
         );
     }
+    
+    const setElements = (getNextExercises) => {
+        console.log(`Calling setExercises with argument ${getNextExercises}`);
+        setExercises(prevExercises => {
+            console.log(`Calling getNextExercises...`);
+            const nextExercises = getNextExercises(prevExercises);
+            console.log(`Set new exercises of Stepper to ${JSON.stringify(nextExercises)} (usingContext ${usingContext})`);
+            return nextExercises;
+        });
+    };
 
     return (
-        <Store elements={exercises} setElements={setExercises} >
+        <Store elements={exercises} setElements={setElements} name="stepperStore">
             <StyledStepper nonLinear activeStep={activeStep}>
                 {steps.map((_step, index) => (
                     <StyledStep key={index}>
@@ -202,14 +235,14 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 }
 
 export const BareExerciseStepper = ({ children }: ExerciseStepperProps) => {
-    const [exercises, setExercises] = useState<ExerciseType[]>([]);
+    const [exercises, setExercises] = useStoredElement<ExerciseType[]>([]);
     return (
         <Store elements={exercises} setElements={setExercises} >
         {
             getExerciseStepsFromChildren(children).map((step, index) =>
-                <Paper key={index} elevation={1}>
+                <StyledPaper key={index} elevation={1}>
                     {step}
-                </Paper>
+                </StyledPaper>
             )
         }
         </Store>

@@ -1,66 +1,111 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { nanoid } from '@reduxjs/toolkit'
 
 import { useStoredElement, Store, GetNextElementsType } from '../store';
 import { AnswerType } from "./answer";
+import { ExerciseStepperContext } from './exerciseStepper';
 import { ExercisesFeedback } from "./exerciseFeedback";
 import Paper from '../paper';
 
+import { RootState } from '../../state/store'
+import { exerciseAdded, exerciseAnswerAdded } from '../../state/exercisesSlice';
+import { answerChanged, showAnswerSolution, resetAnswer } from '../../state/answersSlice'
 
-export type ExerciseType = AnswerType<any>[];
+
+export type ExerciseType = {
+    id: string,
+    answerIds: string[],
+    nCorrect: number,
+    showingSolution: boolean
+}
 
 interface ExerciseProps {
     children: React.ReactNode;
 }
 
+type ExerciseContextValueType = ((answerId: string) => void);
+
+export const ExerciseContext = createContext<ExerciseContextValueType|null>(null);
+
 
 export const Exercise = ({ children }: ExerciseProps) => {
-    const [answers, setAnswers, usingContext] = useStoredElement<ExerciseType>([]);
-    // const [answers, setAnswers] = React.useState<ExerciseType>([]);
-    // const usingContext = false;
+    const id = useRef(nanoid());
+
+    const exercise = useSelector(
+        (state: RootState) => state.exercises.find(exercise => exercise.id === id.current)
+    );
+
+    const answers = useSelector(
+        (state: RootState) => {
+            return exercise?.answerIds.map(ansId =>
+                state.answers.find(ans => ans.id === ansId)
+            );
+        }
+    )
+
+    const addExerciseIdToStepper = useContext(ExerciseStepperContext);
+    const dispatch = useDispatch();
+
+    if (!exercise) {
+        dispatch(
+            exerciseAdded({
+                id: id.current,
+                answerIds: [],
+                nCorrect: 0,
+                showingSolution: false
+            })
+        )
+        if (addExerciseIdToStepper !== null) {
+            addExerciseIdToStepper(id.current)
+        }
+    }
+
+    const addAnswerId = (answerId: string) => {
+        dispatch(
+            exerciseAnswerAdded({
+                exerciseId: id.current,
+                answerId: answerId,
+            })
+        )
+    }
 
     const allAnswered = (
-        Array.isArray(answers) && answers.length > 0 && answers.every(ans => ans.answered)
+        Array.isArray(answers) && answers.length > 0 && answers.every(ans => ans?.answered)
     );
 
     const allShowingSolutions = (
-        Array.isArray(answers) && answers.length > 0 && answers.every(ans => ans.showingSolution)
+        Array.isArray(answers) && answers.length > 0 && answers.every(ans => ans?.showingSolution)
     );
 
     const showSolutions = () => {
-        setAnswers(
-            answers.map(ans =>
-                ({ ...ans, showingSolution: true })
+        answers?.forEach(ans => {
+            dispatch(
+                showAnswerSolution({
+                    id: ans?.id
+                })
             )
-        );
-    };
-
-    const handleReset = () => {
-        setAnswers(
-            answers.map(ans => ({
-                ...ans,
-                value: null,
-                answered: false,
-                correct: false,
-                showingSolution: false,
-            }))
-        );
-    };
-    
-    const setElements = (getNextAnswers) => {
-        console.log(`Calling setAnswers with argument ${getNextAnswers}`);
-        setAnswers(prevAnswers => {
-            console.log(`Calling getNextAnswers...`);
-            const newAnswers = getNextAnswers(prevAnswers);
-            console.log(`Set new answers of exercise to ${JSON.stringify(newAnswers)} (usingContext ${usingContext})`);
-            return newAnswers;
         });
     };
 
+    const handleReset = () => {
+        answers?.forEach(ans => {
+            dispatch(
+                resetAnswer({
+                    id: ans?.id
+                })
+            )
+        });
+    };
+
+    const insideStepper = addExerciseIdToStepper !== null;
+
     return (
-        <Store elements={answers} setElements={setElements} name="exerciseStore">
+        <ExerciseContext.Provider value={addAnswerId}>
             {
-            usingContext ?
+            insideStepper ?
             children
             :
             <Paper>
@@ -85,6 +130,6 @@ export const Exercise = ({ children }: ExerciseProps) => {
                 }
             </Paper>
             }
-        </Store>
+        </ExerciseContext.Provider>
     );
 };

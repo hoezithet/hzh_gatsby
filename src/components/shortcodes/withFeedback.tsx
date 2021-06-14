@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 
 import { useStoredElement, StoreContext, StoreContextType } from '../store';
 import { AnswerFeedback } from './answerFeedback';
 import { AnswerType } from './answer';
+import { ExerciseContext } from './exercise'
 import Button from '@material-ui/core/Button';
+
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { nanoid } from '@reduxjs/toolkit'
+import { RootState } from '../../state/store'
 
 
 type WithFeedbackProps = {
@@ -15,25 +21,22 @@ type WithFeedbackProps = {
 
 export const withFeedback = <P extends object, T>(Component: React.ComponentType<P>): React.FC<P & WithFeedbackProps> => {
     return (props: WithFeedbackProps) => {
-        const [answer, setAnswer, usingContext] = useStoredElement<AnswerType<T>>({
-            value: null,
-            correct: false,
-            answered: false,
-            solution: "feedback solution",
-            explanation: props.explanation,
-            showingSolution: false,
-        });
+        const id = useRef(null);
+        const answer = useSelector(
+            (state: RootState) => state.answers.find(ans => ans.id === id.current)
+        );
+        const addAnswerToExercise = useContext(ExerciseContext);
         const showFeedback = answer?.showingSolution;
-    
-        const { registerElement, setElement, getElement } = {
-            registerElement: idCallback => idCallback(0),
-            setElement: (_id, ans) => setAnswer(ans),
-            getElement: _id => answer,
-        } as StoreContextType<AnswerType<T>>;
+        const usingContext = addAnswerToExercise !== null;
 
         return (
-            <StoreContext.Provider
-                value={{ registerElement: registerElement, setElement: setElement, getElement: getElement, name: "withFeedbackStore" }}
+            <ExerciseContext.Provider
+                value={(ansId) => {
+                    id.current = ansId;
+                    if (addAnswerToExercise !== null) {
+                        addAnswerToExercise(ansId);
+                    }
+                }}
             >
                 <Component {...(props as P)} />
                 {showFeedback ? (
@@ -53,7 +56,7 @@ export const withFeedback = <P extends object, T>(Component: React.ComponentType
                         {"Toon feedback"}
                     </Button>
                 ) : null}
-            </StoreContext.Provider>
+            </ExerciseContext.Provider>
         );
     };
 };

@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import answersReducer from './answersSlice';
+import answersReducer from './answersSlice'
+import exerciseReducer from './exercisesSlice'
+import exerciseSteppersReducer from './exerciseSteppersSlice'
 
 
 const store = configureStore({
     reducer: {
-        answers: answersReducer
+        answers: answersReducer,
+        exercises: exerciseReducer,
+        exerciseSteppers: exerciseSteppersReducer,
     }
 })
 

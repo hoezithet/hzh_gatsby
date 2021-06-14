@@ -6,6 +6,7 @@ import { nanoid } from '@reduxjs/toolkit'
 import { RootState } from '../../state/store'
 
 import { answerAdded, answerChanged } from '../../state/answersSlice'
+import { ExerciseContext } from './exercise'
 
 
 export type AnswerType<T> = {
@@ -28,6 +29,8 @@ export function useAnswerValue<T> (
         (state: RootState) => state.answers.find(ans => ans.id === id.current)
     );
 
+    const addAnswerToExercise = useContext(ExerciseContext);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -43,6 +46,10 @@ export function useAnswerValue<T> (
                 showingSolution: false,
             })
         )
+
+        if (addAnswerToExercise !== null) {
+            addAnswerToExercise(id.current);
+        }
     }, []);
 
     const setAnswerValue = (newValue: T|null) => {

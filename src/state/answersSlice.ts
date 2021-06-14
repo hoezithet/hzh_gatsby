@@ -5,6 +5,10 @@ import { AnswerType } from '../components/shortcodes/answer'
 
 const initialState = [] as AnswerType<any>[];
 
+const getIdxFromId = (state: typeof initialState, id: string) => {
+    return state.findIndex(answer => answer.id === id);
+}
+
 const answersSlice = createSlice({
     name: 'answers',
     initialState,
@@ -13,12 +17,29 @@ const answersSlice = createSlice({
             state.push(action.payload);
         },
         answerChanged(state, action) {
-            const answerIdx = state.findIndex(a => a.id === action.payload.id);
+            const answerIdx = getIdxFromId(state, action.payload.id);
+            if (answerIdx === -1) { return }
             state[answerIdx] = action.payload;
+        },
+        showAnswerSolution(state, action) {
+            const answerIdx = getIdxFromId(state, action.payload.id);
+            if (answerIdx === -1) { return }
+            state[answerIdx]['showingSolution'] = true;
+        },
+        resetAnswer(state, action) {
+            const answerIdx = getIdxFromId(state, action.payload.id);
+            if (answerIdx === -1) { return }
+            state[answerIdx] = {
+                ...state[answerIdx],
+                value: null,
+                answered: false,
+                correct: false,
+                showingSolution: false,
+            };
         },
     }
 })
 
-export const { answerAdded, answerChanged } = answersSlice.actions
+export const { answerAdded, answerChanged, showAnswerSolution, resetAnswer } = answersSlice.actions
 
 export default answersSlice.reducer

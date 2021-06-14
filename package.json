@@ -13,6 +13,7 @@
     "@material-ui/styles": ">=4.0.0",
     "@mdx-js/mdx": "^1.6.21",
     "@mdx-js/react": "^1.6.21",
+    "@reduxjs/toolkit": "^1.6.0",
     "@types/mdx-js__react": "^1.5.3",
     "@types/react-helmet": "^6.1.0",
     "@types/styled-components": "^5.1.4",

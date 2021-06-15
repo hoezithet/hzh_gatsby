@@ -15,11 +15,11 @@ import styled from "styled-components";
 import SwipeableViews from 'react-swipeable-views';
 
 import { theme } from "../theme";
-import { ExerciseType } from "./exercise";
+import { ExerciseType, useExercises } from "./exercise";
 import { ExercisesFeedback } from "./exerciseFeedback";
 import { Store, useStoredElement } from '../store';
 import COLORS from '../../colors';
-import { AnswerType } from './answer';
+import { AnswerType, useAnswers } from './answer';
 
 import { RootState } from '../../state/store'
 import { exerciseStepperAdded, exerciseStepAdded } from '../../state/exerciseSteppersSlice'
@@ -75,6 +75,33 @@ type ExerciseStepperContextValueType = ((exerciseId: string) => void);
 
 export const ExerciseStepperContext = createContext<ExerciseStepperContextValueType|null>(null);
 
+export const useExerciseSteppers = () => {
+    return useSelector(
+        (state: RootState) => state.exerciseSteppers
+    );
+};
+
+export const useExerciseStepper = (id: string) => {
+    return useExerciseSteppers().find(
+        stepper => stepper.id === id
+    )
+};
+
+export const useExerciseStepperExercises = (id: string) => {
+    const exerciseStepper = useExerciseStepper(id);
+    const allExercises = useExercises();
+    return allExercises.filter(ex => exerciseStepper?.exerciseIds.includes(ex.id));
+};
+
+export const useExerciseStepperAnswers = (id: string) => {
+    const exercises = useExerciseStepperExercises(id);
+    const allAnswers = useAnswers();
+    return exercises?.map(
+        ex => ex?.answerIds.map(ansId =>
+            allAnswers.find(ans => ansId === ans?.id)
+        )
+    );
+};
 
 export type ExerciseStepperType = {
     id: string,
@@ -85,39 +112,15 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     const id = useRef(nanoid());
     const steps = getExerciseStepsFromChildren(children);
 
-    const exerciseStep = useSelector(
-        (state: RootState) => state.exerciseSteppers.find(
-            stepper => stepper.id === id.current
-        )
-    );
-
-    const exercises = useSelector(
-        (state: RootState) => {
-            return exerciseStep?.exerciseIds.map(exId =>
-                state.exercises.find(ex => ex.id === exId)
-            );
-        }
-    )
-
-    const answers = useSelector(
-        (state: RootState) => {
-            return exercises?.map(exercise =>
-                exercise?.answerIds.map(ansId =>
-                    state.answers.find(ans => ans.id === ansId)
-                )
-            ).reduce(
-                (acc, curVal) => acc?.concat(curVal),
-                []
-            );
-        }
-    );
+    const exerciseStepper = useExerciseStepper(id.current);
+    const answers = useExerciseStepperAnswers(id.current);
+    const flatAnswers = answers.reduce((acc, curVal) => acc?.concat(curVal), []);
 
     const dispatch = useDispatch();
 
-    const usingContext = false;
     const [activeStep, setActiveStep] = useState(0);
 
-    if (!exerciseStep) {
+    if (!exerciseStepper) {
         dispatch(
             exerciseStepperAdded({
                 id: id.current,
@@ -151,17 +154,21 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     const handleBack = () => {
         handleStepChange(activeStep - 1);
     };
+    
+    const showSolutions = () => {
+        flatAnswers?.forEach(ans => {
+            dispatch(
+                showAnswerSolution({
+                    id: ans?.id
+                })
+            )
+        });
+    };
 
     const handleStep = (step: number) => () => {
         if (isLastStep() && allStepsCompleted()) {
             // All exercises are done. The solution can be shown now.
-            answers?.forEach(ans => {
-                dispatch(
-                    showAnswerSolution({
-                        id: ans?.id
-                    })
-                )
-            });
+            showSolutions();
         }
         const newActiveStep =
             isLastStep() && !allStepsCompleted() && step > activeStep
@@ -177,7 +184,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     };
 
     const handleReset = () => {
-        answers?.forEach(ans => {
+        flatAnswers?.forEach(ans => {
             dispatch(
                 resetAnswer({
                     id: ans?.id
@@ -187,32 +194,32 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
         setActiveStep(0);
     };
 
-    const showFeedback = useCallback(() => {
-        return answers?.every(ans => ans?.showingSolution) || false
-    }, [exercises]);
-    
-    const getStepAnswers = (step: number) => {
-        if (!Array.isArray(exercises)) { return null }
-
-        const ansIds = exercises[step]?.answerIds;
-        return ansIds?.map(ansId => {
-            return answers?.find(ans => ans?.id === ansId);
-        });
+    const isShowingSolutions = () => {
+        return flatAnswers?.every(ans => ans?.showingSolution) || false
     };
     
-    const stepCompleted = useCallback((step: number) => {
+    const getStepAnswers = (step: number) => {
+        if (!Array.isArray(answers)) { return null }
+        return answers[step];
+    };
+    
+    const stepCompleted = (step: number) => {
         const stepAnswers = getStepAnswers(step);
         return stepAnswers?.every(a => a?.answered) || false;
-    }, [exercises]);
+    };
 
-    const allStepsCompleted = useCallback(() => {
-        return exercises?.every((_ex, index) => stepCompleted(index));
-    }, [exercises]);
+    const allStepsCompleted = () => {
+        return answers?.every((_exAnswers, index) => stepCompleted(index));
+    };
 
-    const stepCorrect = useCallback((step: number) => {
+    const stepCorrect = (step: number) => {
         const stepAnswers = getStepAnswers(step);
         return  stepAnswers?.every(a => a?.correct) || false;
-    }, [exercises]);
+    };
+    
+    const getScore = () => {
+        return answers?.reduce((acc, _exAnswers, idx) => stepCorrect(idx) ? acc + 1 : acc, 0) || 0;
+    };
 
     const views = (
         steps.map((step, index) =>
@@ -227,7 +234,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
                     <Grid item>
                         <Button variant="contained"
                             color="primary"
-                            disabled={!stepCompleted(index) && exercises?.filter((_ex, i) => i !== index).every((_ex, i) => stepCompleted(i))}
+                            disabled={!stepCompleted(index) && answers?.filter((_exAns, i) => i !== index).every((_ex, i) => stepCompleted(i))}
                             onClick={handleNext}>
                             {index === steps.length - 1 && allStepsCompleted() ? 'Klaar' : 'Volgende'}
                         </Button>
@@ -237,10 +244,10 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
         )
     );
     
-    if(showFeedback()) {
+    if(isShowingSolutions()) {
         views.push(
             <StyledPaper key={views.length} >
-                <ExercisesFeedback nCorrect={exercises?.reduce((acc, _ex, idx) => stepCorrect(idx) ? acc + 1 : acc, 0) || 0} nTotal={exercises?.length || 0} />
+                <ExercisesFeedback nCorrect={getScore()} nTotal={steps.length || 0} />
                 <NextPrevBtnGrid container spacing={2}>
                     <Grid item>
                         <Button onClick={handleReset}>
@@ -284,9 +291,18 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 }
 
 export const BareExerciseStepper = ({ children }: ExerciseStepperProps) => {
-    const [exercises, setExercises] = useStoredElement<ExerciseType[]>([]);
+    const id = useRef(nanoid());
+    const dispatch = useDispatch();
+    const addExerciseId = (exerciseId: string) => {
+        dispatch(
+            exerciseStepAdded({
+                exerciseStepperId: id.current,
+                exerciseId: exerciseId,
+            })
+        )
+    }
     return (
-        <>
+        <ExerciseStepperContext.Provider value={addExerciseId}>
         {
             getExerciseStepsFromChildren(children).map((step, index) =>
                 <StyledPaper key={index} elevation={1}>
@@ -294,6 +310,6 @@ export const BareExerciseStepper = ({ children }: ExerciseStepperProps) => {
                 </StyledPaper>
             )
         }
-        </>
+        </ExerciseStepperContext.Provider>
     );
 };

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { nanoid } from '@reduxjs/toolkit'
 
 import { useStoredElement, Store, GetNextElementsType } from '../store';
-import { AnswerType } from "./answer";
+import { AnswerType, useAnswers } from "./answer";
 import { ExerciseStepperContext } from './exerciseStepper';
 import { ExercisesFeedback } from "./exerciseFeedback";
 import Paper from '../paper';
@@ -31,20 +31,31 @@ type ExerciseContextValueType = ((answerId: string) => void);
 export const ExerciseContext = createContext<ExerciseContextValueType|null>(null);
 
 
+export const useExercises = () => {
+    return useSelector(
+        (state: RootState) => {
+            return state.exercises;
+        }
+    )
+};
+
+export const useExercise = (id: string) => {
+    return useExercises()?.find(ex => ex.id === id);
+};
+
+export const useExerciseAnswers = (exerciseId: string) => {
+    const exercise = useExercise(exerciseId);
+    const answers = useAnswers();
+    return exercise?.answerIds.map(ansId =>
+        answers?.find(ans => ans.id === ansId)
+    );
+};
+
 export const Exercise = ({ children }: ExerciseProps) => {
     const id = useRef(nanoid());
 
-    const exercise = useSelector(
-        (state: RootState) => state.exercises.find(exercise => exercise.id === id.current)
-    );
-
-    const answers = useSelector(
-        (state: RootState) => {
-            return exercise?.answerIds.map(ansId =>
-                state.answers.find(ans => ans.id === ansId)
-            );
-        }
-    )
+    const exercise = useExercise(id.current);
+    const answers = useExerciseAnswers(id.current);
 
     const addExerciseIdToStepper = useContext(ExerciseStepperContext);
     const dispatch = useDispatch();

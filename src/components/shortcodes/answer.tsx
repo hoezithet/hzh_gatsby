@@ -19,22 +19,29 @@ export type AnswerType<T> = {
     showingSolution: boolean,
 };
 
+export const useAnswers = () => {
+    return useSelector(
+        (state: RootState) => state.answers
+    )
+};
+
+export const useAnswer = (id: string) => {
+    return useAnswers()?.find(ans => ans.id === id)
+};
+
 export function useAnswerValue<T> (
     evaluateAnswerValue: (v: T|null) => boolean,
     solution: React.ReactNode|React.ReactNode[],
     explanation: React.ReactNode,
 ): {answerValue: T|null, setAnswerValue: (newValue: T|null) => void, showingSolution: boolean} {
-    const id = useRef("");
-    const answer = useSelector(
-        (state: RootState) => state.answers.find(ans => ans.id === id.current)
-    );
+    const id = useRef(nanoid());
+    const answer = useAnswer(id.current);
 
     const addAnswerToExercise = useContext(ExerciseContext);
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        id.current = nanoid();
+    
+    if (!answer) {
         dispatch(
             answerAdded({
                 id: id.current,
@@ -46,11 +53,10 @@ export function useAnswerValue<T> (
                 showingSolution: false,
             })
         )
-
         if (addAnswerToExercise !== null) {
             addAnswerToExercise(id.current);
         }
-    }, []);
+    }
 
     const setAnswerValue = (newValue: T|null) => {
         dispatch(

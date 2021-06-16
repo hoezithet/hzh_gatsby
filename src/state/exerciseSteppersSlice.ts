@@ -22,9 +22,14 @@ const exerciseSteppersSlice = createSlice({
             if (stepperIdx === -1) { return }
             state[stepperIdx]['exerciseIds'].push(action.payload.exerciseId);
         },
+        removeExerciseStepper(state, action) {
+            const stepperIdx = getIdxFromId(state, action.payload.id);
+            if (stepperIdx === -1) { return }
+            state.splice(stepperIdx, 1);
+        },
     }
 })
 
-export const { exerciseStepperAdded, exerciseStepAdded } = exerciseSteppersSlice.actions
+export const { exerciseStepperAdded, exerciseStepAdded, removeExerciseStepper } = exerciseSteppersSlice.actions
 
 export default exerciseSteppersSlice.reducer

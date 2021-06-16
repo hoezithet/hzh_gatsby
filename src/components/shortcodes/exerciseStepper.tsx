@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, createContext } from 'react';
+import React, { useState, useCallback, useRef, createContext, useEffect } from 'react';
 
 import Step from '@material-ui/core/Step';
 import { StepIconProps } from '@material-ui/core/StepIcon';
@@ -22,7 +22,7 @@ import COLORS from '../../colors';
 import { AnswerType, useAnswers } from './answer';
 
 import { RootState } from '../../state/store'
-import { exerciseStepperAdded, exerciseStepAdded } from '../../state/exerciseSteppersSlice'
+import { exerciseStepperAdded, exerciseStepAdded, removeExerciseStepper } from '../../state/exerciseSteppersSlice'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { nanoid } from '@reduxjs/toolkit'
@@ -130,6 +130,10 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
         )
     }
 
+    useEffect(() => {
+        return () => { removeExerciseStepper({ id: id.current }) };
+    }, []);
+
     const addExerciseId = (exerciseId: string) => {
         dispatch(
             exerciseStepAdded({
@@ -174,7 +178,7 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
             isLastStep() && !allStepsCompleted() && step > activeStep
                 ? // It's the last step, but not all steps have been completed,
                 // find the first step that has not been completed
-                (exercises?.map((_ex, i) => i).find(i => !stepCompleted(i)) || step)
+                (answers?.map((_ans, i) => i).find(i => !stepCompleted(i)) || step)
                 : step;
         setActiveStep(newActiveStep % (allStepsCompleted() ? steps.length + 1 : steps.length));
     };

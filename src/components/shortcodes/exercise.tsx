@@ -11,19 +11,20 @@ import { ExercisesFeedback } from "./exerciseFeedback";
 import Paper from '../paper';
 
 import { RootState } from '../../state/store'
-import { exerciseAdded, exerciseAnswerAdded } from '../../state/exercisesSlice';
+import { exerciseAdded, exerciseAnswerAdded, removeExercise } from '../../state/exercisesSlice';
 import { answerChanged, showAnswerSolution, resetAnswer } from '../../state/answersSlice'
 
 
 export type ExerciseType = {
     id: string,
     answerIds: string[],
-    nCorrect: number,
-    showingSolution: boolean
+    showingSolution: boolean,
+    rank: number
 }
 
-interface ExerciseProps {
-    children: React.ReactNode;
+type ExerciseProps = {
+	children: React.ReactNode,
+	showTitle: boolean
 }
 
 type ExerciseContextValueType = ((answerId: string) => void);
@@ -51,7 +52,7 @@ export const useExerciseAnswers = (exerciseId: string) => {
     );
 };
 
-export const Exercise = ({ children }: ExerciseProps) => {
+export const Exercise = ({ children, showTitle=false }: ExerciseProps) => {
     const id = useRef(nanoid());
 
     const exercise = useExercise(id.current);
@@ -64,15 +65,16 @@ export const Exercise = ({ children }: ExerciseProps) => {
         dispatch(
             exerciseAdded({
                 id: id.current,
-                answerIds: [],
-                nCorrect: 0,
-                showingSolution: false
             })
         )
         if (addExerciseIdToStepper !== null) {
             addExerciseIdToStepper(id.current)
         }
     }
+
+    useEffect(() => {
+        return () =>  { removeExercise({ id: id.current }) };
+    }, []);
 
     const addAnswerId = (answerId: string) => {
         dispatch(
@@ -112,15 +114,19 @@ export const Exercise = ({ children }: ExerciseProps) => {
     };
 
     const insideStepper = addExerciseIdToStepper !== null;
+	const title = showTitle && exercise?.rank !== undefined ? <ExerciseTitle rank={exercise?.rank}/> : null;
 
     return (
         <ExerciseContext.Provider value={addAnswerId}>
             {
             insideStepper ?
-            children
+			<>
+			{ title }
+			{ children }
+			</>
             :
             <Paper>
-                <p>{ JSON.stringify(answers) }</p>
+				{ title }
                 { children }
                 {
                 allShowingSolutions ?
@@ -143,4 +149,14 @@ export const Exercise = ({ children }: ExerciseProps) => {
             }
         </ExerciseContext.Provider>
     );
+};
+
+type ExerciseTitleProps = {
+	rank: number,
+}
+
+const ExerciseTitle = ({ rank }: ExerciseTitleProps) => <h3>{ `Oefening ${(rank || 0) + 1} ` }</h3>;
+
+export const TitledExercise = (props: ExerciseProps) => {
+	return <Exercise {...props} showTitle={ true } />;
 };

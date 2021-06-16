@@ -15,7 +15,12 @@ const exercisesSlice = createSlice({
     initialState,
     reducers: {
         exerciseAdded(state, action) {
-            state.push(action.payload);
+            state.push({
+                id: action.payload.id,
+                answerIds: [],
+                showingSolution: false,
+                rank: state.length
+            });
         },
         exerciseChanged(state, action) {
             const idx = getIdxFromId(state, action.payload.id);
@@ -27,9 +32,14 @@ const exercisesSlice = createSlice({
             if (exIdx === -1) { return }
             state[exIdx]['answerIds'].push(action.payload.answerId);
         },
+        removeExercise(state, action) {
+            const exIdx = getIdxFromId(state, action.payload.id);
+            if (exIdx === -1) { return }
+            state.splice(exIdx, 1);
+        },
     }
 })
 
-export const { exerciseAdded, exerciseChanged, exerciseAnswerAdded } = exercisesSlice.actions
+export const { exerciseAdded, exerciseChanged, exerciseAnswerAdded, removeExercise } = exercisesSlice.actions
 
 export default exercisesSlice.reducer

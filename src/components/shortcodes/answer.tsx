@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { nanoid } from '@reduxjs/toolkit'
 import { RootState } from '../../state/store'
 
-import { answerAdded, answerChanged } from '../../state/answersSlice'
+import { answerAdded, answerChanged, removeAnswer } from '../../state/answersSlice'
 import { ExerciseContext } from './exercise'
 
 
@@ -40,7 +40,7 @@ export function useAnswerValue<T> (
     const addAnswerToExercise = useContext(ExerciseContext);
 
     const dispatch = useDispatch();
-    
+
     if (!answer) {
         dispatch(
             answerAdded({
@@ -53,10 +53,16 @@ export function useAnswerValue<T> (
                 showingSolution: false,
             })
         )
+
         if (addAnswerToExercise !== null) {
             addAnswerToExercise(id.current);
         }
+
     }
+    
+    useEffect(() => {
+        return () => { removeAnswer({ id: id.current }) };
+    }, []);
 
     const setAnswerValue = (newValue: T|null) => {
         dispatch(
@@ -68,5 +74,7 @@ export function useAnswerValue<T> (
             })
         )
     };
+
+
     return {answerValue: answer?.value !== undefined ? answer.value : null, setAnswerValue: setAnswerValue, showingSolution: answer?.showingSolution || false};
 }

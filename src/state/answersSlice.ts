@@ -37,9 +37,14 @@ const answersSlice = createSlice({
                 showingSolution: false,
             };
         },
+        removeAnswer(state, action) {
+            const answerIdx = getIdxFromId(state, action.payload.id);
+            if (answerIdx === -1) { return }
+            state.splice(answerIdx, 1);
+        },
     }
 })
 
-export const { answerAdded, answerChanged, showAnswerSolution, resetAnswer } = answersSlice.actions
+export const { answerAdded, answerChanged, showAnswerSolution, resetAnswer, removeAnswer } = answersSlice.actions
 
 export default answersSlice.reducer

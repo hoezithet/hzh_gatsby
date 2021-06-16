@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 import answersReducer from './answersSlice'
 import exerciseReducer from './exercisesSlice'
@@ -10,7 +10,15 @@ const store = configureStore({
         answers: answersReducer,
         exercises: exerciseReducer,
         exerciseSteppers: exerciseSteppersReducer,
-    }
+    },
+	middleware: getDefaultMiddleware({
+		serializableCheck: {
+			// Ignore these action types
+            ignoredActions: [
+                'answers/answerAdded', 'answers/answerChanged', 'resetAnswer'
+            ],
+		},
+	}),
 })
 
 

@@ -16,6 +16,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Plot } from "../components/shortcodes/plot";
 import { Drawing } from "../components/shortcodes/drawing";
 import { BareExerciseStepper } from "../components/shortcodes/exerciseStepper";
+import { MultipleAnswer } from "../components/shortcodes/multipleAnswer";
+import { MultipleChoice } from "../components/shortcodes/multipleChoice";
+import { FillString } from "../components/shortcodes/fillAnswer";
+import { Store } from '../components/store';
+import { LessonSolutions } from '../components/shortcodes/lessonSolutions'
+import { TitledExercise } from '../components/shortcodes/exercise'
+
 
 const useStyles = makeStyles({
     img: {
@@ -91,6 +98,10 @@ const bareShortcodes = {
     Plot: Plot,
     Drawing: Drawing,
     ExerciseStepper: BareExerciseStepper,
+    MultipleAnswer: MultipleAnswer,
+    MultipleChoice: MultipleChoice,
+    FillString: FillString,
+    Exercise: TitledExercise,
 };
 
 const bareComponents = {
@@ -137,6 +148,7 @@ export default function Template({ data }: LessonData) {
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </MDXProvider>
+                <LessonSolutions />
                 <Box my={4} textAlign="center" justifyContent="center">
                     <Sponsors width="28mm" showTreat={false} />
                 </Box>

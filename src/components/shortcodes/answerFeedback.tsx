@@ -6,10 +6,7 @@ import { gsap } from "gsap";
 
 import { getRandomArrElement } from "../../utils/array";
 import { theme } from "../theme";
-import {
-    AnswerValueType, AnswerOptionType, evaluateAnsweredOptions,
-    getAnswerType, MULTIPLE_ANSWER, MULTIPLE_CHOICE
-} from "./answer";
+import { ReadableAnswerSolution } from "./answerSolution";
 
 
 const FeedbackPaper = styled(Paper)`
@@ -18,55 +15,11 @@ const FeedbackPaper = styled(Paper)`
     margin-bottom: ${theme.spacing(2)}px;
 `;
 
-type AnsFeedbackCtxType = {
-    options: AnswerValueType,
-    answeredOptions: AnswerValueType,
-    correctOptions: AnswerValueType,
-    margin: number,
-    showFeedback: boolean
+type PositiveFeedbackProps = {
+
 };
 
-export const AnswerFeedbackContext = React.createContext<AnsFeedbackCtxType>(
-    {
-        options: [],
-        answeredOptions: [],
-        correctOptions: [],
-        margin: 0,
-        showFeedback: false
-    }
-);
-
-type AnsFeedbackProps = {
-    children?: React.ReactNode | null
-};
-
-export const AnswerFeedback = ({ children = null }: AnsFeedbackProps) => {
-    const {
-        options,
-        answeredOptions,
-        correctOptions,
-        margin,
-        showFeedback
-    } = useContext(AnswerFeedbackContext);
-    const answerType = getAnswerType(options, correctOptions);
-    const isCorrect = evaluateAnsweredOptions(answeredOptions, correctOptions, margin);
-    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    const answerToReadable = (
-        [MULTIPLE_ANSWER, MULTIPLE_CHOICE].includes(answerType)
-            ?
-            (ans: AnswerOptionType) => ALPHABET[ans as number]
-            :
-            (ans: AnswerOptionType) => `${ans}`
-    );
-    const readableAnswers = correctOptions.map(answerToReadable);
-    const correctOptionsText = (
-        readableAnswers.length > 1
-            ?
-            `${readableAnswers.slice(0, -1).join(',')} en ${readableAnswers.slice(-1)[0]}`
-            :
-            readableAnswers[0]
-    );
-
+const PositiveFeedback = ({}: PositiveFeedbackProps) => {
     const correctMessages = [
         "Juist!",
         "Klopt!",
@@ -78,7 +31,22 @@ export const AnswerFeedback = ({ children = null }: AnsFeedbackProps) => {
         "🎉", "🎈", "🎊", "🥳", "👍", "💪", "👏",
         "🕺", "💃"
     ];
+    
+    const [msg] = useState(getRandomArrElement(correctMessages));
+    const [emoji] = useState(getRandomArrElement(correctEmojis));
 
+    return (
+        <span>
+            { `${msg} ${emoji}` }
+        </span>
+    );
+};
+
+type NegativeFeedbackProps = {
+    solution: React.ReactNode|React.ReactNode[],
+};
+
+const NegativeFeedback = ({ solution }: NegativeFeedbackProps) => {
     const incorrectMessages = [
         "Niet juist...",
         "Dat klopt niet helaas...",
@@ -89,22 +57,41 @@ export const AnswerFeedback = ({ children = null }: AnsFeedbackProps) => {
     const incorrectEmojis = [
         "😕", "😩", "🤷", "🤷‍♂️", "🤷‍♀️"
     ];
+    
+    const [msg] = useState(getRandomArrElement(incorrectMessages));
+    const [emoji] = useState(getRandomArrElement(incorrectEmojis));
 
-    const correctFeedbackText = useMemo(
-        () => `${getRandomArrElement(correctMessages)} ${getRandomArrElement(correctEmojis)}`,
-        []);
-    const incorrectFeedbackText = useMemo(
-        () => (correctOptions.length > 1
-            ?
-            `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} De juiste antwoorden waren ${correctOptionsText}.`
-            :
-            `${getRandomArrElement(incorrectMessages)} ${getRandomArrElement(incorrectEmojis)} Het juiste antwoord was ${correctOptionsText}.`),
-        []);
+    const singleCorrectAnswerText = "Het juiste antwoord was ";
+    const multCorrectAnswersText = "De juiste antwoorden waren "; 
+    
+    return (
+        <span>
+            { `${msg} ${emoji} ` }
+            <span>
+                { Array.isArray(solution) ? (
+                      solution.length > 1 ?
+                      multCorrectAnswersText
+                      : singleCorrectAnswerText
+                  )
+                  : singleCorrectAnswerText }
+                <ReadableAnswerSolution solution={ solution } />
+                { "." }
+            </span>
+        </span>
+    );
+};
 
-    const [showExtraExplanation, setShowExtraExplanation] = useState(false);
+type AnsFeedbackProps = {
+    solution: React.ReactNode|React.ReactNode[],
+    explanation?: React.ReactNode,
+    correct: boolean,
+};
+
+export const AnswerFeedback = ({ solution, explanation, correct }: AnsFeedbackProps) => {
+    const [showExplanation, setShowExplanation] = useState(false);
     const nodeHeight = useRef(0);
     const nodeRef = useRef(null);
-    const extraExplnRef = useCallback(node => {
+    const explnRef = useCallback(node => {
         if (node !== null) {
             nodeRef.current = node;
             nodeHeight.current = node.clientHeight;
@@ -121,45 +108,37 @@ export const AnswerFeedback = ({ children = null }: AnsFeedbackProps) => {
             return;
         }
         gsap.to(explnNode, {
-            height: showExtraExplanation ? `${nodeHeight.current}px` : 0,
-            opacity: showExtraExplanation ? 1 : 0,
+            height: showExplanation ? `${nodeHeight.current}px` : 0,
+            opacity: showExplanation ? 1 : 0,
             duration: 0.5,
             ease: "power2.inOut"
         });
-    }, [showExtraExplanation]);
+    }, [showExplanation]);
 
     return (
-        showFeedback
-            ?
-            <FeedbackPaper elevation={0} variant="outlined">
-                <b>
-                    {isCorrect
-                        ?
-                        correctFeedbackText
-                        :
-                        incorrectFeedbackText
-                    }
-                </b>
+        <FeedbackPaper elevation={0} variant="outlined">
+            <b>
                 {
-                    children
-                        ?
-                        <>
-                            <div ref={extraExplnRef}>
-                                {children}
-                            </div>
-                            <Button onClick={() => setShowExtraExplanation(prev => !prev)}>{
-                                showExtraExplanation
-                                    ?
-                                    "Verberg meer uitleg"
-                                    :
-                                    "Toon meer uitleg"
-                            }</Button>
-                        </>
-                        :
-                        null
+                    correct ?
+                    <PositiveFeedback/>
+                    : <NegativeFeedback solution={ solution } />
                 }
-            </FeedbackPaper>
-            :
-            null
+            </b>
+            {
+                explanation ?
+                <>
+                    <div ref={explnRef}>
+                        { explanation }
+                    </div>
+                    <Button onClick={() => setShowExplanation(prev => !prev)}>
+                        { showExplanation ?
+                          "Verberg uitleg"
+                          : "Toon uitleg" }
+                    </Button>
+                </>
+                :
+                null
+            }
+        </FeedbackPaper>
     );
 }

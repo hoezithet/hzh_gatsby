@@ -1,22 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 
 type idCallbackType = (id: number) => void;
 
 export interface StoreContextType<T> {
     registerElement: (callback: idCallbackType) => void;
     setElement: (id: number, value: T) => void;
-    getElement: (id: number) => T | null;
+    getElement: (id: number) => T;
 }
+
+export type GetNextElementsType<T> = (elements: T[]) => T[];
 
 interface StoreProps<T> {
     children: React.ReactNode;
     elements: T[];
-    setElements: (getNextElements: ((elements: T[]) => T[])) => void;
-};
+    setElements: (getNextElements: GetNextElementsType<T>) => void;
+}
 
 export const StoreContext = React.createContext({});
 
-export function Store<T>({ children, elements, setElements }: StoreProps<T>) {
+export function Store<T>({ children, elements, setElements, name }: StoreProps<T>) {
     const idxCounterRef = useRef(0);
 
     const registerElement = (callback: idCallbackType) => {
@@ -25,18 +27,19 @@ export function Store<T>({ children, elements, setElements }: StoreProps<T>) {
     };
 
     const setElement = (id: number, element: T) => {
-        setElements(elements => {
-            let newElements = [...elements];
+        setElements(prevElements => {
+            let nextElements = [...prevElements];
             if (id < 0) {
-                return newElements;
-            } else if (id >= newElements.length) {
-                newElements = [
-                    ...newElements,
-                    ...Array(id - newElements.length).fill({} as T)
+                return nextElements;
+            } else if (id >= nextElements.length) {
+                nextElements = [
+                    ...nextElements,
+                    ...Array(id - nextElements.length).fill({} as T)
                 ];
             }
-            newElements[id] = element;
-            return newElements;
+            nextElements[id] = element;
+            console.log(`Received prevElements ${JSON.stringify(prevElements)}, returning nextElements ${JSON.stringify(nextElements)} for store "${name}"`);
+            return nextElements;
         });
     };
 
@@ -48,8 +51,60 @@ export function Store<T>({ children, elements, setElements }: StoreProps<T>) {
     };
 
     return (
-        <StoreContext.Provider value={{ registerElement: registerElement, setElement: setElement, getElement: getElement }}>
+        <StoreContext.Provider value={{ registerElement: registerElement, setElement: setElement, getElement: getElement, name: name}}>
             { children}
         </StoreContext.Provider>
     );
+};
+
+export function useStoredElement<T>(initialEl: T): [T, (newEl: T) => void, boolean] {
+    const idRef = useRef(-1);
+    const elementCache = useRef(initialEl);
+    
+    const [ownElement, setOwnElement] = useState<T>(elementCache.current);  // Only used when there's no context
+    const store = useContext(StoreContext);
+    const usingContext = (
+        'registerElement' in store
+        && 'setElement' in store
+        && 'getElement' in store
+    );
+    const {registerElement, setElement, getElement, name} = (
+        usingContext ?
+        store
+        : {
+            registerElement: (idCallback) => idCallback(0),
+            setElement: (_id, el) => setOwnElement(el),
+            getElement: (_id) => ownElement,
+            name: "own store"
+        }) as StoreContextType<T>;
+
+    const getEl = () => {
+        if (idRef.current === -1) {
+            // Return the cache when the store isn't ready yet
+            return elementCache.current;
+        }
+        return getElement(idRef.current);
+    };
+    const setEl = (newEl: T) => {
+        if (newEl !== undefined) {
+            // Store in cache for when the store wouldn't be ready yet
+            elementCache.current = newEl;
+            console.log(`Setting id ${idRef.current} in store "${name}", setting element to ${newEl} (${JSON.stringify(newEl)}).`);
+            setElement(idRef.current, newEl);
+        }
+    };
+
+    useEffect(() => {
+        registerElement((assignedId) => {
+            idRef.current = assignedId;
+            setEl(elementCache.current);
+            console.log(`Registered id ${assignedId} in store "${name}", setting element to ${JSON.stringify(elementCache.current)}.`);
+        });
+    }, []);
+    
+    useEffect(() => {
+        console.log(`Element in ${name} at ${idRef.current} is now ${JSON.stringify(getEl())}`);
+    }, [getEl()]);
+
+    return [getEl(), setEl, usingContext];
 };

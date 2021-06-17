@@ -15,7 +15,9 @@ const store = configureStore({
 		serializableCheck: {
 			// Ignore these action types
             ignoredActions: [
-                'answers/answerAdded', 'answers/answerChanged', 'resetAnswer'
+                'answers/answerAdded', 'answers/answerChanged', 'answers/resetAnswer',
+                'exerciseSteppers/exerciseStepAdded', 'exercises/exerciseAnswerAdded',
+                'exerciseSteppers/exerciseStepperAdded', 'exercises/exerciseAdded',
             ],
 		},
 	}),

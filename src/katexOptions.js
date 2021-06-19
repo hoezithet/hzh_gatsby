@@ -49,6 +49,8 @@ module.exports = {
         "\\mute": "\\color{d3d3d3}",
 
         "\\si": "\\text",
+
+        "\\var": "\\htmlClass{var #1}{}",
     },
     colorIsTextColor: true,
     strict: "ignore",

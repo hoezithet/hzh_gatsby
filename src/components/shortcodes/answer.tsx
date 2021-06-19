@@ -37,7 +37,7 @@ export function useAnswerValue<T> (
     const id = useRef(nanoid());
     const answer = useAnswer(id.current);
 
-    const addAnswerToExercise = useContext(ExerciseContext);
+    const exCtx = useContext(ExerciseContext);
 
     const dispatch = useDispatch();
 
@@ -53,7 +53,8 @@ export function useAnswerValue<T> (
                 showingSolution: false,
             })
         )
-        if (addAnswerToExercise !== null) {
+        if (exCtx !== null) {
+            const { addAnswerToExercise } = exCtx;
             addAnswerToExercise(id.current);
         }
 

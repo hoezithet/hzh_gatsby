@@ -24,13 +24,19 @@ export type ExerciseType = {
 
 type ExerciseProps = {
 	children: React.ReactNode,
-	showTitle: boolean
+	showTitle: boolean,
+	vars: object,
 }
 
-type ExerciseContextValueType = ((answerId: string) => void);
+export type ExerciseContextValueType = {
+    addAnswerToExercise: ((answerId: string) => void),
+    vars: { [key: string]: any; },
+}
 
-export const ExerciseContext = createContext<ExerciseContextValueType|null>(null);
-
+export const ExerciseContext = createContext<ExerciseContextValueType>({
+    addAnswerToExercise: () => {},
+    vars: {},
+});
 
 export const useExercises = () => {
     return useSelector(
@@ -52,7 +58,7 @@ export const useExerciseAnswers = (exerciseId: string) => {
     );
 };
 
-export const Exercise = ({ children, showTitle=false }: ExerciseProps) => {
+export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) => {
     const id = useRef(nanoid());
 
     const exercise = useExercise(id.current);
@@ -113,8 +119,12 @@ export const Exercise = ({ children, showTitle=false }: ExerciseProps) => {
     const insideStepper = addExerciseIdToStepper !== null;
 	const title = showTitle && exercise?.rank !== undefined ? <ExerciseTitle rank={exercise?.rank}/> : null;
 
+    const ctxValRef = useRef<ExerciseContextValueType>({
+        vars: vars,
+        addAnswerToExercise: addAnswerId,
+    });
     return (
-        <ExerciseContext.Provider value={addAnswerId}>
+        <ExerciseContext.Provider value={ctxValRef.current}>
             {
             insideStepper ?
 			<>

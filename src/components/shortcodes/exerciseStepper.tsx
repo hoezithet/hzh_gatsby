@@ -90,7 +90,7 @@ export const useExerciseStepper = (id: string) => {
 export const useExerciseStepperExercises = (id: string) => {
     const exerciseStepper = useExerciseStepper(id);
     const allExercises = useExercises();
-    return allExercises.filter(ex => exerciseStepper?.exerciseIds.includes(ex.id));
+    return allExercises.filter(ex => exerciseStepper?.exerciseIds?.includes(ex.id));
 };
 
 export const useExerciseStepperAnswers = (id: string) => {

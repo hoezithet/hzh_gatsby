@@ -26,16 +26,21 @@ const exerciseSteppersSlice = createSlice({
             }
         },
         exerciseStepAdded(state, action) {
-            const id = action.payload.exerciseStepperId;
-            const stepperIdx = getIdxFromId(state, id);
+            const stepperId = action.payload.exerciseStepperId;
+            const stepperIdx = getIdxFromId(state, stepperId);
             if (stepperIdx === -1) {
                 // If the exercise stepper doesn't exist yet, create it
                 state.push({
-                    id: id,
+                    id: stepperId,
                     exerciseIds: [action.payload.exerciseId],
                 });
             } else {
-                state[stepperIdx]['exerciseIds'].push(action.payload.exerciseId);
+                const exId = action.payload.exerciseId;
+                if (!Array.isArray(state[stepperIdx]['exerciseIds'])) {
+                    state[stepperIdx]['exerciseIds'] = [exId];
+                } else {
+                    state[stepperIdx]['exerciseIds'].push(exId);
+                }
             }
         },
         removeExerciseStepper(state, action) {

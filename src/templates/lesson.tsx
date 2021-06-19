@@ -29,6 +29,7 @@ import Sponsors from '../components/sponsors';
 import Feedback from "../components/feedback";
 import PrintLink from "../components/printlink";
 import { Exercise } from "../components/shortcodes/exercise";
+import { Var } from "../components/shortcodes/exerciseVar";
 import { FillStringWithFeedback as FillString } from "../components/shortcodes/fillAnswer";
 import { MultipleAnswerWithFeedback as MultipleAnswer } from "../components/shortcodes/multipleAnswer";
 import { MultipleChoiceWithFeedback as MultipleChoice } from "../components/shortcodes/multipleChoice";
@@ -70,7 +71,7 @@ export const shortcodes = {
     Orange,
     Red, DarkRed, Purple, Gray,
     FillString, MultipleAnswer, MultipleChoice, Explanation,
-    Exercise, ExerciseStepper,
+    Exercise, Var, ExerciseStepper,
     Plot, Drawing, Fx, Point, Annot, HairLines, Line, ArrowLine, Rectangle, SvgNote
 };
 

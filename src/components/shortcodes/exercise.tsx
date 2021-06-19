@@ -61,7 +61,7 @@ export const Exercise = ({ children, showTitle=false }: ExerciseProps) => {
     const addExerciseIdToStepper = useContext(ExerciseStepperContext);
     const dispatch = useDispatch();
 
-    if (!exercise) {
+    useEffect(() => {
         dispatch(
             exerciseAdded({
                 id: id.current,
@@ -70,9 +70,6 @@ export const Exercise = ({ children, showTitle=false }: ExerciseProps) => {
         if (addExerciseIdToStepper !== null) {
             addExerciseIdToStepper(id.current)
         }
-    }
-
-    useEffect(() => {
         return () =>  { removeExercise({ id: id.current }) };
     }, []);
 

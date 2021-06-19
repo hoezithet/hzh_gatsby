@@ -120,17 +120,12 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 
     const [activeStep, setActiveStep] = useState(0);
 
-    if (!exerciseStepper) {
+    useEffect(() => {
         dispatch(
             exerciseStepperAdded({
                 id: id.current,
-                exerciseIds: [],
-                nCorrect: 0,
             })
         )
-    }
-
-    useEffect(() => {
         return () => { removeExerciseStepper({ id: id.current }) };
     }, []);
 

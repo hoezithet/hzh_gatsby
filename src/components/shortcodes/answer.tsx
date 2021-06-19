@@ -41,7 +41,7 @@ export function useAnswerValue<T> (
 
     const dispatch = useDispatch();
 
-    if (!answer) {
+    useEffect(() => {
         dispatch(
             answerAdded({
                 id: id.current,
@@ -53,14 +53,10 @@ export function useAnswerValue<T> (
                 showingSolution: false,
             })
         )
-
         if (addAnswerToExercise !== null) {
             addAnswerToExercise(id.current);
         }
 
-    }
-    
-    useEffect(() => {
         return () => { removeAnswer({ id: id.current }) };
     }, []);
 

@@ -63,6 +63,7 @@ export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) 
 
     const exercise = useExercise(id.current);
     const answers = useExerciseAnswers(id.current);
+    const nodeRef = useRef<HTMLDivElement>(null);
 
     const addExerciseIdToStepper = useContext(ExerciseStepperContext);
     const dispatch = useDispatch();
@@ -78,6 +79,19 @@ export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) 
         }
         return () =>  { removeExercise({ id: id.current }) };
     }, []);
+
+    useEffect(() => {
+        if (!nodeRef.current) {
+            return;
+        }
+
+        for (const [key, value] of Object.entries(vars)) {
+            const elements = nodeRef?.current?.querySelectorAll(`.var.${key}`);
+            elements.forEach(el => {
+                el.innerHTML = value;
+            });
+        }
+    });
 
     const addAnswerId = (answerId: string) => {
         dispatch(
@@ -125,41 +139,43 @@ export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) 
     });
     return (
         <ExerciseContext.Provider value={ctxValRef.current}>
-            {
-            insideStepper ?
-			<>
-			{ title }
-			{ children }
-			</>
-            :
-            <Paper>
-				{ title }
+            <div ref={nodeRef}>
+                {
+                insideStepper ?
+                <>
+                { title }
                 { children }
-                {
-                allShowingSolutions ?
-                <Button onClick={handleReset}>
-                    { "Begin opnieuw" }
-                </Button>
-                : null
+                </>
+                :
+                <Paper>
+                    { title }
+                    { children }
+                    {
+                    allShowingSolutions ?
+                    <Button onClick={handleReset}>
+                        { "Begin opnieuw" }
+                    </Button>
+                    : null
+                    }
+                    {
+                    !allShowingSolutions ?
+                    <Button variant="contained"
+                        color="primary"
+                        disabled={!allAnswered}
+                        onClick={showSolutions} >
+                        {"Toon feedback"}
+                    </Button>
+                    : null
+                    }
+                </Paper>
                 }
-                {
-                !allShowingSolutions ?
-                <Button variant="contained"
-                    color="primary"
-                    disabled={!allAnswered}
-                    onClick={showSolutions} >
-                    {"Toon feedback"}
-                </Button>
-                : null
-                }
-            </Paper>
-            }
+            </div>
         </ExerciseContext.Provider>
     );
 };
 
 type ExerciseTitleProps = {
-	rank: number,
+    rank: number,
 }
 
 const ExerciseTitle = ({ rank }: ExerciseTitleProps) => <h3>{ `Oefening ${(rank || 0) + 1} ` }</h3>;

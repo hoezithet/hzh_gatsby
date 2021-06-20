@@ -54,8 +54,8 @@ export function useAnswerValue<T> (
             })
         )
         if (exCtx !== null) {
-            const { addAnswerToExercise } = exCtx;
-            addAnswerToExercise(id.current);
+            const { addAnswer } = exCtx;
+            addAnswer(id.current);
         }
 
         return () => { removeAnswer({ id: id.current }) };

@@ -26,12 +26,12 @@ export const withFeedback = <P extends object, T>(Component: React.ComponentType
         const answer = useSelector(
             (state: RootState) => state.answers.find(ans => ans.id === id.current)
         );
-        const {vars, addAnswerToExercise} = useContext(ExerciseContext);
+        const {vars, addAnswer} = useContext(ExerciseContext);
         const showFeedback = answer?.showingSolution;
         const addAnswerId = (ansId: string) => {
             id.current = ansId;
-            if (addAnswerToExercise !== null) {
-                addAnswerToExercise(ansId);
+            if (addAnswer !== null) {
+                addAnswer(ansId);
             }
         };
 
@@ -47,7 +47,7 @@ export const withFeedback = <P extends object, T>(Component: React.ComponentType
 
         const ctxValRef = useRef<ExerciseContextValueType>({
             vars: vars,
-            addAnswerToExercise: addAnswerId,
+            addAnswer: addAnswerId,
         });
 
         return (

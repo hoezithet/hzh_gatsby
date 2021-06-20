@@ -50,7 +50,7 @@ module.exports = {
 
         "\\si": "\\text",
 
-        "\\var": "\\htmlClass{var #1}{}",
+        "\\exVar": "\\htmlClass{exVar #1}{}",
     },
     colorIsTextColor: true,
     strict: "ignore",

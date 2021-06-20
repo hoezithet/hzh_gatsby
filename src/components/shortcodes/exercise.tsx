@@ -8,6 +8,7 @@ import { useStoredElement, Store, GetNextElementsType } from '../store';
 import { AnswerType, useAnswers } from "./answer";
 import { ExerciseStepperContext } from './exerciseStepper';
 import { ExercisesFeedback } from "./exerciseFeedback";
+import { ExVarsType, getExVarsProxy } from "./exerciseVar";
 import Paper from '../paper';
 
 import { RootState } from '../../state/store'
@@ -25,16 +26,16 @@ export type ExerciseType = {
 type ExerciseProps = {
 	children: React.ReactNode,
 	showTitle: boolean,
-	vars: object,
+	vars: ExVarsType,
 }
 
 export type ExerciseContextValueType = {
-    addAnswerToExercise: ((answerId: string) => void),
-    vars: { [key: string]: any; },
+    addAnswer: ((answerId: string) => void),
+    vars: ExVarsType,
 }
 
 export const ExerciseContext = createContext<ExerciseContextValueType>({
-    addAnswerToExercise: () => {},
+    addAnswer: () => {},
     vars: {},
 });
 
@@ -58,12 +59,105 @@ export const useExerciseAnswers = (exerciseId: string) => {
     );
 };
 
+/**
+ * An exercise, consisting of one or more questions with answering modalities.
+ *
+ * The interactive parts of an exercise are provided by answering components like `MultipleChoice`,
+ * `MultipleAnswer` and `FillString`. The user enters their response via the answering component and
+ * can get feedback on their given answers. A simple exercise might look like this:
+ *
+ * ```jsx
+ * <Exercise>
+ *   2 + 5 is equal to
+ *   <MultipleChoice shuffle={false} solution={1}>
+ *
+ *       - 4
+ *       - 7
+ *       - -5
+ *
+ *     <Explanation>
+ *       If you'd be standing at number 2 on a number line and would take 5 steps to the right, you'll end up standing at number 7.
+ *     </Explanation>
+ *   </MultipleChoice>
+ * </Exercise>
+ * ```
+ *
+ * With **exercise variables**, it is possible to randomly generate certain parts of the exercise:
+ *
+ * ```jsx
+ * <Exercise vars={{
+ *     a: Math.floor(Math.random()*10),
+ *     b: Math.floor(Math.random()*10),
+ *     aPlusB: ({a, b}) => a + b,
+ *     aMinB: ({a, b}) => a - b,
+ *     aTimesB: ({a, b}) => a * b,
+ *  }}>
+ *   <ExVar name="a"/> + <ExVar name="b"/> is equal to
+ *   <MultipleChoice shuffle={false} solution={1}>
+ *
+ *       - <ExVar name="aMinB"/>
+ *       - <ExVar name="aPlusB"/>
+ *       - <ExVar name="aTimesB"/>
+ *
+ *     <Explanation>
+ *       If you'd be standing at number <ExVar name="a"/> on a number line and would take <ExVar name="b"/> steps to the right,
+ *       you'll end up standing at number <ExVar name="aPlusB"/>.
+ *     </Explanation>
+ *   </MultipleChoice>
+ * </Exercise>
+ * ```
+ *
+ * Note that you can pass in exercise variables that depend on other exercise variables by using a callback. You can even pass in exercise
+ * variables that depend on exercise variables that - in their turn - *also* depend on exercise variables etc. As long as there or no circular dependencies,
+ * everything will be sorted out nicely.
+ *
+ * Although the `ExVar` component offers an easy way to access the value of exercise variables, there are circumstances
+ * where it is impossible to use it. The most important example of such a circumstance is when you'd want to use an
+ * exercise variable inside of a KaTeX formula. Luckily, the `Exercise` component provides a workaround. More specifically,
+ * the `innerHTML` of all child nodes with CSS classes `exVar` and `myExVar` (where `myExVar` can be any of the keys passed to
+ * the `vars` prop of `Exercise`) will be replaced by the value of the exercise variable with the name `myExVar`. Because we
+ * have defined a global KaTeX macro `\\exVar` that injects the necessary CSS classes, we can use our exercise variables in
+ * KaTeX as well! It goes like this:
+ *
+ * ```jsx
+ * <Exercise vars={{
+ *     a: Math.floor(Math.random()*10),
+ *     b: Math.floor(Math.random()*10),
+ *     aPlusB: ({a, b}) => a + b,
+ *     aMinB: ({a, b}) => a - b,
+ *     aTimesB: ({a, b}) => a * b,
+ *  }}>
+ *
+ *   $\exVar{a} + \exVar{b}$ is equal to
+ *   <MultipleChoice shuffle={false} solution={1}>
+ *
+ *       - $\exVar{aMinB}$
+ *       - $\exVar{aPlusB}$
+ *       - $\exVar{aTimesB}$
+ *
+ *     <Explanation>
+ *
+ *       If you'd be standing at number $\exVar{a}$ on a number line and would take $\exVar{b}$ steps to the right,
+ *       you'll end up standing at number $\exVar{aPlusB}$.
+ *
+ *     </Explanation>
+ *   </MultipleChoice>
+ *
+ * </Exercise>
+ * ```
+ *
+ * @prop {React.ReactNode} children The children of the exercise. Should contain some question text and one or more answer components.
+ * @prop {boolean} showTitle If `true`, show a title above the exercise displaying the rank number of the exercise inside the current lesson.
+ * @props {ExVarsType} vars The exercise variables.
+ * ```
+ */
 export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) => {
     const id = useRef(nanoid());
 
     const exercise = useExercise(id.current);
     const answers = useExerciseAnswers(id.current);
     const nodeRef = useRef<HTMLDivElement>(null);
+    const exVarsProxy = getExVarsProxy(vars);
 
     const addExerciseIdToStepper = useContext(ExerciseStepperContext);
     const dispatch = useDispatch();
@@ -85,12 +179,12 @@ export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) 
             return;
         }
 
-        for (const [key, value] of Object.entries(vars)) {
-            const elements = nodeRef?.current?.querySelectorAll(`.var.${key}`);
+        Object.keys(vars).forEach(key => {
+            const elements = nodeRef?.current?.querySelectorAll(`.exVar.${key}`);
             elements.forEach(el => {
-                el.innerHTML = value;
+                el.innerHTML = exVarsProxy[key];
             });
-        }
+        });
     });
 
     const addAnswerId = (answerId: string) => {
@@ -134,8 +228,8 @@ export const Exercise = ({ children, showTitle=false, vars={} }: ExerciseProps) 
 	const title = showTitle && exercise?.rank !== undefined ? <ExerciseTitle rank={exercise?.rank}/> : null;
 
     const ctxValRef = useRef<ExerciseContextValueType>({
-        vars: vars,
-        addAnswerToExercise: addAnswerId,
+        vars: exVarsProxy,
+        addAnswer: addAnswerId,
     });
     return (
         <ExerciseContext.Provider value={ctxValRef.current}>

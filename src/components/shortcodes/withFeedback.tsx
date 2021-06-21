@@ -30,9 +30,7 @@ export const withFeedback = <P extends object, T>(Component: React.ComponentType
         const showFeedback = answer?.showingSolution;
         const addAnswerId = (ansId: string) => {
             id.current = ansId;
-            if (addAnswer !== null) {
-                addAnswer(ansId);
-            }
+            addAnswer(ansId);
         };
 
         const dispatch = useDispatch();

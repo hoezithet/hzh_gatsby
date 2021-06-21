@@ -92,7 +92,9 @@ export const useExerciseAnswers = (exerciseId: string) => {
  *     aMinB: ({a, b}) => a - b,
  *     aTimesB: ({a, b}) => a * b,
  *  }}>
- *   <ExVar name="a"/> + <ExVar name="b"/> is equal to
+ *   <MdWithExVars>
+ *     ${a} + ${b} is equal to
+ *   </MdWithExVars>
  *   <MultipleChoice shuffle={false} solution={1}>
  *
  *       - <ExVar name="aMinB"/>
@@ -107,17 +109,23 @@ export const useExerciseAnswers = (exerciseId: string) => {
  * </Exercise>
  * ```
  *
- * Note that you can pass in exercise variables that depend on other exercise variables by using a callback. You can even pass in exercise
- * variables that depend on exercise variables that - in their turn - *also* depend on exercise variables etc. As long as there or no circular dependencies,
+ * Note that you can pass in exercise variables that depend on other exercise
+ * variables by using a callback. You can even pass in exercise variables that
+ * depend on exercise variables that - in their turn - *also* depend on
+ * exercise variables etc. As long as there or no circular dependencies,
  * everything will be sorted out nicely.
  *
- * Although the `ExVar` component offers an easy way to access the value of exercise variables, there are circumstances
- * where it is impossible to use it. The most important example of such a circumstance is when you'd want to use an
- * exercise variable inside of a KaTeX formula. Luckily, the `Exercise` component provides a workaround. More specifically,
- * the `innerHTML` of all child nodes with CSS classes `exVar` and `myExVar` (where `myExVar` can be any of the keys passed to
- * the `vars` prop of `Exercise`) will be replaced by the value of the exercise variable with the name `myExVar`. Because we
- * have defined a global KaTeX macro `\\exVar` that injects the necessary CSS classes, we can use our exercise variables in
- * KaTeX as well! It goes like this:
+ * Although the `ExVar` component offers an easy way to access the value of
+ * exercise variables, there are circumstances where it is impossible to use
+ * it. The most important example of such a circumstance is when you'd want to
+ * use an exercise variable inside of a KaTeX formula. Luckily, the `Exercise`
+ * component provides a workaround. More specifically, the `innerHTML` of all
+ * child nodes with CSS classes `exVar` and `myExVar` (where `myExVar` can be
+ * any of the keys passed to the `vars` prop of `Exercise`) will be replaced by
+ * the value of the exercise variable with the name `myExVar`. Because we have
+ * defined a global KaTeX macro `\\exVar` that injects the necessary CSS
+ * classes, we can use our exercise variables in KaTeX as well! It goes like
+ * this:
  *
  * ```jsx
  * <Exercise vars={{
@@ -145,6 +153,14 @@ export const useExerciseAnswers = (exerciseId: string) => {
  *
  * </Exercise>
  * ```
+ *
+ * For more complex KaTeX formulas, however, the `\exVar` command is not ideal.
+ * This is because the KaTeX rendering engine cannot take the dimensions of the
+ * exercise variables into account and as such the layout will look ugly.
+ * Instead, you better use the `MdWithExVars` component with which you can
+ * write plain markdown syntax and embed exercise variables inside of it with
+ * simple template literal syntax. For more details, check the `MdWithExVars`
+ * docs.
  *
  * @prop {React.ReactNode} children The children of the exercise. Should contain some question text and one or more answer components.
  * @prop {boolean} showTitle If `true`, show a title above the exercise displaying the rank number of the exercise inside the current lesson.

@@ -15,12 +15,18 @@ const exercisesSlice = createSlice({
     initialState,
     reducers: {
         exerciseAdded(state, action) {
-            state.push({
-                id: action.payload.id,
-                answerIds: [],
-                showingSolution: false,
-                rank: state.length
-            });
+            const exIdx = getIdxFromId(state, action.payload.id);
+            if (exIdx !== -1) {
+                // If the exercise exists already, do nothing
+                return;
+            } else {
+                state.push({
+                    id: action.payload.id,
+                    answerIds: [],
+                    showingSolution: false,
+                    rank: state.length
+                });
+            }
         },
         exerciseChanged(state, action) {
             const idx = getIdxFromId(state, action.payload.id);
@@ -29,8 +35,17 @@ const exercisesSlice = createSlice({
         },
         exerciseAnswerAdded(state, action) {
             const exIdx = getIdxFromId(state, action.payload.exerciseId);
-            if (exIdx === -1) { return }
-            state[exIdx]['answerIds'].push(action.payload.answerId);
+            if (exIdx === -1) {
+                // If the exercise doesn't exist yet, create it
+                state.push({
+                    id: action.payload.exerciseId,
+                    answerIds: [action.payload.answerId],
+                    showingSolution: false,
+                    rank: state.length
+                });
+            } else {
+                state[exIdx]['answerIds'].push(action.payload.answerId);
+            }
         },
         removeExercise(state, action) {
             const exIdx = getIdxFromId(state, action.payload.id);

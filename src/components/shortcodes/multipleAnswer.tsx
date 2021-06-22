@@ -7,6 +7,7 @@ import { getChoices } from "./multipleChoice";
 import { getChildAtIndex } from "../../utils/children";
 import { useAnswerValue } from "./answer";
 import { withFeedback } from "./withFeedback";
+import withCallableSolution from "./withCallableSolution"
 import { shuffle as shuffleArray } from '../../utils/array';
 
 
@@ -16,7 +17,7 @@ type MultipleAnswerProps = {
     shuffle?: boolean,
 };
 
-export const MultipleAnswer = ({ children, solution, shuffle=true }: MultipleAnswerProps) => {
+const _MultipleAnswer = ({ children, solution, shuffle=true }: MultipleAnswerProps) => {
     const choices = getChoices(children);
     const solutionNodes = solution.map(s => choices[s]);
     const explanation = getChildAtIndex(children, 1) || null;
@@ -63,4 +64,12 @@ export const MultipleAnswer = ({ children, solution, shuffle=true }: MultipleAns
     );
 };
 
+/**
+ * Same as `MultipleChoice`, but with multiple correct answers.
+ */
+export const MultipleAnswer = withCallableSolution(_MultipleAnswer);
+
+/**
+ * Same as `MultipleAnswer`, but with the possibility to show feedback (via the `Exercise` component wrapping `MultipleAnswerWithFeedback`).
+ */
 export const MultipleAnswerWithFeedback = withFeedback(MultipleAnswer);

@@ -7,8 +7,8 @@ type ExplanationProps = {
 
 export const Explanation = ({ children }: ExplanationProps) => {
     return (
-        <p>
+        <div>
         { children }
-        </p>
+        </div>
     );
 };

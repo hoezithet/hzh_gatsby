@@ -37,11 +37,11 @@ export function useAnswerValue<T> (
     const id = useRef(nanoid());
     const answer = useAnswer(id.current);
 
-    const addAnswerToExercise = useContext(ExerciseContext);
+    const exCtx = useContext(ExerciseContext);
 
     const dispatch = useDispatch();
 
-    if (!answer) {
+    useEffect(() => {
         dispatch(
             answerAdded({
                 id: id.current,
@@ -53,14 +53,11 @@ export function useAnswerValue<T> (
                 showingSolution: false,
             })
         )
-
-        if (addAnswerToExercise !== null) {
-            addAnswerToExercise(id.current);
+        if (exCtx !== null) {
+            const { addAnswer } = exCtx;
+            addAnswer(id.current);
         }
 
-    }
-    
-    useEffect(() => {
         return () => { removeAnswer({ id: id.current }) };
     }, []);
 

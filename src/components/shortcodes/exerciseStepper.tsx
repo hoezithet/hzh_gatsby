@@ -90,7 +90,7 @@ export const useExerciseStepper = (id: string) => {
 export const useExerciseStepperExercises = (id: string) => {
     const exerciseStepper = useExerciseStepper(id);
     const allExercises = useExercises();
-    return allExercises.filter(ex => exerciseStepper?.exerciseIds.includes(ex.id));
+    return allExercises.filter(ex => exerciseStepper?.exerciseIds?.includes(ex.id));
 };
 
 export const useExerciseStepperAnswers = (id: string) => {
@@ -108,6 +108,48 @@ export type ExerciseStepperType = {
     exerciseIds: string[],
 }
 
+/**
+ * A set of multiple consecutive exercises, presented as a stepper.
+ *
+ * After the user has completed all exercises, a score will be shown and the user
+ * can review their answers, check the solution and view the explanation for the
+ * solution of each answer.
+ *
+ * For example, the following `ExerciseStepper` will contain two exercises:
+ *
+ * ```jsx
+ * <ExerciseStepper>
+ *   <Exercise>
+ *     2 + 5 is equal to
+ *     <MultipleChoice solution={1}>
+ *
+ *       - 4
+ *       - 7
+ *       - -5
+ *
+ *       <Explanation>
+ *         If you'd be standing at number 2 on a number line and would take 5 steps to the right, you'll end up standing at number 7.
+ *       </Explanation>
+ *     </MultipleChoice>
+ *   </Exercise>
+ *   <Exercise>
+ *     4 + 2 is equal to
+ *     <MultipleChoice solution={0}>
+ *
+ *       - 6
+ *       - 7
+ *       - 9
+ *
+ *       <Explanation>
+ *         If you'd be standing at number 4 on a number line and would take 2 steps to the right, you'll end up standing at number 6.
+ *       </Explanation>
+ *     </MultipleChoice>
+ *   </Exercise>
+ * </ExerciseStepper>
+ * ``` 
+ *
+ * @prop {ExerciseStepperProps} children: Each direct child should be an `Exercise` component.
+ */
 export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
     const id = useRef(nanoid());
     const steps = getExerciseStepsFromChildren(children);
@@ -120,17 +162,12 @@ export const ExerciseStepper = ({ children }: ExerciseStepperProps) => {
 
     const [activeStep, setActiveStep] = useState(0);
 
-    if (!exerciseStepper) {
+    useEffect(() => {
         dispatch(
             exerciseStepperAdded({
                 id: id.current,
-                exerciseIds: [],
-                nCorrect: 0,
             })
         )
-    }
-
-    useEffect(() => {
         return () => { removeExerciseStepper({ id: id.current }) };
     }, []);
 

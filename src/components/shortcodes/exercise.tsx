@@ -85,9 +85,11 @@ export const useExerciseAnswers = (exerciseId: string) => {
  * With **exercise variables**, it is possible to randomly generate certain parts of the exercise:
  *
  * ```jsx
+ * import random from 'lodash/random';
+ *
  * <Exercise vars={{
- *     a: Math.floor(Math.random()*10),
- *     b: Math.floor(Math.random()*10),
+ *     a: random(1, 10),
+ *     b: random(1, 10),
  *     aPlusB: ({a, b}) => a + b,
  *     aMinB: ({a, b}) => a - b,
  *     aTimesB: ({a, b}) => a * b,
